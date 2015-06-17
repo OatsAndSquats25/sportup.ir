@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n static future program_tags %}
+
+{% block meta_title %}{% trans "List of complex" %}{% endblock %}
+
+{% block title %}{% trans "List of complex" %}{% endblock %}
+
+{% block breadcrumb_menu %}
+<li class="active">{% trans "Directory" %}</li>
+{% endblock %}
+
+{% block main %}
+        <p>{{ object.title }}</p>
+        <p>{{ object.phone }}</p>
+        <p><img src="{% get_media_prefix %}{{ object.image }}"></p>
+        <p><a href="{{ object.get_absolute_url }}" target="_blank">{{ object.slug }}</a></p>
+        <hr>
+        {% program_list object.id %}
+
+{% endblock %}
