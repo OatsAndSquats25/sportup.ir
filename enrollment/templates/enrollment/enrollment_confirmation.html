@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main %}
+    <p>{% trans "Program detail" %}</p>
+    <p> {{ object.title }}
+        {{ object.agreementKey }}
+        {{ object.clubKey }}
+
+        {{ object.maxCapacity }}
+        {{ object.remainCapacity }}
+        {{ object.price }}
+        {{ object.ageMin }}
+        {{ object.ageMax }}
+        {{ object.genderLimit }}
+        {{ object.needInsurance }}
+        {{ object.multipleReserve }}
+
+        {{ object.usageBeginChoices }}
+        {{ object.usageBeginDate }}
+        {{ object.usageEndDate }}
+        {{ object.maxDays }}
+        {{ object.maxSessions }}
+        {{ object.expireDate }}
+    </p>
+
+    <hr>
+
+    <p>{% trans "User detail" %}</p>
+    <p>{{ user.username }}
+    {{ user.name }}
+    {{ user.family }}
+    </p>
+
+    <a href="{% url 'paymentRequest' pk=object.id %}">{% trans 'Confirm' %}</a>
+
+{% endblock %}
