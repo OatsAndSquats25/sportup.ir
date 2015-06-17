@@ -1,0 +1,89 @@
+@font-face {
+	font-family: "Droid Arabic Naskh";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../font/DroidNaskh-Regular.woff") format('woff');
+}
+
+@font-face {
+	font-family: "Droid Arabic Naskh";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../font/DroidNaskh-Bold.woff") format('woff');
+}
+
+body{padding-top:80px;font-size:12px;text-align:justify}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Droid Arabic Naskh", Arial, sans-serif;
+	font-weight: bold;
+}
+p{font-family: Tahoma}
+
+img.aligncenter {clear : both;display : block;margin-left : auto;margin-right : auto;}
+#category {/*border:2px solid #eee;*/border:1px solid #000000;border-radius:10px;background : #fff;}
+img.alignright {display : inline;float : right;margin-left : 24px;margin-top : 4px;}
+img.alignleft {display : inline;float : left;margin-right : 24px;margin-top : 4px;}
+.gallery-caption {color : #888;}
+.alignright {float : right;}
+.alignleft {float : left;}
+.text-align-center {text-align : center;}
+embed, iframe, object, video {max-width : 100%;}
+.aligncenter, div.aligncenter {display : block;margin-left : auto;margin-right : auto;}
+.thumbnail{height: 300px;border : 1px solid #000000;}
+.img-responsive{max-height: 80%;}
+.headlineImgThumbnail{max-width:200px;max-height:160px}
+.headlineImgMedia{min-height:54px;max-height:54px;min-width:54px;max-width:54px;height: 100%;width: 100% ;}
+.headlineImgMediaFrame{max-height:64px;max-width:64px;height: 100%;width: 100% ;}
+.panel{margin-left:5%;margin-right:5%;}
+.carousel-inner > .item > img {   /*min-width: 400px;*/   /*max-width: 400px;*/   min-height: 400px;   max-height: 400px;   height: 100%;   width: 100% ;}
+
+#footer{background:#333;padding-top:15px;padding-bottom:15px;color:#666}
+#footer a{color:#666}
+#footer a:hover{color:lightblue}
+#footer .cp{margin-top:11px}
+
+ul.social{list-style:none;margin:10px 0 0;padding:0;display:inline-block}
+ul.social>li{display:inline-block;margin:0 5px}
+ul.social>li>a{font-size:24px;color:#666}
+ul.social>li>a:hover{color:#999}
+
+@media(min-width:768px) {
+    .sidebar {
+        z-index: 1;
+        position: absolute;
+        width: 250px;
+        margin-top: 100px;
+    }
+}
+.sidebar ul li {
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.sidebar ul li a.active {
+    background-color: #eee;
+}
+
+.sidebar .arrow {
+    float: right;
+}
+
+.sidebar .fa.arrow:before {
+    content: "\f104";
+}
+
+.sidebar .active>a>.fa.arrow:before {
+    content: "\f107";
+}
+
+.sidebar .nav-second-level li,
+.sidebar .nav-third-level li {
+    border-bottom: 0!important;
+}
+
+@media(min-width:768px) {
+    .dashboard-container{
+    padding-left:50px;
+    padding-right: 300px;
+    min-height: 500px
+    }
+}

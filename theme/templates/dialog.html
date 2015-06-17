@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-align-center">
+            {% block dialog %}{% endblock %}
+        </div>
+    </div>
+</div>
+<script>
+{% block dialogscript %}{% endblock %}
+</script>
+{%  endblock %}

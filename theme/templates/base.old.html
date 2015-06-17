@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+
+    {% ifinstalled mezzanine.blog %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+    {% endifinstalled %}
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    {% if LANGUAGE_BIDI %}
+    <link rel="stylesheet" href="{% static "css/rtl.css" %}">
+    {% endif %}
+    {% ifinstalled cartridge.shop %}
+    <link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+    {% if LANGUAGE_BIDI %}
+    <link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+    {% endif %}
+    {% endifinstalled %}
+    {% block extra_css %}{% endblock %}
+    {% endcompress %}
+
+    {% compress js %}
+    <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script src="{% static "js/bootstrap-extras.js" %}"></script>
+    <script src="{% static "js/custom.js" %}"></script>
+    {% block extra_js %}{% endblock %}
+    {% endcompress %}
+
+    <!--[if lt IE 9]>
+    <script src="{% static "js/html5shiv.js" %}"></script>
+    <script src="{% static "js/respond.min.js" %}"></script>
+    <![endif]-->
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}">
+{% block body %}
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
+    {% if settings.SITE_TAGLINE %}<p class="navbar-text">{{ settings.SITE_TAGLINE }}</p>{% endif %}
+</div>
+<div class="navbar-collapse collapse">
+{% page_menu "pages/menus/dropdown.html" %}
+    {% nevercache %}
+    {% include "includes/user_panel.html" %}
+    {% endnevercache %}
+    
+</div>
+</div>
+{% block extra_nav %}{% endblock %}
+</nav>
+
+<div class="container">
+
+{% nevercache %}
+{% if messages %}
+<div class="messages">
+{% for message in messages %}
+<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ message }}
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endnevercache %}
+
+{#<h1>{% block title %}{% endblock %}</h1>#}
+{#<br>#}
+{#<ul class="breadcrumb">#}
+{#{% spaceless %}#}
+{#{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}#}
+{#{% endspaceless %}#}
+{#</ul>#}
+
+</div>
+{% block pre_main %}
+<div class="container">
+<div class="row">
+
+{#<div class="col-md-2 left">#}
+{#    {% block left_panel %}#}
+{#    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>#}
+{#    {% endblock %}#}
+{#</div>#}
+
+<div class="col-md-12 middle">
+    {% block main %}{% endblock %}
+</div>
+
+</div>
+</div>
+{% endblock %}
+<footer id="footer">
+<div class="container">
+{% page_menu "pages/menus/footer.html" %}
+        <!--row-fluids-->
+        <div class="row">
+        
+            <!--Contact Form-->
+            <div class="col-sm-5">
+                <h4>{% trans "ADDRESS" %}</h4>
+                <ul class="unstyled address">
+{#                    <li><i class="icon-home"></i> <strong>{% trans "Address" %}:</strong> 1032 Wayback Lane, Wantagh<br>NY 11793</li>#}
+                    <li><i class="icon-envelope"></i> <strong>{% trans "Email" %}: </strong> info@sportadvisor.ir</li>
+                    <li><i class="icon-globe"></i> <strong>{% trans "Website" %}:</strong> www.sportadvisor.ir</li>
+                    <li><i class="icon-phone"></i> <strong>{% trans "Tel" %}:</strong> <span dir="LTR">(+98) 912 308 6945</span></li>
+{#                    <li><i class="icon-fax"></i> <strong>{% trans "Fax" %}:</strong> 631-409-3105</li>#}
+                </ul>
+            </div>
+            <!--End Contact Form-->
+            
+	    <div class="col-sm-6">
+            <ul class="social bottom">
+                <li><a href="{% url "blog_post_list_category" "news" %}feeds/rss/"><i class="icon-rss"> <small>{% trans "News" %}</small></i></a></li><br>
+	            <li><a href="{% url "blog_post_list_category" "article" %}feeds/rss/"><i class="icon-rss"> <small>{% trans "Article" %}</small></i></a></li><br>
+	            <li><a href="{% url "blog_post_list_category" "travelogue" %}feeds/rss/"><i class="icon-rss"> <small>{% trans "Travelogue" %}</small></i></a></li>
+            </ul>
+
+	    </div>
+	    
+	    <div class="col-sm-1">
+            </div>
+	</div>
+        <div class="row">
+            <div class="col-sm-5">
+		{% trans "All content currently distributed under the GNU" %}
+		<a target="_blank" href="http://www.gnu.org/copyleft/fdl.html">
+		{% trans "Free Documentation License." %}</a>
+                <br>2014-1393
+            </div>
+            <!--/Copyright-->
+
+            <div class="col-sm-6">
+                <ul class="social pull-right">
+                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+{#                    <li><a href="#"><i class="icon-pinterest"></i></a></li>#}
+                    <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                    <li><a href="#"><i class="icon-google-plus"></i></a></li>                       
+                    <li><a href="#"><i class="icon-youtube"></i></a></li>
+{#                    <li><a href="#"><i class="icon-tumblr"></i></a></li>                        #}
+{#                    <li><a href="#"><i class="icon-dribbble"></i></a></li>#}
+{#                    <li><a href="#"><i class="icon-rss"></i></a></li>#}
+{#                    <li><a href="#"><i class="icon-github-alt"></i></a></li>#}
+                    <li><a href="#"><i class="icon-instagram"></i></a></li>
+                </ul>            </div>
+
+            <div class="col-sm-1">
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% include "includes/footer_scripts.html" %}
+{% endblock %}
+</body>
+</html>
