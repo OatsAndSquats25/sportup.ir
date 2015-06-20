@@ -20,7 +20,7 @@ from django.utils.html import strip_tags
 from django.utils.timesince import timesince
 from django.utils.timezone import now
 from django.utils.translation import ugettext, ugettext_lazy as _
-from django_jalali.db import models as jmodels
+#from django_jalali.db import models as jmodels
 
 # Create your models here.
 
