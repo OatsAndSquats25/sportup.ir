@@ -2,10 +2,18 @@ from django.shortcuts import render,redirect
 from django.views.generic import View
 
 from registration.backends.simple.views import RegistrationView
-
+from registration.forms import RegistrationForm
+from django import forms
 
 # Create your views here.
+class MyRegistrationForm(RegistrationForm):
+    next    = forms.CharField(widget=forms.HiddenInput)
+
 class MyRegistrationView(RegistrationView):
-    def register(self, request, form):
-        request.POST.get('next', request.GET.get('next','/'))
-        super(MyRegistrationView, self).register(self, request, form)
+    form_class = MyRegistrationForm
+
+    def get_initial(self):
+        return {'next': self.request.GET.get('next',self.request.POST.get('next','/'))}
+
+    def get_success_url(self, request, user):
+        return request.POST.get('next','/')
