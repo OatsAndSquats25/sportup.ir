@@ -88,7 +88,7 @@ INSTALLED_APPS = (
     'programcourse',
     'enrollment',
     'payment',
-#    'finance',
+    'finance',
 #    'debug_toolbar',
 )
 
