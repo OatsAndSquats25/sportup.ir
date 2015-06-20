@@ -89,7 +89,7 @@ INSTALLED_APPS = (
     'enrollment',
     'payment',
 #    'finance',
-    'debug_toolbar',
+#    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
