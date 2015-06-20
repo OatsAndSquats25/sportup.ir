@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import club
 
 #import django_jalali.admin.filterspecs
-import django_jalali.admin as jadmin
+#import django_jalali.admin as jadmin
 
 # Register your models here.
 class clubsAdmin(admin.ModelAdmin):
