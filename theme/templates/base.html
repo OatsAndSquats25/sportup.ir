@@ -51,10 +51,17 @@
                 <nav class="navigation-items">
                     <div class="wrapper">
                         <ul class="main-navigation navigation-top-header"></ul>
+                        {% block authentication %}
                         <ul class="user-area">
-                            <li><a href="sign-in.html">{% trans "Sign In" %}</a></li>
-                            <li><a href="register.html"><strong>{% trans "Register" %}</strong></a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="#"><strong>{% trans "Profile" %}</strong></a></li>
+                            <li><a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
+                        {% else %}
+                            <li><a href="{% url  'registration_register' %}"><strong>{% trans "Register" %}</strong></a></li>
+                            <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>
+                        {% endif %}
                         </ul>
+                        {% endblock %}
                         <a href="submit.html" class="submit-item">
                             <div class="content"><span>{% trans "Submit Your Item" %}</span></div>
                             <div class="icon">
