@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required, permission_required
 
-from enrollment import views
+from enroll import views
 
 urlpatterns = patterns('',
     url(r'^confirm/(?P<pk>\d+)/$', login_required(views.enrollmentConfirmation.as_view()), name='enrollmentConfirmation'),
