@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import clubItemEnrollment
+from .models import enrolledProgram
 
 
 # ----------------------------------------------------
 class clubItemEnrollmentAdmin(admin.ModelAdmin):
-    list_display = ('clubItemDefinitionKey','status','invoiceKey','amount')
+    list_display = ('programDefinitionKey','status','invoiceKey','amount')
 
-admin.site.register(clubItemEnrollment, clubItemEnrollmentAdmin)
+admin.site.register(enrolledProgram, clubItemEnrollmentAdmin)
 # ----------------------------------------------------

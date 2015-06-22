@@ -86,8 +86,13 @@
             {{ object.usageBeginChoices }}
             {{ object.maxDays }}
             {{ object.maxSessions }}
+<<<<<<< HEAD
             {{ object.expireDate }} -->
             
+=======
+            {{ object.expireDate }}
+            <p><a href="{% url 'enrollConfirmation' object.id %}">{% trans "Enroll" %}</a></p>
+>>>>>>> 7e3cc6e9a27540804198b223ec0ce2f15b16a8a0
         {% endif %}
     {% endfor %}
 {% endif %}

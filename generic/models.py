@@ -110,7 +110,7 @@ class Displayable(TimeStamped):
     blog posts, and Cartridge products.
     """
 
-    title = models.CharField(_("Title"), max_length=500)
+    title = models.CharField(_("Title"), max_length=500, blank=True, null=True)
     slug = models.CharField(_("URL"), max_length=2000, blank=True, null=True,
             help_text=_("Leave blank to have the URL auto-generated from "
                         "the title."))

@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Sum,F
 
 from mezzanine.core import models as mezModels
-from enrollment.models import clubItemEnrollment, clubItemDefinition
+from enroll.models import enrolledProgram, clubItemDefinition
 
 from .payment import testBank,saman
 from finance import models
@@ -17,7 +17,7 @@ class financeOrder(ListView):
     template_name = 'finance/order.html'
 
     def get_queryset(self):
-        return clubItemEnrollment.objects.filter(user_id = self.request.user.id).filter(status = clubItemEnrollment.ENROLLMENT_STATUS_RESERVED)
+        return enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.ENROLLMENT_STATUS_RESERVED)
 
     def get_context_data(self, **kwargs):
         context = super(financeOrder, self).get_context_data()
@@ -25,7 +25,7 @@ class financeOrder(ListView):
         amount = 0
         discount = 0
 
-        itemsInst = clubItemEnrollment.objects.filter(user_id = self.request.user.id).filter(status = clubItemEnrollment.ENROLLMENT_STATUS_RESERVED)
+        itemsInst = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.ENROLLMENT_STATUS_RESERVED)
         if itemsInst:
             amount = itemsInst.aggregate(total = Sum('amount'))['total']
 
@@ -40,7 +40,7 @@ class financeOrder(ListView):
 # ----------------------------------------------------
 class fianceDeleteItem(View):
     def get(self,request,*args,**kwargs):
-        models.clubItemEnrollment.objects.get(pk = kwargs['pk']).delete()
+        models.enrolledProgram.objects.get(pk = kwargs['pk']).delete()
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 # ----------------------------------------------------
 class paymentRequest(TemplateView):
@@ -61,19 +61,19 @@ class paymentRequest(TemplateView):
         for i in range(1,count+1):
             dataSetPK += [int(request.POST.get(str(i))),]
 
-        clubEnInst = clubItemEnrollment.objects.select_related().filter(pk__in = dataSetPK)
+        clubEnInst = enrolledProgram.objects.select_related().filter(pk__in = dataSetPK)
         # check all items are valid
 
         for item in clubEnInst:
             if not item.clubItemDefinitionKey.isValid():
-                messages.error(request, _("There are some invalid enrollment in you order please remove them. Maybe it is full or expired."))
+                messages.error(request, _("There are some invalid enroll in you order please remove them. Maybe it is full or expired."))
                 return HttpResponseRedirect(reverse('financeOrderURL'))
 
         # remove incomplete old invoices
             invoiceInst= models.invoice.objects.filter(paid = False).filter(user_id = request.user.id)
             if invoiceInst:
                 for invItem in invoiceInst:
-                    clubItemEnrollment.objects.filter(invoiceKey=invItem).update(invoiceKey = 0)
+                    enrolledProgram.objects.filter(invoiceKey=invItem).update(invoiceKey = 0)
                 invoiceInst.delete()
 
         #utils.clearUnusedReservedItems(self.request)
@@ -85,7 +85,7 @@ class paymentRequest(TemplateView):
                                                     status = mezModels.CONTENT_STATUS_DRAFT,
                                                     content='None')
         # connect invoice to related items
-        clubItemEnrollment.objects.select_related().filter(pk__in = dataSetPK).update(invoiceKey = invoiceInst)
+        enrolledProgram.objects.select_related().filter(pk__in = dataSetPK).update(invoiceKey = invoiceInst)
 
         # Call specific payment request with reserve number and amount
         if gatewayName == 'test':
@@ -151,7 +151,7 @@ class paymentResponse(View):
             invoiceInst.save()
 
             # record financial documents for company and club
-            clubEnInst = clubItemEnrollment.objects.filter(invoiceKey = invoiceInst).select_related()
+            clubEnInst = enrolledProgram.objects.filter(invoiceKey = invoiceInst).select_related()
             for item in clubEnInst:
                 agreement = item.clubItemDefinitionKey.agreementKey
                 commission = item.clubItemDefinitionKey.agreementKey.commission
@@ -179,7 +179,7 @@ class paymentResponse(View):
                 item.save()
 
             #clubItemDefinition.objects.filter(clubItemEnrollment__).update(remainCapacity = F('remainCapacity')-1)
-            # reduce enrollment capacity here or at enrollment
+            # reduce enroll capacity here or at enroll
             #clubDef = clubItemDefinition.objects.filter()
             #clubDef.reservedCapacity -= 1
             #clubDef.save()
@@ -193,7 +193,7 @@ class paymentResponse(View):
                                                         content='None',
                                                         user_id = self.request.user.id)
             # Remove invoice
-            clubItemEnrollment.objects.filter(invoiceKey = invoiceInst).update(invoiceKey = 0)
+            enrolledProgram.objects.filter(invoiceKey = invoiceInst).update(invoiceKey = 0)
 
             invoiceInst.delete()
             #invoiceInst.save()
