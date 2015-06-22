@@ -2,36 +2,69 @@
 {% load i18n %}
 
 {% block main %}
-    <p>{% trans "Program detail" %}</p>
-    <p> {{ object.title }}
-        {{ object.agreementKey }}
-        {{ object.clubKey }}
-
-        {{ object.maxCapacity }}
-        {{ object.remainCapacity }}
-        {{ object.price }}
-        {{ object.ageMin }}
-        {{ object.ageMax }}
-        {{ object.genderLimit }}
-        {{ object.needInsurance }}
-        {{ object.multipleReserve }}
-
-        {{ object.usageBeginChoices }}
-        {{ object.usageBeginDate }}
-        {{ object.usageEndDate }}
-        {{ object.maxDays }}
-        {{ object.maxSessions }}
-        {{ object.expireDate }}
-    </p>
-
-    <hr>
-
     <p>{% trans "User detail" %}</p>
     <p>{{ user.username }}
     {{ user.name }}
     {{ user.family }}
     </p>
 
-    <a href="{% url 'paymentRequest' pk=object.id %}">{% trans 'Confirm' %}</a>
+    <section class="container">
+        <div class="row">
+            <!--Content-->
+            <div class="col-md-10 col-md-offset-1">
+                <header>
+                    <h1 class="page-title">{% trans "Your programs to buy" %}</h1>
+                </header>
+                <div id="payment" class="form-group clearfix">
+                    <a class="btn btn-default" href="{% url 'paymentRequest' pk=object.id %}">
+                        <i class="fa fa-shopping-cart"></i> {% trans "Payment" %}</a>
+                    <!-- <button type="submit" class="btn pull-left pull-bottom btn-default">Payment</button> -->
+                </div>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr class="info">
+                            <th style="width:30%;">{% trans "Image" %}</th>
+                            <th style="width:50%;">{% trans "Description" %}</th>
+                            <th style="width:20%;">{% trans "Price" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="assets/img/shena.jpg" alt="shena" >
+                            </td>
+                            <td>
+                                <article class="block">
+                                    <header><h2>{{ object.title }}</h2></header>
+                                    <dl>
+                                        <dt>{% trans "Capacity" %}</dt>
+                                        <dd>{{ object.maxCapacity }}</dd>
+                                        <dt>{% trans "Remain Capacity" %}</dt>
+                                        <dd>{{ object.remainCapacity }}</dd>
+                                        <dt>{% trans "Minimum age" %}</dt>
+                                        <dd>{{ object.ageMin }}</dd>
+                                        <dt>{% trans "Maximum age" %}</dt>
+                                        <dd>{{ object.ageMax }}</dd>
+                                        <dt>{% trans "Gender" %}</dt>
+                                        <dd>{{ object.genderLimit }}</dd>
+                                        <dt>{% trans "Need Insurance?" %}</dt>
+                                        <dd>{{ object.needInsurance }}</dd>
+                                        <dt>{% trans "Begin date" %}</dt>
+                                        <dd>{{ object.usageBeginDate }}</dd>
+                                        <dt>{% trans "End date" %}</dt>
+                                        <dd>{{ object.usageEndDate }}</dd>
+                                        <dt>{% trans "End date" %}</dt>
+                                        <dd>{{ object.usageEndDate }}</dd>
+                                    </dl>
+                                </article>
+                            </td>
+                            <td>{{ object.price }} {% trans "toman" %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

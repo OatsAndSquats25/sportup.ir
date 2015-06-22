@@ -3,26 +3,91 @@
 {% if object_list %}
     {% for object in object_list %}
         {% if object.isValid %}
-            {{ object.id }}
-            {{ object.title }}
-            {{ object.agreementKey }}
+<!--        {{ object.id }}
+            {{ object.agreementKey }} -->
+            <div class="slide">
+                <header>
+                    <h3><i></i>{{ object.title }}</h3>
+                </header>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Capacity" %}</h4>
+                        <!-- <figure>{{ object.maxCapacity }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.maxCapacity }}</div>
+                </div>
+                <!-- /.list-item -->
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Remain Capacity" %}</h4>
+                        <!-- <figure>{{ object.remainCapacity }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.remainCapacity }}</div>
+                </div>
+                <!-- /.list-item -->
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Price" %}</h4>
+                        <!-- <figure>{{ object.price }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.price }}</div>
+                </div>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Minimum age" %}</h4>
+                        <!-- <figure>{{ object.ageMin }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.ageMin }}</div>
+                </div>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Maximum age" %}</h4>
+                        <!-- <figure>{{ object.ageMax }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.ageMax }}</div>
+                </div>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Gender" %}</h4>
+                        <!-- <figure>{{ object.genderLimit }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.genderLimit }}</div>
+                </div>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Need Insurance?" %}</h4>
+                        <!-- <figure>{{ object.needInsurance }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.needInsurance }}</div>
+                </div>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "Begin date" %}</h4>
+                        <!-- <figure>{{ object.usageBeginDate }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.usageBeginDate }}</div>
+                </div>
+                <div class="list-item">
+                    <div class="left">
+                        <h4>{% trans "End date" %}</h4>
+                        <!-- <figure>{{ object.usageEndDate }}</figure> -->
+                    </div>
+                    <div class="right">{{ object.usageEndDate }}</div>
+                </div>
+                <!-- /.list-item -->
+                <div class="form-group clearfix">
+                    <a class="btn btn-default" href="{% url 'enrollmentConfirmation' object.id %}">
+                        <i class="fa fa-shopping-cart"></i> {% trans "Enroll" %}
+                    </a>
+                </div>
+            </div>
 
-            {{ object.maxCapacity }}
-            {{ object.remainCapacity }}
-            {{ object.price }}
-            {{ object.ageMin }}
-            {{ object.ageMax }}
-            {{ object.genderLimit }}
-            {{ object.needInsurance }}
-            {{ object.multipleReserve }}
-
+<!--             {{ object.multipleReserve }}
             {{ object.usageBeginChoices }}
-            {{ object.usageBeginDate }}
-            {{ object.usageEndDate }}
             {{ object.maxDays }}
             {{ object.maxSessions }}
-            {{ object.expireDate }}
-            <p><a href="{% url 'enrollmentConfirmation' object.id %}">{% trans "Enroll" %}</a></p>
+            {{ object.expireDate }} -->
+            
         {% endif %}
     {% endfor %}
 {% endif %}
