@@ -10,7 +10,7 @@ from programcourse import models
 #from programcourse import forms
 
 #from agreement.models import agreement
-from enrollment.models import clubItemEnrollment
+from enroll.models import enrolledProgram
 from program.views import userAuthorizeMixin
 
 
@@ -107,10 +107,10 @@ class courseReserve(TemplateView):
         if not agreementInst:
             raise Http404
 
-        # Multiple enrollment check
-        enrollInst = clubItemEnrollment.objects.filter(clubItemDefinitionKey = kwargs['courseId']).filter(user_id = request.user.id)
+        # Multiple enroll check
+        enrollInst = enrolledProgram.objects.filter(clubItemDefinitionKey = kwargs['courseId']).filter(user_id = request.user.id)
         if enrollInst:
-            messages.error(request, _("Attention! Previously you enrolled this course. Please check dashboard, enrollment section"))
+            messages.error(request, _("Attention! Previously you enrolled this course. Please check dashboard, enroll section"))
             if not enrollInst[0].clubItemDefinitionKey.multipleReserve:
                 return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
@@ -140,10 +140,10 @@ class courseReserve(TemplateView):
         return self.render_to_response(context)
 
     def post(self,request,*args,**kwargs):
-        enrollInstance = clubItemEnrollment.objects.create(user_id = request.user.id,
+        enrollInstance = enrolledProgram.objects.create(user_id = request.user.id,
                                                                  clubItemDefinitionKey_id=request.POST['courseId'],
                                                                  amount=int(request.POST['price']),
-                                                                 status=clubItemEnrollment.ENROLLMENT_STATUS_RESERVED)
+                                                                 status=enrolledProgram.ENROLLMENT_STATUS_RESERVED)
         messages.info(request, _("Your request added to your order and your place will reserve after successful online payment"))
         return HttpResponseRedirect(request.GET['next'])
 

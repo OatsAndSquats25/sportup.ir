@@ -22,7 +22,7 @@
             {{ object.maxDays }}
             {{ object.maxSessions }}
             {{ object.expireDate }}
-            <p><a href="{% url 'enrollmentConfirmation' object.id %}">{% trans "Enroll" %}</a></p>
+            <p><a href="{% url 'enrollConfirmation' object.id %}">{% trans "Enroll" %}</a></p>
         {% endif %}
     {% endfor %}
 {% endif %}

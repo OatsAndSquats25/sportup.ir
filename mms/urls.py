@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
     url(r'^accounts/', include("accounts.urls")),
     url(r'^noadmin/', include(admin.site.urls)),
-    url(r'^enr/', include("enrollment.urls")),
+    url(r'^enr/', include("enroll.urls")),
     url(r'^pay/', include("payment.urls")),
     url(r'^', include("directory.urls")),
 )

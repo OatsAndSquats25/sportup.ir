@@ -15,10 +15,10 @@ class courseDefinition(programDefinition):
         (USAGE_BEGIN_DATE, _("Specific date")),
     )
 
-    usageBeginChoices   = models.IntegerField(_("Usage can begin from"), choices=USAGE_BEGIN_CHOICES, default=USAGE_BEGIN_ENROLLMENT, help_text=_("Usage begin policy since enrollment"))
+    usageBeginChoices   = models.IntegerField(_("Usage can begin from"), choices=USAGE_BEGIN_CHOICES, default=USAGE_BEGIN_ENROLLMENT, help_text=_("Usage begin policy since enroll"))
     usageBeginDate      = models.DateField(_("Begin date of usage"), blank=True, null=True, help_text=_("Set this field if usage will start at specific date"))
     usageEndDate        = models.DateField(_("End date of usage"), blank=True, null=True, help_text=_("Set this field if usage will finish at specific date"))
-    maxDays             = models.IntegerField(_("Maximum valid day"), blank=True, null=True, help_text=_("Maximum valid days since enrollment choice"))
+    maxDays             = models.IntegerField(_("Maximum valid day"), blank=True, null=True, help_text=_("Maximum valid days since enroll choice"))
     maxSessions         = models.IntegerField(_("Maximum allowed session"), blank=True, null=True, help_text=_("Maximum sessions"))
     expireDate          = models.DateField(_("Membership expire date"), blank=True, null=True)
 

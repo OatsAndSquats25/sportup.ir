@@ -4,13 +4,14 @@ from django.utils.translation import ugettext_lazy as _
 from generic.models import Displayable
 
 from agreement.models import agreement
-from enrollment.models import clubItemEnrollment
+from enroll.models import enrolledProgram
 
 # ----------------------------------------------------
 class invoice(Displayable):
 
     paid        = models.BooleanField(_('Paid'), default=False)
     amount      = models.IntegerField()
+    context     = models.TextField()
 
     class Meta:
         verbose_name = _('Invoice list')
@@ -34,7 +35,7 @@ class accountingBook(Displayable):
 
     invoiceKey    = models.ForeignKey(invoice, null=True, blank=True)
     agreementKey= models.ForeignKey(agreement, null=True, blank=True)
-    enrollmentKey= models.ForeignKey(clubItemEnrollment, null=True, blank=True)
+    enrollmentKey= models.ForeignKey(enrolledProgram, null=True, blank=True)
     debit       = models.IntegerField(_('Debit'), default=0)
     credit      = models.IntegerField(_('Credit'), default=0)
     company     = models.BooleanField(_('Company'), default=False)

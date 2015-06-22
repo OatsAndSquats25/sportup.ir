@@ -18,5 +18,5 @@ class programPaymentReq(View):
             return redirect('/')
         else:
             return HttpResponse('ERROR')
-            messages.error(request, _('This program is not valid for enrollment. Validation expired or no free spcae.'))
+            messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect('directoryItemDetail', slug= programInst.clubSlug())

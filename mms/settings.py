@@ -86,7 +86,7 @@ INSTALLED_APPS = (
     'agreement',
     'program',
     'programcourse',
-    'enrollment',
+    'enroll',
     'payment',
     'finance',
 #    'debug_toolbar',

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from enrollment.models import clubItemEnrollment
+from enroll.models import enrolledProgram
 from finance import models
 
 # ----------------------------------------------------
@@ -12,7 +12,7 @@ admin.site.register(models.accountingBook,accountingBookAdmin)
 #admin.site.register(models.accountingHistory)
 # ----------------------------------------------------
 class clubItemEnrollmentInline(admin.TabularInline):
-    model = clubItemEnrollment
+    model = enrolledProgram
 
 class invoiceAdmin(admin.ModelAdmin):
     list_display = ('id','paid')

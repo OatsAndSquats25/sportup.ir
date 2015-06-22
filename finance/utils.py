@@ -1,5 +1,5 @@
 from .models import invoice
-from enrollment.models import clubItemEnrollment
+from enroll.models import enrolledProgram
 from datetime import datetime
 
 
@@ -7,11 +7,11 @@ from datetime import datetime
 def clearUnusedReservedItems(request):
     # delete orders more than 20 minute and its items
     orderInst = invoice.objects.filter( created < datetime.now())
-    clubItemEnrollment.objects.filter( orderKey__in = orderInst).delete()
+    enrolledProgram.objects.filter( orderKey__in = orderInst).delete()
     orderInst.delete()
 
     # delete items more than 20 minute without order
-    clubItemEnrollment.objects.filter( created < datetime.now()).filter(orderKey = null).delete()
+    enrolledProgram.objects.filter( created < datetime.now()).filter(orderKey = null).delete()
     pass
 # ----------------------------------------------------
 def generateOrder(request):
