@@ -57,7 +57,7 @@
                             <li><a href="#"><strong>{% trans "Profile" %}</strong></a></li>
                             <li><a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
                         {% else %}
-                            <li><a href="{% url  'registration_register' %}"><strong>{% trans "Register" %}</strong></a></li>
+                            <li><a href="{% url  'registration_register' %}?next={{ request.path }}"><strong>{% trans "Register" %}</strong></a></li>
                             <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>
                         {% endif %}
                         </ul>
