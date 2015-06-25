@@ -1,12 +1,12 @@
 from django.views.generic import TemplateView, ListView, View
 from django.utils.translation import ugettext_lazy as _
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 # from django.db.models import Sum,F
 
 from payment import testNull
-from functions import invoicePayed
+from functions import invoicePayed, invoicePayedTest
 # from enroll.models import enrolledProgram, clubItemDefinition
 
 # from .payment import testBank,saman
@@ -101,15 +101,18 @@ from functions import invoicePayed
 class paymentResponse(View):
 
     def get(self,request,*args,**kwargs):
-        invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
-        if invoiceProp.status == True :
-            invoicePayed(invoiceProp)
-        else:
-            Http404()
+        # invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
+        # if invoiceProp.status == True :
+        #     invoicePayed(invoiceProp)
+        # else:
+        invoicePayedTest(1)
+        messages.success(request, _("Payment was successful."))
+        return HttpResponseRedirect(reverse('dashboard'))
 
-    def post(self,request,*args,**kwargs):
-        invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
-        return
+    # def post(self,request,*args,**kwargs):
+    #     invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
+    #
+    #     return HttpResponse('Payment Done.')
 
 #         #Check for correct response and detect fake or hacker generated
 #         # Dispatch and call specific payment response

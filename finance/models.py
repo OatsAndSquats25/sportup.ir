@@ -9,7 +9,6 @@ from enroll.models import enrolledProgram
 # ----------------------------------------------------
 class invoice(Displayable):
 
-    paid        = models.BooleanField(_('Paid'), default=False)
     amount      = models.IntegerField()
     context     = models.TextField()
 
