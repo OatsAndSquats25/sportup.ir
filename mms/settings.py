@@ -78,8 +78,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'registration',
-    #'accounts',
+    'accounts',
     'polymorphic',
     #'django_jalali',
     'directory',
@@ -87,7 +86,6 @@ INSTALLED_APPS = (
     'program',
     'programcourse',
     'enroll',
-    'payment',
     'finance',
 #    'debug_toolbar',
 )
