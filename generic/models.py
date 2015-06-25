@@ -24,13 +24,6 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 
 # Create your models here.
 
-CONTENT_STATUS_INACTIVE = 1
-CONTENT_STATUS_ACTIVE = 2
-CONTENT_STATUS_CHOICES = (
-    (CONTENT_STATUS_INACTIVE, _("Inactive")),
-    (CONTENT_STATUS_ACTIVE, _("Active")),
-)
-
 class TimeStamped(models.Model):
     """
     Provides created and updated timestamps on models.
@@ -104,6 +97,13 @@ class TimeStamped(models.Model):
 
 #class Displayable(Slugged):
 class Displayable(TimeStamped):
+    CONTENT_STATUS_INACTIVE = 1
+    CONTENT_STATUS_ACTIVE = 2
+    CONTENT_STATUS_CHOICES = (
+        (CONTENT_STATUS_INACTIVE, _("Inactive")),
+        (CONTENT_STATUS_ACTIVE, _("Active")),
+    )
+
     """
     Abstract model that provides features of a visible page on the
     website such as publishing fields. Basis of Mezzanine pages,
@@ -116,7 +116,7 @@ class Displayable(TimeStamped):
                         "the title."))
 
     status = models.IntegerField(_("Status"),
-        choices=CONTENT_STATUS_CHOICES, default=CONTENT_STATUS_ACTIVE,
+        choices=CONTENT_STATUS_CHOICES, default=CONTENT_STATUS_INACTIVE,
         help_text=_("With Draft chosen, will only be shown for admin users "
             "on the site."))
     publish_date = models.DateTimeField(_("Published from"),

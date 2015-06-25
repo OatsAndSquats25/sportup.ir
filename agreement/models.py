@@ -44,7 +44,7 @@ class agreement(Displayable):
         return self.title
 
     def isValid(self):
-        if self.agreementStatus == self.AGREEMENT_STATUS_ACTIVE and \
+        if self.status == Displayable.CONTENT_STATUS_ACTIVE and \
             self.publish_date < now() and \
             self.expiry_date > now():
             return True

@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 from polymorphic import PolymorphicModel
 
-from generic.models import Displayable, CONTENT_STATUS_ACTIVE
+from generic.models import Displayable
 from directory.models import club
 from agreement.models import agreement
 
@@ -13,6 +13,9 @@ from agreement.models import agreement
 
 # ----------------------------------------------------
 class programDefinition(PolymorphicModel, Displayable):
+
+    TABLE_TYPE_COURSE = 1
+    TABLE_TYPE_SESSION = 2
 
     GENDER_BOTH   = 1
     GENDER_MALE   = 2
@@ -43,7 +46,7 @@ class programDefinition(PolymorphicModel, Displayable):
            self.publish_date < now() and \
            self.expiry_date > now() and \
            self.remainCapacity > 0 and \
-           self.status == CONTENT_STATUS_ACTIVE:
+           self.status == Displayable.CONTENT_STATUS_ACTIVE:
             return True
         return False
 
