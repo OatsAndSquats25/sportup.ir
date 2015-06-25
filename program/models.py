@@ -14,8 +14,8 @@ from agreement.models import agreement
 # ----------------------------------------------------
 class programDefinition(PolymorphicModel, Displayable):
 
-    TABLE_TYPE_COURSE = 1
-    TABLE_TYPE_SESSION = 2
+    TYPE_COURSE = 1
+    TYPE_SESSION = 2
 
     GENDER_BOTH   = 1
     GENDER_MALE   = 2

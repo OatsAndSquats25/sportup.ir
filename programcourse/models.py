@@ -22,6 +22,9 @@ class courseDefinition(programDefinition):
     maxSessions         = models.IntegerField(_("Maximum allowed session"), blank=True, null=True, help_text=_("Maximum sessions"))
     expireDate          = models.DateField(_("Membership expire date"), blank=True, null=True)
 
+    def type(self):
+        return programDefinition.TYPE_COURSE
+
     class Meta:
         verbose_name = _("Course definition")
         verbose_name_plural = _("Courses definition")
