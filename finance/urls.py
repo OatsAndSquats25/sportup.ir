@@ -6,9 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from finance import views
 
 urlpatterns = patterns('',
-    url(r'^order/$', views.financeOrder.as_view(), name='financeOrderURL'),
-    url(r'^deleteitem/(?P<pk>\d+)/$', views.fianceDeleteItem.as_view(), name='financeDeleteItem'),
-    url(r'^paymentrequest/$', views.paymentRequest.as_view(), name='financePaymentRequestURL'),
+    # url(r'^order/$', views.financeOrder.as_view(), name='financeOrderURL'),
+    # url(r'^deleteitem/(?P<pk>\d+)/$', views.fianceDeleteItem.as_view(), name='financeDeleteItem'),
     url(r'^paymentresponse/$', csrf_exempt(views.paymentResponse.as_view()), name='financePaymentResponseURL'),
     )
 

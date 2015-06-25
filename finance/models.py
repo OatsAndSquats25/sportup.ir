@@ -20,6 +20,15 @@ class invoice(Displayable):
     def __unicode__(self):
         return unicode(self.pk)
 # ----------------------------------------------------
+class paymentItem(models.Model):
+
+    invoiceKey  = models.ForeignKey(invoice)
+    ref         = models.CharField(max_length=50)
+    price       = models.IntegerField()
+    datetime    = models.DateTimeField()
+
+
+# ----------------------------------------------------
 class accountingBook(Displayable):
 #invoiceKey=, agreementKey=, enrollmentKey=, debit =, credit =, company =, defray =, transaction =, transactionStatus=
     DEFRAY_NONE = 1

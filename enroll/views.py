@@ -6,7 +6,8 @@ from enroll.models import enrolledProgram
 from program.views import userAuthorizeMixin
 from program.models import programDefinition
 
-from enrollcourse.views import enrollCourse
+from enroll.enrollcourse.function import enrollCourse
+from finance.functions import invoiceGenerate, paymentRequest
 
 # ----------------------------------------------------
 class enrollConfirmation(DetailView):
@@ -16,13 +17,12 @@ class enrollConfirmation(DetailView):
 # ----------------------------------------------------
 class enrollConfirmed(View):
     def get(self, request, *args, **kwargs):
-        # check
         programInst = programDefinition.objects.get(pk = kwargs['pk'])
-        if programInst.isValid() :
-            # generate invoice
-            invoiceInst = enrollCourse(request, args, kwargs)
-            HttpResponseRedirect('payment', invoiceInst.id)
-            # call bank payment
+        if programInst.isValid():
+            # if programInst.type == :
+            enrollInst = enrollCourse(programInst)
+            invoiceId = invoiceGenerate(enrollInst)
+            return HttpResponse(paymentRequest(invoiceId))
             return HttpResponse('OK')
             return redirect('/')
         else:

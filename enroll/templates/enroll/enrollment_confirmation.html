@@ -7,7 +7,6 @@
     {{ user.name }}
     {{ user.family }}
     </p>
-
     <section class="container">
         <div class="row">
             <!--Content-->
@@ -16,7 +15,7 @@
                     <h1 class="page-title">{% trans "Your programs to buy" %}</h1>
                 </header>
                 <div id="payment" class="form-group clearfix">
-                    <a class="btn btn-default" href="{% url 'paymentRequest' pk=object.id %}">
+                    <a class="btn btn-default" href="{% url 'enrollConfirmed' pk=object.id %}">
                         <i class="fa fa-shopping-cart"></i> {% trans "Payment" %}</a>
                     <!-- <button type="submit" class="btn pull-left pull-bottom btn-default">Payment</button> -->
                 </div>
@@ -66,5 +65,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}
