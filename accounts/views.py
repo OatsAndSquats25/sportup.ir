@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from django.views.generic import View
+from django.views.generic import View, TemplateView
+from django.http import HttpResponse
 
 from registration.backends.simple.views import RegistrationView
 from registration.forms import RegistrationForm
@@ -17,3 +18,6 @@ class MyRegistrationView(RegistrationView):
 
     def get_success_url(self, request, user):
         return request.POST.get('next','/')
+
+class dashboard(TemplateView):
+    template_name = 'registration/dashboard.html'
