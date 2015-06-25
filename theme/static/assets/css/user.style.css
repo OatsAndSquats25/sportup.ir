@@ -1,0 +1,204 @@
+.item.admin-view .view-details {
+  display: none;
+}
+
+.item .view-details {
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  background-color: #d43133;
+  cursor: pointer;
+  color: #fff;
+  height: 30px;
+  left: 0;
+  width: 60px;
+  position: absolute;
+  top: 20px;
+  z-index: 4;
+}
+.item .view-details i {
+  text-align: right;
+  font-size: 18px;
+  line-height: 28px;
+  margin-right: 10px;
+  display: block;
+}
+
+.item.list p, .item.list figure, .item.list a, .item.list span {
+  color: #fff;
+}
+.item.list a:hover {
+  color: #d43133;
+}
+.item.list .image .overlay .content h4 {
+  color: #fff;
+}
+
+#featur-header {
+	padding-top: 30px;
+	padding-left: 98px;
+}
+
+.course-description {
+	list-style-type: none;
+}
+
+table.table td img{
+    width: 100%;
+    height: auto;
+}
+
+#payment {
+	margin-top: 30px;
+}
+
+#dashboard-bar {
+	filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+    -moz-transition: 0.4s ease-in-out all;
+  -webkit-transition: 0.4s ease-in-out all;
+  transition: 0.4s ease-in-out all;
+  background-color: #424242;
+  height: 100%;
+  padding: 0px;
+  position: absolute;
+  right: 0px;
+  top: 0;
+  width: 200px;
+  z-index: 1;
+}
+#dashboard-bar ul {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transition: 1s;
+  -webkit-transition: 1s;
+  transition: 1s;
+  padding-left: 0;
+  list-style: none;
+}
+#dashboard-bar ul li a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d43130;
+  display: block;
+  padding: 10px 20px;
+  position: relative;
+}
+#dashboard-bar ul li a:hover {
+  background-color: #3a3a3a;
+  color: #d43133;
+}
+#dashboard-bar ul li a.active {
+  color: #d43133;
+}
+#dashboard-bar ul li a.active:hover {
+  color: #fff;
+}
+#dashboard-bar ul li ul {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+#dashboard-bar .expandable-content {
+  margin-bottom: 0;
+}
+
+/*.invertedshiftdown{
+padding: 0;
+width: 100%;
+background: transparent;
+voice-family: "\"}\"";
+voice-family: inherit;
+}
+
+.invertedshiftdown ul{
+margin-top:15px;
+margin-left: 40px; /*margin between first menu item and left browser edge
+padding: 0;
+list-style: none;
+}
+
+.invertedshiftdown li{
+display: inline;
+margin: 0 2px 0 0;
+padding: 0;
+text-transform:uppercase;
+}
+
+.invertedshiftdown a {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  border-radius: 0px;
+  -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: #f4f4f2;
+  border: none;
+  color: #d43133;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none !important;
+  padding: 10px 11px 9px 11px;
+  width: auto;
+}
+.invertedshiftdown a:hover{
+  background-color: #ededea;
+}
+*/
+
+.invertedshiftdown{
+margin-top: 20px;
+padding: 0;
+width: 100%;
+border-bottom: 5px solid #D10000; /*Red color theme*/
+background: transparent;
+voice-family: "\"}\"";
+voice-family: inherit;
+}
+
+.invertedshiftdown ul{
+margin-bottom: 11px;
+margin-left: 40px; /*margin between first menu item and left browser edge*/
+padding: 0;
+list-style: none;
+}
+
+.invertedshiftdown li{
+display: inline;
+margin: 0 2px 0 0;
+padding: 0;
+text-transform:uppercase;
+}
+
+.invertedshiftdown a{
+float: left;
+display: block;
+font-size: 12px;
+font-weight: bold;
+color: black;
+text-decoration: none;
+margin: 0 1px 0 0; /*Margin between each menu item*/
+padding: 5px 10px 9px 10px; /*Padding within each menu item*/
+background-color: white; /*Default menu color*/
+}
+
+.invertedshiftdown a:hover{
+background-color: #D10000; /*Red color theme*/
+color: white;
+}
+
+.invertedshiftdown .current a{ /** currently selected menu item **/
+background-color: #D10000; /*Red color theme*/
+padding-top: 9px; /*Flip default padding-top value with padding-bottom */
+padding-bottom: 5px; /*Flip default padding-bottom value with padding-top*/
+color: white;
+}
+
+.active a{
+  background-color: #D10000;
+  color: #fff;
+}
+
