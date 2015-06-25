@@ -1,17 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{%  load i18n static %}
 
 {% block main %}
     {% block authentication %}
     {% endblock %}
-
-    <h1>Register Here</h1>
-    <form method="post" action="{% url "registration_register" %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <input type="submit" value="Submit" />
-{#        <input type="hidden" name="next" value="{{ next }}" />#}
-    </form>
     <section class="container">
         <div class="block">
             <div class="row">
@@ -22,20 +14,21 @@
                     <hr>
                     <form role="form" id="form-register" method="post" action="?">
                         <div class="form-group">
-                            <label for="form-register-full-name">Full Name:</label>
-                            <input type="text" class="form-control" id="form-register-full-name" name="form-register-full-name" required>
+                            <label for="{{ form.username.id_for_label }}">Username:</label>
+                            {{ form.username }}
                         </div><!-- /.form-group -->
                         <div class="form-group">
-                            <label for="form-register-email">Email:</label>
-                            <input type="email" class="form-control" id="form-register-email" name="form-register-email" required>
+                        {{ form.email.label_tag }}
+                            <label for="{{ form.email.id_for_label }}">:</label>
+                            {{ form.email }}
                         </div><!-- /.form-group -->
                         <div class="form-group">
-                            <label for="form-register-password">Password:</label>
-                            <input type="password" class="form-control" id="form-register-password" name="form-register-password" required>
+                            <label for="{{ form.password1.id_for_label }}">Password:</label>
+                            {{ form.password1 }}
                         </div><!-- /.form-group -->
                         <div class="form-group">
-                            <label for="form-register-confirm-password">Confirm Password:</label>
-                            <input type="password" class="form-control" id="form-register-confirm-password" name="form-register-confirm-password" required>
+                            <label for="password2">Confirm Password:</label>
+                            {{ form.password2 }}
                         </div><!-- /.form-group -->
                         <div class="checkbox pull-left">
                             <label>
@@ -47,11 +40,13 @@
                         </div><!-- /.form-group -->
                     </form>
                     <hr>
-                    <div class="center">
+<!--                     <div class="center">
                         <figure class="note">By clicking the “Create an Account” button you agree with our <a href="terms-conditions.html" class="link">Terms and conditions</a></figure>
-                    </div>
+                    </div> -->
                 </div>
+                
             </div>
         </div>
     </section>
 {% endblock %}
+{% block extra_js_end %}<script type="text/javascript" src="{% static "assets/js/icheck.min.js" %}"></script>{% endblock %}

@@ -1,59 +1,38 @@
 {% extends 'base.html' %}
-{%  load i18n %}
+{%  load i18n static %}
 
 {% block main %}
     {% block authentication %}
     {% endblock %}
 
     {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+        <div class="alert alert-danger">
+            <p>Your username and password didn't match. Please try again.</p>
+        </div>
+        
     {% endif %}
 
     {% if next %}
         {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
+        <div class="alert alert-warning">
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        </div>
         {% else %}
-        <p>Please login to see this page.</p>
+        <div class="alert alert-info">
+            <p>Please login to see this page.</p>
+        </div>
         {% endif %}
     {% endif %}
-
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-        {% csrf_token %}
-        <table>
-        <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </tr>
-        </table>
-
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
     <section class="container">
         <div class="block">
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <header>
-                        <h1 class="page-title">Sign In</h1>
+                        <h1 class="page-title">{%trans "Sign In" %}</h1>
                     </header>
                     <hr>
-                    <form role="form" id="form-sign-in-account" method="post" action="?">
-                        <div class="form-group">
-                            <label for="form-sign-in-email">Email:</label>
-                            <input type="email" class="form-control" id="form-sign-in-email" name="form-sign-in-email" required>
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="form-sign-in-password">Password:</label>
-                            <input type="password" class="form-control" id="form-sign-in-password" name="form-sign-in-password" required>
-                        </div><!-- /.form-group -->
-                        <div class="form-group clearfix">
-                            <button type="submit" class="btn pull-right btn-default" id="account-submit">Sign In</button>
-                        </div><!-- /.form-group -->
+                    <form role="form" id="form-sign-in-account" method="post" action="{% url 'django.contrib.auth.views.login' %}">
                     </form>
                 </div>
                 <div class="col-md-4 col-sm-6 col-md-offset-2">
@@ -62,30 +41,6 @@
                     </header>
                     <hr>
                     <form role="form" id="form-register" method="post" action="?">
-                        <div class="form-group">
-                            <label for="form-register-full-name">Full Name:</label>
-                            <input type="text" class="form-control" id="form-register-full-name" name="form-register-full-name" required>
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="form-register-email">Email:</label>
-                            <input type="email" class="form-control" id="form-register-email" name="form-register-email" required>
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="form-register-password">Password:</label>
-                            <input type="password" class="form-control" id="form-register-password" name="form-register-password" required>
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="form-register-confirm-password">Confirm Password:</label>
-                            <input type="password" class="form-control" id="form-register-confirm-password" name="form-register-confirm-password" required>
-                        </div><!-- /.form-group -->
-                        <div class="checkbox pull-left">
-                            <label>
-                                <input type="checkbox" name="newsletter">Receive Newsletter
-                            </label>
-                        </div>
-                        <div class="form-group clearfix">
-                            <button type="submit" class="btn pull-right btn-default" id="account-submit">Create an Account</button>
-                        </div><!-- /.form-group -->
                     </form>
                     <hr>
                     <div class="center">
@@ -96,7 +51,5 @@
             </div>
         </div>
     </section>
-
-    {# Assumes you setup the password_reset view in your URLconf #}
-    <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">Lost password?</a></p>
 {% endblock %}
+{% block extra_js_end %}<script type="text/javascript" src="{% static "assets/js/icheck.min.js" %}"></script>{% endblock %}
