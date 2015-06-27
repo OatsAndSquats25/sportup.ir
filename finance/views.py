@@ -13,7 +13,23 @@ from functions import invoicePayed, invoicePayedTest
 # from finance import models
 # from finance import utils
 #
-# # ----------------------------------------------------
+
+# ----------------------------------------------------
+class testGateway(TemplateView):
+    template_name = 'finance/testgateway.html'
+# ----------------------------------------------------
+class paymentResponse(View):
+    def get(self,request,*args,**kwargs):
+        payRes = testNull.testPaymentResponse(request,*args,**kwargs)
+
+        if payRes['status'] == True :
+            invoicePayedTest(payRes['invoiceId'])
+            messages.success(request, _("Payment was successful."))
+        else:
+            messages.error(request, _("Payment has error"))
+
+        return HttpResponseRedirect(reverse('dashboard'))
+# ----------------------------------------------------
 # class financeOrder(ListView):
 #     template_name = 'finance/order.html'
 #
@@ -98,16 +114,16 @@ from functions import invoicePayed, invoicePayedTest
 #
 #         return self.render_to_response(context)
 # ----------------------------------------------------
-class paymentResponse(View):
-
-    def get(self,request,*args,**kwargs):
-        # invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
-        # if invoiceProp.status == True :
-        #     invoicePayed(invoiceProp)
-        # else:
-        invoicePayedTest(1)
-        messages.success(request, _("Payment was successful."))
-        return HttpResponseRedirect(reverse('dashboard'))
+# class paymentResponse(View):
+#
+#     def get(self,request,*args,**kwargs):
+#         # invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
+#         # if invoiceProp.status == True :
+#         #     invoicePayed(invoiceProp)
+#         # else:
+#         invoicePayedTest(1)
+#         messages.success(request, _("Payment was successful."))
+#         return HttpResponseRedirect(reverse('dashboard'))
 
     # def post(self,request,*args,**kwargs):
     #     invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
