@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
-from course import views
+from programcourse import views
 
 urlpatterns = patterns('',
     url(r'^$', views.courseList.as_view(), name='courseListURL'),
