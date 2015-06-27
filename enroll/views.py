@@ -1,5 +1,7 @@
 from django.views.generic import ListView, DetailView, View
-from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 from enroll.models import enrolledProgram
 
@@ -21,29 +23,26 @@ class enrollConfirmed(View):
         if programInst.isValid():
             # if programInst.type == :
             enrollInst = enrollCourse(programInst)
-            invoiceId = invoiceGenerate(enrollInst)
-            return HttpResponse(paymentRequest(invoiceId))
-            return HttpResponse('OK')
-            return redirect('/')
+            invoiceInst = invoiceGenerate(enrollInst)
+            return paymentRequest(invoiceInst)
         else:
-            return HttpResponse('ERROR')
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect('directoryItemDetail', slug= programInst.clubSlug())
 # ----------------------------------------------------
-class enrollmentList(ListView):
-    template_name = 'enroll/enrolled_list.html'
-
-    def get_queryset(self):
-        return enrolledProgram.objects.filter(user_id = self.request.user.id).\
-            filter(status = enrolledProgram.ENROLLMENT_STATUS_PAYED)
-# ----------------------------------------------------
-class enrollmentList2(userAuthorizeMixin, ListView):
-    template_name = 'enroll/enrolled_list.html'
-    model = enrolledProgram
-    template_name = 'enroll/enrolled_list.html'
-    model = enrolledProgram
-
-    def get_queryset(self):
-        return enrolledProgram.objects.filter(clubItemDefinitionKey = self.kwargs['programId']).\
-            filter(status = enrolledProgram.ENROLLMENT_STATUS_PAYED)
-# ----------------------------------------------------
+# class enrollmentList(ListView):
+#     template_name = 'enroll/enrolled_list.html'
+#
+#     def get_queryset(self):
+#         return enrolledProgram.objects.filter(user_id = self.request.user.id).\
+#             filter(status = enrolledProgram.ENROLLMENT_STATUS_PAYED)
+# # ----------------------------------------------------
+# class enrollmentList2(userAuthorizeMixin, ListView):
+#     template_name = 'enroll/enrolled_list.html'
+#     model = enrolledProgram
+#     template_name = 'enroll/enrolled_list.html'
+#     model = enrolledProgram
+#
+#     def get_queryset(self):
+#         return enrolledProgram.objects.filter(clubItemDefinitionKey = self.kwargs['programId']).\
+#             filter(status = enrolledProgram.ENROLLMENT_STATUS_PAYED)
+# # ----------------------------------------------------
