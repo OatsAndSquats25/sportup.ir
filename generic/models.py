@@ -20,10 +20,23 @@ from django.utils.html import strip_tags
 from django.utils.timesince import timesince
 from django.utils.timezone import now
 from django.utils.translation import ugettext, ugettext_lazy as _
+# from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 #from django_jalali.db import models as jmodels
 
+# user_model_name = get_user_model()
 # Create your models here.
+# -------------------------------------------------------------------------------------
+class Ownable(models.Model):
+    # user = models.ForeignKey(get_user_model(), verbose_name=_("Owner"))
+    user = models.ForeignKey(User, verbose_name=_("Owner"))
 
+    class Meta:
+        abstract = True
+
+    def is_editable(self, request):
+        return request.user.is_superuser or request.user.id == self.user_id
+# -------------------------------------------------------------------------------------
 class TimeStamped(models.Model):
     """
     Provides created and updated timestamps on models.
@@ -45,7 +58,7 @@ class TimeStamped(models.Model):
         if not self.id:
             self.created = _now
         super(TimeStamped, self).save(*args, **kwargs)
-
+# -------------------------------------------------------------------------------------
 #@python_2_unicode_compatible
 #class Slugged(models.Model):
 #    """
@@ -94,9 +107,9 @@ class TimeStamped(models.Model):
 #                                        ugettext("View on site"))
 #    admin_link.allow_tags = True
 #    admin_link.short_description = ""
-
+# -------------------------------------------------------------------------------------
 #class Displayable(Slugged):
-class Displayable(TimeStamped):
+class Displayable(TimeStamped, Ownable):
     CONTENT_STATUS_INACTIVE = 1
     CONTENT_STATUS_ACTIVE = 2
     CONTENT_STATUS_CHOICES = (
@@ -163,3 +176,5 @@ class Displayable(TimeStamped):
         name = self.__class__.__name__
         raise NotImplementedError("The model %s does not have "
                                   "get_absolute_url defined" % name)
+
+# -------------------------------------------------------------------------------------
