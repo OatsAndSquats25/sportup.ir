@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     # url(r'^order/$', views.financeOrder.as_view(), name='financeOrderURL'),
     # url(r'^deleteitem/(?P<pk>\d+)/$', views.fianceDeleteItem.as_view(), name='financeDeleteItem'),
     url(r'^paymentresponse/$', csrf_exempt(views.paymentResponse.as_view()), name='financePaymentResponseURL'),
+    url(r'^testgateway/$', views.testGateway.as_view(), name = 'financeTestGatewayURL'),
     )
 

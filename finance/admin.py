@@ -9,7 +9,7 @@ class invoiceAdmin(admin.ModelAdmin):
 
 admin.site.register(models.invoice, invoiceAdmin)
 # ----------------------------------------------------
-admin.site.register(models.paymentItem)
+admin.site.register(models.transaction)
 # ----------------------------------------------------
 admin.site.register(models.accountingBook)
 # ----------------------------------------------------

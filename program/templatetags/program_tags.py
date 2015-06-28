@@ -12,7 +12,7 @@ def program_list(id):
     currentAgreement = agreement.objects.get(clubKey = id)
 
     if not currentAgreement.isValid():
-        return {'agreement' : False}
+        return ''
 
     definedCourses = programDefinition.objects.filter(agreementKey = currentAgreement)
 

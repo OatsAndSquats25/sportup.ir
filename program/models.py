@@ -28,7 +28,7 @@ class programDefinition(PolymorphicModel, Displayable):
 
     agreementKey        = models.ForeignKey(agreement, verbose_name=_('Agreement'))
     #coachUserKey        = models.ManyToManyField(user_model_name, blank=True, null=True)
-    maxCapacity         = models.IntegerField(_("Maximum capacity"), help_text=_("Please fill if your program has maximum capacity"))
+    maxCapacity         = models.IntegerField(_("Maximum capacity"), default=-1, help_text=_("Please fill if your program has maximum capacity"))
     remainCapacity      = models.IntegerField(_("Remain capacity"), blank=True, null=True)
     price               = models.DecimalField(_("Price"), max_digits=15, decimal_places=2)
     ageMin              = models.IntegerField(_("Age minimum"), default=0)
@@ -46,7 +46,8 @@ class programDefinition(PolymorphicModel, Displayable):
            self.publish_date < now() and \
            self.expiry_date > now() and \
            self.remainCapacity > 0 and \
-           self.status == Displayable.CONTENT_STATUS_ACTIVE:
+           self.status == Displayable.CONTENT_STATUS_ACTIVE and \
+           self.remainCapacity != 0:
             return True
         return False
 

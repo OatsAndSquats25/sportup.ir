@@ -19,7 +19,7 @@ class invoice(Displayable):
     def __unicode__(self):
         return unicode(self.pk)
 # ----------------------------------------------------
-class paymentItem(models.Model):
+class transaction(models.Model):
 
     invoiceKey  = models.ForeignKey(invoice)
     ref         = models.CharField(max_length=50)

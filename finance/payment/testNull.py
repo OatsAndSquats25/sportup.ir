@@ -1,6 +1,10 @@
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
+
 
 def testPaymentRequest(InvoiceId):
-    return 'Payment request.'
+    return redirect(reverse('financeTestGatewayURL'))
 
-def testPaymentResponse():
-    return 'Payment response.'
+def testPaymentResponse(request,*args,**kwargs):
+    res = { 'status' : True, 'invoiceId' : 1, 'context' : '---'}
+    return res
