@@ -68,13 +68,7 @@
                                 <i class="fa fa-plus"></i>
                             </div>
                         </a>
-                        <div class="toggle-navigation">
-                            <div class="icon">
-                                <div class="line"></div>
-                                <div class="line"></div>
-                                <div class="line"></div>
-                            </div>
-                        </div>
+                        {% block toggle-nav %}{% endblock %}
                     </div>
                 </nav>
             </div>
@@ -97,10 +91,7 @@
         <!-- Page Canvas-->
         <div id="page-canvas">
             <!--Off Canvas Navigation-->
-            <nav class="off-canvas-navigation">
-                <header>{% trans "Navigation" %}</header>
-                <div class="main-navigation navigation-off-canvas"></div>
-            </nav>
+            {% block navigation %}{% endblock %}
             <!--end Off Canvas Navigation-->
 {#            <!--Sub Header-->#}
 {#            <section class="sub-header">#}

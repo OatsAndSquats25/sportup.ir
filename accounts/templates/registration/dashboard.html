@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block toggle-nav %}
+    <div class="toggle-navigation">
+        <div class="icon">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block navigation %}
+	<nav class="off-canvas-navigation">
+        <header>{% trans "Navigation" %}</header>
+        <div class="main-navigation navigation-off-canvas"></div>
+    </nav>
+{% endblock %}
 
 {% block main %}
-    Dashboard
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <p>in tabae avalemun!</p>
+        </div>
+        <div class="tab-pane" id="tab2">
+            <p>inam tave dovomemun!</p>
+        </div>
+    </div>
 {% endblock %}

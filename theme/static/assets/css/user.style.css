@@ -202,3 +202,51 @@ color: white;
   color: #fff;
 }
 
+.off-canvas-navigation .nav-header {
+  border-bottom: 1px solid rgba(55, 205, 25, 0.1);
+  color: #D13140;
+  margin: 0px 20px 5px 20px;
+}
+
+.clickable-row {
+    cursor: pointer; 
+}
+
+#myTable {
+    float:left;
+    border:1px solid #dfdfdf;
+    border-collapse:collapse;   
+    width:100%;
+    font-size:12px;
+}
+/* #Tablet (Portrait)
+================================================== */
+/* Note: Design for a width of 768px */
+/*@media all and (min-width: 768px) and (max-width: 959px) {
+    td.mob-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;       
+    } 
+}*/
+/* #Mobile (Landscape)
+================================================== */
+/* Note: Design for a width of 600px */
+@media all and (max-width: 600px){
+    td.mob-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
+    th.mob-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
+}

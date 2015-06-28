@@ -22,9 +22,8 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr class="info">
-                            <th style="width:30%;">{% trans "Image" %}</th>
-                            <th style="width:50%;">{% trans "Description" %}</th>
-                            <th style="width:20%;">{% trans "Price" %}</th>
+                            <th style="width:40%;">{% trans "Image" %}</th>
+                            <th style="width:60%;">{% trans "Description" %}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,10 +53,10 @@
                                         <dd>{{ object.usageEndDate }}</dd>
                                         <dt>{% trans "End date" %}</dt>
                                         <dd>{{ object.usageEndDate }}</dd>
+                                        <dt>{% trans "Price" %}</dt>
+                                        <dd>{{ object.price }} {% trans "toman" %}</dd>
                                     </dl>
                                 </article>
-                            </td>
-                            <td>{{ object.price }} {% trans "toman" %}
                             </td>
                         </tr>
                     </tbody>
