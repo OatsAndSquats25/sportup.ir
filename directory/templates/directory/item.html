@@ -20,10 +20,6 @@
                             <h1>{{ object.title }}</h1>
                             <figure>{{ object.city }}</figure>
                         </div>
-<!--                             <div class="info">
-                            <i><img src="{% static "assets/icons/sports/water-sports/swimming.png" %}" alt=""></i>
-	                         <span>مدرسه شنا</span>
-                        </div> -->
                     </header>
                     <div class="row">
                         <!--Detail Sidebar-->
@@ -52,6 +48,23 @@
                                 </address>
                             </section>
                             <!--end Contact Form-->
+                            <article class="block">
+                                <header><h2>Opening Hours</h2></header>
+                                <dl class="lines">
+                                    <dt>Monday</dt>
+                                    <dd>08:00 am - 11:00 pm</dd>
+                                    <dt>Tuesday</dt>
+                                    <dd>08:00 am - 11:00 pm</dd>
+                                    <dt>Wednesday</dt>
+                                    <dd>08:00 am - 11:00 pm</dd>
+                                    <dt>Thursday</dt>
+                                    <dd>08:00 am - 11:00 pm</dd>
+                                    <dt>Friday</dt>
+                                    <dd>08:00 am - 11:00 pm</dd>
+                                    <dt>Saturday</dt>
+                                    <dd>08:00 am - 11:00 pm</dd>
+                                </dl>
+                            </article>
                         </aside>
                         <!--end Detail Sidebar-->
                         <!--Content-->
@@ -76,46 +89,34 @@
                                         </div>
                                     </div>
                                 </article>
-
-                                <article class="block">
-                                    <header><h2>Opening Hours</h2></header>
-                                    <dl class="lines">
-                                        <dt>Monday</dt>
-                                        <dd>08:00 am - 11:00 pm</dd>
-                                        <dt>Tuesday</dt>
-                                        <dd>08:00 am - 11:00 pm</dd>
-                                        <dt>Wednesday</dt>
-                                        <dd>08:00 am - 11:00 pm</dd>
-                                        <dt>Thursday</dt>
-                                        <dd>08:00 am - 11:00 pm</dd>
-                                        <dt>Friday</dt>
-                                        <dd>08:00 am - 11:00 pm</dd>
-                                        <dt>Saturday</dt>
-                                        <dd>08:00 am - 11:00 pm</dd>
-                                    </dl>
-                                </article>
-
-                                <article class="block">
-                					<header><h2>{% trans "Programs" %}</h2></header>
-                					<div class="list-slider owl-carousel">
-                						{% program_list object.id %}
-                					</div>
-                				</article>
-                                
                                 <!-- /.block -->
                             </section>
+                            <div class="table-responsive">
+                                <header><h2>{% trans "Programs" %}</h2></header>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>{% trans "Program Name" %}</th>
+                                            <th>{% trans "Capacity" %}</th>
+                                            <th>{% trans "Price" %}</th>
+                                            <th class="mob-hide">{% trans "Gender" %}</th>
+                                            <th class="mob-hide">{% trans "Begin date" %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% program_list object.id %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.col-md-8-->
                     </div>
+                    
                     <!-- /.row -->
                 </section>
                 <!-- /#main-content-->
             </div>
-            <!-- /.col-md-8-->
-      
-            <!-- /.col-md-3-->
-            <!--end Sidebar-->
-        </div><!-- /.row-->
+        </div>
     </section>
 {% endblock %}
 {% block extra_js_end %}
