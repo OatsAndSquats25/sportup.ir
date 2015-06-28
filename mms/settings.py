@@ -60,13 +60,13 @@ TEMPLATE_DIRS = (os.path.join(BASE_DIR, "templates"),)
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!1e4g5lrbsif^992(qj!enn=h-fthd08h+)lukfn_c^vt2t*%d'
+# SECRET_KEY = '!1e4g5lrbsif^992(qj!enn=h-fthd08h+)lukfn_c^vt2t*%d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = []
-SITE_ID=1
+# DEBUG = True
+# TEMPLATE_DEBUG = True
+# ALLOWED_HOSTS = []
+# SITE_ID=1
 
 # Application definition
 INSTALLED_APPS = (
@@ -102,24 +102,13 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
+    "django.core.context_processors.i18n",
     'django.contrib.messages.context_processors.messages',
 )
 
 ROOT_URLCONF = 'mms.urls'
 
 WSGI_APPLICATION = 'mms.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 #######################
 # Internationalization#
 #######################
@@ -143,6 +132,9 @@ except ImportError as e:
         raise e
 
 
+#####################
+# Default Variables #
+#####################
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
