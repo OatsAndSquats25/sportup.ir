@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block main %}
-    Payment Gateway
-    <a href="{% url 'financePaymentResponseURL' %}">Response</a>
+    <p align="center"><img src="{% static "behpardakht.jpg" %}"></p>
+    <p align="center"><a href="{% url 'financePaymentResponseURL' %}">Response</a></p>
 {% endblock %}
