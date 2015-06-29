@@ -5,9 +5,9 @@ from payment import testNull
 
 
 #----------------------------------------------------------------------
-def invoiceGenerate(enrollInst):
+def invoiceGenerate(request, enrollInst):
     # TODO: check aginst re invoice
-    invoiceInst = invoice.objects.create(amount=enrollInst.amount, context='Payment pending.')
+    invoiceInst = invoice.objects.create(amount=enrollInst.amount, context='Payment pending.', user= request.user)
     enrollInst.invoiceKey = invoiceInst
     enrollInst.save()
     return invoiceInst

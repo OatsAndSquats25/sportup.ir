@@ -22,8 +22,8 @@ class enrollConfirmed(View):
         programInst = programDefinition.objects.get(pk = kwargs['pk'])
         if programInst.isValid():
             # if programInst.type == :
-            enrollInst = enrollCourse(programInst)
-            invoiceInst = invoiceGenerate(enrollInst)
+            enrollInst = enrollCourse(request, programInst)
+            invoiceInst = invoiceGenerate(request, enrollInst)
             return paymentRequest(invoiceInst)
         else:
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
