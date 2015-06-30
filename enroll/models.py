@@ -39,6 +39,10 @@ class enrolledProgram(PolymorphicModel, Displayable):
 
     def __unicode__(self):
         return unicode(self.programDefinitionKey)
+
+    def reduceRemainCapacity(self):
+        self.programDefinitionKey.remainCapacity -= 1
+
 #
 #    #def payingRequest(self):
 #    #def payedRequest(self):

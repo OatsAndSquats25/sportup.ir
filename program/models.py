@@ -45,9 +45,8 @@ class programDefinition(PolymorphicModel, Displayable):
         if self.agreementKey.isValid() and \
            self.publish_date < now() and \
            self.expiry_date > now() and \
-           self.remainCapacity > 0 and \
-           self.status == Displayable.CONTENT_STATUS_ACTIVE and \
-           self.remainCapacity != 0:
+           self.remainCapacity != 0 and \
+           self.status == Displayable.CONTENT_STATUS_ACTIVE:
             return True
         return False
 
