@@ -18,7 +18,7 @@ admin.site.register(courseDays)
 #
 #class courseDefinitionAdmin(programDefinitionAdmin):
 class courseDefinitionAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title','status','publish_date', 'expiry_date', 'maxCapacity', 'remainCapacity', 'agreementKey')
 #    course_fieldsets = deepcopy(clubItemDefinitionAdmin.fieldsets)
 #    course_fieldsets += ((_('Course'),{'fields':('usageBeginChoices','usageBeginDate','usageEndDate','maxDays','maxSessions','expireDate'),'classes':('collapse',)}),)
 #    fieldsets = course_fieldsets
