@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from generic.models import Displayable
+from generic.models import Displayable, Ownable, TimeStamped
 
 from agreement.models import agreement
 from enroll.models import enrolledProgram
@@ -19,12 +19,14 @@ class invoice(Displayable):
     def __unicode__(self):
         return unicode(self.pk)
 # ----------------------------------------------------
-class transaction(models.Model):
+class transaction(TimeStamped, Ownable):
 
     invoiceKey  = models.ForeignKey(invoice)
-    ref         = models.CharField(max_length=50)
-    price       = models.IntegerField()
-    datetime    = models.DateTimeField()
+    ref_id      = models.CharField(max_length=50)
+    trans_id    = models.CharField(max_length=50, null=True, blank=True)
+    amount      = models.IntegerField()
+    description = models.CharField(max_length=200, null=True, blank=True)
+
 
 
 # ----------------------------------------------------

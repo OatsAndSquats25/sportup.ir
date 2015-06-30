@@ -24,7 +24,7 @@ class enrollConfirmed(View):
             # if programInst.type == :
             enrollInst = enrollCourse(request, programInst)
             invoiceInst = invoiceGenerate(request, enrollInst)
-            return paymentRequest(invoiceInst)
+            return paymentRequest(request, invoiceInst)
         else:
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect('directoryItemDetail', slug= programInst.clubSlug())

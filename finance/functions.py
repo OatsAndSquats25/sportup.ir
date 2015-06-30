@@ -1,7 +1,8 @@
 from models import invoice
+from program.models import programDefinition
 from enroll.models import enrolledProgram
 from finance.models import transaction
-from payment import testNull
+from payment import testPay, payline
 
 
 #----------------------------------------------------------------------
@@ -11,26 +12,25 @@ def invoiceGenerate(request, enrollInst):
     enrollInst.invoiceKey = invoiceInst
     enrollInst.save()
     return invoiceInst
-#----------------------------------------------------------------------
-def invoicePayed(invoiceObj):
-    invoiceInst = invoice.objects.get(pk=invoiceObj.invoiceInst.id)
 
-    # invoiceProp.invoiceInst.paid = invoiceProp.paid
-    # invoiceProp.invoiceInst.content = invoiceProp.ref
-    # invoiceProp.invoiceInst.save()
-
-    enrolledProgram.objects.filter(invoiceKey = invoiceInst).update(paid=True)
-    return True
 #----------------------------------------------------------------------
-def invoicePayedTest(idValue):
+def invoicePayed(idValue):
     invoiceInst = invoice.objects.get(pk=idValue)
     invoiceInst.status = enrolledProgram.CONTENT_STATUS_ACTIVE
-    invoiceInst.context = '10md4kds9934nmdids094782jkje2'
     invoiceInst.save()
 
-    enrolledProgram.objects.filter(invoiceKey = invoiceInst).update(status=enrolledProgram.CONTENT_STATUS_ACTIVE)
+    enrolledInst = enrolledProgram.objects.select_related().get(invoiceKey = invoiceInst)
+    enrolledInst.status = enrolledProgram.CONTENT_STATUS_ACTIVE
+    programInst = enrolledInst.programDefinitionKey
+    enrolledInst.save()
+    programInst.remainCapacity -= 1
+    programInst.save()
+
     return True
+
 #----------------------------------------------------------------------
-def paymentRequest(invoiceInst):
-    return testNull.testPaymentRequest(invoiceInst.id)
+def paymentRequest(request, invoiceInst):
+    return testPay.paymentRequest(request, invoiceInst)
+    return payline.paymentRequest(request, invoiceInst)
+
 #----------------------------------------------------------------------

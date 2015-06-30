@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 # from django.db.models import Sum,F
 
-from payment import testNull
-from functions import invoicePayed, invoicePayedTest
+from payment import testPay,payline
+from functions import invoicePayed
 # from enroll.models import enrolledProgram, clubItemDefinition
 
 # from .payment import testBank,saman
@@ -20,15 +20,27 @@ class testGateway(TemplateView):
 # ----------------------------------------------------
 class paymentResponse(View):
     def get(self,request,*args,**kwargs):
-        payRes = testNull.testPaymentResponse(request,*args,**kwargs)
+        payRes = testPay.paymentResponse(request,*args,**kwargs)
 
         if payRes['status'] == True :
-            invoicePayedTest(payRes['invoiceId'])
+            invoicePayed(payRes['invoiceId'])
             messages.success(request, _("Payment was successful."))
         else:
             messages.error(request, _("Payment has error"))
 
         return HttpResponseRedirect(reverse('dashboard'))
+
+    def post(self,request,*args,**kwargs):
+        payRes = payline.paymentResponse(request)
+
+        if payRes['status'] == True :
+            invoicePayed(payRes['invoiceId'])
+            messages.success(request, _("Payment was successful."))
+        else:
+            messages.error(request, _("Payment has error"))
+
+        return HttpResponseRedirect(reverse('dashboard'))
+
 # ----------------------------------------------------
 # class financeOrder(ListView):
 #     template_name = 'finance/order.html'
