@@ -10,51 +10,51 @@
 {% endblock %}
 
 {% block main %}
-	<section class="hero-image search-filter-bottom height-300">
+	<section class="hero-image search-filter-bottom height-350">
         <div class="inner">
             <div class="container">
-                <h1>{% trans 'Singn in your club in blink of an eye' %}</h1>
+                <h1>{% trans 'Register in your club in blink of an eye' %}</h1>
             </div>
         </div>
         <div class="background">
-            <img src="{% static "assets/img/ski.jpg" %}" alt="">
+            <img src="{% static "assets/img/swimming.jpg" %}" alt="swimming">
         </div>
     </section>
     <section id="featured" class="block background-color-grey-dark">
         <div class="container">
         	<header><h2 id="featur-header">{% trans 'Best Clubs' %}</h2></header>
     		<div class="row">
-    			<div class="col-md-10 col-sm-12 col-md-offset-1">
 					{% for object in object_list %}
-	                    <!-- /.item-->
-	                    <div class="item list">
-	                        <div class="image">
-	                            <a href="{{ object.get_absolute_url }}" target="_blank">
-	                            <div class="view-details"><i class="fa fa-eye"></i></div>
-	                                <div class="overlay">
-	                                    <div class="inner">
-	                                        <div class="content">
-<!-- 		                                            <h4>توضیحات</h4>
-	                                            <p>Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa</p> -->
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <!-- <img src="{% get_media_prefix %}{{ object.image }}" alt=""> -->
-	                                <img src="{% static "assets/img/shena.jpg" %}" alt="">
-	                            </a>
-	                        </div>
-	                        <div class="wrapper">
-	                            <a href="{{ object.get_absolute_url }}" target="_blank"><h3>{{ object.title }}</h3></a>
-	                            <figure>{{ object.phone }}</figure>
-	                            <!-- <div class="info">
-	                                <div class="type">
-	                                    <i><img src="{% static "assets/icons/sports/water-sports/swimming.png" %}" alt=""></i>
-	                                    <span>مدرسه شنا</span>
-	                                </div>
-	                                <div class="rating" data-rating="4"></div>
-	                            </div> -->
-	                        </div>
-	                    </div>
+	                    <div class="col-md-3 col-sm-3">
+                                <div class="item featured">
+                                    <div class="image">
+                                        <div class="view-details"><i class="fa fa-eye"></i></div>
+                                        <a href="{{ object.get_absolute_url }}">
+                                            <div class="overlay">
+                                                <div class="inner">
+                                                    <div class="content">
+                                                        <h4>Swimming pool</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="{% static "assets/img/swimming2.jpg" %}" alt="swimming">
+                                        </a>
+                                    </div>
+                                    <div class="wrapper">
+                                        <a href="{{ object.get_absolute_url }}"><h3>{{ object.title }}</h3></a>
+                                        <figure>{{ object.address }}</figure>
+                                        <div class="info">
+                                            <dl>
+		                                        <dt>{% trans "Phone Number" %}</dt>
+		                                        <dd>+{{ object.phone }}</dd>
+		                                        <dt>{% trans "Website" %}</dt>
+		                                        <dd>{{ object.website }}</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.item-->
+                            </div>
 	                {% endfor %}
                 </div>
             </div>

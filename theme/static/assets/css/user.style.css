@@ -36,10 +36,10 @@
   color: #fff;
 }
 
-#featur-header {
+/*#featur-header {
 	padding-top: 30px;
 	padding-left: 98px;
-}
+}*/
 
 .course-description {
 	list-style-type: none;
@@ -249,4 +249,22 @@ color: white;
         opacity:0;
         visibility: collapse;
     } 
+}
+
+.height-350 {
+  height: 350px !important;
+}
+
+.hero-image .inner h1 {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #d13234;
+  font-size: 32px;
+}
+
+.background-color-grey-dark {
+  background-color: #dbd9d9 !important;
+}
+
+.background-color-grey-dark h2{
+  color: #d13234 !important;
 }

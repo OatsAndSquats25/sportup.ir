@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static%}
 
 {% block main %}
     <section class="container">
@@ -24,7 +24,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <img src="assets/img/shena.jpg" alt="shena" >
+                                <img src="{% static "assets/img/swimming2.jpg" %}" alt="shena" >
                             </td>
                             <td>
                                 <article class=""> <!--block-->
@@ -39,7 +39,11 @@
                                         <dt>{% trans "Maximum age" %}</dt>
                                         <dd>{{ object.ageMax }}</dd>
                                         <dt>{% trans "Gender" %}</dt>
-                                        <dd>{{ object.genderLimit }}</dd>
+                                        {% if object.genderLimit %}
+                                        <dd>mard</dd>
+                                        {% else %}
+                                        <dd>zan</dd>
+                                        {% endif %}
                                         <dt>{% trans "Need Insurance?" %}</dt>
                                         <dd>{{ object.needInsurance }}</dd>
                                         <dt>{% trans "Begin date" %}</dt>

@@ -35,13 +35,13 @@
     {% block extra_head %}{% endblock %}
 </head>
 
-<body onunload="" class="page-subpage page-item-detail navigation-off-canvas" id="page-top" >
+<body onunload="" class="page-subpage navigation-off-canvas" id="page-top" >
 {% block body %}
 
 <!-- Outer Wrapper-->
 <div id="outer-wrapper">
     <!-- Inner Wrapper -->
-    <div id="inner-wrapper">
+    
         <!-- Navigation-->
         <div class="header">
             <div class="wrapper">
@@ -73,7 +73,6 @@
                 </nav>
             </div>
         </div>
-        <!-- end Navigation-->
 
 {#        {% nevercache %}#}
         {% if messages %}
@@ -87,7 +86,7 @@
         </div>
         {% endif %}
 {#        {% endnevercache %}#}
-
+        <div id="inner-wrapper">
         <!-- Page Canvas-->
         <div id="page-canvas">
             <!--Off Canvas Navigation-->
