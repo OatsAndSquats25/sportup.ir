@@ -3,15 +3,15 @@ from accounts.functions import dashboardBody
 
 # -----------------------------------------------------------------------
 def generateMenu():
-    menu = {'title':_('Enrollment'),
-            'class':'enrollList',
+    menu = {'title':_('Program'),
+            'class':'programList',
             'badge':'fa fa-book',
             'submenu':None
             }
     return menu
 # -----------------------------------------------------------------------
-class enrollList(dashboardBody):
-    template_name = 'enroll/dashboard_enrolled_list.html'
+class programList(dashboardBody):
+    template_name = 'program/dashboard_program_list.html'
 
     def generate(self, request):
         content = {'x':'y'}
