@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-08 14:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: templates/base.html:55
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: templates/base.html:56
+msgid "Sign Out"
+msgstr "خروج"
+
+#: templates/base.html:58
+msgid "Register"
+msgstr "ثبت نام"
+
+#: templates/base.html:59
+msgid "Sign In"
+msgstr "ورود"
+
+#: templates/base.html:64
+msgid "Submit Your Item"
+msgstr "ثبت باشگاه"
+
+#: templates/base.html:129
+msgid "New Items"
+msgstr "جدید"
+
+#: templates/base.html:166
+msgid "Recent Reviews"
+msgstr "نظرات اخیر"
+
+#: templates/base.html:201
+msgid "About Us"
+msgstr "درباره ما"
+
+#: templates/base.html:229
+msgid "Contact Us"
+msgstr "تماس با ما"
+
+#: templates/base.html:241
+msgid "(C) SportUp, All rights reserved"
+msgstr ""
+
+#: templates/base.old.html:58
+msgid "Toggle Navigation"
+msgstr ""
+
+#: templates/base.old.html:126
+msgid "ADDRESS"
+msgstr "آدرس"
+
+#: templates/base.old.html:129
+msgid "Email"
+msgstr "ایمیل"
+
+#: templates/base.old.html:130
+msgid "Website"
+msgstr "وب سایت"
+
+#: templates/base.old.html:131
+msgid "Tel"
+msgstr "تلفن"
+
+#: templates/base.old.html:139
+msgid "News"
+msgstr "اخبار"
+
+#: templates/base.old.html:140
+msgid "Article"
+msgstr "مقاله"
+
+#: templates/base.old.html:141
+msgid "Travelogue"
+msgstr "سفرنامه"
+
+#: templates/base.old.html:151
+msgid "All content currently distributed under the GNU"
+msgstr "تمام مطالب تحت "
+
+#: templates/base.old.html:153
+msgid "Free Documentation License."
+msgstr "مجوز مستندات آزاد گنو منتشر می‌گردد."
+
+#: templates/errors/404.html:6 templates/errors/404.html.py:10
+#: templates/errors/404.html:15
+msgid "Page not found"
+msgstr "صفحه پیدا نشد"
+
+#: templates/errors/404.html:16
+msgid "The page you requested does not exist."
+msgstr ""
+
+#: templates/errors/500.html:6 templates/errors/500.html.py:10
+#: templates/errors/500.html:15
+msgid "Error"
+msgstr "خطا"
+
+#: templates/errors/500.html:16
+msgid "Sorry, an error occurred."
+msgstr ""
+
+#: templates/index.html:4 templates/index.html.py:5 templates/index.html:8
+msgid "Home"
+msgstr "خانه"

@@ -1,0 +1,141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-08 20:13+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:20
+msgid "Draft"
+msgstr ""
+
+#: models.py:21
+msgid "Request"
+msgstr "درخواست"
+
+#: models.py:22
+msgid "Processing"
+msgstr "در حال بررسی"
+
+#: models.py:23
+msgid "Active"
+msgstr "فعال"
+
+#: models.py:24
+msgid "Pending"
+msgstr "تعلیق"
+
+#: models.py:25
+msgid "Canceled"
+msgstr "انصراف"
+
+#: models.py:26
+msgid "Expired"
+msgstr "پایان زمان همکاری"
+
+#: models.py:31
+msgid "Commission percentage"
+msgstr "درصد کارمزد"
+
+#: models.py:32
+msgid "Agreement status"
+msgstr "وضعیت پیمان ها"
+
+#: models.py:33
+msgid "Customer bank name"
+msgstr "نام بانک مشتری"
+
+#: models.py:34
+msgid "Customer bank branch"
+msgstr "شعبه بانک مشتری"
+
+#: models.py:35
+msgid "Customer bank account number"
+msgstr " شماره حساب بانکی مشتری"
+
+#: models.py:36
+msgid "Customer bank account owner"
+msgstr "صاحب حساب بانکی مشتری"
+
+#: models.py:37
+msgid "Description"
+msgstr "توضیحات"
+
+#: models.py:41 templatetags/agreement_tags.py:25 views.py:45
+msgid "Agreement"
+msgstr "پیمان همکاری"
+
+#: templates/agreement/agreement_list.html:4
+#: templates/agreement/agreement_list.html:12
+msgid "Agreemen list"
+msgstr "لیست پیمان ها"
+
+#: templates/agreement/agreement_list.html:16
+msgid "Agreement list"
+msgstr "لیست پیمان ها"
+
+#: templates/agreement/agreement_list.html:21
+msgid "Number"
+msgstr "شماره"
+
+#: templates/agreement/agreement_list.html:22
+msgid "Facility"
+msgstr "قابلیت"
+
+#: templates/agreement/agreement_list.html:23
+msgid "Begin"
+msgstr "شروع"
+
+#: templates/agreement/agreement_list.html:24
+msgid "Expire"
+msgstr "پایان"
+
+#: templates/agreement/agreement_list.html:25
+msgid "Commission"
+msgstr "کمیسون"
+
+#: templates/agreement/agreement_list.html:26
+msgid "Remain days"
+msgstr "روزهای باقی"
+
+#: templates/agreement/agreement_request.html:5
+msgid "Agreement request"
+msgstr "در خواست پیمان همکاری"
+
+#: templates/agreement/agreement_request.html:10
+msgid "You have an avtive contract"
+msgstr "شما قرارداد فعال دارید"
+
+#: templates/agreement/agreement_request.html:18
+#: templates/agreement/agreement_request.html:29
+msgid "Agree"
+msgstr "موافق"
+
+#: templates/agreement/wizard/formwizard.html:6
+msgid "Step"
+msgstr "قدم"
+
+#: templates/agreement/wizard/formwizard.html:25
+msgid "first step"
+msgstr "قدم اول"
+
+#: templates/agreement/wizard/formwizard.html:26
+msgid "prev step"
+msgstr "قدم قبل"
+
+#: templates/agreement/wizard/formwizard.html:29
+msgid "submit"
+msgstr "ثبت"
