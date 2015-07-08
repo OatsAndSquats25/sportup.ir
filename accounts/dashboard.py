@@ -12,10 +12,10 @@ def enrollList():
 class homePage(dashboardBody):
     template_name = 'dashboard/homepage.html'
 
-    def generate(self):
+    def generate(self, request):
         context = {
         'text': 'Amir Hossein',
         'message': 'I am view 1.'
         }
-        return self.render_content(context)
+        return self.render_content(request, context)
 # -----------------------------------------------------------------------

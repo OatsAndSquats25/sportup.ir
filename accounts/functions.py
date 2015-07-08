@@ -1,13 +1,11 @@
-from django.template import loader, Context
+from django.shortcuts import render
 
 # -----------------------------------------------------------------------
 class dashboardBody(object):
     template_name = ''
 
-    def render_content(self, context):#
-        t = loader.get_template(self.template_name)
-        c = Context(context)
-        return t.render(c)
+    def render_content(self, request, context):#
+        return render(request, self.template_name, context)
 
     def generate(self):
         return False
