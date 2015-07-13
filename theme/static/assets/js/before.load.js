@@ -10,6 +10,12 @@ $(document).ready(function($) {
     // else if( $body.hasClass('navigation-off-canvas') ) {
     //     $( ".main-navigation.navigation-off-canvas" ).load( "/static/assets/external/_navigation.html" );
     // }
+    //if( $body.hasClass('navigation-top-header') ) {
+    //    $( ".main-navigation.navigation-top-header" ).load( "/static/assets/external/_navigation.html" );
+    //}
+    //else if( $body.hasClass('navigation-off-canvas') ) {
+    //    $( ".main-navigation.navigation-off-canvas" ).load( "/static/assets/external/_navigation.html" );
+    //}
     mobileNavigation();
     toggleNav();
 });
@@ -25,6 +31,7 @@ function mobileNavigation(){
         $(".main-navigation.navigation-top-header").remove();
         $(".toggle-navigation").css("display","inline-block");
         // $(".main-navigation.navigation-off-canvas").load("/static/assets/external/_navigation.html");
+        //$(".main-navigation.navigation-off-canvas").load("/static/assets/external/_navigation.html");
         $("body").removeClass("navigation-top-header");
         $("body").addClass("navigation-off-canvas");
     }

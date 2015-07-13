@@ -1,0 +1,5 @@
+<ul>
+    {% for object in object_list.items %}
+        <li><a href="{% url 'dashboard' %}?app={{ object.0 }}&cls={{ object.1.class }}" data-toggle="tab"><i class="fa fa-book"></i>{{ object.1.title }}</a></li>
+    {% endfor %}
+</ul>
