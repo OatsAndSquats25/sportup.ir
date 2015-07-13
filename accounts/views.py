@@ -36,7 +36,7 @@ class dashboard(View):
         except:
             return Http404
 
-        return HttpResponse(clas().generate())
+        return HttpResponse(clas().generate(request))
 # -----------------------------------------------------------------------
 # class dashboard(TemplateView):
 #     template_name = 'dashboard/dashboard.html'

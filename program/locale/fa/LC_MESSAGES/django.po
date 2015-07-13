@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-08 20:21+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:24
+msgid "Both"
+msgstr "هردو"
+
+#: models.py:25
+msgid "Male"
+msgstr "مرد"
+
+#: models.py:26
+msgid "Female"
+msgstr "زن"
+
+#: models.py:29
+msgid "Agreement"
+msgstr "پیمان همکاری"
+
+#: models.py:31
+msgid "Maximum capacity"
+msgstr "حداکثر ظرفیت"
+
+#: models.py:31
+msgid "Please fill if your program has maximum capacity"
+msgstr "لطفا در صورتی که برنامه حداکثر ظرفیت دارد پر شود"
+
+#: models.py:32
+msgid "Remain capacity"
+msgstr "ظرفیت باقی"
+
+#: models.py:33 templates/program/program_list_tag.html:11
+msgid "Price"
+msgstr "هزینه"
+
+#: models.py:34
+msgid "Age minimum"
+msgstr "حداقل سن"
+
+#: models.py:35
+msgid "Age maximum"
+msgstr "حداکثر سن"
+
+#: models.py:36 templates/program/program_list_tag.html:12
+msgid "Gender"
+msgstr "جنسیت"
+
+#: models.py:36
+msgid "Please select gender if there is limitation"
+msgstr "در صورت محدودیت جنسیتی انتخاب شود"
+
+#: models.py:37
+msgid "Sport insurance required"
+msgstr "نیار به بیمه ورزشی"
+
+#: models.py:37
+msgid "Mark if your program needs sport insurance"
+msgstr "در صورت نیاز به بیمه ورزشی علامت زده شود"
+
+#: models.py:38
+msgid "Multiple reserve eligibility"
+msgstr "اجازه چندین رزرو"
+
+#: models.py:38
+msgid ""
+"Mark if you want to permit each account can reserve multiple instance of "
+"this program"
+msgstr ""
+"در صورتی که تمایل به اجازه رزرو بیش از یکبار توسط یک کاربر را دارید این "
+"علامت زده شود"
+
+#: templates/program/program_list_tag.html:5
+msgid "Programs"
+msgstr "برنامه ها"
+
+#: templates/program/program_list_tag.html:9
+#, fuzzy
+#| msgid "Program category"
+msgid "Program Name"
+msgstr "گروه برنامه"
+
+#: templates/program/program_list_tag.html:10
+#, fuzzy
+#| msgid "Remain capacity"
+msgid "Capacity"
+msgstr "ظرفیت باقی"
+
+#: templates/program/program_list_tag.html:13
+msgid "Begin date"
+msgstr "تاریخ شروع"
+
+#: templates/program/program_list_tag.html:27
+#: templates/program/program_list_tag.html:37
+msgid "Enroll"
+msgstr "ثبت نام"

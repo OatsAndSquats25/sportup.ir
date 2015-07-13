@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-
-<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
-
 {% load i18n future staticfiles %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -239,7 +238,7 @@
                 <!--/.footer-top-->
                 <div class="footer-bottom">
                     <div class="container">
-                        <span class="left">(C) Sport Advisor, All rights reserved</span>
+                        <span class="left">{% trans "(C) SportUp, All rights reserved" %}</span>
                             <span class="right">
                                 <a href="#page-top" class="to-top roll"><i class="fa fa-angle-up"></i></a>
                             </span>

@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-08 20:16+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: dashboard.py:6 templatetags/enroll_tags.py:9
+msgid "Enrollment"
+msgstr "ثبت نام"
+
+#: models.py:32 templates/enroll/enrolled_list.html:13
+msgid "Amount"
+msgstr "مقدار"
+
+#: models.py:38
+msgid "Enroll"
+msgstr "ثبت نام"
+
+#: models.py:56
+msgid "First time remaining flag"
+msgstr ""
+
+#: templates/enroll/enrolled_list.html:5
+msgid "Enrolled list"
+msgstr "لیست ثبت نام شده"
+
+#: templates/enroll/enrolled_list.html:10
+msgid "User"
+msgstr "کاربر"
+
+#: templates/enroll/enrolled_list.html:11
+msgid "Complex"
+msgstr "مجموعه"
+
+#: templates/enroll/enrolled_list.html:12
+msgid "Program"
+msgstr "برنامه"
+
+#: templates/enroll/enrolled_list.html:14
+msgid "Status"
+msgstr "وضعیت"
+
+#: templates/enroll/enrollment_confirmation.html:10
+msgid "Your programs to buy"
+msgstr "برنامه های خریداری"
+
+#: templates/enroll/enrollment_confirmation.html:14
+msgid "Payment"
+msgstr "پرداخت"
+
+#: templates/enroll/enrollment_confirmation.html:20
+msgid "Image"
+msgstr "تصویر"
+
+#: templates/enroll/enrollment_confirmation.html:21
+msgid "Description"
+msgstr "توضیحات"
+
+#: templates/enroll/enrollment_confirmation.html:33
+msgid "Capacity"
+msgstr "ظرفیت"
+
+#: templates/enroll/enrollment_confirmation.html:35
+msgid "Remain Capacity"
+msgstr "ظرفیت باقی"
+
+#: templates/enroll/enrollment_confirmation.html:37
+msgid "Minimum age"
+msgstr "حداقل سن"
+
+#: templates/enroll/enrollment_confirmation.html:39
+msgid "Maximum age"
+msgstr "حداکثر سن"
+
+#: templates/enroll/enrollment_confirmation.html:41
+msgid "Gender"
+msgstr "جنسیت"
+
+#: templates/enroll/enrollment_confirmation.html:43
+msgid "Need Insurance?"
+msgstr "بیمه ورزشی اجباری"
+
+#: templates/enroll/enrollment_confirmation.html:45
+msgid "Begin date"
+msgstr "تاریخ شروع"
+
+#: templates/enroll/enrollment_confirmation.html:47
+#: templates/enroll/enrollment_confirmation.html:49
+msgid "End date"
+msgstr "تاریخ پایان"
+
+#: templates/enroll/enrollment_confirmation.html:51
+msgid "Price"
+msgstr "هزینه"
+
+#: templates/enroll/enrollment_confirmation.html:52
+msgid "toman"
+msgstr "تومان"
+
+#: views.py:29
+msgid ""
+"This program is not valid for enroll. Validation expired or no free spcae."
+msgstr "این برنامه جهت خردی معتبر نمی باشد. اعتبار پایان رسیده یا ظرفیت آن تمام شده است"

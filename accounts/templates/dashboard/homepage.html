@@ -1,6 +1,8 @@
 {% extends 'dashboard/dashboard.html' %}
+{% load i18n %}
 
 {% block dashboard %}
-<h1>Dashboard Home Page</h1>
+<h1>{% trans "Dashboard Home Page" %}</h1>
 <p>{{ text }}</p>
+<p>{{ message }}</p>
 {% endblock %}
