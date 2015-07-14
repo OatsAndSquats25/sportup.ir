@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-08 20:22+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:13
+msgid "Enrollment"
+msgstr "ثبت نام"
+
+#: models.py:14
+msgid "First login"
+msgstr "اولین ورود"
+
+#: models.py:15
+msgid "Specific date"
+msgstr "تاریخ مشخص"
+
+#: models.py:18 templates/programcourse/course_reserve.html:16
+msgid "Usage can begin from"
+msgstr "شروع استفاده از"
+
+#: models.py:18
+msgid "Usage begin policy since enroll"
+msgstr "سیاست شروع استفاده از زمان ثبت نام"
+
+#: models.py:19
+msgid "Begin date of usage"
+msgstr "تاریخ شروع استفاده"
+
+#: models.py:19
+msgid "Set this field if usage will start at specific date"
+msgstr "این فیلد در صورت انتخاب شروع از تاریخ مشخص تنظیم گردد"
+
+#: models.py:20
+msgid "End date of usage"
+msgstr "تاریخ پایان استفاده"
+
+#: models.py:20
+msgid "Set this field if usage will finish at specific date"
+msgstr "این فیلد در صورتی که پایان دوره مشخص باشد تنظیم گردد"
+
+#: models.py:21
+msgid "Maximum valid day"
+msgstr "حداکثر روز قابل استفاده"
+
+#: models.py:21
+msgid "Maximum valid days since enroll choice"
+msgstr "تعداد روز معتبر از ثبت نام(وابسته به انتخاب شروع استفاده)"
+
+#: models.py:22
+msgid "Maximum allowed session"
+msgstr "حداکثر جلسه قابل استفاده"
+
+#: models.py:22
+msgid "Maximum sessions"
+msgstr "حداکثر جلسه"
+
+#: models.py:23
+msgid "Membership expire date"
+msgstr "تاریخ اتمام اشتراک"
+
+#: models.py:29 templates/programcourse/course_edit.html:8
+msgid "Course definition"
+msgstr "تعریف دوره"
+
+#: models.py:30
+msgid "Courses definition"
+msgstr "تعریف دوره ها"
+
+#: models.py:49
+msgid "Saturday"
+msgstr "شنبه"
+
+#: models.py:50
+msgid "Sunday"
+msgstr "یکشنبه"
+
+#: models.py:51
+msgid "Monday"
+msgstr "دوشنبه"
+
+#: models.py:52
+msgid "Tuesday"
+msgstr "سه شنبه"
+
+#: models.py:53
+msgid "Wednesday"
+msgstr "چهارشنبه"
+
+#: models.py:54
+msgid "Thursday"
+msgstr "پنج شنبه"
+
+#: models.py:55
+msgid "Friday"
+msgstr "جمعه"
+
+#: models.py:61
+msgid "Day of week"
+msgstr "روز هفته"
+
+#: models.py:62
+msgid "Date of day"
+msgstr "تاریخ روز"
+
+#: models.py:63
+msgid "Begin time"
+msgstr "زمان شروع"
+
+#: models.py:64
+msgid "End time"
+msgstr "زمان پایان"
+
+#: templates/programcourse/course_edit.html:10
+msgid "Detail"
+msgstr "شرح"
+
+#: templates/programcourse/course_edit.html:11
+msgid "Schedule"
+msgstr "زمانبندی"
+
+#: templates/programcourse/course_edit.html:21
+msgid "Course category"
+msgstr "گروه دوره"
+
+#: templates/programcourse/course_edit.html:30
+msgid "Course detail"
+msgstr "شرح دوره"
+
+#: templates/programcourse/course_edit.html:36
+msgid "Schedule definition"
+msgstr "تعریف زمانبندی"
+
+#: templates/programcourse/course_edit.html:45
+msgid "Course schedule"
+msgstr "زمانبندی دوره"
+
+#: templates/programcourse/course_edit.html:58
+msgid "Submit new course"
+msgstr "ایجاد دوره جدید"
+
+#: templates/programcourse/course_list.html:4
+#: templates/programcourse/course_list.html:12
+#: templates/programcourse/course_list.html:17
+msgid "Courses list"
+msgstr "لیست دوره ها"
+
+#: templates/programcourse/course_reserve.html:5
+msgid "Coursee review"
+msgstr "مرور دوره"
+
+#: templates/programcourse/course_reserve.html:24
+msgid "Price"
+msgstr "هزینه"
+
+#: templates/programcourse/course_reserve.html:25
+msgid "Age"
+msgstr "سن"
+
+#: templates/programcourse/course_reserve.html:26
+msgid "Gender"
+msgstr "جنسیت"
+
+#: templates/programcourse/course_reserve.html:27
+msgid "Sport insurance required"
+msgstr "نیازمند بیمه ورزشی"
+
+#: templates/programcourse/course_reserve.html:34
+msgid "cancel"
+msgstr ""
+
+#: views.py:32
+msgid "The course status has been toggled."
+msgstr ""
+
+#: views.py:84
+msgid "Your course has been created"
+msgstr ""
+
+#: views.py:113
+msgid ""
+"Attention! Previously you enrolled this course. Please check dashboard, "
+"enroll section"
+msgstr ""
+"توجه! شما قبلا در این دوره صبت نام کرده اید. لطفا داشبود بخش ثبت نام را "
+"مشاهده نمایید"
+
+#: views.py:120
+msgid "This course is full."
+msgstr ""
+
+#: views.py:147
+msgid ""
+"Your request added to your order and your place will reserve after "
+"successful online payment"
+msgstr ""
+

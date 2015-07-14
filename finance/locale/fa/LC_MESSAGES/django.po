@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-08 20:19+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:16 models.py:17
+msgid "Invoice list"
+msgstr "لیست فاکتور"
+
+#: models.py:40
+msgid "None"
+msgstr "خالی"
+
+#: models.py:41
+msgid "No"
+msgstr "خیر"
+
+#: models.py:42
+msgid "Yes"
+msgstr "بلی"
+
+#: models.py:43
+msgid "Done"
+msgstr "تمام"
+
+#: models.py:49
+msgid "Debit"
+msgstr "بدهکار"
+
+#: models.py:50
+msgid "Credit"
+msgstr "بستانکار"
+
+#: models.py:51
+msgid "Company"
+msgstr "شرکت"
+
+#: models.py:52
+msgid "Defray status"
+msgstr "وضعیت تسویه"
+
+#: models.py:57 models.py:58
+msgid "Balance sheet"
+msgstr "دفتر توازن"
+
+#: models.py:75 models.py:76
+msgid "History"
+msgstr "تاریخچه"
+
+#: templates/finance/order.html:5
+msgid "Order list"
+msgstr "لیست سفارش"
+
+#: templates/finance/order.html:13
+msgid "Number"
+msgstr "شماره"
+
+#: templates/finance/order.html:14
+msgid "Complex"
+msgstr "مجموعه"
+
+#: templates/finance/order.html:15
+msgid "Group"
+msgstr ""
+
+#: templates/finance/order.html:16
+msgid "Program"
+msgstr "برنامه"
+
+#: templates/finance/order.html:17 templates/finance/order.html.py:47
+#: templates/finance/payment_request.html:6
+msgid "Amount"
+msgstr "مقدار"
+
+#: templates/finance/order.html:18
+msgid "Delete"
+msgstr "حذف"
+
+#: templates/finance/order.html:43 templates/finance/order.html.py:70
+msgid "Discount"
+msgstr ""
+
+#: templates/finance/order.html:46
+msgid "Copoun"
+msgstr "کوپن"
+
+#: templates/finance/order.html:48
+msgid "Commit"
+msgstr "تایید"
+
+#: templates/finance/order.html:67
+msgid "Final Payment"
+msgstr "پرداخت نهایی"
+
+#: templates/finance/order.html:69
+msgid "Total"
+msgstr "مجموع"
+
+#: templates/finance/order.html:71
+msgid "Payment amount"
+msgstr "مبلغ قابل پرداخت"
+
+#: templates/finance/order.html:71
+msgid "Toman"
+msgstr ""
+
+#: templates/finance/order.html:80
+msgid "Test Bank"
+msgstr ""
+
+#: templates/finance/order.html:83
+msgid "Saman Bank"
+msgstr ""
+
+#: templates/finance/order.html:88
+msgid "Payment"
+msgstr "پرداخت"
+
+#: templates/finance/order.html:89
+msgid "Update"
+msgstr "بروزرسانی"
+
+#: templates/finance/payment_request.html:5
+msgid "System automatically redirect you to payment gateway"
+msgstr "بصورت خودکار به درگاه پرداخت منتقل می شوید"
+
+#: templatetags/finance_tags.py:9
+msgid "Finance order"
+msgstr "فاکتور فروش"
+
+#: views.py:27 views.py:38
+msgid "Payment was successful."
+msgstr "پرداخت تکمیل شد"
+
+#: views.py:29 views.py:40
+msgid "Payment has error"
+msgstr "پرداخت با خظا مواجه شد"

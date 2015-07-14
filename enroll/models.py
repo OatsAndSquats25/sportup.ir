@@ -34,7 +34,7 @@ class enrolledProgram(PolymorphicModel, Displayable):
     #                                           help_text=_("Please select gender if there is limitation"))
 
     class Meta:
-        verbose_name = _('enroll')
+        verbose_name = _('Enroll')
         verbose_name_plural = _('Enroll')
 
     def __unicode__(self):
