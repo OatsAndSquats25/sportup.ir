@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'iransansz-webfont';
+    src:  url('../fonts/iransansz-webfont/.eot') format('eot'),    
+          url('../fonts/iransansz-webfont.woff') format('woff'),
+          url('../fonts/iransansz-webfont.ttf') format('truetype'); 
+}
+
+
 a {
   -moz-transition: 0.4s;
   -webkit-transition: 0.4s;
@@ -35,10 +43,10 @@ address .info i {
 
 body, html {
   color: #474747;
-  font-family: 'Arial', sans-serif;
+  font-family:  iransansz-webfont;
   height: 100%;
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 body.navigation-fixed #outer-wrapper.show-nav #inner-wrapper .header, html.navigation-fixed #outer-wrapper.show-nav #inner-wrapper .header {
   left: -200px;
@@ -80,7 +88,7 @@ blockquote .description {
   padding-left: 40px;
 }
 blockquote .description p {
-  font-family: "Georgia", serif;
+  font-family: iransansz-webfont, "Georgia", serif;
   font-size: 24px;
   font-style: italic;
 }
@@ -103,7 +111,7 @@ dl.lines dd {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: iransansz-webfont, 'Montserrat', sans-serif;
   font-weight: bold;
 }
 
