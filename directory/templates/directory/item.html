@@ -18,17 +18,22 @@
                     <header class="page-title">
                         <div class="title">
                             <h1>{{ object.title }}</h1>
-                            <figure>{{ object.city }}</figure>
+                            <figure>{{ object.summary }}</figure>
+                        </div>
+                        <div class="info">
+                            <div class="type">
+
+                            </div>
                         </div>
                     </header>
                     <div class="row">
                         <!--Detail Sidebar-->
                         <aside class="col-md-4 col-sm-4" id="detail-sidebar">
                             <!--Contact-->
+                                <img src="{{ object.logo.url }}" alt="{% trans "Logo" %}">
                             <section>
                                 <header><h3>{% trans 'Contact' %}</h3></header>
                                 <address>
-                                    <div>{{ object.title }}</div>
                                     <div>{{ object.city }}</div>
                                     <div>{{ object.address }}</div>
                                     <figure>
@@ -42,29 +47,29 @@
                                         </div>
                                         <div class="info">
                                             <i class="fa fa-globe"></i>
-                                            <a href="#">{{ object.website }}</a>
+                                            <a target="_blank" href="{{ object.website }}" >{{ object.website }}</a>
                                         </div>
                                     </figure>
                                 </address>
                             </section>
                             <!--end Contact Form-->
-                            <article class="block">
-                                <header><h2>Opening Hours</h2></header>
-                                <dl class="lines">
-                                    <dt>Monday</dt>
-                                    <dd>08:00 am - 11:00 pm</dd>
-                                    <dt>Tuesday</dt>
-                                    <dd>08:00 am - 11:00 pm</dd>
-                                    <dt>Wednesday</dt>
-                                    <dd>08:00 am - 11:00 pm</dd>
-                                    <dt>Thursday</dt>
-                                    <dd>08:00 am - 11:00 pm</dd>
-                                    <dt>Friday</dt>
-                                    <dd>08:00 am - 11:00 pm</dd>
-                                    <dt>Saturday</dt>
-                                    <dd>08:00 am - 11:00 pm</dd>
-                                </dl>
-                            </article>
+{#                            <article class="block">#}
+{#                                <header><h2>Opening Hours</h2></header>#}
+{#                                <dl class="lines">#}
+{#                                    <dt>Monday</dt>#}
+{#                                    <dd>08:00 am - 11:00 pm</dd>#}
+{#                                    <dt>Tuesday</dt>#}
+{#                                    <dd>08:00 am - 11:00 pm</dd>#}
+{#                                    <dt>Wednesday</dt>#}
+{#                                    <dd>08:00 am - 11:00 pm</dd>#}
+{#                                    <dt>Thursday</dt>#}
+{#                                    <dd>08:00 am - 11:00 pm</dd>#}
+{#                                    <dt>Friday</dt>#}
+{#                                    <dd>08:00 am - 11:00 pm</dd>#}
+{#                                    <dt>Saturday</dt>#}
+{#                                    <dd>08:00 am - 11:00 pm</dd>#}
+{#                                </dl>#}
+{#                            </article>#}
                         </aside>
                         <!--end Detail Sidebar-->
                         <!--Content-->
@@ -88,6 +93,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <header><h2>{% trans "Description" %}</h2></header>
+                                    <p> {{ object.detail }} </p>
                                 </article>
                                 <!-- /.block -->
                             </section>

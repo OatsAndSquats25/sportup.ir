@@ -33,11 +33,11 @@
                                             <div class="overlay">
                                                 <div class="inner">
                                                     <div class="content">
-                                                        <h4>Swimming pool</h4>
+                                                        <p>{{ object.summary }}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <img src="{% static "assets/img/swimming2.jpg" %}" alt="swimming">
+                                            <img src="{{ object.logo.url }}" alt="{% trans "Logo" %}">
                                         </a>
                                     </div>
                                     <div class="wrapper">
