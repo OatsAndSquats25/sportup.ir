@@ -21,7 +21,7 @@ class programDefinition(PolymorphicModel, Displayable):
     GENDER_MALE   = 2
     GENDER_FEMALE = 3
     GENDER_CHOICES = (
-        (GENDER_BOTH , _("Both")),
+        (GENDER_BOTH , _("Male/Female")),
         (GENDER_MALE , _("Male")),
         (GENDER_FEMALE  , _("Female")),
     )
@@ -30,7 +30,7 @@ class programDefinition(PolymorphicModel, Displayable):
     #coachUserKey        = models.ManyToManyField(user_model_name, blank=True, null=True)
     maxCapacity         = models.IntegerField(_("Maximum capacity"), default=-1, help_text=_("Please fill if your program has maximum capacity"))
     remainCapacity      = models.IntegerField(_("Remain capacity"), blank=True, null=True)
-    price               = models.DecimalField(_("Price"), max_digits=15, decimal_places=2)
+    price               = models.DecimalField(_("Price"), max_digits=15, decimal_places=0)
     ageMin              = models.IntegerField(_("Age minimum"), default=0)
     ageMax              = models.IntegerField(_("Age maximum"), default=100)
     genderLimit         = models.IntegerField(_("Gender"), choices= GENDER_CHOICES, default=GENDER_BOTH, help_text=_("Please select gender if there is limitation"))

@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n humanize %}
 
 {% if object_list %}
 <div class="table-responsive">
@@ -6,11 +6,13 @@
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th>{% trans "Program Name" %}</th>
+            <th>{% trans "Program" %}</th>
             <th>{% trans "Capacity" %}</th>
-            <th>{% trans "Price" %}</th>
+            <th>{% trans "Price" %}({% trans "Rials" %})</th>
             <th class="mob-hide">{% trans "Gender" %}</th>
             <th class="mob-hide">{% trans "Begin date" %}</th>
+            <th class="mob-hide">{% trans "End date" %}</th>
+            <th class="mob-hide">{% trans "Expires on" %}</th>
         </tr>
     </thead>
     <tbody>
@@ -18,23 +20,25 @@
         {% if object.isValid %}
             <tr class="clickable-row" data-href="{% url 'enrollConfirmation' object.id %}">
                 <td>{{ object.title }}</td>
-                <td>{{ object.remainCapacity }}</td>
-                <td>{{ object.price }}</td>
-                <td class="mob-hide">{{ object.genderLimit }}</td>
-                <td class="mob-hide">{{ object.usageBeginDate }}</td>
-<!-- 	                <td>
-                    <a class="btn btn-default" href="{% url 'enrollConfirmation' object.id %}">
-                        <i class="fa fa-shopping-cart"></i> {% trans "Enroll" %}
-                    </a>
-                </td> -->
+                <td>{% if object.remainCapacity >= 0 %}{{ object.remainCapacity }}{% endif %}</td>
+                <td>{{ object.price|floatformat:2|intcomma }}</td>
+                <td class="mob-hide">{{ object.get_genderLimit_display }}</td>
+                <td class="mob-hide">{{ object.usageBeginDate|date }}</td>
+                <td class="mob-hide">{{ object.usageEndDate|date }}</td>
+                <td class="mob-hide">{{ object.expiry_date|date }}</td>
+{#                <td>#}
+{#                    <a class="btn btn-default" href="{% url 'enrollConfirmation' object.id %}">#}
+{#                        <i class="fa fa-shopping-cart"></i> {% trans "Enroll" %}#}
+{#                    </a>#}
+{#                </td>#}
             </tr>
-            <!--{{ object.agreementKey }} -->
-<!--             {{ object.multipleReserve }}
-            {{ object.usageBeginChoices }}
-            {{ object.maxDays }}
-            {{ object.maxSessions }}
-            {{ object.expireDate }}ds
-            <p><a href="{% url 'enrollConfirmation' object.id %}">{% trans "Enroll" %}</a></p> --!>
+{#            {{ object.agreementKey }}#}
+{#            {{ object.multipleReserve }}#}
+{#            {{ object.usageBeginChoices }}#}
+{#            {{ object.maxDays }}#}
+{#            {{ object.maxSessions }}#}
+{#            {{ object.expireDate }}#}
+{#            <p><a href="{% url 'enrollConfirmation' object.id %}">{% trans "Enroll" %}</a></p> #}
         {% endif %}
     {% endfor %}
     </tbody>
