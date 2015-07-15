@@ -126,110 +126,69 @@
                             <div class="col-md-4 col-sm-4">
                                 <!--New Items-->
                                 <section>
-                                    <h2>{% trans "New Items" %}</h2>
-                                    <a href="item-detail.html" class="item-horizontal small">
-                                        <h3>Cash Cow Restaurante</h3>
-                                        <figure>63 Birch Street</figure>
-                                        <div class="wrapper">
-                                            <div class="image"><img src="{% static "assets/img/items/1.jpg"%}" alt=""></div>
-                                            <div class="info">
-                                                <div class="type">
-                                                    <i><img src="{%  static "assets/icons/restaurants-bars/restaurants/restaurant.png" %}" alt=""></i>
-                                                    <span>Restaurant</span>
-                                                </div>
-                                                <div class="rating" data-rating="4"></div>
-                                            </div>
+                                    <h2>{% trans "Newsletter" %}</h2>
+                                    <div class="newsletter">
+                                        <div>{% trans 'Keep up on our always evolving product features. Enter your e-mail and subscribe to our newsletter.' %}</div>
+                                        <p></p>
+                                    <div id="mlb2-660983" class="ml-subscribe-form">
+                                        <div class="subscribe-form ml-block-success" style="display:none">
+                                        <div class="input-group">
+                                            <div>{% trans "<strong>Success!</strong> You've been added to our newsletter." %}</div>
                                         </div>
-                                    </a>
-                                    <!--/.item-horizontal small-->
-                                    <a href="item-detail.html" class="item-horizontal small">
-                                        <h3>Blue Chilli</h3>
-                                        <figure>2476 Whispering Pines Circle</figure>
-                                        <div class="wrapper">
-                                            <div class="image"><img src="{% static "assets/img/items/2.jpg" %}" alt=""></div>
-                                            <div class="info">
-                                                <div class="type">
-                                                    <i><img src="{% static "assets/icons/restaurants-bars/restaurants/restaurant.png" %}"alt=""></i>
-                                                    <span>Restaurant</span>
-                                                </div>
-                                                <div class="rating" data-rating="3"></div>
-                                            </div>
                                         </div>
-                                    </a>
-                                    <!--/.item-horizontal small-->
+                                        <form class="ml-block-form" action="//app.mailerlite.com/webforms/submit/u6g7q4" data-code="u6g7q4" method="POST" target="_blank">
+                                        <div class="input-group">
+                                          <div class="form-group ml-field-email ml-validate-required ml-validate-email">
+                                            <input type="text" name="fields[email]" class="form-control" placeholder="{% trans "Email" %}" value="">
+                                            <input type="hidden" name="ml-submit" value="1" />
+                                            <span class="input-group-btn">
+                                              <button type="submit" class="btn btn-default">{% trans 'Subscribe' %}</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    </div>
                                 </section>
                                 <!--end New Items-->
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <!--Recent Reviews-->
                                 <section>
-                                    <h2>{% trans "Recent Reviews" %}</h2>
-                                    <a href="item-detail.html#reviews" class="review small">
-                                        <h3>Max Five Lounge</h3>
-                                        <figure>4365 Bruce Street</figure>
-                                        <div class="info">
-                                            <div class="rating" data-rating="4"></div>
-                                            <div class="type">
-                                                <i><img src="{% static "assets/icons/restaurants-bars/restaurants/restaurant.png" %}" alt=""></i>
-                                                <span>Restaurant</span>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non suscipit felis, sed sagittis tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ac placerat mauris.
-                                        </p>
-                                    </a><!--/.review-->
-                                    <a href="item-detail.html#reviews" class="review small">
-                                        <h3>Saguaro Tavern</h3>
-                                        <figure>2476 Whispering Pines Circle</figure>
-                                        <div class="info">
-                                            <div class="rating" data-rating="5"></div>
-                                            <div class="type">
-                                                <i><img src="{% static "assets/icons/restaurants-bars/restaurants/restaurant.png"%}" alt=""></i>
-                                                <span>Restaurant</span>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            Pellentesque mauris. Proin sit amet scelerisque risus. Donec semper semper erat ut mollis curabitur
-                                        </p>
-                                    </a>
-                                    <!--/.review-->
-                                </section>
-                                <!--end Recent Reviews-->
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <section>
-                                    <h2>{% trans "About Us" %}</h2>
+                                    <h2>{% trans "Contact Us" %}</h2>
                                     <address>
-                                        <div>5th Floor, Anestito-Mohandesi-Naft Building</div>
-                                        <div>Daneshkadeh-Fanni Tehran University</div>
-                                        <div>North Karegar Ave</div>
-                                        <div>Tehran</div>
-                                        <div>Iran</div>
+                                        <div>{% trans '5th Floor, Anestito-Mohandesi-Naft Building, Daneshkadeh-Fanni Tehran University, North Karegar Ave, Tehran, Iran' %}</div>
                                         <figure>
                                             <div class="info">
                                                 <i class="fa fa-mobile"></i>
-                                                <span>+98-912-308-6945</span>
+                                                <span>{% trans '+98-912-308-6945' %}</span>
                                             </div>
 {#                                            <div class="info">#}
 {#                                                <i class="fa fa-phone"></i>#}
 {#                                                <span>+1-123-456-789</span>#}
 {#                                            </div>#}
                                             <div class="info">
-                                                <i class="fa fa-globe"></i>
-                                                <a href="http://www.sportadvisor.ir/">www.sportadvisor.ir</a>
+                                                <i class="fa fa-envelope"></i>
+                                                <a href="mailto:hi@sportup.ir">hi@sportup.ir</a>
                                             </div>
                                         </figure>
                                     </address>
-                                    <div class="social">
-                                        <a href="#" class="social-button"><i class="fa fa-twitter"></i></a>
-                                        <a href="#" class="social-button"><i class="fa fa-facebook"></i></a>
-                                        <a href="#" class="social-button"><i class="fa fa-pinterest"></i></a>
-                                    </div>
-
-                                    <a href="contact.html" class="btn framed icon">{% trans "Contact Us" %}<i class="fa fa-angle-right"></i></a>
+{#                                    <a href="contact.html" class="btn framed icon">{% trans "Contact Us" %}<i class="fa fa-angle-right"></i></a>#}
                                 </section>
                             </div>
                             <!--/.col-md-4-->
+                            <div class="col-md-4 col-sm-4">
+                                <!--Recent Reviews-->
+                                <section>
+                                    <h2>{% trans "Follow Us" %}</h2>
+                                   <div class="social">
+                                        <a href="http://www.instagram.com/sportup.ir/" class="social-button"><i class="fa fa-instagram"></i></a>
+                                        <a href="http://www.facebook.com/sportup.ir/" class="social-button"><i class="fa fa-facebook"></i></a>
+                                        <a href="http://www.linkedin.com/company/sportup-ir/" class="social-button"><i class="fa fa-linkedin"></i></a>
+                                        <a href="http://www.twitter.com/sportup.ir/" class="social-button"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </section>
+                                <!--end Recent Reviews-->
+                            </div>
                         </div>
                         <!--/.row-->
                     </div>
