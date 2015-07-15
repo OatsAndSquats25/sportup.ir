@@ -24,7 +24,8 @@
                     <tbody>
                         <tr>
                             <td>
-                                <img src="{% static "assets/img/swimming2.jpg" %}" alt="shena" >
+                                <h3>{{ object.agreementKey.clubKey.title }}</h3>
+                                <img src="{{ object.agreementKey.clubKey.logo.url }}" alt="{% trans "Logo" %}" >
                             </td>
                             <td>
                                 <article class=""> <!--block-->
@@ -39,11 +40,7 @@
                                         <dt>{% trans "Maximum age" %}</dt>
                                         <dd>{{ object.ageMax }}</dd>
                                         <dt>{% trans "Gender" %}</dt>
-                                        {% if object.genderLimit %}
-                                        <dd>mard</dd>
-                                        {% else %}
-                                        <dd>zan</dd>
-                                        {% endif %}
+                                        <dd>{{ object.get_genderLimit_display }}</dd>
                                         <dt>{% trans "Need Insurance?" %}</dt>
                                         <dd>{{ object.needInsurance }}</dd>
                                         <dt>{% trans "Begin date" %}</dt>
@@ -53,7 +50,7 @@
                                         <dt>{% trans "End date" %}</dt>
                                         <dd>{{ object.usageEndDate }}</dd>
                                         <dt>{% trans "Price" %}</dt>
-                                        <dd>{{ object.price }} {% trans "toman" %}</dd>
+                                        <dd>{{ object.price }} {% trans "Rials" %}</dd>
                                     </dl>
                                 </article>
                             </td>

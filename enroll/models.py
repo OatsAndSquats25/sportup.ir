@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
-from polymorphic import PolymorphicModel
+from django.utils.timezone import now
 
 from polymorphic import PolymorphicModel
 
@@ -54,5 +53,12 @@ class enrolledProgram(PolymorphicModel, Displayable):
 class enrolledProgramCourse(enrolledProgram):
 
     firstTime   = models.BooleanField(_('First time remaining flag'), default=True)
+
+    def isValid(self):
+        if self.publish_date < now() and \
+           self.expiry_date > now() and \
+           self.status == Displayable.CONTENT_STATUS_ACTIVE:
+           return True
+        return False
 ## ----------------------------------------------------
 ## ----------------------------------------------------
