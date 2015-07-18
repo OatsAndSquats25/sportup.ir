@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static%}
+{% load i18n static humanize %}
 
 {% block main %}
     <section class="container">
@@ -9,11 +9,6 @@
                 <header>
                     <h1 class="page-title">{% trans "Your programs to buy" %}</h1>
                 </header>
-                <div id="payment" class="form-group clearfix">
-                    <a class="btn btn-default" href="{% url 'enrollConfirmed' pk=object.id %}">
-                        <i class="fa fa-shopping-cart"></i> {% trans "Payment" %}</a>
-                    <!-- <button type="submit" class="btn pull-left pull-bottom btn-default">Payment</button> -->
-                </div>
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr class="info">
@@ -41,22 +36,28 @@
                                         <dd>{{ object.ageMax }}</dd>
                                         <dt>{% trans "Gender" %}</dt>
                                         <dd>{{ object.get_genderLimit_display }}</dd>
+                                        {% if object.needInsurance %}
                                         <dt>{% trans "Need Insurance?" %}</dt>
-                                        <dd>{{ object.needInsurance }}</dd>
+                                        <dd>{% trans "Mandatory" %}</dd>
+                                        {% endif %}
                                         <dt>{% trans "Begin date" %}</dt>
-                                        <dd>{{ object.usageBeginDate }}</dd>
+                                        <dd>{{ object.usageBeginDate|default:"-" }}</dd>
                                         <dt>{% trans "End date" %}</dt>
-                                        <dd>{{ object.usageEndDate }}</dd>
-                                        <dt>{% trans "End date" %}</dt>
-                                        <dd>{{ object.usageEndDate }}</dd>
+                                        <dd>{{ object.usageEndDate|default:"-" }}</dd>
                                         <dt>{% trans "Price" %}</dt>
-                                        <dd>{{ object.price }} {% trans "Rials" %}</dd>
+                                        <dd>{{ object.price|floatformat:2|intcomma }} {% trans "Rials" %}</dd>
                                     </dl>
                                 </article>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div id="payment" class="form-group clearfix">
+                    <a class="btn btn-default" href="{% url 'enrollConfirmed' pk=object.id %}">
+                        <i class="fa fa-shopping-cart"></i> {% trans "Payment" %}</a>
+                    <!-- <button type="submit" class="btn pull-left pull-bottom btn-default">Payment</button> -->
+                </div>
+
             </div>
         </div>
     </section>
