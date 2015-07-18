@@ -18,10 +18,13 @@ class club(Displayable):
 
     def get_absolute_url(self):
         return reverse('directoryItemDetail', kwargs={'slug':self.slug})
+
+    def images(self):
+        return self.imageCollection.all()
 # -------------------------------------------------------------------------------
 class imageCollection(models.Model):
     title       = models.CharField(max_length= 200)
-    clubKey     = models.ForeignKey(club)
+    clubKey     = models.ForeignKey(club, related_name='imageCollection', related_query_name='imageCollection')
     imageFile   = models.ImageField() #height=555, width=415
 
     def __unicode__(self):

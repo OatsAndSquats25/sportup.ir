@@ -77,19 +77,24 @@
                             <section>
                                 <article class="item-gallery">
                                     <div class="owl-carousel item-slider">
-                                        <!-- <div class="slide"><img src="{% get_media_prefix %}{{ object.image }}" data-hash="1" alt=""></div> -->
-                                        <div class="slide"><img src="{% static "assets/img/items/2.jpg" %}" data-hash="1" alt=""></div>
-                                        <div class="slide"><img src="{% static "assets/img/items/3.jpg" %}" data-hash="2" alt=""></div>
-                                        <div class="slide"><img src="{% static "assets/img/items/4.jpg" %}" data-hash="3" alt=""></div>
+                                        {% for image in object.images %}
+                                            <div class="slide"><img src="{{ image.imageFile.url }}" data-hash="{{ forloop.counter }}" alt=""></div>
+                                        {% endfor %}
+{#                                        <div class="slide"><img src="{% static "assets/img/items/2.jpg" %}" data-hash="1" alt=""></div>#}
+{#                                        <div class="slide"><img src="{% static "assets/img/items/3.jpg" %}" data-hash="2" alt=""></div>#}
+{#                                        <div class="slide"><img src="{% static "assets/img/items/4.jpg" %}" data-hash="3" alt=""></div>#}
                                     </div>
                                     <!-- /.item-slider -->
                                     <div class="thumbnails">
                                         <span class="expand-content btn framed icon" data-expand="#gallery-thumbnails" >{% trans 'More' %}<i class="fa fa-plus"></i></span>
                                         <div class="expandable-content height collapsed show-70" id="gallery-thumbnails">
                                             <div class="content">
-                                                <a href="#1" id="thumbnail-1" class="active"><img src="{% static "assets/img/items/2.jpg" %}" alt=""></a>
-                                                <a href="#2" id="thumbnail-2"><img src="{% static "assets/img/items/3.jpg" %}" alt=""></a>
-                                                <a href="#3" id="thumbnail-3"><img src="{% static "assets/img/items/4.jpg" %}" alt=""></a>
+                                                {% for image in object.images %}
+                                                    <a href="#{{ forloop.counter }}" id="thumbnail-{{ forloop.counter }}" {% if forloop.first %}class="active"{% endif %}><img src="{{ image.imageFile.url }}" alt=""></a>
+                                                {% endfor %}
+{#                                                <a href="#1" id="thumbnail-1" class="active"><img src="{% static "assets/img/items/2.jpg" %}" alt=""></a>#}
+{#                                                <a href="#2" id="thumbnail-2"><img src="{% static "assets/img/items/3.jpg" %}" alt=""></a>#}
+{#                                                <a href="#3" id="thumbnail-3"><img src="{% static "assets/img/items/4.jpg" %}" alt=""></a>#}
                                             </div>
                                         </div>
                                     </div>
