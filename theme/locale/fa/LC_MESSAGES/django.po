@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 14:30+0000\n"
+"POT-Creation-Date: 2015-07-18 13:37+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,45 +18,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: templates/base.html:55
+#: templates/base.html:56
+msgid "Profile"
+msgstr "پروفایل"
+
+#: templates/base.html:57
 msgid "Dashboard"
 msgstr "داشبورد"
 
-#: templates/base.html:56
+#: templates/base.html:58
 msgid "Sign Out"
 msgstr "خروج"
 
-#: templates/base.html:58
+#: templates/base.html:60
 msgid "Register"
 msgstr "ثبت نام"
 
-#: templates/base.html:59
+#: templates/base.html:61
+#, fuzzy
 msgid "Sign In"
 msgstr "ورود"
 
-#: templates/base.html:64
+#: templates/base.html:66
 msgid "Submit Your Item"
 msgstr "ثبت باشگاه"
 
-#: templates/base.html:129
-msgid "New Items"
-msgstr "جدید"
+#: templates/base.html:81
+msgid "Please update your profile to finish your registration."
+msgstr "لطفا پروفایل خود را جهت تکمیل ثبت نام کامل نمایید"
 
-#: templates/base.html:166
-msgid "Recent Reviews"
-msgstr "نظرات اخیر"
+#: templates/base.html:81
+msgid "Click here"
+msgstr "اینجا کلیک کنید"
 
-#: templates/base.html:201
-msgid "About Us"
-msgstr "درباره ما"
+#: templates/base.html:137
+msgid "Newsletter"
+msgstr "خبرنامه"
 
-#: templates/base.html:229
+#: templates/base.html:139
+msgid ""
+"Keep up on our always evolving product features. Enter your e-mail and "
+"subscribe to our newsletter."
+msgstr ""
+"از امکانات جدید محصولات در حال توسعه ما با خبر باشد. ایمیل خود را برای عضویت "
+"در خبرنامه ما وارد کنید."
+
+#: templates/base.html:144
+msgid "<strong>Success!</strong> You've been added to our newsletter."
+msgstr " شما با <strong>موفقیت</strong> در خبر نامه ما عضو شدید"
+
+#: templates/base.html:150 templates/base.old.html:129
+msgid "Email"
+msgstr "پست الکترونیک"
+
+#: templates/base.html:153
+msgid "Subscribe"
+msgstr "عضویت"
+
+#: templates/base.html:165
 msgid "Contact Us"
 msgstr "تماس با ما"
 
-#: templates/base.html:241
-msgid "(C) SportUp, All rights reserved"
+#: templates/base.html:167
+msgid ""
+"5th Floor, Anestito-Mohandesi-Naft Building, Daneshkadeh-Fanni Tehran "
+"University, North Karegar Ave, Tehran, Iran"
 msgstr ""
+"تهران، خیابان کارگر شمالی، دانشکده فنی دانشگاه تهران، ساختمان انستیتو مهندسی "
+"نفت، طبقه پنجم"
+
+#: templates/base.html:171
+msgid "+98-912-308-6945"
+msgstr "+۹۸-۹۱۲-۳۰۸-۶۹۴۵"
+
+#: templates/base.html:190
+msgid "Follow Us"
+msgstr "ما را دنبال کنید"
+
+#: templates/base.html:208
+msgid "(C) SportUp, All rights reserved"
+msgstr "تمامی حقوق برای SportUp محفوظ است."
 
 #: templates/base.old.html:58
 msgid "Toggle Navigation"
@@ -64,39 +105,35 @@ msgstr ""
 
 #: templates/base.old.html:126
 msgid "ADDRESS"
-msgstr "آدرس"
-
-#: templates/base.old.html:129
-msgid "Email"
-msgstr "ایمیل"
+msgstr ""
 
 #: templates/base.old.html:130
 msgid "Website"
-msgstr "وب سایت"
+msgstr ""
 
 #: templates/base.old.html:131
 msgid "Tel"
-msgstr "تلفن"
+msgstr ""
 
 #: templates/base.old.html:139
 msgid "News"
-msgstr "اخبار"
+msgstr ""
 
 #: templates/base.old.html:140
 msgid "Article"
-msgstr "مقاله"
+msgstr ""
 
 #: templates/base.old.html:141
 msgid "Travelogue"
-msgstr "سفرنامه"
+msgstr ""
 
 #: templates/base.old.html:151
 msgid "All content currently distributed under the GNU"
-msgstr "تمام مطالب تحت "
+msgstr ""
 
 #: templates/base.old.html:153
 msgid "Free Documentation License."
-msgstr "مجوز مستندات آزاد گنو منتشر می‌گردد."
+msgstr ""
 
 #: templates/errors/404.html:6 templates/errors/404.html.py:10
 #: templates/errors/404.html:15

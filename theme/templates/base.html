@@ -53,11 +53,12 @@
                         {% block authentication %}
                         <ul class="user-area">
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'dashboard' %}"><strong>{% trans "Dashboard" %}</strong></a></li>
+                            <li><a href="{% url 'profileUpdate' %}">{% trans "Profile" %}</a></li>
+                            <li><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
                             <li><a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
                         {% else %}
-                            <li><a href="{% url  'registration_register' %}?next={{ request.path }}"><strong>{% trans "Register" %}</strong></a></li>
-                            <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>
+                            {% block register %}<li><a href="{% url  'registration_register' %}?next={{ request.path }}">{% trans "Register" %}</a></li>{% endblock %}
+                            {% block login %}<li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>{% endblock %}
                         {% endif %}
                         </ul>
                         {% endblock %}
@@ -74,6 +75,13 @@
         </div>
 
 {#        {% nevercache %}#}
+        {% if user.is_authenticated and not perms.accounts.profile_is_update %}
+        <div class="alert alert-dismissable alert-warning" data-alert="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% trans "Please update your profile to finish your registration." %} <a href="{% url "profileUpdate" %}">{% trans "Click here" %}</a>
+        </div>
+        {% endif %}
+
         {% if messages %}
         <div class="messages">
         {% for message in messages %}
