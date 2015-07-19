@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 20:07+0430\n"
+"POT-Creation-Date: 2015-07-18 13:30+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,29 +18,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: forms.py:9
+msgid "first name"
+msgstr ""
+
+#: forms.py:10
+msgid "last name"
+msgstr ""
+
+#: models.py:9
+msgid "Photo"
+msgstr "تصویر"
+
+#: models.py:10
+msgid "National Identity"
+msgstr "کدملی"
+
+#: models.py:11
+msgid "Sport`s Insurance Number"
+msgstr "شماره بیمه ورزشی"
+
+#: models.py:11
+msgid "Please enter your sport`s insurance number"
+msgstr ""
+
+#: models.py:12
+msgid "Cell Phone"
+msgstr "تلفن همراه"
+
+#: models.py:12
+msgid "example: 09121231234"
+msgstr "مثال: ۰۹۱۲۱۲۳۱۲۳۴"
+
+#: models.py:13
+msgid "Landline"
+msgstr "تلفن ثابت"
+
+#: models.py:13
+msgid "With area code - example: 02122334455"
+msgstr "همراه با کد شهر - مثال: ۰۲۱۲۲۳۳۴۴۵۵"
+
+#: models.py:14
+msgid "Postal Code"
+msgstr "کدپستی ۱۰ رقمی"
+
+#: models.py:15
+msgid "Address"
+msgstr "آدرس"
+
+#: templates/accounts/profile_update.html:11
+msgid "Update"
+msgstr "بروزرسانی"
+
 #: templates/dashboard/dashboard.html:16
 #: templates/registration/dashboard.html:15
 msgid "Navigation"
 msgstr ""
 
+#: templates/dashboard/homepage.html:5
+msgid "Dashboard Home Page"
+msgstr ""
+
 #: templates/registration/login-registration.html:32
-#: templates/registration/login.html:29 templates/registration/login.html:45
+#: templates/registration/login.html:30 templates/registration/login.html:46
 msgid "Sign In"
 msgstr "ورود"
 
-#: templates/registration/login.html:9
+#: templates/registration/login.html:10
 msgid "Your username and password didn't match. Please try again"
 msgstr "نام کاربری و رمز عبور صحیح نمی باشد. مجددا تلاش کنید."
 
-#: templates/registration/login.html:35
+#: templates/registration/login.html:36
 msgid "Username"
 msgstr "نام کاربری"
 
-#: templates/registration/login.html:39
+#: templates/registration/login.html:40
 msgid "Password"
 msgstr "رمز عبور"
 
-#: templates/registration/login.html:44
+#: templates/registration/login.html:45
 msgid "Lost your password?"
 msgstr "رمز عبور گم شده؟"
 
@@ -51,3 +107,25 @@ msgstr "رمز مجدد"
 #: templates/registration/password_reset_form.html:19
 msgid "Reset my password"
 msgstr "ایجاد رمز مجدد"
+
+#: templates/registration/registration_form.html:14
+msgid "Register"
+msgstr ""
+
+#: templates/registration/registration_form.html:43
+msgid "Create an Account"
+msgstr ""
+
+#: templates/registration/registration_form.html:49
+msgid ""
+"By clicking the “Create an Account” button you agree with our <a href="
+"\"terms-conditions.html\" class=\"link\">Terms and conditions</a>"
+msgstr ""
+
+#: views.py:26
+msgid "You are successfuly registered."
+msgstr "شما با موفقیت ثبت نام کردید"
+
+#: views.py:77
+msgid "Your profile updated successfully."
+msgstr "پروفایل شما با موفقت بروز رسانی گردید"
