@@ -27,6 +27,7 @@ class programDefinition(PolymorphicModel, Displayable):
     )
 
     agreementKey        = models.ForeignKey(agreement, verbose_name=_('Agreement'))
+    clubKey             = models.ForeignKey(club, verbose_name=_("Club"))
     #coachUserKey        = models.ManyToManyField(user_model_name, blank=True, null=True)
     maxCapacity         = models.IntegerField(_("Maximum capacity"), default=-1, help_text=_("Please fill if your program has maximum capacity"))
     remainCapacity      = models.IntegerField(_("Remain capacity"), blank=True, null=True)
@@ -53,4 +54,7 @@ class programDefinition(PolymorphicModel, Displayable):
     def __unicode__(self):
         #return self.agreementKey.facilityKey + "-" + self.title +"-"+ self.agreementKey.id
         return self.title
+
+    def enrolled(self):
+        return self.enrolledprogram_set.all().select_related()
 # ----------------------------------------------------
