@@ -1,48 +1,53 @@
 {% extends 'base.html' %}
 {%  load i18n static %}
 
+{% block register %}
+{% endblock %}
+
+
 {% block main %}
-    {% block authentication %}
-    {% endblock %}
     <section class="container">
         <div class="block">
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                     <header>
-                        <h1 class="page-title">Register</h1>
+                        <h1 class="page-title">{% trans "Register" %}</h1>
                     </header>
                     <hr>
-                    <form role="form" id="form-register" method="post" action="?">
-                        <div class="form-group">
-                            <label for="{{ form.username.id_for_label }}">Username:</label>
-                            {{ form.username }}
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                        {{ form.email.label_tag }}
-                            <label for="{{ form.email.id_for_label }}">:</label>
-                            {{ form.email }}
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="{{ form.password1.id_for_label }}">Password:</label>
-                            {{ form.password1 }}
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="password2">Confirm Password:</label>
-                            {{ form.password2 }}
-                        </div><!-- /.form-group -->
-                        <div class="checkbox pull-left">
-                            <label>
-                                <input type="checkbox" name="newsletter">Receive Newsletter
-                            </label>
-                        </div>
+                    <form role="form" id="form-register" method="post" action="{% url 'registration_register' %}">
+                        {% csrf_token %}
+                        {{ form }}
+{#                        <div class="form-group">#}
+{#                            <label for="{{ form.username.id_for_label }}">{% trans "Username" %}:</label>#}
+{#                            {{ form.username }}#}
+{#                        </div><!-- /.form-group -->#}
+{#                        <div class="form-group">#}
+{#                        {{ form.email.label_tag }}#}
+{#                            <label for="{{ form.email.id_for_label }}">{% trans "E-Mail" %}:</label>#}
+{#                            {{ form.email }}#}
+{#                        </div><!-- /.form-group -->#}
+{#                        <div class="form-group">#}
+{#                            <label for="{{ form.password1.id_for_label }}">{% trans "Password" %}:</label>#}
+{#                            {{ form.password1 }}#}
+{#                        </div><!-- /.form-group -->#}
+{#                        <div class="form-group">#}
+{#                            <label for="password2">{% trans "Confirm Password" %}:</label>#}
+{#                            {{ form.password2 }}#}
+{#                        </div><!-- /.form-group -->#}
+{#                        <div class="checkbox pull-left">#}
+{#                            <label>#}
+{#                                <input type="checkbox" name="newsletter">{% trans "Receive Newsletter" %}</input>#}
+{#                            </label>#}
+{#                        </div>#}
                         <div class="form-group clearfix">
-                            <button type="submit" class="btn pull-right btn-default" id="account-submit">Create an Account</button>
+                            <button type="submit" class="btn pull-right btn-default" id="account-submit">{% trans "Create an Account" %}</button>
                         </div><!-- /.form-group -->
+{#                        <input type="hidden" name="next" value="{{ next }}" />#}
                     </form>
                     <hr>
-<!--                     <div class="center">
-                        <figure class="note">By clicking the “Create an Account” button you agree with our <a href="terms-conditions.html" class="link">Terms and conditions</a></figure>
-                    </div> -->
+                    <div class="center">
+                        <figure class="note">{% trans 'By clicking the “Create an Account” button you agree with our <a href="terms-conditions.html" class="link">Terms and conditions</a>' %}</figure>
+                    </div>
                 </div>
                 
             </div>

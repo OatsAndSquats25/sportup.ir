@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {%  load i18n static %}
 
+{% block login %}
+{% endblock %}
+
 {% block main %}
-    {% block authentication %}
-    {% endblock %}
     {% if form.errors %}
         <div class="alert alert-danger">
             <p>{% trans "Your username and password didn't match. Please try again" %}</p>
