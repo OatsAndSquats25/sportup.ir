@@ -1,0 +1,60 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load i18n %}
+
+{% block dashboard %}
+    <div class="table-responsive">
+        <header><h2>{% trans "Enrolled list" %}</h2></header>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr class="success">
+                <th>{% trans "User" %}</th>
+                <th>{% trans "Complex" %}</th>
+                <th>{% trans "Program" %}</th>
+{#                <th>{% trans "Amount" %}</th>#}
+{#                <th>{% trans "Status" %}</th>#}
+                <th>{% trans "Status" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in object_list %}
+                <tr>
+                    <td>{{ item.user }}</td>
+                    <td>{{ item.programDefinitionKey.agreementKey.clubKey.title }}</td>
+                    <td>{{ item.programDefinitionKey.title }}</td>
+{#                    <td>{{ item.amount }}</td>#}
+{#                    {% if item.status == 3 %}#}
+{#                        <td style="color: green">#}
+{#                    {% else %}#}
+{#                        <td style="color: red">#}
+{#                    {% endif %}#}
+{#                    {{ item.get_status_display }}</td>#}
+                    {% if item.isValid %}
+                        <td style="color: green">{% trans "Active" %}</td>
+                    {% else %}
+                        <td style="color: red">{% trans "Inactive" %}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{#<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Launch demo modal</button>#}
+{##}
+{#<!-- Modal -->#}
+{#<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#    <div class="modal-dialog">#}
+{#        <div class="modal-content">#}
+{#            <div class="modal-header">#}
+{#                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+{#                <h4 class="modal-title" id="myModalLabel">This Modal title</h4>#}
+{#            </div>#}
+{#            <div class="modal-body">Add some text here</div>#}
+{#            <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+{#                    <button type="button" class="btn btn-primary">Submit changes</button>#}
+{#            </div>#}
+{#        </div><!-- /.modal-content -->#}
+{#    </div><!-- /.modal -->#}
+{#</div>#}
+</div>
