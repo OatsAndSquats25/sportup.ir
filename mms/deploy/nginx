@@ -1,0 +1,20 @@
+erver {
+    listen  80;
+    server_name test.sportup.ir;
+    access_log /var/log/nginx/test.sportup.ir_access.log;
+    error_log /var/log/nginx/test.sportup.ir_error.log;
+
+    location / {
+        include     uwsgi_params;
+        uwsgi_pass  unix:///home/django/SA-MMS/SA-MMS.sock;
+    }
+
+    location /media/  {
+        alias /home/django/SA-MMS/static/media/;
+    }
+
+    location  /static/ {
+        alias /home/django/SA-MMS/static/;
+    }
+}
+
