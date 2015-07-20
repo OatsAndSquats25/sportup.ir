@@ -17,6 +17,7 @@ class userProfile(models.Model):
     class Meta:
         permissions = (
             ("profile_is_update", "This permission gives to the user who has updated his/her profile"),
+            ("club_owner", "This permission gives to the club`s owner"),
         )
 
     def isUpdate(self):
