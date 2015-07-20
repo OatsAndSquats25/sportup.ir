@@ -36,7 +36,7 @@
 
 <body onunload="" class="page-subpage navigation-off-canvas" id="page-top" >
 {% block body %}
-
+{% block modal%}{% endblock %}
 <!-- Outer Wrapper-->
 <div id="outer-wrapper">
     <!-- Inner Wrapper -->
@@ -62,12 +62,12 @@
                         {% endif %}
                         </ul>
                         {% endblock %}
-                        <a href="submit.html" class="submit-item">
-                            <div class="content"><span>{% trans "Submit Your Item" %}</span></div>
-                            <div class="icon">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                        </a>
+                        {#<a href="submit.html" class="submit-item">#}
+                        {#    <div class="content"><span>{% trans "Submit Your Item" %}</span></div>#}
+                        {#    <div class="icon">#}
+                        {#        <i class="fa fa-plus"></i>#}
+                        {#    </div>#}
+                        {#</a>#}
                         {% block toggle-nav %}{% endblock %}
                     </div>
                 </nav>

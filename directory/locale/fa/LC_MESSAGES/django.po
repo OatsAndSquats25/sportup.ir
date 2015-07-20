@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 20:04+0430\n"
+"POT-Creation-Date: 2015-07-20 16:35+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,18 +27,34 @@ msgstr "لیست مجموعه‌ها"
 msgid "Directory"
 msgstr "دایرکتوری"
 
-#: templates/directory/item.html:29
+#: templates/directory/item.html:33 templates/directory/listall.html:40
+msgid "Logo"
+msgstr ""
+
+#: templates/directory/item.html:35
 msgid "Contact"
 msgstr "تماس"
 
-#: templates/directory/item.html:82
+#: templates/directory/item.html:89
 msgid "More"
 msgstr "بیشتر"
 
+#: templates/directory/item.html:101
+msgid "Description"
+msgstr ""
+
 #: templates/directory/listall.html:16
-msgid "Sign in your club in blink of an eye"
-msgstr "با یک چشم به هم زدن از باشگاه خود استفاده کنید"
+msgid "Register in your club in blink of an eye"
+msgstr "در یک چشم به هم زدن در باشگاه خود ثبت نام کنید"
 
 #: templates/directory/listall.html:25
 msgid "Best Clubs"
 msgstr "بهترین باشگاه ها"
+
+#: templates/directory/listall.html:48
+msgid "Phone Number"
+msgstr ""
+
+#: templates/directory/listall.html:50
+msgid "Website"
+msgstr ""
