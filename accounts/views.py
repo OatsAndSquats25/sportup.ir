@@ -34,12 +34,12 @@ class dashboard(View):
         if app == None or cls == None:
             # app = 'accounts'
             # cls = 'homePage'
-            # if request.user.has_permission():
+            if request.user.has_perm('accounts.club_owner'):
                 app = 'program'
                 cls = 'programList'
-            # else:
-            #     app = 'enroll'
-            #     cls = 'enrollList'
+            else:
+                app = 'enroll'
+                cls = 'enrollList'
         try:
             mod_name = app + '.dashboard'
             mod = importlib.import_module(mod_name)
