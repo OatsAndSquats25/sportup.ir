@@ -98,7 +98,7 @@ msgstr "رمز عبور"
 
 #: templates/registration/login.html:45
 msgid "Lost your password?"
-msgstr "رمز عبور گم شده؟"
+msgstr "رمز عبور خود را فراموش کرده اید؟"
 
 #: templates/registration/password_reset_form.html:10
 msgid "Password reset"
