@@ -1,36 +1,37 @@
 {% load i18n humanize %}
 
 {% if object_list %}
-<div class="table-responsive">
+<div class="table-responsive container">
 <header><h2>{% trans "Programs" %}</h2></header>
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th>{% trans "Program" %}</th>
-            <th>{% trans "Capacity" %}</th>
+            <th class="mob-hide">{% trans "Capacity" %}</th>
             <th>{% trans "Price" %}({% trans "Rials" %})</th>
-            <th class="mob-hide">{% trans "Gender" %}</th>
-            <th class="mob-hide">{% trans "Begin date" %}</th>
-            <th class="mob-hide">{% trans "End date" %}</th>
-            <th class="mob-hide">{% trans "Expires on" %}</th>
+            <th class="tb-hide">{% trans "Gender" %}</th>
+            <th class="tb-hide">{% trans "Begin date" %}</th>
+            <th class="tb-hide">{% trans "End date" %}</th>
+            <th class="tb-hide">{% trans "Expires on" %}</th>
+            <th>{% trans "Enroll" %}</th>
         </tr>
     </thead>
     <tbody>
     {% for object in object_list %}
         {% if object.isValid %}
-            <tr class="clickable-row" data-href="{% url 'enrollConfirmation' object.id %}">
+            <tr>
                 <td>{{ object.title }}</td>
-                <td>{% if object.remainCapacity >= 0 %}{{ object.remainCapacity }}{% endif %}</td>
+                <td class="tb-hide">{% if object.remainCapacity >= 0 %}{{ object.remainCapacity }}{% endif %}</td>
                 <td>{{ object.price|floatformat:2|intcomma }}</td>
-                <td class="mob-hide">{{ object.get_genderLimit_display }}</td>
-                <td class="mob-hide">{{ object.usageBeginDate|date }}</td>
-                <td class="mob-hide">{{ object.usageEndDate|date }}</td>
-                <td class="mob-hide">{{ object.expiry_date|date }}</td>
-{#                <td>#}
-{#                    <a class="btn btn-default" href="{% url 'enrollConfirmation' object.id %}">#}
-{#                        <i class="fa fa-shopping-cart"></i> {% trans "Enroll" %}#}
-{#                    </a>#}
-{#                </td>#}
+                <td class="tb-hide">{{ object.get_genderLimit_display }}</td>
+                <td class="tb-hide">{{ object.usageBeginDate|date }}</td>
+                <td class="tb-hide">{{ object.usageEndDate|date }}</td>
+                <td class="tb-hide">{{ object.expiry_date|date }}</td>
+                <td>
+                    <a class="btn btn-default" href="{% url 'enrollConfirmation' object.id %}">
+                        <i class="fa fa-shopping-cart"></i> {% trans "Enroll" %}
+                    </a>
+                </td>
             </tr>
 {#            {{ object.agreementKey }}#}
 {#            {{ object.multipleReserve }}#}

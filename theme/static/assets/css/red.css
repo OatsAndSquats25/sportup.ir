@@ -1616,6 +1616,7 @@ ul.bullets li a:hover {
 }
 .hero-image .background {
   text-align: center;
+  background-position: center;
 }
 
 .invisible {

@@ -250,6 +250,22 @@ color: white;
         visibility: collapse;
     } 
 }
+@media (max-width: 768px) {
+  td.tb-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
+    th.tb-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
+}
 
 .height-350 {
   height: 350px !important;
