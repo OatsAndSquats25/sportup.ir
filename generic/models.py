@@ -1,22 +1,4 @@
 from django.db import models
-#from __future__ import unicode_literals
-#from future.builtins import str
-#from future.utils import with_metaclass
-
-#from json import loads
-try:
-    from urllib.request import urlopen
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib import urlopen, urlencode
-
-#from django.contrib.contenttypes.generic import GenericForeignKey
-from django.db import models
-from django.db.models.base import ModelBase
-from django.db.models.signals import post_save
-from django.template.defaultfilters import truncatewords_html
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.html import strip_tags
 from django.utils.timesince import timesince
 from django.utils.timezone import now
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -153,6 +135,8 @@ class Displayable(TimeStamped, Ownable):
         the field as it will be blank when a blog post is created from
         the quick blog form in the admin dashboard.
         """
+        date = now()
+        self.slug = u'%s%i%i' % (self.title, date.month, date.day)
         if self.publish_date is None:
             self.publish_date = now()
         super(Displayable, self).save(*args, **kwargs)
