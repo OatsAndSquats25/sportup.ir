@@ -2,7 +2,6 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from registration.forms import RegistrationForm
-
 # -----------------------------------------------------------------------
 class MyRegistrationForm(RegistrationForm):
     next    = forms.CharField(widget=forms.HiddenInput)
@@ -27,3 +26,4 @@ class MyRegistrationForm(RegistrationForm):
         #return the User model
 
         return new_user
+# -----------------------------------------------------------------------
