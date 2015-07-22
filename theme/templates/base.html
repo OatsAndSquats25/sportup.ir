@@ -62,12 +62,12 @@
                         {% endif %}
                         </ul>
                         {% endblock %}
-                        {#<a href="submit.html" class="submit-item">#}
-                        {#    <div class="content"><span>{% trans "Submit Your Item" %}</span></div>#}
-                        {#    <div class="icon">#}
-                        {#        <i class="fa fa-plus"></i>#}
-                        {#    </div>#}
-                        {#</a>#}
+                        <a href="{% url "directoryRegistration" %}" class="submit-item">
+                            <div class="content"><span>{% trans "Submit Your Item" %}</span></div>
+                            <div class="icon">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </a>
                         {% block toggle-nav %}{% endblock %}
                     </div>
                 </nav>
