@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{%  load i18n static %}
+
+{% block register %}
+{% endblock %}
+
+{% block main %}
+    <section class="container">
+        <div class="block">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                    <header>
+                        <h1 class="page-title">{% trans "Register Club" %}</h1>
+                    </header>
+                    <hr>
+                    <form enctype="multipart/form-data" role="form" id="form-register" method="post" action="{% url 'directoryRegistration' %}">
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="form-group clearfix">
+                            <button type="submit" class="btn pull-right btn-default" id="account-submit">{% trans "Create an Account" %}</button>
+                        </div><!-- /.form-group -->
+{#                        <input type="hidden" name="next" value="{{ next }}" />#}
+                    </form>
+                    <hr>
+                    <div class="center">
+                        <figure class="note">{% trans 'By clicking the “Create an Account” button you agree with our <a href="terms-conditions.html" class="link">Terms and conditions</a>' %}</figure>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block extra_js_end %}<script type="text/javascript" src="{% static "assets/js/icheck.min.js" %}"></script>{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-20 16:35+0430\n"
+"POT-Creation-Date: 2015-07-22 15:38+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:8
+msgid "Summary"
+msgstr "خلاصه"
+
+#: models.py:9 templates/directory/item.html:97
+msgid "Description"
+msgstr "توضیحات"
+
+#: models.py:10
+msgid "Address"
+msgstr "آدرس"
+
+#: models.py:11 templates/directory/listall.html:50
+msgid "Website"
+msgstr "وب سایت"
+
+#: models.py:12
+msgid "Phone"
+msgstr "تلفن"
+
+#: models.py:13
+msgid "Cell"
+msgstr "موبایل"
+
+#: models.py:14 templates/directory/item.html:33
+#: templates/directory/listall.html:40
+msgid "Logo"
+msgstr "لوگو"
+
+#: models.py:26
+msgid "Title"
+msgstr "عنوان"
+
+#: models.py:28
+msgid "File"
+msgstr "فایل"
+
+#: templates/directory/club_registration.html:13
+msgid "Register Club"
+msgstr "بهترین باشگاه ها"
+
+#: templates/directory/club_registration.html:20
+msgid "Create an Account"
+msgstr "ثبت نام"
+
+#: templates/directory/club_registration.html:26
+msgid ""
+"By clicking the “Create an Account” button you agree with our <a href="
+"\"terms-conditions.html\" class=\"link\">Terms and conditions</a>"
+msgstr ""
+"با ثبت نام شما موافقت خود را با قوانین و شرایط ما اعلام می‌نمایید. <a href="
+"\"terms-conditions.html\" class=\"link\">قوانین و شرایط</a>"
 
 #: templates/directory/item.html:4 templates/directory/item.html.py:6
 #: templates/directory/listall.html:4 templates/directory/listall.html.py:6
@@ -27,21 +80,13 @@ msgstr "لیست مجموعه‌ها"
 msgid "Directory"
 msgstr "دایرکتوری"
 
-#: templates/directory/item.html:33 templates/directory/listall.html:40
-msgid "Logo"
-msgstr ""
-
 #: templates/directory/item.html:35
 msgid "Contact"
 msgstr "تماس"
 
-#: templates/directory/item.html:89
+#: templates/directory/item.html:87
 msgid "More"
 msgstr "بیشتر"
-
-#: templates/directory/item.html:101
-msgid "Description"
-msgstr ""
 
 #: templates/directory/listall.html:16
 msgid "Register in your club in blink of an eye"
@@ -53,8 +98,4 @@ msgstr "بهترین باشگاه ها"
 
 #: templates/directory/listall.html:48
 msgid "Phone Number"
-msgstr ""
-
-#: templates/directory/listall.html:50
-msgid "Website"
-msgstr ""
+msgstr "شماره تلفن"
