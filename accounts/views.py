@@ -63,7 +63,11 @@ class profileUpdate(UpdateView):
 
     # def get_queryset(self):
     def get_object(self):
-        return self.model.objects.get(user = self.request.user)
+        try:
+            return self.model.objects.get(user = self.request.user)
+        except:
+            return None
+            # return userProfile(user =  self.request.user)
 
     def get_success_url(self):
         content_type = ContentType.objects.get_for_model(userProfile)
