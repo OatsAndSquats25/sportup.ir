@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-18 13:37+0430\n"
+"POT-Creation-Date: 2015-07-25 16:35+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
+"Language-Team: LANGUAGE <ll@sportup.ir>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,6 @@ msgid "Register"
 msgstr "ثبت نام"
 
 #: templates/base.html:61
-#, fuzzy
 msgid "Sign In"
 msgstr "ورود"
 
@@ -95,7 +94,11 @@ msgstr "+۹۸-۹۱۲-۳۰۸-۶۹۴۵"
 msgid "Follow Us"
 msgstr "ما را دنبال کنید"
 
-#: templates/base.html:208
+#: templates/base.html:198
+msgid "About Us"
+msgstr "درباره ما"
+
+#: templates/base.html:209
 msgid "(C) SportUp, All rights reserved"
 msgstr "تمامی حقوق برای SportUp محفوظ است."
 
@@ -105,23 +108,23 @@ msgstr ""
 
 #: templates/base.old.html:126
 msgid "ADDRESS"
-msgstr ""
+msgstr "آدرس"
 
 #: templates/base.old.html:130
 msgid "Website"
-msgstr ""
+msgstr "وب سایت"
 
 #: templates/base.old.html:131
 msgid "Tel"
-msgstr ""
+msgstr "تلفن"
 
 #: templates/base.old.html:139
 msgid "News"
-msgstr ""
+msgstr "اخبار"
 
 #: templates/base.old.html:140
 msgid "Article"
-msgstr ""
+msgstr "مقاله"
 
 #: templates/base.old.html:141
 msgid "Travelogue"
