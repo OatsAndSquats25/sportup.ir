@@ -266,7 +266,22 @@ color: white;
         visibility: collapse;
     } 
 }
-
+@media (min-width: 768px) {
+  td.desktop-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
+    th.desktop-hide{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    } 
+}
 .height-350 {
   height: 350px !important;
 }

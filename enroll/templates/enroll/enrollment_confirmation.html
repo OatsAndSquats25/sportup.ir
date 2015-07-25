@@ -12,13 +12,19 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr class="info">
-                            <th style="width:40%;">{% trans "Image" %}</th>
+                            <th style="width:40%;" class="tb-hide">{% trans "Image" %}</th>
                             <th style="width:60%;">{% trans "Description" %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td class="desktop-hide">
+                                <h3>{{ object.agreementKey.clubKey.title }}</h3>
+                                <img src="{{ object.agreementKey.clubKey.logo.url }}" alt="{% trans "Logo" %}" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tb-hide">
                                 <h3>{{ object.agreementKey.clubKey.title }}</h3>
                                 <img src="{{ object.agreementKey.clubKey.logo.url }}" alt="{% trans "Logo" %}" >
                             </td>
