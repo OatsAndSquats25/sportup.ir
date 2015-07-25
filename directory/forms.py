@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-
+from django.contrib.auth.models import Permission
 from directory.models import club
 from registration.forms import RegistrationForm
 
@@ -17,7 +17,7 @@ class clubRegistrationForm(RegistrationForm):
     detail  = forms.CharField(label=_("Description"), widget=forms.Textarea)
     address = forms.CharField(label=_("Address"), max_length=200)
     website = forms.CharField(label=_("Website"), max_length=100)
-    phone   = forms.CharField(label=_("Photo"), max_length=20)
+    phone   = forms.CharField(label=_("Landline"), max_length=20)
     cell    = forms.CharField(label=_("Cell"), max_length=20)
     logo    = forms.ImageField(label=_("Logo"), ) #height=200, width=350
     next    = forms.CharField(widget=forms.HiddenInput)
@@ -33,5 +33,9 @@ class clubRegistrationForm(RegistrationForm):
         phone    = self.cleaned_data['phone'],
         cell     = self.cleaned_data['cell'],
         logo     = self.cleaned_data['logo']).save()
+
+        permission = Permission.objects.get(codename='club_owner')
+        new_user.user_permissions.add(permission)
+
         return new_user
 # -----------------------------------------------------------------------
