@@ -14,6 +14,7 @@ class imageViewsInline(admin.TabularInline):
 
 class clubsAdmin(admin.ModelAdmin):
     list_display = ('title',)
+    list_filter = ('status',)
     inlines = [imageViewsInline]
 
 admin.site.register(club, clubsAdmin)
