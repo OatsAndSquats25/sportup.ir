@@ -580,7 +580,7 @@ $(document).ready(function($) {
 });
 
 $(document).ready(function($) {
-    var elem;
+    var elem = $(".item.featured > figure");
     var maxHeight = Math.max.apply(null, elem.map(function ()
     {
         return $(this).height();
