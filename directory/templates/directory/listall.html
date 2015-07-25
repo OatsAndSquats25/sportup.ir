@@ -25,36 +25,36 @@
         	<header><h2 id="featur-header">{% trans 'Best Clubs' %}</h2></header>
     		<div class="row">
 					{% for object in object_list %}
-	                    <div class="col-md-3 col-sm-3">
-                                <div class="item featured">
-                                    <div class="image">
-                                        <div class="view-details"><i class="fa fa-eye"></i></div>
-                                        <a href="{{ object.get_absolute_url }}">
-                                            <div class="overlay">
-                                                <div class="inner">
-                                                    <div class="content">
-                                                        <p>{{ object.summary }}</p>
-                                                    </div>
+	                    <div class="col-md-3 col-sm-4">
+                            <div class="item featured">
+                                <div class="image">
+                                    <div class="view-details"><i class="fa fa-eye"></i></div>
+                                    <a href="{{ object.get_absolute_url }}">
+                                        <div class="overlay">
+                                            <div class="inner">
+                                                <div class="content">
+                                                    <p>{{ object.summary }}</p>
                                                 </div>
                                             </div>
-                                            <img src="{{ object.logo.url }}" alt="{% trans "Logo" %}">
-                                        </a>
-                                    </div>
-                                    <div class="wrapper">
-                                        <a href="{{ object.get_absolute_url }}"><h3>{{ object.title }}</h3></a>
-                                        <figure>{{ object.address }}</figure>
-                                        <div class="info">
-                                            <dl>
-		                                        <dt>{% trans "Phone Number" %}</dt>
-		                                        <dd>+{{ object.phone }}</dd>
-		                                        <dt>{% trans "Website" %}</dt>
-		                                        <dd>{{ object.website }}</dd>
-                                            </dl>
                                         </div>
+                                        <img src="{{ object.logo.url }}" alt="{% trans "Logo" %}">
+                                    </a>
+                                </div>
+                                <div class="wrapper">
+                                    <a href="{{ object.get_absolute_url }}"><h3>{{ object.title }}</h3></a>
+                                    <figure>{{ object.address }}</figure>
+                                    <div class="info">
+                                        <dl>
+	                                        <dt>{% trans "Phone Number" %}</dt>
+	                                        <dd>+{{ object.phone }}</dd>
+	                                        <dt>{% trans "Website" %}</dt>
+	                                        <dd>{{ object.website }}</dd>
+                                        </dl>
                                     </div>
                                 </div>
-                                <!-- /.item-->
                             </div>
+                            <!-- /.item-->
+                        </div>
 	                {% endfor %}
                 </div>
             </div>

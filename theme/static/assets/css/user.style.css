@@ -299,3 +299,12 @@ color: white;
 .background-color-grey-dark h2{
   color: #d13234 !important;
 }
+
+.item.featured img {
+  height: 158px;
+}
+
+.hero-image .background {
+  text-align: center;
+  background-position: center;
+}
