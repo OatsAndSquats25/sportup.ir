@@ -573,8 +573,18 @@ function adaptBackgroundHeight(){
     });
 }
 
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
     $(".clickable-row").click(function() {
         window.document.location = $(this).data("href");
     });
 });
+
+$(document).ready(function($) {
+    var elem = $(".item.featured > figure");
+    var maxHeight = Math.max.apply(null, elem.map(function ()
+    {
+        return $(this).height();
+    }).get());
+    elem.css('height' , maxHeight);
+});
+
