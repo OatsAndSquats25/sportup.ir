@@ -232,8 +232,20 @@
 {% block extra_js_end %}{% endblock %}
 <script type="text/javascript" src="{% static "assets/js/custom.js" %}"></script>
 <script type="text/javascript" src="//static1.mailerlite.com/js/w/webforms.js?v2"></script>
-
 {% endblock %}
+
+<script>
+var _gaq = _gaq || [['_trackPageview']];
+_gaq.unshift(['_setAccount', 'UA-56387083-1']);
+(function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = '//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+})(document, 'script');
+</script>
+
 </body>
 </html>
 
