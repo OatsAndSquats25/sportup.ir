@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 16:35+0430\n"
+"POT-Creation-Date: 2015-07-27 11:31+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
 "Language-Team: LANGUAGE <ll@sportup.ir>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: templates/404.html:6 templates/404.html.py:10 templates/404.html.py:15
+msgid "Page not found"
+msgstr "صفحه پیدا نشد"
+
+#: templates/404.html:16
+msgid "The page you requested does not exist."
+msgstr "صفحه مورد درخواست شما پیدا نشد."
+
+#: templates/500.html:6 templates/500.html.py:10 templates/500.html.py:15
+msgid "Error"
+msgstr "خطا"
+
+#: templates/500.html:16
+msgid "Sorry, an error occurred."
+msgstr "متاسفانه شما با خطا مواجه شدید."
 
 #: templates/base.html:56
 msgid "Profile"
@@ -136,24 +152,6 @@ msgstr ""
 
 #: templates/base.old.html:153
 msgid "Free Documentation License."
-msgstr ""
-
-#: templates/errors/404.html:6 templates/errors/404.html.py:10
-#: templates/errors/404.html:15
-msgid "Page not found"
-msgstr "صفحه پیدا نشد"
-
-#: templates/errors/404.html:16
-msgid "The page you requested does not exist."
-msgstr ""
-
-#: templates/errors/500.html:6 templates/errors/500.html.py:10
-#: templates/errors/500.html:15
-msgid "Error"
-msgstr "خطا"
-
-#: templates/errors/500.html:16
-msgid "Sorry, an error occurred."
 msgstr ""
 
 #: templates/index.html:4 templates/index.html.py:5 templates/index.html:8
