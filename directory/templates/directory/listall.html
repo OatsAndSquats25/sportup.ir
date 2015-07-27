@@ -20,13 +20,13 @@
         </div>
     </section>
 
-    <section id="featured" class="block background-color-grey-dark">
+    <section id="featured" class="block equal-height">
         <div class="container">
         	<header><h2 id="featur-header">{% trans 'Best Clubs' %}</h2></header>
     		<div class="row">
 					{% for object in object_list %}
 	                    <div class="col-md-3 col-sm-4">
-                            <div class="item featured">
+                            <div class="item">
                                 <div class="image">
                                     <div class="view-details"><i class="fa fa-eye"></i></div>
                                     <a href="{{ object.get_absolute_url }}">
@@ -61,3 +61,4 @@
 	    </div>
     </section>
 {% endblock %}
+

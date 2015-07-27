@@ -304,7 +304,40 @@ color: white;
   height: 158px;
 }
 
+.item.featured figure{
+  height: 
+}
+
 .hero-image .background {
   text-align: center;
   background-position: center;
+  background-repeat: no-repeat;
+}
+
+#featur-header {
+  margin-top: 0;
+}
+
+.header .wrapper .navigation-items .wrapper .user-area {
+  margin: 5px 10px 0 0;
+}
+
+.header .wrapper .brand {
+  display: table-cell;
+  float: right;
+  vertical-align: middle;
+}
+
+.header .wrapper .navigation-items {
+  display: table-cell;
+  float: left;
+  vertical-align: middle;
+}
+
+.navigation-items .user-area {
+  float: right;
+}
+
+.header .wrapper .navigation-items .wrapper .submit-item {
+  margin-top: 2px;
 }
