@@ -53,7 +53,7 @@
                         {% block authentication %}
                         <ul class="user-area">
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'profileUpdate' %}">{% trans "Profile" %}</a></li>
+                            <li><a href="{% url 'profileUpdate' %}"class="submit-item">{% trans "Profile" %}<div class="content"><span>{{ user }}</span></div></a></li>
                             <li><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
                             <li><a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
                         {% else %}
