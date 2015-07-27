@@ -8,15 +8,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-18 13:37+0430\n"
+"POT-Creation-Date: 2015-07-27 11:31+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
+"Language-Team: LANGUAGE <ll@sportup.ir>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: templates/404.html:6 templates/404.html.py:10 templates/404.html.py:15
+msgid "Page not found"
+msgstr "صفحه پیدا نشد"
+
+#: templates/404.html:16
+msgid "The page you requested does not exist."
+msgstr "صفحه مورد درخواست شما پیدا نشد."
+
+#: templates/500.html:6 templates/500.html.py:10 templates/500.html.py:15
+msgid "Error"
+msgstr "خطا"
+
+#: templates/500.html:16
+msgid "Sorry, an error occurred."
+msgstr "متاسفانه شما با خطا مواجه شدید."
 
 #: templates/base.html:56
 msgid "Profile"
@@ -35,7 +51,6 @@ msgid "Register"
 msgstr "ثبت نام"
 
 #: templates/base.html:61
-#, fuzzy
 msgid "Sign In"
 msgstr "ورود"
 
@@ -95,7 +110,11 @@ msgstr "+۹۸-۹۱۲-۳۰۸-۶۹۴۵"
 msgid "Follow Us"
 msgstr "ما را دنبال کنید"
 
-#: templates/base.html:208
+#: templates/base.html:198
+msgid "About Us"
+msgstr "درباره ما"
+
+#: templates/base.html:209
 msgid "(C) SportUp, All rights reserved"
 msgstr "تمامی حقوق برای SportUp محفوظ است."
 
@@ -105,23 +124,23 @@ msgstr ""
 
 #: templates/base.old.html:126
 msgid "ADDRESS"
-msgstr ""
+msgstr "آدرس"
 
 #: templates/base.old.html:130
 msgid "Website"
-msgstr ""
+msgstr "وب سایت"
 
 #: templates/base.old.html:131
 msgid "Tel"
-msgstr ""
+msgstr "تلفن"
 
 #: templates/base.old.html:139
 msgid "News"
-msgstr ""
+msgstr "اخبار"
 
 #: templates/base.old.html:140
 msgid "Article"
-msgstr ""
+msgstr "مقاله"
 
 #: templates/base.old.html:141
 msgid "Travelogue"
@@ -133,24 +152,6 @@ msgstr ""
 
 #: templates/base.old.html:153
 msgid "Free Documentation License."
-msgstr ""
-
-#: templates/errors/404.html:6 templates/errors/404.html.py:10
-#: templates/errors/404.html:15
-msgid "Page not found"
-msgstr "صفحه پیدا نشد"
-
-#: templates/errors/404.html:16
-msgid "The page you requested does not exist."
-msgstr ""
-
-#: templates/errors/500.html:6 templates/errors/500.html.py:10
-#: templates/errors/500.html:15
-msgid "Error"
-msgstr "خطا"
-
-#: templates/errors/500.html:16
-msgid "Sorry, an error occurred."
 msgstr ""
 
 #: templates/index.html:4 templates/index.html.py:5 templates/index.html:8
