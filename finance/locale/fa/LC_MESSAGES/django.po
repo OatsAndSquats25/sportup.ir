@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 20:19+0430\n"
+"POT-Creation-Date: 2015-07-28 16:14+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: functions.py:16
+#, fuzzy
+#| msgid "Payment"
+msgid "Payment pending"
+msgstr "پرداخت"
+
+#: functions.py:26
+#, fuzzy
+#| msgid "Payment amount"
+msgid "Payment done"
+msgstr "مبلغ قابل پرداخت"
 
 #: models.py:16 models.py:17
 msgid "Invoice list"
@@ -143,10 +155,10 @@ msgstr "بصورت خودکار به درگاه پرداخت منتقل می ش�
 msgid "Finance order"
 msgstr "فاکتور فروش"
 
-#: views.py:27 views.py:38
+#: views.py:23
 msgid "Payment was successful."
 msgstr "پرداخت تکمیل شد"
 
-#: views.py:29 views.py:40
+#: views.py:25
 msgid "Payment has error"
 msgstr "پرداخت با خظا مواجه شد"
