@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.http import Http404
+from django.utils.translation import ugettext_lazy as _
 
 from models import invoice
 from program.models import programDefinition
@@ -12,7 +13,7 @@ from payment import testPay, payline
 #----------------------------------------------------------------------
 def invoiceGenerate(request, enrollInst):
     # TODO: check aginst regenerate invoice
-    invoiceInst = invoice.objects.create(amount=enrollInst.amount, context='Payment pending.', user= request.user)
+    invoiceInst = invoice.objects.create(amount=enrollInst.amount, context=_("Payment pending"), user= request.user)
     enrollInst.invoiceKey = invoiceInst
     enrollInst.save()
     return invoiceInst
@@ -22,6 +23,7 @@ def invoicePayed(idValue):
     # change invoice`s status to active
     invoiceInst = invoice.objects.get(pk=idValue)
     invoiceInst.status = enrolledProgram.CONTENT_STATUS_ACTIVE
+    invoiceInst.context = _("Payment done")
     invoiceInst.save()
 
     # change enroll`s status to active
