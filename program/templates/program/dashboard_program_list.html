@@ -1,5 +1,5 @@
 {% extends 'dashboard/dashboard.html' %}
-{% load i18n %}
+{% load i18n humanize %}
 
 {% block dashboard %}
     <div class="table-responsive">
@@ -15,10 +15,11 @@
                             <tbody>
                                     <tr class="success" class="clickable-row" data-toggle="modal" data-target="#myModal">
                                         <td style="width: 30%">{{ object.title }}</td>
-                                        <td style="width: 10%">{{ object.remainCapacity }}</td>
-                                        <td style="width: 20%">{{ object.price }}</td>
-                                        <td style="width: 25%" class="mob-hide">{{ object.get_genderLimit_display }}</td>
+                                        <td style="width: 20%" class="mob-hide">{{ object.get_genderLimit_display }}</td>
                                         <td style="width: 15%" class="mob-hide">{{ object.usageBeginDate }}</td>
+                                        <td style="width: 15%" class="mob-hide">{{ object.usageEndDate }}</td>
+                                        <td style="width: 5%">{{ object.remainCapacity }}</td>
+                                        <td style="width: 15%">{{ object.price|floatformat:2|intcomma }}</td>
                                     </tr>
                             </tbody>
                         </table>
@@ -30,17 +31,19 @@
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr class="info">
-                                    <th>username</th>
-                                    <th>first name</th>
-                                    <th>last name</th>
+                                    <th>{% trans "username" %}</th>
+                                    <th>{% trans "first name" %}</th>
+                                    <th>{% trans "last name" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for enroll in object.enrolled %}
                                  <tr>
-                                    <td>{{ enroll.user }}</td>
-                                    <td>{{ enroll.user.first_name }}</td>
-                                    <td>{{ enroll.user.last_name }}</td>
+                                    {% if enroll.status == 2%}
+                                        <td>{{ enroll.user }}</td>
+                                        <td>{{ enroll.user.first_name }}</td>
+                                        <td>{{ enroll.user.last_name }}</td>
+                                    {% endif %}
                                 </tr>
                                 {% endfor %}
                             </tbody>
