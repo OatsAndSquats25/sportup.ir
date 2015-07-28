@@ -1,8 +1,12 @@
+from django.conf import settings
+from django.http import Http404
+
 from models import invoice
 from program.models import programDefinition
 from enroll.models import enrolledProgram
 from finance.models import transaction
 from payment import testPay, payline
+
 
 
 #----------------------------------------------------------------------
@@ -38,7 +42,15 @@ def invoicePayed(idValue):
 
 #----------------------------------------------------------------------
 def paymentRequest(request, invoiceInst):
-    return testPay.paymentRequest(request, invoiceInst)
-    return payline.paymentRequest(request, invoiceInst)
+
+    try:
+        default_gateway = settings.DEFAULT_PAYMENT_GATEWAY
+    except:
+        raise Http404
+
+    if default_gateway == 'test':
+        return testPay.paymentRequest(request, invoiceInst)
+    elif default_gateway == 'payline':
+        return payline.paymentRequest(request, invoiceInst)
 
 #----------------------------------------------------------------------

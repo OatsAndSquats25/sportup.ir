@@ -45,7 +45,7 @@ class dashboard(View):
             mod = importlib.import_module(mod_name)
             clas = getattr(mod, cls)
         except:
-            return Http404
+            raise Http404
 
         return HttpResponse(clas().generate(request))
 # -----------------------------------------------------------------------
