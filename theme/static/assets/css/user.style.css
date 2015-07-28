@@ -304,8 +304,8 @@ color: white;
   height: 158px;
 }
 
-.item.featured figure{
-  height: 
+.item img {
+  height: 158px;
 }
 
 .hero-image .background {
@@ -322,22 +322,25 @@ color: white;
   margin: 5px 10px 0 0;
 }
 
-.header .wrapper .brand {
-  display: table-cell;
+/*.header .wrapper .brand {
   float: right;
-  vertical-align: middle;
-}
+}*/
 
-.header .wrapper .navigation-items {
-  display: table-cell;
+/*.header .wrapper .navigation-items {
   float: left;
-  vertical-align: middle;
-}
+}*/
 
-.navigation-items .user-area {
+/*.navigation-items .user-area {
   float: right;
-}
+}*/
 
 .header .wrapper .navigation-items .wrapper .submit-item {
   margin-top: 2px;
 }
+
+/*.header {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}*/
