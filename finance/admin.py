@@ -9,7 +9,9 @@ class invoiceAdmin(admin.ModelAdmin):
 
 admin.site.register(models.invoice, invoiceAdmin)
 # ----------------------------------------------------
-admin.site.register(models.transaction)
+class transactionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'invoiceKey', 'ref_id', 'trans_id' , 'amount', 'description')
+admin.site.register(models.transaction, transactionAdmin)
 # ----------------------------------------------------
 admin.site.register(models.accountingBook)
 # ----------------------------------------------------
