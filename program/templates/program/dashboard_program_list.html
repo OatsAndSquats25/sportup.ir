@@ -1,5 +1,5 @@
 {% extends 'dashboard/dashboard.html' %}
-{% load i18n humanize %}
+{% load i18n humanize generic_tags %}
 
 {% block dashboard %}
     <div class="table-responsive">
@@ -16,8 +16,8 @@
                                     <tr class="success" class="clickable-row" data-toggle="modal" data-target="#myModal">
                                         <td style="width: 30%">{{ object.title }}</td>
                                         <td style="width: 20%" class="mob-hide">{{ object.get_genderLimit_display }}</td>
-                                        <td style="width: 15%" class="mob-hide">{{ object.usageBeginDate }}</td>
-                                        <td style="width: 15%" class="mob-hide">{{ object.usageEndDate }}</td>
+                                        <td style="width: 15%" class="mob-hide">{{ object.usageBeginDate|g2j }}</td>
+                                        <td style="width: 15%" class="mob-hide">{{ object.usageEndDate|g2j }}</td>
                                         <td style="width: 5%">{{ object.remainCapacity }}</td>
                                         <td style="width: 15%">{{ object.price|floatformat:2|intcomma }}</td>
                                     </tr>
