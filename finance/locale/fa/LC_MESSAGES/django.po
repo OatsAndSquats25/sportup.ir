@@ -161,4 +161,4 @@ msgstr "پرداخت تکمیل شد"
 
 #: views.py:25
 msgid "Payment has error"
-msgstr "پرداخت با خظا مواجه شد"
+msgstr "پرداخت با خطا مواجه شد"

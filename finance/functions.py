@@ -41,7 +41,14 @@ def invoicePayed(idValue):
         programInst.save()
 
     return True
+#----------------------------------------------------------------------
+def invoiceError(idValue):
+    # change invoice`s dexcription to error
+    invoiceInst = invoice.objects.get(pk=idValue)
+    invoiceInst.context = _("Payment error")
+    invoiceInst.save()
 
+    return True
 #----------------------------------------------------------------------
 def paymentRequest(request, invoiceInst):
 

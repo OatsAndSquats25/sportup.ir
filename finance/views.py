@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 
 from payment import testPay,payline
-from functions import invoicePayed
+from functions import invoicePayed, invoiceError
 
 # ----------------------------------------------------
 class testGateway(TemplateView):
@@ -20,8 +20,9 @@ def paymentRes(request, *args, **kwargs):
 
     if payRes['status'] == True :
         invoicePayed(payRes['invoiceId'])
-        messages.success(request, _("Payment was successful."))
+        messages.succechoechoexess(request, _("Payment was successful."))
     else:
+        invoiceError(payRes['invoiceId'])
         messages.error(request, _("Payment has error"))
 
     return HttpResponseRedirect(reverse('dashboard'))
