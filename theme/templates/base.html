@@ -80,7 +80,7 @@
         </div>
 
 {#        {% nevercache %}#}
-        {% if user.is_authenticated and not perms.accounts.profile_is_update %}
+        {% if user.is_authenticated and not perms.accounts.profile_is_update and not perms.accounts.club_owner %}
         <div class="alert alert-dismissable alert-warning" data-alert="alert">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             {% trans "Please update your profile to finish your registration." %} <a href="{% url "profileUpdate" %}">{% trans "Click here" %}</a>
