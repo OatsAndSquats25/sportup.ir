@@ -13,7 +13,7 @@ class imageViewsInline(admin.TabularInline):
         return False
 
 class clubsAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'user', 'status', )
     list_filter = ('status',)
     inlines = [imageViewsInline]
 
