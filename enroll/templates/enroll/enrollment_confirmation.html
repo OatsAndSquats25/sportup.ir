@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static humanize %}
+{% load i18n static humanize generic_tags%}
 
 {% block main %}
     <section class="container">
@@ -47,9 +47,9 @@
                                         <dd>{% trans "Mandatory" %}</dd>
                                         {% endif %}
                                         <dt>{% trans "Begin date" %}</dt>
-                                        <dd>{{ object.usageBeginDate|default:"-" }}</dd>
+                                        <dd>{{ object.usageBeginDate|g2j|default:"-" }}</dd>
                                         <dt>{% trans "End date" %}</dt>
-                                        <dd>{{ object.usageEndDate|default:"-" }}</dd>
+                                        <dd>{{ object.usageEndDate|g2j|default:"-" }}</dd>
                                         <dt>{% trans "Price" %}</dt>
                                         <dd>{{ object.price|floatformat:2|intcomma }} {% trans "Rials" %}</dd>
                                     </dl>

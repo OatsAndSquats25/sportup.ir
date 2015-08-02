@@ -13,6 +13,8 @@
 {#                <th>{% trans "Amount" %}</th>#}
 {#                <th>{% trans "Status" %}</th>#}
                 <th>{% trans "Status" %}</th>
+                <th>{% trans "Invoice" %}</th>
+                <th>{% trans "Receipt" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +35,8 @@
                     {% else %}
                         <td style="color: red">{% trans "Inactive" %}</td>
                     {% endif %}
+                    <td>{{ item.invoiceKey.context }}</td>
+                    <td><a href="#">{% trans "Print" %}</a></td>
                 </tr>
             {% endfor %}
             </tbody>

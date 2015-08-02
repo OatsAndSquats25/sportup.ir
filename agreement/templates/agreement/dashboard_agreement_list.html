@@ -1,5 +1,5 @@
 {% extends 'dashboard/dashboard.html' %}
-{% load i18n %}
+{% load i18n generic_tags%}
 
 {% block dashboard %}
     <div class="table-responsive">
@@ -9,6 +9,8 @@
             <tr class="success">
                 <th>{% trans "User" %}</th>
                 <th>{% trans "Complex" %}</th>
+                <th>{% trans "Begin date" %}</th>
+                <th>{% trans "End date" %}</th>
                 <th>{% trans "Status" %}</th>
             </tr>
             </thead>
@@ -17,6 +19,8 @@
                 <tr>
                     <td>{{ item.user }}</td>
                     <td>{{ item.clubKey.title }}</td>
+                    <td>{{ item.publish_date|g2j }}</td>
+                    <td>{{ item.expiry_date|g2j }}</td>
                     <td>{{ item.get_status_display }}</td>
                 </tr>
             {% endfor %}

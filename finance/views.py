@@ -3,44 +3,36 @@ from django.utils.translation import ugettext_lazy as _
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-# from django.db.models import Sum,F
 
 from payment import testPay,payline
-from functions import invoicePayed
-# from enroll.models import enrolledProgram, clubItemDefinition
-
-# from .payment import testBank,saman
-# from finance import models
-# from finance import utils
-#
+from functions import invoicePayed, invoiceError
 
 # ----------------------------------------------------
 class testGateway(TemplateView):
     template_name = 'finance/testgateway.html'
 # ----------------------------------------------------
-class paymentResponse(View):
-    def get(self,request,*args,**kwargs):
+def paymentRes(request, *args, **kwargs):
+    gateway = kwargs.pop('gateway')
+    if (gateway == 'tst'):
         payRes = testPay.paymentResponse(request,*args,**kwargs)
+    elif (gateway == 'pl'):
+        payRes = payline.paymentResponse(request,*args,**kwargs)
 
-        if payRes['status'] == True :
-            invoicePayed(payRes['invoiceId'])
-            messages.success(request, _("Payment was successful."))
-        else:
-            messages.error(request, _("Payment has error"))
+    if payRes['status'] == True :
+        invoicePayed(payRes['invoiceId'])
+        messages.succechoechoexess(request, _("Payment was successful."))
+    else:
+        invoiceError(payRes['invoiceId'])
+        messages.error(request, _("Payment has error"))
 
-        return HttpResponseRedirect(reverse('dashboard'))
+    return HttpResponseRedirect(reverse('dashboard'))
+# ----------------------------------------------------
+class paymentResponse(View):
 
+    def get(self,request,*args,**kwargs):
+        return paymentRes(request, *args, **kwargs)
     def post(self,request,*args,**kwargs):
-        payRes = payline.paymentResponse(request)
-
-        if payRes['status'] == True :
-            invoicePayed(payRes['invoiceId'])
-            messages.success(request, _("Payment was successful."))
-        else:
-            messages.error(request, _("Payment has error"))
-
-        return HttpResponseRedirect(reverse('dashboard'))
-
+        return paymentRes(request, *args, **kwargs)
 # ----------------------------------------------------
 # class financeOrder(ListView):
 #     template_name = 'finance/order.html'

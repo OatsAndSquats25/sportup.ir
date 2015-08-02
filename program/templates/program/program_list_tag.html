@@ -1,4 +1,4 @@
-{% load i18n humanize %}
+{% load i18n humanize generic_tags %}
 
 {% if object_list %}
 <div class="table-responsive ">
@@ -24,9 +24,9 @@
                 <td class="mob-hide">{% if object.remainCapacity >= 0 %}{{ object.remainCapacity }}{% endif %}</td>
                 <td>{{ object.price|floatformat:2|intcomma }}</td>
                 <td class="tb-hide">{{ object.get_genderLimit_display }}</td>
-                <td class="tb-hide">{{ object.usageBeginDate|date }}</td>
-                <td class="tb-hide">{{ object.usageEndDate|date }}</td>
-                <td class="tb-hide">{{ object.expiry_date|date }}</td>
+                <td class="tb-hide">{{ object.usageBeginDate|g2j }}</td>
+                <td class="tb-hide">{{ object.usageEndDate|g2j }}</td>
+                <td class="tb-hide">{{ object.expiry_date|g2j }}</td>
                 <td>
                     <a class="btn btn-default" href="{% url 'enrollConfirmation' object.id %}">
                         <i class="fa fa-shopping-cart"></i> {% trans "Enroll" %}

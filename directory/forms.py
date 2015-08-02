@@ -15,7 +15,7 @@ class clubRegistrationForm(RegistrationForm):
     title   = forms.CharField(label=_("Title"), max_length=50)
     summary = forms.CharField(label=_("Summary"), max_length=200, widget=forms.Textarea)
     detail  = forms.CharField(label=_("Description"), widget=forms.Textarea)
-    address = forms.CharField(label=_("Address"), max_length=200)
+    address = forms.CharField(label=_("Address"), max_length=200, widget=forms.Textarea)
     website = forms.CharField(label=_("Website"), max_length=100)
     phone   = forms.CharField(label=_("Landline"), max_length=20)
     cell    = forms.CharField(label=_("Cell"), max_length=20)
