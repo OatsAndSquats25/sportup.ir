@@ -344,3 +344,103 @@ color: white;
   margin-right: auto;
   margin-left: auto;
 }*/
+
+#club-register {
+    top: -9px;
+}
+
+#club-register .fa-stack-2x{
+  color: #d43133;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////*/
+
+.timetable {
+    font-size: 11px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.timetable th, .timetable td {
+    padding: 15px;
+    text-align: center;
+    width: 12.5%;
+}
+
+caption, th, td {
+    font-weight: normal;
+    text-align: left;
+}
+
+.timetable .row_gray {
+    background-color: #202020;
+}
+
+.timetable tbody tr {
+    background: url("images/dotted_line.png") repeat-x scroll left top rgba(0, 0, 0, 0);
+}
+
+.timetable .event {
+    background-color: #d43133;
+    border-bottom: 1px solid #151515;
+    border-right: 1px solid #151515;
+    color: #fff;
+    line-height: 150%;
+}
+
+.timetable .event a {
+    color: #fff;
+    display: block;
+    font-weight: bold;
+}
+a {
+    color: #59b42d;
+    text-decoration: none;
+}
+
+.box_header {
+    border-bottom: 1px solid #d43133;
+    float: left;
+    padding-bottom: 10px;
+}
+h3 {
+    font-size: 16px;
+}
+
+.timetable.small {
+    display: none;
+    font-size: 13px;
+}
+.ui-tabs-panel ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.opening_hours {
+    margin-top: 12px;
+}
+.opening_hours {
+    clear: both;
+    float: left;
+    margin-top: 20px;
+}
+.items_list {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.items_list li {
+    padding: 10px 0 10px 25px;
+}
+.opening_hours li {
+    width: 290px;
+}
+.items_list li {
+    background-position: left center;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #eee;
+    float: left;
+    padding: 12px 0 12px 25px;
+    width: 100%;
+}

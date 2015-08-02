@@ -579,12 +579,4 @@ $(document).ready(function($) {
     });
 });
 
-$(document).ready(function($) {
-    var elem = $(".item .wrapper > figure");
-    var maxHeight = Math.max.apply(null, elem.map(function ()
-    {
-        return $(this).height();
-    }).get());
-    elem.css('height' , maxHeight);
-});
 

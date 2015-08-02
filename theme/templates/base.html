@@ -49,7 +49,6 @@
                 </div>
                 <nav class="navigation-items">
                     <div class="wrapper">
-                        <ul class="main-navigation navigation-top-header"></ul>
                         {% block authentication %}
                         <ul class="user-area">
                         {% if user.is_authenticated %}
@@ -67,12 +66,13 @@
                         {% endif %}
                         </ul>
                         {% endblock %}
-                        <a href="{% url "directoryRegistration" %}" class="submit-item">
-                            <div class="content"><span>{% trans "Submit Your Item" %}</span></div>
-                            <div class="icon">
-                                <i class="fa fa-plus"></i>
-                            </div>
+                        <a type="button" href="#" class="submit-item" data-toggle="tooltip" data-placement="bottom" title="{% trans "Submit Your Item" %}">
+                            <span id="club-register" class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                            </span>
                         </a>
+                        
                         {% block toggle-nav %}{% endblock %}
                     </div>
                 </nav>
