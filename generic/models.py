@@ -116,12 +116,10 @@ class Displayable(TimeStamped, Ownable):
             "on the site."))
     publish_date = models.DateTimeField(_("Published from"),
     #publish_date = jmodels.jDateTimeField(_("Published from"),
-        help_text=_("With Published chosen, won't be shown until this time"),
-        blank=True, null=True)
+        help_text=_("With Published chosen, won't be shown until this time"))
     #expiry_date = jmodels.jDateTimeField(_("Expires on"),
     expiry_date = models.DateTimeField(_("Expires on"),
-        help_text=_("With Published chosen, won't be shown after this time"),
-        blank=True, null=True)
+        help_text=_("With Published chosen, won't be shown after this time"))
 
     #objects = DisplayableManager()
     search_fields = {"keywords": 10, "title": 5}
@@ -136,7 +134,8 @@ class Displayable(TimeStamped, Ownable):
         the quick blog form in the admin dashboard.
         """
         date = now()
-        self.slug = u'%s%i%i' % (self.title, date.month, date.day)
+        if self.slug is None:
+            self.slug = u'%s%i%i' % (self.title, date.month, date.day)
         if self.publish_date is None:
             self.publish_date = now()
         super(Displayable, self).save(*args, **kwargs)
