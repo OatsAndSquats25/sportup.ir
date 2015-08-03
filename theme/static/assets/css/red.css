@@ -1755,7 +1755,7 @@ ul.bullets li a:hover {
   position: relative;
   z-index: 2;
 }
-.item .image a:after, .item .image > .inner:after {
+/*.item .image a:after, .item .image > .inner:after {
   -moz-transition: 1s;
   -webkit-transition: 1s;
   transition: 1s;
@@ -1772,7 +1772,7 @@ ul.bullets li a:hover {
   content: "";
   position: absolute;
   bottom: 0;
-}
+}*/
 .item .image a > img, .item .image > .inner > img {
   -moz-border-radius-topleft: 1px;
   -webkit-border-top-left-radius: 1px;
@@ -5650,13 +5650,12 @@ input[type="text"]:focus, input[type="text"]:active, input[type="date"]:focus, i
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
   background-color: #fff;
   display: table;
-  width: 100%;
   z-index: 999;
   position: relative;
 }
 .header .wrapper {
   display: table;
-  padding: 10px 10px;
+  /*padding: 10px 10px;*/
   padding-top: 12px;
   overflow: visible;
   width: 100%;

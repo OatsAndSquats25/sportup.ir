@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-25 16:34+0430\n"
+"POT-Creation-Date: 2015-07-28 21:19+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
 "Language-Team: LANGUAGE <ll@sportup.ir>\n"
@@ -61,7 +61,7 @@ msgstr "فایل"
 
 #: templates/directory/club_registration.html:13
 msgid "Register Club"
-msgstr "بهترین باشگاه ها"
+msgstr "باشگاه ها"
 
 #: templates/directory/club_registration.html:20
 msgid "Create an Account"
@@ -97,8 +97,8 @@ msgid "Register in your club in blink of an eye"
 msgstr "در یک چشم به هم زدن در باشگاه خود ثبت نام کنید"
 
 #: templates/directory/listall.html:25
-msgid "Best Clubs"
-msgstr "بهترین باشگاه ها"
+msgid "Clubs"
+msgstr "باشگاه ها"
 
 #: templates/directory/listall.html:48
 msgid "Phone Number"
