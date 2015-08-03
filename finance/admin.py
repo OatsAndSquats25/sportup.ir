@@ -13,6 +13,6 @@ class transactionAdmin(admin.ModelAdmin):
     list_display = ('id', 'invoiceKey', 'ref_id', 'trans_id' , 'amount', 'description')
 admin.site.register(models.transaction, transactionAdmin)
 # ----------------------------------------------------
-admin.site.register(models.accountingBook)
+# admin.site.register(models.accountingBook)
 # ----------------------------------------------------
-admin.site.register(models.accountingHistory)
+# admin.site.register(models.accountingHistory)
