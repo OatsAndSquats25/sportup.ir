@@ -5,6 +5,6 @@ from directory import views
 
 urlpatterns = patterns('',
         url(r'^$', views.listAllItems.as_view(), name='directoryListAllItems'),
-        url(r'^detail/(?P<slug>.*)/$', views.itemDetail.as_view(), name='directoryItemDetail'),
+        url(r'^(?P<slug>.*)/$', views.itemDetail.as_view(), name='directoryItemDetail'),
         url(r'^register/$', views.clubRegistration.as_view(), name='directoryRegistration'),
         )
