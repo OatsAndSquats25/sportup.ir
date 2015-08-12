@@ -143,21 +143,21 @@ class Displayable(TimeStamped, Ownable):
     #def get_admin_url(self):
     #    return admin_url(self, "change", self.id)
 
-    def publish_date_since(self):
-        """
-        Returns the time since ``publish_date``.
-        """
-        return timesince(self.publish_date)
-    publish_date_since.short_description = _("Published from")
-
-    def get_absolute_url(self):
-        """
-        Raise an error if called on a subclass without
-        ``get_absolute_url`` defined, to ensure all search results
-        contains a URL.
-        """
-        name = self.__class__.__name__
-        raise NotImplementedError("The model %s does not have "
-                                  "get_absolute_url defined" % name)
+    # def publish_date_since(self):
+    #     """
+    #     Returns the time since ``publish_date``.
+    #     """
+    #     return timesince(self.publish_date)
+    # publish_date_since.short_description = _("Published from")
+    #
+    # def get_absolute_url(self):
+    #     """
+    #     Raise an error if called on a subclass without
+    #     ``get_absolute_url`` defined, to ensure all search results
+    #     contains a URL.
+    #     """
+    #     name = self.__class__.__name__
+    #     raise NotImplementedError("The model %s does not have "
+    #                               "get_absolute_url defined" % name)
 
 # -------------------------------------------------------------------------------------
