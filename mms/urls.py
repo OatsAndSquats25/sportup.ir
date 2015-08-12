@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'mms.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^googlegoogle9f49bb0345edbd3d\.html$', lambda r: HttpResponse("google-site-verification: google9f49bb0345edbd3d.html", mimetype="text/plain")),
+    url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", mimetype="text/plain"))
     url(r'^accounts/', include("accounts.urls")),
     url(r'^noadmin/', include(admin.site.urls)),
     url(r'^enroll/', include("enroll.urls")),
