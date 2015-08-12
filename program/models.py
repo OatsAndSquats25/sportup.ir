@@ -37,6 +37,8 @@ class programDefinition(PolymorphicModel, Displayable):
     genderLimit         = models.IntegerField(_("Gender"), choices= GENDER_CHOICES, default=GENDER_BOTH, help_text=_("Please select gender if there is limitation"))
     needInsurance       = models.BooleanField(_("Sport insurance required"), default=False, help_text=_("Mark if your program needs sport insurance"))
     multipleReserve     = models.BooleanField(_("Multiple reserve eligibility"), default=False, help_text=_("Mark if you want to permit each account can reserve multiple instance of this program"))
+    brief               = models.CharField(_("Brief"), max_length=50, blank=True, null=True)
+    description         = models.TextField(_("Description about program"), blank=True, null=True)
 
     def clubSlug(self):
         return self.agreementKey.clubKey.slug

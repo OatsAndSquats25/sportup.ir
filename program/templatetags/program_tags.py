@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
 from agreement.models import agreement
 from program.models import programDefinition
+from programcourse.models import courseDefinition
 
 register = template.Library()
 # ----------------------------------------------------
@@ -17,7 +18,7 @@ def program_list(id):
     if not currentAgreement.isValid():
         return {}
 
-    definedCourses = programDefinition.objects.filter(agreementKey = currentAgreement)
+    definedCourses = programDefinition.objects.instance_of(courseDefinition).filter(agreementKey = currentAgreement)
 
     return {'object_list' : definedCourses}
 # ----------------------------------------------------
