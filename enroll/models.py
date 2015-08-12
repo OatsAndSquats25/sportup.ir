@@ -12,7 +12,6 @@ from program.models import programDefinition
 #class clubItemEnrollment(PolymorphicModel):
 
 class enrolledProgram(PolymorphicModel, Displayable):
-
     # ENROLLMENT_STATUS_RESERVED = 1
     # ENROLLMENT_STATUS_PAYED    = 2
     # ENROLLMENT_STATUS_CANCELED = 3
@@ -49,9 +48,8 @@ class enrolledProgram(PolymorphicModel, Displayable):
 #    #def revokeRequest(self):
 #    #def rejectRequest(self):
 #
-## ----------------------------------------------------
+# ----------------------------------------------------
 class enrolledProgramCourse(enrolledProgram):
-
     firstTime   = models.BooleanField(_('First time remaining flag'), default=True)
 
     def isValid(self):
@@ -60,5 +58,9 @@ class enrolledProgramCourse(enrolledProgram):
            self.status == Displayable.CONTENT_STATUS_ACTIVE:
            return True
         return False
-## ----------------------------------------------------
-## ----------------------------------------------------
+# ----------------------------------------------------
+class enrolledProgramSession(enrolledProgram):
+    date                = models.DateField(_("Specific date"),blank=True, null=True)
+    sessionTimeBegin    = models.TimeField(_("Begin time"),blank=True, null=True)
+    sessionTimeEnd      = models.TimeField(_("End time"),blank=True, null=True)
+# ----------------------------------------------------
