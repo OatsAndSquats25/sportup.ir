@@ -1,18 +1,16 @@
-from django.http import Http404
+from rest_framework import generics
+from rest_framework.authentication import SessionAuthentication,BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
-from agreement.models import agreement
-
+from models import programDefinition
+from serializers import programDefinitionSerializer
 # ----------------------------------------------------
-class userAuthorizeMixin(object):
-    def dispatch(self, request, *args, **kwargs):
-        if not agreement.objects.published().filter(pk=kwargs['agreementId']).filter(user = request.user):
-           raise Http404()
-        if 'programId' in kwargs:
-            try:
-                programDefInstance = models.clubProgramDefinition.objects.get(pk = kwargs['programId'])
-            except:
-                raise Http404()
-            if programDefInstance.agreementKey.id != int(kwargs['agreementId']):
-                raise Http404()
-        return super(userAuthorizeMixin, self).dispatch(request, *args, **kwargs)
+class programInformation(generics.RetrieveAPIView):
+    """
+    retrieve session information
+    """
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = programDefinition.objects.all()
+    serializer_class = programDefinitionSerializer
 # ----------------------------------------------------
