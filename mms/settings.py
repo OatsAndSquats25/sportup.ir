@@ -110,8 +110,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.template.context_processors.debug',
 )
 
-ROOT_URLCONF = 'mms.urls'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
+ROOT_URLCONF = 'mms.urls'
 WSGI_APPLICATION = 'mms.wsgi.application'
 #######################
 # Internationalization#
