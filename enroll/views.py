@@ -3,13 +3,16 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
-from enroll.models import enrolledProgram
+from rest_framework.generics import ListAPIView,CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 
-from program.views import userAuthorizeMixin
 from program.models import programDefinition
-
-from enroll.enrollcourse.function import enrollCourse
 from finance.functions import invoiceGenerate, paymentRequest
+
+from models import enrolledProgramSession
+from enrollcourse.function import enrollCourse
+from serializer import enrolledProgramSessionSerializer,enrolledProgramSessionCreateSerializer
+
 
 # ----------------------------------------------------
 class enrollConfirmation(DetailView):
@@ -29,20 +32,19 @@ class enrollConfirmed(View):
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect('directoryItemDetail', slug= programInst.clubSlug())
 # ----------------------------------------------------
-# class enrollmentList(ListView):
-#     template_name = 'enroll/enrolled_list.html'
-#
-#     def get_queryset(self):
-#         return enrolledProgram.objects.filter(user_id = self.request.user.id).\
-#             filter(status = enrolledProgram.ENROLLMENT_STATUS_PAYED)
-# # ----------------------------------------------------
-# class enrollmentList2(userAuthorizeMixin, ListView):
-#     template_name = 'enroll/enrolled_list.html'
-#     model = enrolledProgram
-#     template_name = 'enroll/enrolled_list.html'
-#     model = enrolledProgram
-#
-#     def get_queryset(self):
-#         return enrolledProgram.objects.filter(clubItemDefinitionKey = self.kwargs['programId']).\
-#             filter(status = enrolledProgram.ENROLLMENT_STATUS_PAYED)
-# # ----------------------------------------------------
+class enrollSessionList(ListAPIView):
+    serializer_class = enrolledProgramSessionSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        user = self.request.user
+        return enrolledProgramSession.objects.filter(user = user)
+# ----------------------------------------------------
+class enrollSessionCreate(CreateAPIView):
+    serializer_class = enrolledProgramSessionCreateSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        # validate session for enough space and layout activation #fixme
+        serializer.save(user=self.request.user, amount = '10') #fixme
+# ----------------------------------------------------

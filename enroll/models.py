@@ -60,7 +60,7 @@ class enrolledProgramCourse(enrolledProgram):
         return False
 # ----------------------------------------------------
 class enrolledProgramSession(enrolledProgram):
-    date                = models.DateField(_("Specific date"),blank=True, null=True)
-    sessionTimeBegin    = models.TimeField(_("Begin time"),blank=True, null=True)
-    sessionTimeEnd      = models.TimeField(_("End time"),blank=True, null=True)
+    date                = models.DateField(_("Specific date"))
+    sessionTimeBegin    = models.TimeField(_("Begin time"))
+    sessionTimeEnd      = models.TimeField(_("End time"))
 # ----------------------------------------------------

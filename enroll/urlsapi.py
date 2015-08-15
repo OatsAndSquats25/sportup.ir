@@ -5,14 +5,13 @@ from rest_framework.routers import DefaultRouter
 import views
 
 # ----------------------------------------------------
-router = DefaultRouter()
-router.register(r'table', views.sessionSchedule, 'sessions')
-
-# urlpatterns = router.urls
-# urlpatterns = patterns('',
-#     url(r'^', include(router.urls)),
-# )
+# router = DefaultRouter()
+# router.register(r'enroll_session', views.enrollSession, 'enroll')
 
 urlpatterns = patterns('',
-    url(r'^session_schedules/$',views.sessionSchedule.as_view()),
+    url(r'^enroll_session/$',views.enrollSessionList.as_view()),
+    url(r'^enroll_session_create/$',views.enrollSessionCreate.as_view()),
 )
+
+# urlpatterns += router.urls
+

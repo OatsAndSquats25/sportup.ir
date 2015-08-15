@@ -3,6 +3,7 @@ from enroll.models import enrolledProgramCourse
 
 def enrollSession(request, sessionInst):
     # TODO: check against re enroll
+    pass
     # enrolledProgramCourseInst = enrolledProgramCourse.objects.create(programDefinitionKey=programInst,
     #                                                                  amount= programInst.price,
     #                                                                  publish_date= programInst.publish_date,
