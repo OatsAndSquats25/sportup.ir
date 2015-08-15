@@ -5,7 +5,8 @@ from django.db.models import Count
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.authentication import SessionAuthentication,BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 import datetime
 
@@ -13,7 +14,7 @@ from program.models import programDefinition
 from enroll.models import enrolledProgram, enrolledProgramSession
 
 from models import sessionDefinition, sessionRestriction
-from serializers import cell,cellSerializer
+from serializers import cell, cellSerializer
 # ----------------------------------------------------
 def applySessionRestriction(restriction, cellInst):
     """
@@ -136,7 +137,25 @@ class sessionSchedule(APIView):
             scheduleTable += sessionGenerate(definition, dateBegin, dateEnd, weekDay)
 
         # sort schedule table by day and begin time
-        scheduleTable.sort(key=lambda x: (x.day, x.begin))
+        scheduleTable.sort(key=lambda x: (x.begin, x.day))
+
+        # add cell to begin for general information
+        min = scheduleTable[0].begin
+        max = scheduleTable[0].end
+        for sch in scheduleTable:
+            if sch.begin < min:
+                min = sch.begin
+            if sch.end > max:
+                max = sch.end
+
+        firstCell = cell(-1,
+                         datetime.date.today(),
+                         -1,
+                         min,
+                         max,
+                         -1,
+                         -1)
+        scheduleTable.insert(0,firstCell)
 
         serializer = cellSerializer(scheduleTable, many=True)
         return Response(serializer.data)
