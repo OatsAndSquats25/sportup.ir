@@ -13,10 +13,11 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include("access.urlsapi")),
+    url(r'^api/', include("agreement.urlsapi")),
     url(r'^api/', include("program.urlsapi")),
     url(r'^api/', include("programsession.urlsapi")),
     url(r'^api/', include("enroll.urlsapi")),
-    url(r'^api/', include("access.urlsapi")),
 )
 
 urlpatterns += patterns('',

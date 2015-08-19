@@ -3,8 +3,9 @@ from rest_framework import serializers
 
 # ----------------------------------------------------
 class cell(object):
-    def __init__(self, id, date, day, begin, end, price, capacity):
-        self.id     = id
+    def __init__(self, prgid, date, day, begin, end, price, capacity):
+        self.prgid  = prgid
+        self.cellid = -1
         self.date   = date
         self.day    = day
         self.begin  = begin
@@ -15,7 +16,8 @@ class cell(object):
         self.status = 0
 # ----------------------------------------------------
 class cellSerializer(serializers.Serializer):
-    id      = serializers.IntegerField()
+    prgid   = serializers.IntegerField()
+    cellid  = serializers.IntegerField()
     date    = serializers.DateField()
     day     = serializers.IntegerField()
     begin   = serializers.TimeField()

@@ -7,9 +7,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication,BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 import datetime
 
+from generic.models import Displayable
 from program.models import programDefinition
 from enroll.models import enrolledProgram, enrolledProgramSession
 
@@ -45,6 +47,7 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
     # create table base on layout
     cells = []
     cellDate = dateBegin
+    count = 0
     for day,status in days.iteritems():
         if status:# and day >= weekDay and cellDate <= dateEnd:
             bgn = datetime.datetime.combine(datetime.date.today(), singleSession.sessionTimeBegin)
@@ -58,6 +61,7 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
                                 (bgn + datetime.timedelta(hours=duration.hour,minutes=duration.minute)).time(),
                                 singleSession.price,
                                 singleSession.maxCapacity)
+                count += 1
                 if day < weekDay or cellDate > dateEnd:
                     tempCell.status = 1
                 cells.append(tempCell)
@@ -96,7 +100,9 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
             pass
 
     # apply enrolled information on table
-    enrolls = enrolledProgramSession.objects.filter(programDefinitionKey = singleSession).filter(date__gte = dateBegin).filter(date__lte = dateEnd ).values('date','sessionTimeBegin','sessionTimeEnd').annotate(count=Count('id'))
+    enrolls = enrolledProgramSession.objects.filter(programDefinitionKey = singleSession).\
+        filter(date__gte = dateBegin).filter(date__lte = dateEnd ).exclude(status = Displayable.CONTENT_STATUS_INACTIVE).\
+        values('date','sessionTimeBegin','sessionTimeEnd').annotate(count=Count('id'))
     for enroll in enrolls:
         for cellInst in filter(lambda x :(x.date==enroll['date'] and x.begin == enroll['sessionTimeBegin'] and x.end==enroll['sessionTimeEnd']), cells):
             cellInst.enroll     = enroll['count']
@@ -104,15 +110,8 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
 
     return cells
 # ----------------------------------------------------
-class sessionSchedule(APIView):
-    # """
-    # This view return sessions' schedule for specific club
-    # """
-    def get(self, request, format=None):
-        #input parameter club, week and validation #todo
-        showWeek = 0
-        club = 1
-        if showWeek <0 :
+def sessionGenerateFull(club , showWeek):
+        if showWeek < 0 or club == 0:
             return Response('None')
 
         #check program isvalid #todo
@@ -142,7 +141,9 @@ class sessionSchedule(APIView):
         # add cell to begin for general information
         min = scheduleTable[0].begin
         max = scheduleTable[0].end
-        for sch in scheduleTable:
+        # for sch in scheduleTable:
+        for idx, sch in enumerate(scheduleTable):
+            sch.cellid = idx
             if sch.begin < min:
                 min = sch.begin
             if sch.end > max:
@@ -157,6 +158,18 @@ class sessionSchedule(APIView):
                          -1)
         scheduleTable.insert(0,firstCell)
 
-        serializer = cellSerializer(scheduleTable, many=True)
+        return scheduleTable
+# ----------------------------------------------------
+class sessionSchedule(generics.GenericAPIView):
+# class sessionSchedule(APIView):
+    # """
+    # This view return sessions' schedule for specific club
+    # """
+    def get(self, request, *args, **kwargs):
+        #input parameter club, week and validation #todo
+        club = int(kwargs.get('club','0'))
+        showWeek = int(kwargs.get('week','0'))
+
+        serializer = cellSerializer(sessionGenerateFull(club, showWeek), many=True)
         return Response(serializer.data)
 # ----------------------------------------------------
