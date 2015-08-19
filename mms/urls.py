@@ -16,6 +16,7 @@ urlpatterns += patterns('',
     url(r'^api/', include("program.urlsapi")),
     url(r'^api/', include("programsession.urlsapi")),
     url(r'^api/', include("enroll.urlsapi")),
+    url(r'^api/', include("access.urlsapi")),
 )
 
 urlpatterns += patterns('',
