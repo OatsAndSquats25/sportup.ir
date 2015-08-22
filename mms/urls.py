@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from django.views.static import directory_index
+from django.conf.urls.static import static
 from django.http import HttpResponse
 
 admin.autodiscover()

@@ -376,9 +376,9 @@ caption, th, td {
     background-color: #202020;
 }
 
-.timetable tbody tr {
+/*.timetable tbody tr {
     background: url("images/dotted_line.png") repeat-x scroll left top rgba(0, 0, 0, 0);
-}
+}*/
 
 .timetable .event {
     background-color: #d43133;
@@ -389,6 +389,7 @@ caption, th, td {
 }
 
 .timetable .event a {
+  font-size: 11px;
     color: #fff;
     display: block;
     font-weight: bold;
