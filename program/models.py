@@ -20,10 +20,12 @@ class programDefinition(PolymorphicModel, Displayable):
     GENDER_BOTH   = 1
     GENDER_MALE   = 2
     GENDER_FEMALE = 3
+    GENDER_SEPERATE = 4
     GENDER_CHOICES = (
         (GENDER_BOTH , _("Male/Female")),
         (GENDER_MALE , _("Male")),
         (GENDER_FEMALE  , _("Female")),
+        (GENDER_SEPERATE  , _("Seperate")),
     )
 
     agreementKey        = models.ForeignKey(agreement, verbose_name=_('Agreement'))
@@ -49,7 +51,7 @@ class programDefinition(PolymorphicModel, Displayable):
            self.publish_date < now() and \
            self.expiry_date > now() and \
            self.remainCapacity != 0 and \
-           self.status == Displayable.CONTENT_STATUS_ACTIVE:
+        self.status == Displayable.CONTENT_STATUS_ACTIVE:
             return True
         return False
 
@@ -59,4 +61,9 @@ class programDefinition(PolymorphicModel, Displayable):
 
     def enrolled(self):
         return self.enrolledprogram_set.all().select_related()
+
+    def save(self, *args, **kwargs):
+        if self.expiry_date > self.agreementKey.expiry_date:
+            self.expiry_date = self.agreementKey.expiry_date
+        super(programDefinition,self).save()
 # ----------------------------------------------------

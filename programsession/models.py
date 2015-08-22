@@ -16,7 +16,7 @@ class sessionDefinition(programDefinition):
     dayWed              = models.BooleanField(_("Wedensday"))
     dayThu              = models.BooleanField(_("Thursday"))
     dayFri              = models.BooleanField(_("Friday"))
-    daysToShow          = models.IntegerField(_("Numberof weeks to show"), default=7)
+    daysToShow          = models.IntegerField(_("Number of next days to show"), default=7)
 # ----------------------------------------------------
 class sessionRestriction(models.Model):
     sessionDefinitionKey    = models.ForeignKey(sessionDefinition)

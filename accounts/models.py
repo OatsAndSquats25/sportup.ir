@@ -13,6 +13,8 @@ class userProfile(models.Model):
     landline    = models.CharField(_("Landline"), max_length=12, null=True, blank=True, help_text=_("With area code - example: 02122334455"))
     postalcode  = models.CharField(_("Postal Code"), max_length=10, null=True, blank=True)
     address     = models.CharField(_("Address"), max_length=400, null=True, blank=True)
+    # emailAuto   = models.IntegerField()
+    # membership  = models.CharField(_("Membership number"), max_length=10, unique=True) #todo
 
     class Meta:
         permissions = (
@@ -25,6 +27,9 @@ class userProfile(models.Model):
             return True
         else:
             return False
+
+    # def save(self):
+    #     membership = YY,MM,DD,id
 #---------------------------------------------------------------------------------------------------
 def create_user_profile(**kwargs):
     userProfile.objects.get_or_create(user=kwargs['user'])

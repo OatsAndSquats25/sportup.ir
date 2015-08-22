@@ -8,6 +8,9 @@
 {% block breadcrumb_menu %}
 <li class="active">{% trans "Directory" %}</li>
 {% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "assets/app/Content/app.css"  %}" type="text/css">
+{% endblock %}
 
 {% block main %}
     <section class="container">
@@ -97,13 +100,37 @@
                                     <header><h2>{% trans "Description" %}</h2></header>
                                     <p> {{ object.detail }} </p>
                                 </article>
+
+                                
                                 <!-- /.block -->
                             </section>
                                         
                         </div>
-                        <div class="container">
-                            {% program_list object.id %}
-                        </div>
+{#                       <div class="container">#}
+{#                            {% program_list object.id %}#}
+{#                        </div>#}
+
+                        <article ng-app="app" class="container">
+                            <input type="hidden" id="club" value="{{object.id}}">
+                            <session-table></session-table>
+                        </article>
+
+
+{#                        <article ng-app="app" class="container">#}
+{#                            <input type="hidden" id="club" value="{{object.id}}">#}
+{#                            <session-table-club></session-table-club>#}
+{#                        </article>#}
+
+{#                        <article ng-app="app" class="container">#}
+{#                            <input type="hidden" id="club" value="{{object.id}}">#}
+{#                            <registered-sessions></registered-sessions>#}
+{#                        </article>#}
+
+{#                        <article ng-app="app" class="container">#}
+{#                            <input type="hidden" id="club" value="{{object.id}}">#}
+{#                            <registered-sessions-club></registered-sessions-club>#}
+{#                        </article>#}
+
                         <!-- /.col-md-8-->
                     </div>
                     
@@ -115,6 +142,22 @@
     </section>
 {% endblock %}
 {% block extra_js_end %}
+<script type="text/javascript" src="{% static "assets/js/angular.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/angular-route.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/ui-bootstrap-tpls.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/dateparser.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/persiandate.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/persian-datepicker-tpls.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/app.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/DataService.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/Session/sessionCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/Session/sessionDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/SessionClub/sessionClubCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/SessionClub/sessionClubDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubDirective.js" %}"></script>
 <script>
     $(window).load(function(){
         var rtl = true; // Use RTL

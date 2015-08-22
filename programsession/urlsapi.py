@@ -14,5 +14,5 @@ router.register(r'table', views.sessionSchedule, 'sessions')
 # )
 
 urlpatterns = patterns('',
-    url(r'^session_schedules/$',views.sessionSchedule.as_view()),
+    url(r'^session/schedules/(?P<club>\d+)/(?P<week>\d+)/$',views.sessionSchedule.as_view(), name="session_schedule"),
 )

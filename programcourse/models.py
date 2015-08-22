@@ -39,8 +39,12 @@ class courseDefinition(programDefinition):
     #           self.agreementKey.facilityKey.title + ":" + self.title
 
     def save(self, *args, **kwargs):
-        self.remainCapacity= self.maxCapacity
-        self.reservedCapacity = 1
+        if not self.remainCapacity:
+            self.remainCapacity = self.maxCapacity
+        # self.reservedCapacity = 1
+        if self.usageEndDate:
+            if self.usageEndDate > self.agreementKey.expiry_date.date:
+                self.usageEndDate = self.agreementKey.expiry_date.date
         super(courseDefinition,self).save()
 
 # ----------------------------------------------------
