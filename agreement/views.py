@@ -7,6 +7,9 @@ from models import agreement
 from serializers import agreementSerializer
 # ----------------------------------------------------
 class agreementList(generics.ListAPIView):
+    """
+    Return active agreement for current user
+    """
     serializer_class = agreementSerializer
     permission_classes = (permissions.IsAuthenticated,)
 

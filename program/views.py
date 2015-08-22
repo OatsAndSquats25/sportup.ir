@@ -7,7 +7,7 @@ from serializers import programDefinitionSerializer
 # ----------------------------------------------------
 class programInformation(generics.RetrieveAPIView):
     """
-    retrieve session information
+    Return program information
     """
     authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated,)
