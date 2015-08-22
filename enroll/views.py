@@ -14,7 +14,7 @@ from finance.functions import invoiceGenerate, paymentRequest
 
 from models import enrolledProgramSession, enrolledProgram
 from enrollcourse.function import enrollCourse
-from serializer import enrollProgramSerializer
+from serializer import enrollProgramSerializer,enrollSessionSerializer
 
 from agreement.models import agreement
 from programsession.views import sessionGenerateFull
@@ -37,6 +37,9 @@ class enrollConfirmed(View):
             return redirect('directoryItemDetail', slug= programInst.clubSlug())
 # ----------------------------------------------------
 class enrollSessionList(generics.ListAPIView):
+    """
+    Return list of all enrolled sessions for current user
+    """
     serializer_class = enrollProgramSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -46,22 +49,24 @@ class enrollSessionList(generics.ListAPIView):
         # return enrolledProgram.objects.filter(user = user)
 # ----------------------------------------------------
 class enrollSessionListClub(generics.ListAPIView):
+    """
+    Return list of all enrolled sessions for club
+    """
     serializer_class = enrollProgramSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         # user = self.request.user
-        # agreementInst = agreement.objects.active().filter(user = self.request.user)
         agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.kwargs['agreement'])
-        # return enrolledProgramSession.objects.filter(status = Displayable.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = self.kwargs['agreement'])
         return enrolledProgramSession.objects.filter(status = Displayable.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst)
 # ----------------------------------------------------
 class enrollSession(generics.GenericAPIView):
     """
-    enroll session
+    Enroll single session for current user
     """
+    serializer_class = enrollSessionSerializer
     permission_classes = (permissions.IsAuthenticated,)
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         club= int(kwargs.get('club','-1'))
         week= int(kwargs.get('week','-1'))
         id  = int(kwargs.get('id','-1'))

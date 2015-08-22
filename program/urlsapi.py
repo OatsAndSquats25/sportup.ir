@@ -14,5 +14,5 @@ router.register(r'info', views.programInformation, 'program')
 # )
 
 urlpatterns = patterns('',
-    url(r'^program_info/(?P<pk>\d+)/$',views.programInformation.as_view()),
+    url(r'^program/info/(?P<pk>\d+)/$',views.programInformation.as_view(), name="program_information"),
     )

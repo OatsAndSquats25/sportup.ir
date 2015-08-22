@@ -162,9 +162,10 @@ def sessionGenerateFull(club , showWeek):
 # ----------------------------------------------------
 class sessionSchedule(generics.GenericAPIView):
 # class sessionSchedule(APIView):
-    # """
-    # This view return sessions' schedule for specific club
-    # """
+    """
+    Full schedule for specific club with all layouts
+    """
+    serializer_class = cellSerializer
     def get(self, request, *args, **kwargs):
         #input parameter club, week and validation #todo
         club = int(kwargs.get('club','0'))

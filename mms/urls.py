@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from django.conf import settings
 from django.contrib import admin
 from django.views.static import directory_index
 from django.conf.urls.static import static
@@ -12,6 +12,11 @@ urlpatterns = patterns('',
     url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", content_type="text/plain")),
     url(r'^noadmin/', include(admin.site.urls)),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^api/docs/', include('rest_framework_swagger.urls')),
+    )
 
 urlpatterns += patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
