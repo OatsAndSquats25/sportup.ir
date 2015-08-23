@@ -18,20 +18,24 @@ from serializer import enrollProgramSerializer,enrollSessionSerializer
 
 from agreement.models import agreement
 from programsession.views import sessionGenerateFull
-from generic.models import Displayable
 # ----------------------------------------------------
 class enrollConfirmation(DetailView):
+    """
+    Get course confirmation from user
+    """
     template_name = 'enroll/enrollment_confirmation.html'
     model = programDefinition
 # ----------------------------------------------------
 class enrollConfirmed(View):
+    """
+    Enroll in course and redirect to shopping cart
+    """
     def get(self, request, *args, **kwargs):
         programInst = programDefinition.objects.get(pk = kwargs['pk'])
         if programInst.isValid():
             # if programInst.type == :
             enrollInst = enrollCourse(request, programInst)
-            invoiceInst = invoiceGenerate(request, enrollInst)
-            return paymentRequest(request, invoiceInst)
+            return redirect('checkoutURL')
         else:
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect('directoryItemDetail', slug= programInst.clubSlug())
@@ -58,7 +62,7 @@ class enrollSessionListClub(generics.ListAPIView):
     def get_queryset(self):
         # user = self.request.user
         agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.kwargs['agreement'])
-        return enrolledProgramSession.objects.filter(status = Displayable.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst)
+        return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst).select_related('user')
 # ----------------------------------------------------
 class enrollSession(generics.GenericAPIView):
     """
