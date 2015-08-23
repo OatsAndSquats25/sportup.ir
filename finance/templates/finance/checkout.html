@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load i18n static humanize generic_tags %}
+
+{% block main %}
+    <section class="container">
+        <div class="row">
+            <!--Content-->
+            <div class="col-md-12">
+                <h1>{% trans "Order list" %}</h1>
+                <h3>{% trans "Attention: You have only 30 minutes to pay and confirm your items." %}</h3>
+                    <div class="table">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="success">
+                                <th>{% trans "Number" %}</th>
+                                <th>{% trans "Complex" %}</th>
+{#                                <th>{% trans "Group" %}</th>#}
+                                <th>{% trans "Program" %}</th>
+                                <th>{% trans "Amount" %}({% trans "Rial" %})</th>
+                                <th>{% trans "Delete" %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in object_list %}
+                                {% if item.isValid %}
+                                    <tr>
+                                        {% else %}
+                                    <tr style="background: #ffff00">
+                                {% endif %}
+                            <td>{{ forloop.counter }}<input type="hidden" name="{{ forloop.counter }}"
+                                                            value="{{ item.pk }}"></td>
+                            <td>{{ item.programDefinitionKey.clubKey }}</td>
+{#                            <td>{{ item.clubItemDefinitionKey.clubItemCategoryKey }}</td>#}
+                            <td>{{ item.programDefinitionKey }}</td>
+                            <td>{{ item.amount|floatformat:2|intcomma }}</td>
+                            <td><a style="color: red" href="{% url 'checkoutDeleteItem' item.pk %}"><span
+                                    class="glyphicon glyphicon-remove"></span></a></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table">
+                                <table class="table table-bordered">
+                                    <caption>{% trans "Final Payment" %}</caption>
+                                    <tbody>
+                                    <tr>
+                                        <td>{% trans "Total" %}</td>
+                                        <td>{{ totalAmount|floatformat:2|intcomma }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{% trans "Discount" %}</td>
+                                        <td>{{ discount|floatformat:2|intcomma }}</td>
+                                    </tr>
+                                    <tr class="danger">
+                                        <td><h5><b>{% trans "Payment amount" %}({% trans "Rial" %})</b></h5></td>
+                                        <td><h5><b>{{ payable|floatformat:2|intcomma }}</b></h5></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+{#                            <div class="table">#}
+{#                                <table class="table table-bordered">#}
+{#                                    <caption>{% trans "Discount" %}</caption>#}
+{#                                    <thead>#}
+{#                                    <tr class="warning">#}
+{#                                        <th>{% trans "Copoun" %}</th>#}
+{#                                        <th>{% trans "Amount" %}</th>#}
+{#                                        <th>{% trans "Commit" %}</th>#}
+{#                                    </tr>#}
+{#                                    </thead>#}
+{#                                    <tbody>#}
+                                    {#            {% for item in object_list %}#}
+                                    {#                <tr>#}
+                                    {#                    <td>{{ item.clubItemDefinitionKey.agreementKey.facilityKey }}</td>#}
+                                    {#                    <td>{{ item.amount }}</td>#}
+                                    {#                    <td><div class="checkbox"><label><input type="checkbox" value=""></label></div></td>#}
+                                    {#                </tr>#}
+                                    {#            {% endfor %}#}
+{#                                    </tbody>#}
+{#                                </table>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-4">
+{#                                <div>#}
+{#                                    <label><input type="radio" name="paymentGateway" id="optionsRadios1" value="test" checked>{% trans "Test Bank" %}</label>#}
+{#                                </div>#}
+{#                                <div>#}
+{#                                    <label><input type="radio" name="paymentGateway" id="optionsRadios2" value="saman"> {% trans "Saman Bank" %}</label>#}
+{#                                </div>#}
+                                <button><a href="{% url 'checkoutPayURL' %}">{% trans "Payment" %}</a></button>
+                            </div>
+                            <div class="col-md-8">
+{#                                <button><a href="{{ request.path }}">{% trans "Update" %}</a></button>#}
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

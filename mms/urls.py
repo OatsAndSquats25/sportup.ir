@@ -29,6 +29,6 @@ urlpatterns += patterns('',
     url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", content_type="text/plain")),
     url(r'^accounts/', include("accounts.urls")),
     url(r'^enroll/', include("enroll.urls")),
-    url(r'^finance/', include("finance.urls")),
+    url(r'^checkout/', include("finance.urls")),
     url(r'^', include("directory.urls")),
 )

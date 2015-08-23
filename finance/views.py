@@ -1,15 +1,58 @@
 from django.views.generic import TemplateView, ListView, View
 from django.utils.translation import ugettext_lazy as _
-from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.db.models import Sum
+from django.shortcuts import redirect
+from django.http import Http404
 
-from payment import testPay,payline
-from functions import invoicePayed, invoiceError
+from enroll.models import enrolledProgram
 
+from payment import testPay,payline,paylineTest
+from functions import invoicePayed, invoiceError, invoiceGenerate, paymentRequest
 # ----------------------------------------------------
-class testGateway(TemplateView):
-    template_name = 'finance/testgateway.html'
+class checkout(ListView):
+    template_name = 'finance/checkout.html'
+
+    def get_queryset(self):
+        return enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).select_related()
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.kwargs.get('command',None) == 'pay':
+            Payable = True
+
+            for object in self.object_list:
+                if not object.isValid():
+                    Payable = False
+                    # break
+
+            if Payable:
+                invoiceInst = invoiceGenerate(self.request)
+                return redirect(paymentRequest(self.request, invoiceInst))
+            else:
+                messages.error(self.request, _("Please check your cart and remove yellow programs. This programs expired or do not have enough space."))
+        else:
+            context = super(checkout, self).get_context_data()
+            amount = 0
+            discount = 0
+
+            itemsInst = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
+            if itemsInst:
+                amount = itemsInst.aggregate(total = Sum('amount'))['total']
+
+            #if discountInst:
+            #    discount = 0
+
+            context['totalAmount'] = amount
+            context['discount'] = discount
+            context['payable'] = amount - discount
+
+        return super(checkout, self).render_to_response(context)
+# ----------------------------------------------------
+class fianceDeleteItem(View):
+    def get(self,request,*args,**kwargs):
+        enrolledProgram.objects.get(pk = kwargs['pk']).delete()
+        return redirect(request.META['HTTP_REFERER'])
 # ----------------------------------------------------
 def paymentRes(request, *args, **kwargs):
     gateway = kwargs.pop('gateway')
@@ -17,230 +60,37 @@ def paymentRes(request, *args, **kwargs):
         payRes = testPay.paymentResponse(request,*args,**kwargs)
     elif (gateway == 'pl'):
         payRes = payline.paymentResponse(request,*args,**kwargs)
+    elif (gateway == 'plt'):
+        payRes = paylineTest.paymentResponse(request,*args,**kwargs)
+    else:
+        messages.error(request, _("We do not support this payment gateway"))
+        raise Http404
 
     if payRes['status'] == True :
         invoicePayed(payRes['invoiceId'])
-        messages.succechoechoexess(request, _("Payment was successful."))
+        messages.success(request, _("Payment was successful."))
+        return reverse('dashboard')
     else:
         invoiceError(payRes['invoiceId'])
         messages.error(request, _("Payment has error"))
-
-    return HttpResponseRedirect(reverse('dashboard'))
+        return reverse('checkoutURL')
 # ----------------------------------------------------
 class paymentResponse(View):
 
     def get(self,request,*args,**kwargs):
-        return paymentRes(request, *args, **kwargs)
+        return redirect(paymentRes(request, *args, **kwargs))
     def post(self,request,*args,**kwargs):
-        return paymentRes(request, *args, **kwargs)
+        return redirect(paymentRes(request, *args, **kwargs))
 # ----------------------------------------------------
-# class financeOrder(ListView):
-#     template_name = 'finance/order.html'
-#
-#     def get_queryset(self):
-#         return enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.ENROLLMENT_STATUS_RESERVED)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(financeOrder, self).get_context_data()
-#
-#         amount = 0
-#         discount = 0
-#
-#         itemsInst = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.ENROLLMENT_STATUS_RESERVED)
-#         if itemsInst:
-#             amount = itemsInst.aggregate(total = Sum('amount'))['total']
-#
-#         #if discountInst:
-#         #    discount = 0
-#
-#         context['totalAmount'] = amount
-#         context['discount'] = discount
-#         context['payable'] = amount - discount
-#
-#         return context
-# # ----------------------------------------------------
-# class fianceDeleteItem(View):
-#     def get(self,request,*args,**kwargs):
-#         models.enrolledProgram.objects.get(pk = kwargs['pk']).delete()
-#         return HttpResponseRedirect(request.META['HTTP_REFERER'])
-# # ----------------------------------------------------
-# class paymentRequest(TemplateView):
-#     template_name = 'finance/payment_request.html'
-#
-#     def post(self,request,*args,**kwargs):
-#         context = self.get_context_data()
-#
-#         payable = float(request.POST.get('payable'))
-#         count = int(request.POST.get('count'))
-#         gatewayName = request.POST.get('paymentGateway')
-#
-#         if payable <= 0 :
-#             messages.error(request,_("There is no payable cost."))
-#             return HttpResponseRedirect(reverse('financeOrderURL'))
-#
-#         dataSetPK = []
-#         for i in range(1,count+1):
-#             dataSetPK += [int(request.POST.get(str(i))),]
-#
-#         clubEnInst = enrolledProgram.objects.select_related().filter(pk__in = dataSetPK)
-#         # check all items are valid
-#
-#         for item in clubEnInst:
-#             if not item.clubItemDefinitionKey.isValid():
-#                 messages.error(request, _("There are some invalid enroll in you order please remove them. Maybe it is full or expired."))
-#                 return HttpResponseRedirect(reverse('financeOrderURL'))
-#
-#         # remove incomplete old invoices
-#             invoiceInst= models.invoice.objects.filter(paid = False).filter(user_id = request.user.id)
-#             if invoiceInst:
-#                 for invItem in invoiceInst:
-#                     enrolledProgram.objects.filter(invoiceKey=invItem).update(invoiceKey = 0)
-#                 invoiceInst.delete()
-#
-#         #utils.clearUnusedReservedItems(self.request)
-#
-#         # create invoice
-#         invoiceInst = models.invoice.objects.create(title = _("Invoice"),
-#                                                     amount = payable,
-#                                                     user_id = request.user.id,
-#                                                     status = mezModels.CONTENT_STATUS_DRAFT,
-#                                                     content='None')
-#         # connect invoice to related items
-#         enrolledProgram.objects.select_related().filter(pk__in = dataSetPK).update(invoiceKey = invoiceInst)
-#
-#         # Call specific payment request with reserve number and amount
-#         if gatewayName == 'test':
-#             paymentGateway = testBank.Payment()
-#         elif gatewayName == 'saman':
-#             paymentGateway = saman.Payment()
-#
-#         context['payment'] = paymentGateway.sendGatewayRequest(request, invoiceInst.id, payable)
-#
-#         return self.render_to_response(context)
+class testGateway(TemplateView):
+    template_name = 'finance/testgateway.html'
 # ----------------------------------------------------
-# class paymentResponse(View):
-#
-#     def get(self,request,*args,**kwargs):
-#         # invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
-#         # if invoiceProp.status == True :
-#         #     invoicePayed(invoiceProp)
-#         # else:
-#         invoicePayedTest(1)
-#         messages.success(request, _("Payment was successful."))
-#         return HttpResponseRedirect(reverse('dashboard'))
-
-    # def post(self,request,*args,**kwargs):
-    #     invoiceProp = testNull.testPaymentResponse(request,*args,**kwargs)
-    #
-    #     return HttpResponse('Payment Done.')
-
-#         #Check for correct response and detect fake or hacker generated
-#         # Dispatch and call specific payment response
-#         paymentGateway = testBank.Payment()
-#         # function return values(Transaction Stat, Reference number, Reserve number)
-#         gatewayResult = paymentGateway.receiveGatewayResponse(self.request)
-#
-#         transactionString = 'Error'
-#         transactionST = gatewayResult['TransactionState']
-#
-#         try:
-#             invoiceInst = models.invoice.objects.get(pk=gatewayResult['ReservationNumber'])
-#         except:
-#             # TODO: we must record this payment for conflict
-#             models.accountingBook.objects.create(debit=0,
-#                                     transaction=transactionST,
-#                                     transactionStatus=transactionST,
-#                                     content='ERROR: Invoice doesn`t exist',
-#                                     user_id = self.request.user.id)
-#
-#             raise Http404()
-#
-#         if invoiceInst.paid:
-#             models.accountingBook.objects.create(invoiceKey=invoiceInst,
-#                                                 debit=0,
-#                                                 transaction=transactionST,
-#                                                 transactionStatus=transactionST,
-#                                                 content='ERROR: Double payment on this invoice',
-#                                                 user_id = self.request.user.id)
-#             raise Http404()
-#
-#         if transactionST == 'OK':
-#             # record transaction success for invoice (Debtor)
-#             transactionString = gatewayResult['ReferenceNumber']
-#             # record invoice (Debtor)
-#             models.accountingBook.objects.create(invoiceKey=invoiceInst,
-#                                                  debit = invoiceInst.amount,
-#                                                  transaction = transactionString,
-#                                                  transactionStatus=transactionST,
-#                                                  content='None',
-#                                                  user_id = self.request.user.id)
-#             # record invoice (Creditor)
-#             models.accountingBook.objects.create(invoiceKey=invoiceInst,
-#                                                  credit = invoiceInst.amount,
-#                                                  content='None',
-#                                                  user_id = self.request.user.id)
-#             # update invoice status
-#             invoiceInst.paid = True
-#             invoiceInst.status = mezModels.CONTENT_STATUS_PUBLISHED
-#             invoiceInst.save()
-#
-#             # record financial documents for company and club
-#             clubEnInst = enrolledProgram.objects.filter(invoiceKey = invoiceInst).select_related()
-#             for item in clubEnInst:
-#                 agreement = item.clubItemDefinitionKey.agreementKey
-#                 commission = item.clubItemDefinitionKey.agreementKey.commission
-#                 companyAmount= item.amount * commission
-#                 clubAmount= item.amount - companyAmount
-#
-#                 # record financial company (Debtor)
-#                 models.accountingBook.objects.create(invoiceKey=item.invoiceKey,
-#                                                      agreementKey=agreement,
-#                                                      enrollmentKey=item,
-#                                                      debit =companyAmount ,
-#                                                      company =True,
-#                                                      content='None',
-#                                                      user_id = self.request.user.id)
-#                 # record financial club (Debtor)
-#                 models.accountingBook.objects.create(invoiceKey=item.invoiceKey,
-#                                                      agreementKey=agreement,
-#                                                      enrollmentKey=item,
-#                                                      debit=clubAmount,
-#                                                      defray= models.accountingBook.DEFRAY_NO,
-#                                                      content='None',
-#                                                      user_id = self.request.user.id)
-#                 item.status = item.ENROLLMENT_STATUS_PAYED
-#                 #item.clubItemDefinitionKey.remainCapacity -= 1
-#                 item.save()
-#
-#             #clubItemDefinition.objects.filter(clubItemEnrollment__).update(remainCapacity = F('remainCapacity')-1)
-#             # reduce enroll capacity here or at enroll
-#             #clubDef = clubItemDefinition.objects.filter()
-#             #clubDef.reservedCapacity -= 1
-#             #clubDef.save()
-#             messages.success(request, _("Payment was successful."))
-#             return HttpResponseRedirect(reverse('financeOrderURL'))
-#         else :
-#             # record transaction not successful (Debtor)
-#             inst = models.accountingBook.objects.create(debit=0,
-#                                                         transaction=transactionString,
-#                                                         transactionStatus=transactionST,
-#                                                         content='None',
-#                                                         user_id = self.request.user.id)
-#             # Remove invoice
-#             enrolledProgram.objects.filter(invoiceKey = invoiceInst).update(invoiceKey = 0)
-#
-#             invoiceInst.delete()
-#             #invoiceInst.save()
-#             ## Variables: reserve, reference, state
-#             messages.error(request, _("Payment was not successful."))
-#             return HttpResponseRedirect(reverse('financeOrderURL'))
-# # ----------------------------------------------------
 # class financeHistory(ListView):
 #     model = models.accountingBook
 #     # show last 20 transaction
-# # ----------------------------------------------------
+# ----------------------------------------------------
 # class financeDefray(ListView):
 #     model = models.accountingBook
 #     # show account eligible for defray but not dfray
 #     # capability for defray and insert finance document
-# # ----------------------------------------------------
+# ----------------------------------------------------

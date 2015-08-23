@@ -3,10 +3,14 @@ from models import enrolledProgramSession,enrolledProgramCourse,enrolledProgram
 
 # ----------------------------------------------------
 class enrollProgramCourseSerializer(serializers.ModelSerializer):
+    firstname = serializers.ReadOnlyField(source='user.first_name')
+    lastname  = serializers.ReadOnlyField(source='user.last_name')
     class Meta:
         model = enrolledProgramCourse
 # ----------------------------------------------------
 class enrollProgramSessionSerializer(serializers.ModelSerializer):
+    firstname = serializers.ReadOnlyField(source='user.first_name')
+    lastname  = serializers.ReadOnlyField(source='user.last_name')
     class Meta:
         model = enrolledProgramSession
 # ----------------------------------------------------
