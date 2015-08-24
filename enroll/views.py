@@ -42,7 +42,7 @@ class enrollConfirmed(View):
 # ----------------------------------------------------
 class enrollSessionList(generics.ListAPIView):
     """
-    Return list of all enrolled sessions for current user
+    Return list of all enrolled sessions for current user (anyone)
     """
     serializer_class = enrollProgramSerializer
     permission_classes = (permissions.IsAuthenticated,)
@@ -54,26 +54,47 @@ class enrollSessionList(generics.ListAPIView):
 # ----------------------------------------------------
 class enrollSessionListClub(generics.ListAPIView):
     """
-    Return list of all enrolled sessions for club
+    Return list of all enrolled sessions for club (club permission)
+    agreement -- aggreement id
     """
     serializer_class = enrollProgramSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        # user = self.request.user
-        agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.kwargs['agreement'])
+        agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.request.GET.get('agreement'))
         return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst).select_related('user')
 # ----------------------------------------------------
 class enrollSession(generics.GenericAPIView):
     """
-    Enroll single session for current user
+    Enroll session related operations
     """
     serializer_class = enrollSessionSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    def get(self, request, *args, **kwargs):
+        """
+        Retrive enrolled for each session (Club permission)
+        club    -- club id
+        week    -- select week (current week is 0)
+        cellid  -- cellid
+        """
+        club= int(request.GET.get('club','-1'))
+        week= int(request.GET.get('week','-1'))
+        id  = int(request.GET.get('cellid','-1'))
+        scheduleTable = sessionGenerateFull(club, week)
+        cell = filter(lambda x: x.cellid == id, scheduleTable)
+        if not cell:
+            return Response("No cell exist.",status=status.HTTP_400_BAD_REQUEST)
+
+        enrolledInst = enrolledProgramSession.objects.filter(date = cell[0].date).filter(sessionTimeBegin = cell[0].begin).filter(sessionTimeEnd = cell[0].end)
+        return Response(enrollProgramSerializer(enrolledInst, many=True).data)
+
     def post(self, request, *args, **kwargs):
-        club= int(kwargs.get('club','-1'))
-        week= int(kwargs.get('week','-1'))
-        id  = int(kwargs.get('id','-1'))
+        """
+        Enroll in a specific cell (anyone)
+        """
+        club= int(request.POST.get('club','-1'))
+        week= int(request.POST.get('week','-1'))
+        id  = int(request.POST.get('cellid','-1'))
 
         # if club <= -1 or week <= -1 or id <= -1:
         #     return Response({"detail":"negative value does not allow."})
@@ -93,7 +114,5 @@ class enrollSession(generics.GenericAPIView):
                                               sessionTimeEnd = cell[0].end,
                                               user = request.user)
 
-        # return Response('Done')
-        from programsession.serializers import cellSerializer
-        return Response(cellSerializer(cell[0]).data)
+        return Response("Done", status=status.HTTP_200_OK)
 # ----------------------------------------------------
