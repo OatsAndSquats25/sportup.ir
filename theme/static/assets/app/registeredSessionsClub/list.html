@@ -1,0 +1,50 @@
+<div class="col-sm-6" ng-controller="toDoController">
+	<nav id="menu">
+		<ul class="athleteList">
+			<li>
+				<a ng-click="allAthletes()" class="btn btn-danger">
+  					<i class="fa fa-list fa-lg"></i> همه ورزشکارها </a>
+			</li>
+			<li>
+				<a ng-click="notAttendedAthletes()" class="btn btn-danger">
+  					<i class="fa fa-remove fa-lg"></i> اعضای حضور یافته </a>
+			</li>
+			<li>
+				<a ng-click="attendedAthletes()" class="btn btn-danger">
+  					<i class="fa fa-check fa-lg"></i> اعضای حضور نیافته </a>	
+			</li>
+		</ul>
+	</nav>
+
+	<form id="add-task-form" class="form-inline">
+		<div class="form-group">
+			<input class="fistname" type="text" name="athleteName" ng-model="athlete.firstname" placeholder="نام" class="form-control"/>
+			<input class="lastname" type="text" name="athleteLastName" ng-model="athlete.lastname" placeholder="نام خانوادگی" class="form-control"/>
+			<button ng-click="addAthlete(athlete)" id="add-task-button"><span class="glyphicon glyphicon-plus"></span> اضافه </button>
+			<div class="clearfix"></div>
+		</div>
+	</form>
+
+	<ul id="todo-list" >
+		<li ng-repeat="athlete in filteredAthletes = (athletes | filter:{isDone:status}) | orderBy:'firstname'" ng-class-odd="'odd'" ng-class-even="'even'">
+			<input type="checkbox" name="athlete_{{athlete.id}}" id="athlete_{{athlete.id}}" ng-checked="{{athlete.isDone}}" ng-click="updateStatusAthlete(athlete)"  />
+			<label class="fistname" for="athlete_{{athlete.id}}">{{athlete.firstname}}</label>
+			<label class="lastname" for="athlete_{{athlete.id}}">{{athlete.lastname}}</label>
+			<button ng-click="deleteAthlete(athlete)" class="pull-right btn-remove">
+					<i class="fa fa-remove fa-lg"></i>
+			</button>
+			<div class="clearfix"></div>
+		</li>
+		<li ng-hide="filteredAthletes.length" class='odd no-athlete text-warning'>ثبت نامی انجام نشده است</p>
+	</ul>
+
+	<div ng-repeat="item in absent = (athletes | filter:{isDone:false})"></div>
+	<footer id="task-counter">
+		<span ng-show="absent.length">
+			<span class="bold">تعداد کسانی که حضور نیافتند :</span> {{ absent.length }} / {{ athletes.length }}
+		</span>
+		<span ng-hide="absent.length">
+			<span class="bold">همه ورزشکارها حضور یافتند</span>
+		</span>
+	</footer>
+</div>

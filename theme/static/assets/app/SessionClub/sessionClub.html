@@ -1,0 +1,144 @@
+<article class="block">
+    <!-- <div class="row" ng-Controller="MainController">
+        <div class="col-md-4">
+            <p class="input-group">
+              <input type="text" class="form-control"  datepicker-popup-persian="{{format}}" ng-model="beginDate" is-open="beginIsOpen"  datepicker-options="dateOptions"   date-disabled="disabled(date, mode)" ng-required="true" close-text="بسته"/>
+               <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openBegin($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span> 
+            </p>
+      
+      
+            <p class="input-group">
+              <input type="text" class="form-control"   datepicker-popup-persian="{{format}}" ng-model="endDate" is-open="endIsOpen"  datepicker-options="dateOptions" readonly="readonly" date-disabled="disabled(date, mode)" ng-required="true" close-text="بسته" />
+               <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span> 
+            </p>
+            <div class="form-group">
+               <label class="col-sm-2 control-label" for="input-id-1">Interval</label>
+               <div class="col-sm-10">
+                  <input type="text" class="form-control" id="input-id-1">
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="col-sm-2 control-label" for="input-id-1"></label>
+               <div class="col-sm-10">
+                  <input type="text" class="form-control" id="input-id-1">
+               </div>
+            </div>
+            <button class="btn btn-primary" ng-click="create()"></button>
+        </div>
+
+    </div> -->
+    <div ng-Controller="sessionClubCtlr">
+<script type="text/ng-template" id="infoModal.html">
+        <div class="modal-body">
+            <article class="block">
+            <header><h2>جزییات</h2></header>
+              <input type="text" class="form-control"  datepicker-popup-persian="{{info.format}}" ng-model="info.date" is-open="beginIsOpen" ng-required="true" close-text="بسته"/>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td class="text-center">عنوان</td>
+                <td class="text-center">قیمت</td>
+                <td class="text-center">ساعت شروع </td>
+                <td class="text-center">ساعت پایان</td>
+                <td class="text-center">نیاز به بیمه دارد</td>
+              </tr>
+              <tr>
+                <td ng-bind="info.title" class="text-center"></td>
+                <td ng-bind="info.price" class="text-center"></td>
+                <td ng-bind="info.begin" class="text-center"></td>
+                <td ng-bind="info.end" class="text-center"></td>
+                <td ng-bind="info.needInsurance ? 'بله' : 'خیر'" class="text-center"></td>
+              </tr>
+              <tr>
+                <td class="text-center">جنسیت</td>
+                <td class="text-center">ظرفیت</td>
+                <td class="text-center">ظرفیت باقی مانده</td>
+                <td class="text-center">حداقل سن</td>
+                <td class="text-center">حد اکثر سن</td>
+              </tr>
+              <tr>
+                <td ng-bind="(info.genderLimit == 1 ? 'مرد' : 'زن' )" class="text-center"></td>
+                <td ng-bind="info.maxCapacity" class="text-center"></td>
+                <td ng-bind="info.remainCapacity || 0 " class="text-center"></td>
+                <td ng-bind="info.ageMin" class="text-center"></td>
+                <td ng-bind="info.ageMax" class="text-center"></td>
+              </tr>
+
+            </table>
+          </article>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger  " type="button" ng-click="cancel()">خروج</button>
+        </div>
+     </script>
+     <script type="text/ng-template" id="deleteModal.html">
+        <div class="modal-body">
+            <article class="block">
+            <header><h2>حذف ورزشکار</h2></header>
+              <form class="form" name="deleteAthleteForm" role="form">
+                <div class="form-group" show-errors>
+                    <label for="fullName" class="col-sm-3 control-label">Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="fullName" name="fullName" class="form-control"
+                               ng-model="editableEmployee.fullName" required
+                               />
+                    </div>
+                </div>
+                <input type="button" class="btn btn-default" value="Cancel" ng-click="cancelForm()" />
+                <input type="submit" class="btn btn-primary" value="Submit" ng-click="submitForm()" />
+              </form>
+          </article>
+        </div>
+     </script>
+
+      <script type="text/ng-template" id="addModal.html">
+        <div class="modal-body">
+            <article class="block">
+            <header><h2>اضافه کردن ورزشکار</h2></header>
+              <form class="form" name="deleteAthleteForm" role="form">
+                <div class="form-group" show-errors>
+                    <label for="fullName" class="col-sm-3 control-label">Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="fullName" name="fullName" class="form-control"
+                               ng-model="editableEmployee.fullName" required
+                               />
+                    </div>
+                </div>
+                <input type="button" class="btn btn-default" value="Cancel" ng-click="cancelForm()" />
+                <input type="submit" class="btn btn-primary" value="Submit" ng-click="submitForm()" />
+              </form>
+          </article>
+        </div>
+     </script>
+
+    <header><h2>برنامه هفتگی</h2></header>
+    <table class="timetable table  table-bordered ">
+        <thead>
+            <tr>
+                <th></th>
+                <th>شنبه</th>
+                <th>یک شنبه</th>
+                <th>دو شنبه</th>
+                <th>سه شنبه</th>
+                <th>چهار شنبه</th>
+                <th>پنج شنبه</th>
+                <th>جمعه</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr ng-repeat="time in timeTableRenderObject">
+                <td ng-if="$index % labelTimeSpan == 0" class="text-center" rowspan="{{4}}">{{createLabel(label[$index / labelTimeSpan])}}</td>
+                <td ng-class="{'event-gray' : (day.type == 1 && day.status == 0),
+ 'event-green': ((day.type == 1 && day.status == 1) && (day.capacity - day.enroll > 0)),
+ 'event-red': ((day.type == 1 && day.status == 1) && (day.capacity - day.enroll <= 0))}"  ng-repeat="day in time " rowspan="{{day.span}}">
+                    <a href="#" style="text-align: center;" ng-click="getInfo(day)" ng-if="day.type == 1" title="{{day.name}}">{{day.name}}</br>{{day.type == 1 ? createLabel(day) : ''}}</br>قیمت: {{day.price | noFractionCurrency : ''}}</br>ظرفیت: {{day.capacity - day.enroll}}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</article>
