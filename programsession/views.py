@@ -50,7 +50,7 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
     cellDate = dateBegin
     count = 0
     for day,status in days.iteritems():
-        if status and cellDate <= lastDate:# and day >= weekDay and cellDate <= dateEnd:
+        if status and cellDate <= lastDate and day >= weekDay:# and day >= weekDay and cellDate <= dateEnd:
             bgn = datetime.datetime.combine(datetime.date.today(), singleSession.sessionTimeBegin)
             end = datetime.datetime.combine(datetime.date.today(), singleSession.sessionTimeEnd)
             duration = singleSession.sessionDuration
@@ -153,8 +153,8 @@ def sessionGenerateFull(club , showWeek):
                 max = sch.end
 
         firstCell = cell(-1,
-                         datetime.date.today(),
-                         -1,
+                         dateBegin,
+                         weekDay,
                          min,
                          max,
                          -1,
