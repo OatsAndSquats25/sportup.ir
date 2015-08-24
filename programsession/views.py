@@ -45,11 +45,12 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
     # 2
 
     # create table base on layout
+    lastDate = (now() + datetime.timedelta(singleSession.daysToShow)).date()
     cells = []
     cellDate = dateBegin
     count = 0
     for day,status in days.iteritems():
-        if status:# and day >= weekDay and cellDate <= dateEnd:
+        if status and cellDate <= lastDate:# and day >= weekDay and cellDate <= dateEnd:
             bgn = datetime.datetime.combine(datetime.date.today(), singleSession.sessionTimeBegin)
             end = datetime.datetime.combine(datetime.date.today(), singleSession.sessionTimeEnd)
             duration = singleSession.sessionDuration
