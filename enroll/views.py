@@ -2,7 +2,6 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-from django.http import Http404
 
 from rest_framework import generics
 from rest_framework import permissions
@@ -92,9 +91,12 @@ class enrollSession(generics.GenericAPIView):
         """
         Enroll in a specific cell (anyone)
         """
-        club= int(request.POST.get('club','-1'))
-        week= int(request.POST.get('week','-1'))
-        id  = int(request.POST.get('cellid','-1'))
+        club= int(request.DATA.get('club','-1'))
+        week= int(request.DATA.get('week','-1'))
+        id  = int(request.DATA.get('cellid','-1'))
+
+        if club == -1 or week == -1 or id == -1:
+            return Response('input parameters not valid',status=status.HTTP_400_BAD_REQUEST)
 
         # if club <= -1 or week <= -1 or id <= -1:
         #     return Response({"detail":"negative value does not allow."})

@@ -19,7 +19,7 @@ app.controller('sessionCtlr',
         modalInstance.result.then(function () {
               DataService.enrollSession($scope.clubId, $scope.week, $scope.correntCell.cellid).then(
                     function (results) {
-                        $location.change('finance/checkout/');
+                        $window.location.href = '/checkout/';
                     },
                     function (results) {
                         console.log(results);
