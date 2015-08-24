@@ -234,7 +234,7 @@ color: white;
 /* #Mobile (Landscape)
 ================================================== */
 /* Note: Design for a width of 600px */
-@media all and (max-width: 600px){
+/*@media all and (max-width: 600px){
     td.mob-hide{
         display:none;
         width:0;
@@ -281,7 +281,7 @@ color: white;
         opacity:0;
         visibility: collapse;
     } 
-}
+}*/
 .height-350 {
   height: 350px !important;
 }
@@ -380,12 +380,37 @@ caption, th, td {
     background: url("images/dotted_line.png") repeat-x scroll left top rgba(0, 0, 0, 0);
 }*/
 
-.timetable .event {
-    background-color: #d43133;
+.timetable .event-gray {
+    background-color: #B0AEAE;
     border-bottom: 1px solid #151515;
     border-right: 1px solid #151515;
     color: #fff;
     line-height: 150%;
+}
+
+.timetable .event-green {
+    background-color: #7CDAB1;
+    border-bottom: 1px solid #151515;
+    border-right: 1px solid #151515;
+    color: #fff;
+    line-height: 150%;
+}
+
+.timetable .event-red {
+    background-color: #EDA4A4;
+    border-bottom: 1px solid #151515;
+    border-right: 1px solid #151515;
+    color: #fff;
+    line-height: 150%;
+}
+
+.timetable .event-red:hover {
+    color: #000;
+}
+
+
+.timetable .event-green:hover {
+    color: #000;
 }
 
 .timetable .event a {
@@ -444,4 +469,236 @@ h3 {
     float: left;
     padding: 12px 0 12px 25px;
     width: 100%;
+}
+
+#delete {
+/*    padding-left: 5px;
+  padding-right: 5px;*/
+  float: right;
+  display:inline-block;
+  margin-right:5px;
+}
+
+#add {
+/*    padding-left: 5px;
+  padding-right: 5px;*/
+  float: inherit;
+  display:inline-block;
+}
+
+#status {
+/*  padding-left: 5px;
+  padding-right: 5px;*/
+  float: left;
+  display:inline-block;
+  margin-left:5px;
+}
+
+.clubIcons {
+  margin-bottom: 5px; 
+}
+
+.fa-remove { 
+  color: red;
+}
+
+.fa-plus { 
+  color: green;
+}
+
+.fa-edit { 
+  color: black;
+}
+
+.timetable th {
+  font-style: oblique;
+  font-size: initial; 
+}
+
+////////////////////////////////////////
+
+h1{
+  color:#FFF;
+  text-align:center;
+  background-color:#52CEB7;
+  font-weight:bold;
+  padding:10px 0;
+  margin:0;
+}
+
+ul{
+  list-style-type:none;
+}
+.bold{
+  font-weight:bold;
+}
+.light-gray{
+  color:#EEE;
+}
+.red{
+  color:red;
+}
+.light-red{
+  color:#D8838D;
+}
+.green{
+  color:#5FEF37;
+}
+
+/* App */
+#todo-app{
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+  
+  margin:20px auto 0 auto;
+  max-width:600px;
+} 
+
+/* Nav */
+#menu{
+  background-color:#74D9C7;
+  color:#FFF;
+  margin:0px;
+  padding:5px 0;
+}
+#menu ul{
+  margin:0px;
+  padding:5px 0px;
+  text-align:center;
+}
+#menu li{
+  display:inline;
+}
+#menu a{
+  color:#FFF;
+  padding:5px;
+  border-radius:3px;
+  background-color:#6BBEAF;
+}
+#menu a:hover{
+  text-decoration:none;
+  background-color:#8EC3BA;
+}
+#menu a .glyphicon{
+  margin:0 6px 0px 0;
+}
+
+/* ToDo List */
+ul#todo-list{
+  margin:0px;
+  padding:0px 0px;
+}
+ul#todo-list li{
+  padding:0px 10px;
+  position:relative;
+}
+ul#todo-list li.no-task{
+  height:40px;
+  text-align:center;
+  line-height:40px;
+}
+ul#todo-list li input, ul#todo-list li label{
+  margin:10px 0px;
+}
+ul#todo-list li input{
+  position:absolute;
+  top:3px;
+  left:10px;
+}
+ul#todo-list li .btn-remove{
+  border:0px solid #FFF;
+  background:transparent;
+  color:#BBB;
+  padding:10px 10px;
+  float:right;
+  width:20%;
+}
+ul#todo-list li label.fistname{
+  padding-left:30px;
+/*  float:left;*/
+  width:35%;
+}
+ul#todo-list li label.lastname{
+  padding-left:30px;
+  float:left;
+  width:45%;
+}
+ul#todo-list li.odd{
+  background-color:#FFF;
+}
+ul#todo-list li.even{
+  background-color:#F7F7F7;
+}
+ul#todo-list li .btn-remove:hover{
+  background-color:#EEE;
+  color:#666;
+}
+
+/* ToDo Form */
+#add-task-form{}
+#add-task-form .form-group{
+  margin:0px;
+  width:100%;
+}
+#add-task-form input.fistname{
+/*  float:left;*/
+  width:35%;
+  border-radius:0px;
+}
+#add-task-form input.lastname{
+  float:left;
+  width:45%;
+  border-radius:0px;
+}
+#add-task-button{
+  background-color:#f46547;
+  height:34px;
+  font-size:12px;
+  font-weight:bold;
+  text-transform:uppercase;
+  text-align:center;
+  color:#FFF;
+  border:0px solid #FFF;
+  float:right;
+  width:20%;
+}
+#add-task-button:hover{
+  background-color:#F47358;
+}
+#add-task-button span{
+  margin-right:5px;
+}
+
+/* Task counter */
+#task-counter{
+  font-size:12px;
+  color:#888;
+  padding:5px 10px;
+  background-color:#CCC;
+}
+
+
+
+@media (max-width: 468px) {
+  ul#todo-list li .btn-remove{
+    font-size:10px;
+  }
+}
+
+.athleteList li{
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#ModalDateLabel {
+    margin-top: 5px;
+  text-align: right;
+  float:right;
+  width: auto;
+}
+#ModalDateInput {
+  margin-right: 20px;
+  float: right;
+  width: auto;
 }

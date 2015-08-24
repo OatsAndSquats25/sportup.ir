@@ -104,6 +104,8 @@
                                 
                                 <!-- /.block -->
                             </section>
+                            </div>
+                            </section>
                                         
                         </div>
                        <div class="container">
@@ -113,29 +115,16 @@
                         <article ng-app="app" class="container">
                             <input type="hidden" id="club" value="{{object.id}}">
                             <session-table></session-table>
-                        </article>
-
-
-{#                        <article ng-app="app" class="container">#}
-{#                            <input type="hidden" id="club" value="{{object.id}}">#}
 {#                            <session-table-club></session-table-club>#}
-{#                        </article>#}
-
-{#                        <article ng-app="app" class="container">#}
-{#                            <input type="hidden" id="club" value="{{object.id}}">#}
 {#                            <registered-sessions></registered-sessions>#}
-{#                        </article>#}
-
-{#                        <article ng-app="app" class="container">#}
-{#                            <input type="hidden" id="club" value="{{object.id}}">#}
 {#                            <registered-sessions-club></registered-sessions-club>#}
-{#                        </article>#}
-
+                            <task-decorate></task-decorate>
+                        </article>
                         <!-- /.col-md-8-->
-                    </div>
+                    
                     
                     <!-- /.row -->
-                </section>
+                
                 <!-- /#main-content-->
             </div>
         </div>
@@ -148,6 +137,7 @@
 <script type="text/javascript" src="{% static "assets/js/dateparser.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/js/persiandate.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/js/persian-datepicker-tpls.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/filters.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/app/app.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/app/DataService.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/app/Session/sessionCtlr.js" %}"></script>
@@ -156,8 +146,11 @@
 <script type="text/javascript" src="{% static "assets/app/SessionClub/sessionClubDirective.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsCtlr.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsDirective.js" %}"></script>
-<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubCtlr.js" %}"></script>
-<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubDirective.js" %}"></script>
+{#<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubCtlr.js" %}"></script>#}
+{#<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubDirective.js" %}"></script>#}
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/taskProvider.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/toDoController.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/directive.js" %}"></script>
 <script>
     $(window).load(function(){
         var rtl = true; // Use RTL

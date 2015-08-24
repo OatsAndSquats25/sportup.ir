@@ -1,0 +1,26 @@
+<article class="block" ng-Controller="registeredSessionsCtlr">
+    <header><h2>Daily Programs</h2></header>
+    <table class="timetable table  table-bordered ">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>تاریخ شروع</th>
+                <th>تاریخ پایان</th>
+                <th>قیمت</th>
+                <th>ساعت شروع</th>
+                <th>ساعت پایان</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr ng-repeat="program in programs">
+                <td ng-bind="program.title"></td>
+                <td ng-bind="program.publish_date"></td>
+                <td ng-bind="program.expiry_date"></td>
+                <td ng-bind="program.amount"></td>
+                <td ng-bind="program.sessionTimeBegin"></td>
+                <td ng-bind="program.sessionTimeEnd"></td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</article>
