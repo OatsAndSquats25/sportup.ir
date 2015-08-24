@@ -138,6 +138,8 @@ def sessionGenerateFull(club , showWeek):
                 dateEnd = definition.expiry_date.date()
             scheduleTable += sessionGenerate(definition, dateBegin, dateEnd, weekDay)
 
+        if not scheduleTable:
+            return 0
         # sort schedule table by day and begin time
         scheduleTable.sort(key=lambda x: (x.begin, x.day))
 
@@ -179,6 +181,9 @@ class sessionSchedule(generics.GenericAPIView):
         club = int(request.GET.get('club','0'))
         showWeek = int(request.GET.get('week','0'))
 
-        serializer = cellSerializer(sessionGenerateFull(club, showWeek), many=True)
+        sessionTable = sessionGenerateFull(club, showWeek)
+        if sessionTable == 0:
+            return Response("Data not found", status=status.HTTP_204_NO_CONTENT)
+        serializer = cellSerializer(sessionTable, many=True)
         return Response(serializer.data)
 # ----------------------------------------------------
