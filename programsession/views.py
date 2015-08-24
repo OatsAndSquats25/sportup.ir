@@ -117,6 +117,8 @@ def sessionGenerateFull(club , showWeek):
         #check program isvalid #todo
 
         #check week number >=0 and is valid with validation and user restriction #todo
+        if showWeek< 0:
+            return Response('Negative week not allowed!',status=status.HTTP_404_NOT_FOUND)
 
         # date and day calculation
         today = now()
@@ -167,9 +169,14 @@ class sessionSchedule(generics.GenericAPIView):
     """
     serializer_class = cellSerializer
     def get(self, request, *args, **kwargs):
+        """
+        get generated schedule
+        club        -- club id
+        week        -- week number >=0 (0 is current week)
+        """
         #input parameter club, week and validation #todo
-        club = int(kwargs.get('club','0'))
-        showWeek = int(kwargs.get('week','0'))
+        club = int(request.GET.get('club','0'))
+        showWeek = int(request.GET.get('week','0'))
 
         serializer = cellSerializer(sessionGenerateFull(club, showWeek), many=True)
         return Response(serializer.data)
