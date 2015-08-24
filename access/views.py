@@ -6,16 +6,24 @@ from rest_framework import status
 class accessRequest(views.APIView):
 # class accessRequest(generics.GenericAPIView):
     """
-    Request access for specific user to specific club
+    Access request for specific user on specific club
     """
     def get(self, request, *args, **kwargs):
-        return Response('not working')
+        """
+        userid      -- user identification
+        """
+        request.POST.get('userid')
+        return Response('not working', status=status.HTTP_204_NO_CONTENT)
 # ----------------------------------------------------
 class accessRecord(views.APIView):
 # class accessRequest(generics.GenericAPIView):
     """
-    Record access for specific enrollment
+    Access record for specific user enrollment
     """
     def post(self, request, *args, **kwargs):
-        return Response('not working')
+        """
+        enrollid    -- enrollment id for user
+        """
+        request.POST.get('enrollid')
+        return Response('not working', status=status.HTTP_204_NO_CONTENT)
 # ----------------------------------------------------
