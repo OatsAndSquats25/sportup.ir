@@ -24,7 +24,7 @@ app.controller('sessionCtlr',
                         $location.change('finance/checkout/');
                     },
                     function (results) {
-                        console.log("enrollment has error");
+                        alert("enrollment has error");
                     });
             });
     }
@@ -32,7 +32,7 @@ app.controller('sessionCtlr',
 
 
         $scope.getInfo = function (event) {
-          if(event.status) {
+          if(event.status && (event.capacity - event.enroll > 0)) {
             DataService.getInfo(event.prgid).then(
 
                  function(results) {
@@ -42,7 +42,7 @@ app.controller('sessionCtlr',
                      $scope.info.end = Math.floor((event.end) / 60) + ':' + ((((event.end) % 60) < 10) ? '0' + ((event.end) % 60) : ((event.end) % 60));
                      $scope.info.date = event.date;
                      $scope.info.format = 'yyyy/MM/dd'
-                     console.log($scope.info.date);
+                     console.log($scope.info);
                      $scope.openInfoModal();
                  },
                  function (results) {
