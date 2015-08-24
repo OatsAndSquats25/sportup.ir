@@ -4,8 +4,6 @@ app.controller('sessionClubCtlr',
         console.log("session controllerv start");
         $scope.timeTableRenderObject = [];
 
-        console.log("modal"+$scope.beginDate);
-
         $scope.openInfoModal = function () {
             var modalInstance = $modal.open({
 
@@ -19,8 +17,7 @@ app.controller('sessionClubCtlr',
               }
             });
         modalInstance.result.then(function () {
-            console.log("club:"+$scope.clubId+", week:"+ $scope.week+", cell:"+ $scope.selectedEvent.cellod);
-              DataService.enrollSession($scope.clubId, $scope.week, $scope.selectedEvent.cellId).then(
+              DataService.enrollSession($scope.clubId, $scope.week, $scope.info.cellid).then(
                     function (results) {
                         $location.change('finance/checkout/');
                     },

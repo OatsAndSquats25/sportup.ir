@@ -4,7 +4,7 @@
             <article class="block">
             <header><h2>جزییات</h2></header>
             <label id="ModalDateLabel">تاریخ: </label>
-              <input id="ModalDateInput" type="text" class="form-control"  datepicker-popup-persian="{{info.format}}" ng-model="info.date"/>
+              <input id="ModalDateInput" type="text" class="form-control"  datepicker-popup-persian="{{correntCell.format}}" ng-model="correntCell.date"/>
             
             <table class="table table-bordered table-striped">
               <tr>
@@ -13,9 +13,9 @@
                 <td class="text-center">ساعت پایان</td>
               </tr>
               <tr>
-                <td ng-bind="info.title" class="text-center"></td>
-                <td ng-bind="info.begin" class="text-center"></td>
-                <td ng-bind="info.end" class="text-center"></td>
+                <td ng-bind="correntCell.title" class="text-center"></td>
+                <td ng-bind="correntCell.begin" class="text-center"></td>
+                <td ng-bind="correntCell.end" class="text-center"></td>
               </tr>
               <tr>
                 <td class="text-center">قیمت</td>
@@ -23,9 +23,9 @@
                 <td class="text-center">ظرفیت باقی مانده</td>
               </tr>
               <tr>
-                <td ng-bind="info.price" class="text-center"></td>
-                <td ng-bind="(info.genderLimit == 1 ? 'مرد' : 'زن' )" class="text-center"></td>
-                <td ng-bind="info.maxCapacity || 0 " class="text-center"></td>
+                <td ng-bind="correntCell.price" class="text-center"></td>
+                <td ng-bind="(correntCell.genderLimit == 1 ? 'مرد' : 'زن' )" class="text-center"></td>
+                <td ng-bind="correntCell.maxCapacity || 0 " class="text-center"></td>
               </tr>
 
             </table>
@@ -36,19 +36,20 @@
             <button class="btn btn-danger  " type="button" ng-click="cancel()">لغو</button>
         </div>
      </script>
-    <div class="container" style="overflow:scroll;">
+    <div class="table-responsive">
     <header><h2>برنامه هفتگی</h2></header>
+    <div class="schedule_dates">
+        <a ng-if="week > 0" ng-click="previousWeek()" style="curser:pointer;"><i class="fa fa-arrow-right fa-lg"></i></a>
+          {{Dates[0] | persianDate:'yy/MM/dd' }} - {{Dates[6] | persianDate:'yy/MM/dd' }}  
+        <a ng-click="nextWeek()" style="curser:pointer;"><i class="fa fa-arrow-left fa-lg"></i></a>
+    </div>
+
       <table class="timetable table  table-bordered ">
           <thead>
               <tr>
                   <th></th>
-                  <th>شنبه</th>
-                  <th>یک شنبه</th>
-                  <th>دو شنبه</th>
-                  <th>سه شنبه</th>
-                  <th>چهار شنبه</th>
-                  <th>پنج شنبه</th>
-                  <th>جمعه</th>
+                  <th ng-repeat = "day in days">{{day}}</br>{{Dates[$index] | persianDate:'yy/MM/dd' }}</th>
+             
               </tr>
           </thead>
           <tbody >

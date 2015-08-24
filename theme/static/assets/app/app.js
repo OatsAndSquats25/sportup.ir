@@ -1,5 +1,9 @@
 ﻿var app = angular.module('app', ["ngRoute", "ui.bootstrap", 'ui.bootstrap.persian.datepicker','ui.bootstrap.datepicker', 'myModule']);
 
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+}]);
 // app.config(function ($routeProvider) {
 //     // $routeProvider
 //     //     .when("/home", {

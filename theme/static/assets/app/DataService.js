@@ -2,7 +2,11 @@
     function ($http) {
 
         var getAthletes = function(agreement){
-            return $http.get("/api/enroll/session/list/club/"+agreement);
+            return $http({
+                url: "/api/enroll/session/list/club/", 
+                method: "GET",
+                params: {agreement: agreement}
+             });
         }
         
         var addAthlete = function(athlete){
@@ -17,15 +21,30 @@
             items.$save(item);
         }
         var getSessionTable = function (clubId, week) {
-            return $http.get("/api/session/schedules/"+clubId+"/"+week );
+            return $http({
+                url: "/api/session/schedules/", 
+                method: "GET",
+                params: {club : clubId, week : week}
+             });
+
         };
 
         var getInfo = function (ProgramId) {
-            return $http.get("/api/program/info/"+ProgramId );
+            return $http.get("/api/program/info/"+ ProgramId );
+             // return $http({
+             //    url: "/api/program/info/", 
+             //    method: "GET",
+             //    params: {pk : ProgramId}
+             // });
         };
 
         var enrollSession = function (clubId, week, id) {
-            return $http.post("/api/enroll/session/"+clubId+"/"+week+"/"+id );
+            //return $http.post("/api/enroll/session/", clubId, week, id );
+            return $http({
+              url: "/api/enroll/session/", 
+              method: "POST",
+              data: {club : clubId, week : week, cellid : id}
+             });
         };
 
         var enrollSessionList = function () {

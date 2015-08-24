@@ -354,6 +354,11 @@ color: white;
 }
 
 /*//////////////////////////////////////////////////////////////////////////////////*/
+.schedule_dates {
+  text-align: center;
+  font-size: 14pt;
+  padding-bottom: 10px;
+}
 
 .tametable.container {
   overflow: scroll;

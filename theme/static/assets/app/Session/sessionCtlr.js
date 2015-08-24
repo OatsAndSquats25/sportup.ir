@@ -1,10 +1,9 @@
 app.controller('sessionCtlr',
     ["$scope", "$window", "DataService", "$modal", "$modal", "$location", "$rootScope",
     function sessionCtlr($scope, $window, DataService, $modal, $location, $rootScope) {
-        console.log("session controllerv start");
         $scope.timeTableRenderObject = [];
 
-        console.log("modal"+$scope.beginDate);
+
         $scope.openInfoModal = function () {
             var modalInstance = $modal.open({
 
@@ -13,36 +12,32 @@ app.controller('sessionCtlr',
               controller: 'ModalInstanceCtrl',
               resolve: {
                 info: function() {
-                  return $scope.info;
+                  return $scope.correntCell;
                 }
               }
             });
         modalInstance.result.then(function () {
-            console.log("club:"+$scope.clubId+", week:"+ $scope.week+", cell:"+ $scope.selectedEvent.cellod);
-              DataService.enrollSession($scope.clubId, $scope.week, $scope.selectedEvent.cellId).then(
+              DataService.enrollSession($scope.clubId, $scope.week, $scope.correntCell.cellid).then(
                     function (results) {
                         $location.change('finance/checkout/');
                     },
                     function (results) {
-                        alert("enrollment has error");
+                        console.log(results);
+                        alert(results.statusText);
                     });
             });
     }
 
-
-
         $scope.getInfo = function (event) {
-          if(event.status && (event.capacity - event.enroll > 0)) {
+          if(event.status && (event.capacity > 0)) {
             DataService.getInfo(event.prgid).then(
-
                  function(results) {
-                     $scope.info = results.data;
-                     $scope.info.cellid = event.cellid;
-                     $scope.info.begin = Math.floor((event.begin) / 60) + ':' + ((((event.begin) % 60) < 10) ? '0' + ((event.begin) % 60) : ((event.begin) % 60));
-                     $scope.info.end = Math.floor((event.end) / 60) + ':' + ((((event.end) % 60) < 10) ? '0' + ((event.end) % 60) : ((event.end) % 60));
-                     $scope.info.date = event.date;
-                     $scope.info.format = 'yyyy/MM/dd'
-                     console.log($scope.info);
+                     $scope.correntCell = results.data;
+                     $scope.correntCell.cellid = event.cellid;
+                     $scope.correntCell.begin = Math.floor((event.begin) / 60) + ':' + ((((event.begin) % 60) < 10) ? '0' + ((event.begin) % 60) : ((event.begin) % 60));
+                     $scope.correntCell.end = Math.floor((event.end) / 60) + ':' + ((((event.end) % 60) < 10) ? '0' + ((event.end) % 60) : ((event.end) % 60));
+                     $scope.correntCell.date = event.date;
+                     $scope.correntCell.format = 'yyyy/MM/dd'
                      $scope.openInfoModal();
                  },
                  function (results) {
@@ -51,11 +46,24 @@ app.controller('sessionCtlr',
           }
         };
 
+        $scope.Dates = [];
+        var getWeekDates = function(todayInfo) {
+          $scope.Dates = [];
+          var today = new Date(todayInfo.date);
+          var tmpDate = new Date(today).setDate(today.getDate() - todayInfo.day);
+          for(var i = 0; i < 7; i++) {
+            $scope.Dates.push(tmpDate);
+            tmpDate = new Date(tmpDate).setDate(new Date(tmpDate).getDate() + 1);
+          }
+        }
+
+        $scope.days = ["شنبه", "یک شنبه", "دو شنبه", "سه شنبه", "چهار شنبه", "پنج شنبه", "جمعه"];
         var renderTimeTable = function(events) {
+            getWeekDates(events[0]);
             $scope.timeTableRenderObject = [];
             var lastPlan = [{begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}]
             var hasPlan = {0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false};
-            $scope.days = ["شنبه", "یک شنبه", "دو شنبه", "سه شنبه", "چهار شنبه", "پنج شنبه", "جمعه"];
+            
             var inInterval = function (myEvent, myTime) {
                 if(!myEvent)
                     return false;
@@ -124,6 +132,30 @@ app.controller('sessionCtlr',
             }
         }
 
+        $scope.nextWeek = function(){
+          $scope.week++;
+           DataService.getSessionTable($scope.clubId, $scope.week).then(
+                 function(results) {
+                     $scope.data = results.data;
+                     renderTimeTable($scope.data);
+                 },
+                 function (results) {
+                     alert("این برنامه ها قابل رویت نیستند.");
+                 });
+        }
+        $scope.previousWeek = function(){
+          $scope.week--;
+           DataService.getSessionTable($scope.clubId, $scope.week).then(
+                 function(results) {
+                     $scope.data = results.data;
+                     renderTimeTable($scope.data);
+                 },
+                 function (results) {
+                     alert("این برنامه ها قابل رویت نیستند.");
+                 });
+        }
+
+
     	var initialTable = function(clubId, week){
             //$scope.data = DataService.getSessionTable(clubId, week);
             //renderTimeTable($scope.data);
@@ -143,8 +175,7 @@ app.controller('sessionCtlr',
 
 app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, info) {
 
-  $scope.info = info;
-  console.log(info);
+  $scope.correntCell = info;
 
   $scope.ok = function () {
     $modalInstance.close();
