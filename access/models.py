@@ -6,7 +6,4 @@ from enroll.models import enrolledProgram
 #---------------------------------------------------------------------------------------------------
 class access(Displayable):
     enrollKey   = models.ForeignKey(enrolledProgram)
-    # user        = models.ForeignKey(user)
-    datetime    = models.DateTimeField()
-
 #---------------------------------------------------------------------------------------------------

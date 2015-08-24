@@ -9,8 +9,8 @@ import views
 # router.register(r'enroll_session', views.enrollSession, 'enroll')
 
 urlpatterns = patterns('',
-    url(r'^access/request/$',views.accessRequest.as_view(), name="access_request"),
-    url(r'^access/record/$',views.accessRecord.as_view(), name="access_record"),
+    url(r'^access/$',views.accessView.as_view(), name="accessAPI"),
+    url(r'^access/request/$',views.accessRequest.as_view(), name="accessUserAPI"),
 )
 
 # urlpatterns += router.urls
