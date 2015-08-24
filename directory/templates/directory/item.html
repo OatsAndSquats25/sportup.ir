@@ -111,15 +111,14 @@
                        <div class="container">
                             {% program_list object.id %}
                         </div>
-
-                        <article ng-app="app" class="container">
+                        <div ng-app="app" >
                             <input type="hidden" id="club" value="{{object.id}}">
                             <session-table></session-table>
 {#                            <session-table-club></session-table-club>#}
 {#                            <registered-sessions></registered-sessions>#}
 {#                            <registered-sessions-club></registered-sessions-club>#}
                             <task-decorate></task-decorate>
-                        </article>
+                        </div>
                         <!-- /.col-md-8-->
                     
                     

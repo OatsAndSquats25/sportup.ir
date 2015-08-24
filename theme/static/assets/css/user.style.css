@@ -355,6 +355,10 @@ color: white;
 
 /*//////////////////////////////////////////////////////////////////////////////////*/
 
+.tametable.container {
+  overflow: scroll;
+}
+
 .timetable {
     font-size: 11px;
     margin-top: 30px;
@@ -389,6 +393,7 @@ caption, th, td {
 }
 
 .timetable .event-green {
+    cursor: pointer;
     background-color: #7CDAB1;
     border-bottom: 1px solid #151515;
     border-right: 1px solid #151515;
@@ -409,8 +414,17 @@ caption, th, td {
 }
 
 
-.timetable .event-green:hover {
-    color: #000;
+.event-red a:hover {
+  color: #474747;
+}
+
+.event-gray a:hover {
+  color: #474747;
+}
+
+
+.timetable .event-green:hover a {
+    color: #ff513f;
 }
 
 .timetable .event a {
@@ -434,7 +448,7 @@ h3 {
 }
 
 .timetable.small {
-    display: none;
+    /*display: none;*/
     font-size: 13px;
 }
 .ui-tabs-panel ul {

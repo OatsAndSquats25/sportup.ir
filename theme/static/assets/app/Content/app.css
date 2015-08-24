@@ -77,7 +77,7 @@ a {
     text-decoration: none;
 }
 
-@media all and (max-width: 768px){
+/*@media all and (max-width: 768px){
     .timetable{
         display:none;
         width:0;
@@ -95,7 +95,7 @@ a {
         opacity:0;
         visibility: collapse;
     } 
-}
+}*/
 
 .list-slider .slide header h3 {
   color: #ff513f;
