@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from models import access
+# ----------------------------------------------------
+class accessAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+admin.site.register(access, accessAdmin)
+# ----------------------------------------------------

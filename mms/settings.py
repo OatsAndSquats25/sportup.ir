@@ -91,6 +91,7 @@ INSTALLED_APPS = (
     'programsession',
     'enroll',
     'finance',
+    'access',
 )
 
 MIDDLEWARE_CLASSES = (
