@@ -1,6 +1,7 @@
 <article class="block" ng-Controller="registeredSessionsCtlr">
-    <header><h2>Daily Programs</h2></header>
-    <table class="timetable table  table-bordered ">
+    <div class="table-responsive">
+    <header><h2>لیست برنامه‌های ثبت نام شده</h2></header>
+    <table class="timetable table table-striped table-bordered">
         <thead>
             <tr>
                 <th>عنوان</th>
@@ -14,9 +15,9 @@
         <tbody >
             <tr ng-repeat="program in programs">
                 <td ng-bind="program.title"></td>
-                <td ng-bind="program.publish_date"></td>
-                <td ng-bind="program.expiry_date"></td>
-                <td ng-bind="program.amount"></td>
+                <td ng-bind="program.publish_date | persianDate:'yy/MM/dd'"></td>
+                <td ng-bind="program.expiry_date | persianDate:'yy/MM/dd'"></td>
+                <td ng-bind="program.amount | noFractionCurrency:''"></td>
                 <td ng-bind="program.sessionTimeBegin"></td>
                 <td ng-bind="program.sessionTimeEnd"></td>
             </tr>
