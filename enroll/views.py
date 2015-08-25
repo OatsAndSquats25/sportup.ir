@@ -10,6 +10,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework import status
 
+from accounts.models import userProfile
 from program.models import programDefinition
 from finance.functions import invoiceGenerate, paymentRequest
 
@@ -123,7 +124,8 @@ class enrollSession(generics.GenericAPIView):
             try:
                 userInst = UserModel.objects.get(email = _email)
             except UserModel.DoesNotExist:
-                userInst = UserModel.objects.create_user('XXX', _email, None)
+                userInst = UserModel.objects.create_user(UserModel.objects.count(), email = _email, first_name = _first, last_name = _last)
+                userProfile.objects.create(user = userInst, cellPhone = _cellP)
                 # todo est cellphone number
             _user = userInst
         else:
