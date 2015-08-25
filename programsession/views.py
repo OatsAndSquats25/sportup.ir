@@ -48,7 +48,7 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
     lastDate = (now() + datetime.timedelta(singleSession.daysToShow)).date()
     cells = []
     cellDate = dateBegin
-    count = 0
+    # count = 0
     for day,status in days.iteritems():
         if status and cellDate <= lastDate and day >= weekDay:# and day >= weekDay and cellDate <= dateEnd:
             bgn = datetime.datetime.combine(datetime.date.today(), singleSession.sessionTimeBegin)
@@ -62,9 +62,10 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
                                 (bgn + datetime.timedelta(hours=duration.hour,minutes=duration.minute)).time(),
                                 singleSession.price,
                                 singleSession.maxCapacity)
-                count += 1
+                # count += 1
                 cells.append(tempCell)
                 bgn += datetime.timedelta(hours=duration.hour,minutes=duration.minute)
+        if day >= weekDay:
             cellDate += datetime.timedelta(days=1)
 
     # apply restriction condition on table
@@ -122,6 +123,7 @@ def sessionGenerateFull(club , showWeek):
         # date and day calculation
         today = now()
         weekDay = (today.weekday()+2)%7     # move start of week from Mon to Sat
+
         if showWeek > 0:
             today += datetime.timedelta(days=((showWeek * 7) - weekDay ))
             weekDay = 0
