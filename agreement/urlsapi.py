@@ -9,7 +9,8 @@ import views
 # router.register(r'enroll_session', views.enrollSession, 'enroll')
 
 urlpatterns = patterns('',
-    url(r'^agreement/list/$',views.agreementList.as_view(), name= "agreement_list"),
+    url(r'^agreement/list/$',views.agreementList.as_view(), name= "agreementListAPI"),
+    url(r'^agreement/clubs/$',views.agreementClubs.as_view(), name= "agreementClubsAPI"),
 )
 
 # urlpatterns += router.urls
