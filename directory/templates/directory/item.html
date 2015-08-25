@@ -9,7 +9,7 @@
 <li class="active">{% trans "Directory" %}</li>
 {% endblock %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static "assets/app/Content/app.css"  %}" type="text/css">
+
 {% endblock %}
 
 {% block main %}
@@ -114,9 +114,9 @@
                         <div ng-app="app" >
                             <input type="hidden" id="club" value="{{object.id}}">
                             <session-table></session-table>
-{#                            <session-table-club></session-table-club>#}
-{#                            <registered-sessions></registered-sessions>#}
-{#                            <registered-sessions-club></registered-sessions-club>#}
+                            <session-table-club></session-table-club>
+                            <registered-sessions></registered-sessions>
+                            <registered-sessions-club></registered-sessions-club>
                             <task-decorate></task-decorate>
                         </div>
                         <!-- /.col-md-8-->

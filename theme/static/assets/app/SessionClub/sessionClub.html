@@ -1,38 +1,5 @@
-<article class="block">
-    <!-- <div class="row" ng-Controller="MainController">
-        <div class="col-md-4">
-            <p class="input-group">
-              <input type="text" class="form-control"  datepicker-popup-persian="{{format}}" ng-model="beginDate" is-open="beginIsOpen"  datepicker-options="dateOptions"   date-disabled="disabled(date, mode)" ng-required="true" close-text="بسته"/>
-               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="openBegin($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span> 
-            </p>
-      
-      
-            <p class="input-group">
-              <input type="text" class="form-control"   datepicker-popup-persian="{{format}}" ng-model="endDate" is-open="endIsOpen"  datepicker-options="dateOptions" readonly="readonly" date-disabled="disabled(date, mode)" ng-required="true" close-text="بسته" />
-               <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span> 
-            </p>
-            <div class="form-group">
-               <label class="col-sm-2 control-label" for="input-id-1">Interval</label>
-               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-id-1">
-               </div>
-            </div>
-            <div class="form-group">
-               <label class="col-sm-2 control-label" for="input-id-1"></label>
-               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="input-id-1">
-               </div>
-            </div>
-            <button class="btn btn-primary" ng-click="create()"></button>
-        </div>
-
-    </div> -->
-    <div ng-Controller="sessionClubCtlr">
-<script type="text/ng-template" id="infoModal.html">
+<article ng-Controller="sessionClubCtlr">
+    <script type="text/ng-template" id="ClubinfoModal.html">
         <div class="modal-body">
             <article class="block">
             <header><h2>جزییات</h2></header>
@@ -75,60 +42,22 @@
             <button class="btn btn-danger  " type="button" ng-click="cancel()">خروج</button>
         </div>
      </script>
-     <script type="text/ng-template" id="deleteModal.html">
-        <div class="modal-body">
-            <article class="block">
-            <header><h2>حذف ورزشکار</h2></header>
-              <form class="form" name="deleteAthleteForm" role="form">
-                <div class="form-group" show-errors>
-                    <label for="fullName" class="col-sm-3 control-label">Name</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="fullName" name="fullName" class="form-control"
-                               ng-model="editableEmployee.fullName" required
-                               />
-                    </div>
-                </div>
-                <input type="button" class="btn btn-default" value="Cancel" ng-click="cancelForm()" />
-                <input type="submit" class="btn btn-primary" value="Submit" ng-click="submitForm()" />
-              </form>
-          </article>
-        </div>
-     </script>
+    <div class="table-responsive">
+    <header><h2>برنامه هفتگی باشگاه</h2></header>
+    <div class="schedule_dates">
+        <a ng-if="week > 0" ng-click="previousWeek()" style="curser:pointer;"><i class="fa fa-arrow-right fa-lg"></i></a>
+          {{Dates[0] | persianDate:'yy/MM/dd' }} - {{Dates[6] | persianDate:'yy/MM/dd' }}  
+        <a ng-click="nextWeek()" style="curser:pointer;"><i class="fa fa-arrow-left fa-lg"></i></a>
+    </div>
 
-      <script type="text/ng-template" id="addModal.html">
-        <div class="modal-body">
-            <article class="block">
-            <header><h2>اضافه کردن ورزشکار</h2></header>
-              <form class="form" name="deleteAthleteForm" role="form">
-                <div class="form-group" show-errors>
-                    <label for="fullName" class="col-sm-3 control-label">Name</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="fullName" name="fullName" class="form-control"
-                               ng-model="editableEmployee.fullName" required
-                               />
-                    </div>
-                </div>
-                <input type="button" class="btn btn-default" value="Cancel" ng-click="cancelForm()" />
-                <input type="submit" class="btn btn-primary" value="Submit" ng-click="submitForm()" />
-              </form>
-          </article>
-        </div>
-     </script>
-
-    <header><h2>برنامه هفتگی</h2></header>
-    <table class="timetable table  table-bordered ">
-        <thead>
-            <tr>
-                <th></th>
-                <th>شنبه</th>
-                <th>یک شنبه</th>
-                <th>دو شنبه</th>
-                <th>سه شنبه</th>
-                <th>چهار شنبه</th>
-                <th>پنج شنبه</th>
-                <th>جمعه</th>
-            </tr>
-        </thead>
+      <table class="timetable table table-bordered ">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th ng-repeat = "day in days">{{day}}</br>{{Dates[$index] | persianDate:'yy/MM/dd' }}</th>
+             
+              </tr>
+          </thead>
         <tbody >
             <tr ng-repeat="time in timeTableRenderObject">
                 <td ng-if="$index % labelTimeSpan == 0" class="text-center" rowspan="{{4}}">{{createLabel(label[$index / labelTimeSpan])}}</td>

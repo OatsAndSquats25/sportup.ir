@@ -710,3 +710,7 @@ ul#todo-list li .btn-remove:hover{
   float: right;
   width: auto;
 }
+
+#absence td{
+    text-align: center;
+}

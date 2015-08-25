@@ -8,7 +8,7 @@ app.controller('sessionClubCtlr',
             var modalInstance = $modal.open({
 
               animation: $scope.animationsEnabled,
-              templateUrl: 'infoModal.html',
+              templateUrl: 'ClubinfoModal.html',
               controller: 'infoModalCtrl',
               resolve: {
                 info: function() {
@@ -88,7 +88,19 @@ app.controller('sessionClubCtlr',
           }
         };
 
+        $scope.Dates = [];
+        var getWeekDates = function(todayInfo) {
+          $scope.Dates = [];
+          var today = new Date(todayInfo.date);
+          var tmpDate = new Date(today).setDate(today.getDate() - todayInfo.day);
+          for(var i = 0; i < 7; i++) {
+            $scope.Dates.push(tmpDate);
+            tmpDate = new Date(tmpDate).setDate(new Date(tmpDate).getDate() + 1);
+          }
+        }
+
         var renderTimeTable = function(events) {
+            getWeekDates(events[0]);
             $scope.timeTableRenderObject = [];
             var lastPlan = [{begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}, {begin: 0, end: 0}]
             var hasPlan = {0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false};
@@ -159,6 +171,29 @@ app.controller('sessionClubCtlr',
 
                 $scope.timeTableRenderObject.push(tmp);
             }
+        }
+
+        $scope.nextWeek = function(){
+          $scope.week++;
+           DataService.getSessionTable($scope.clubId, $scope.week).then(
+                 function(results) {
+                     $scope.data = results.data;
+                     renderTimeTable($scope.data);
+                 },
+                 function (results) {
+                     alert("این برنامه ها قابل رویت نیستند.");
+                 });
+        }
+        $scope.previousWeek = function(){
+          $scope.week--;
+           DataService.getSessionTable($scope.clubId, $scope.week).then(
+                 function(results) {
+                     $scope.data = results.data;
+                     renderTimeTable($scope.data);
+                 },
+                 function (results) {
+                     alert("این برنامه ها قابل رویت نیستند.");
+                 });
         }
 
       var initialTable = function(clubId, week){
