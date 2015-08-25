@@ -17,6 +17,8 @@ app.controller('sessionClubCtlr',
                 }
               }
             });
+        modalInstance.result.then(function () {
+            initialTable($scope.week);
         }
 
         $scope.deleteAthlete = function(idx) {
@@ -224,8 +226,6 @@ app.controller('infoModalCtrl', function ($scope, DataService, $modalInstance, p
             isDone : false
         };
         if(newAthlete.firstname.length > 0 && newAthlete.lastname.length > 0){
-          console.log(params.clubId+"week "+ params.week+"cell  "+ params.cellid+"name  "+ newAthlete.firstname+"last  "+ 
-                                  newAthlete.lastname+"mail  "+ newAthlete.email+"ph"+ newAthlete.phone)
             DataService.addAthlete(params.clubId, params.week, params.cellid, newAthlete.firstname, 
                                   newAthlete.lastname, newAthlete.email, newAthlete.phone).then(
              function(results){
