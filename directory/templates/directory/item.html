@@ -114,10 +114,7 @@
                         <div ng-app="app" >
                             <input type="hidden" id="club" value="{{object.id}}">
                             <session-table></session-table>
-                            <session-table-club></session-table-club>
-                            <registered-sessions></registered-sessions>
-                            <registered-sessions-club></registered-sessions-club>
-                            <task-decorate></task-decorate>
+                            {#<registered-sessions></registered-sessions>#}
                         </div>
                         <!-- /.col-md-8-->
                     
@@ -147,9 +144,10 @@
 <script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsDirective.js" %}"></script>
 {#<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubCtlr.js" %}"></script>#}
 {#<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubDirective.js" %}"></script>#}
-<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/taskProvider.js" %}"></script>
-<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/toDoController.js" %}"></script>
-<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/directive.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubCltr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsCell/registeredSessionsCellCltr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsCell/registeredSessionsCellDirective.js" %}"></script>
 <script>
     $(window).load(function(){
         var rtl = true; // Use RTL

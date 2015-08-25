@@ -1,13 +1,24 @@
 ﻿app.factory('DataService',
     function ($http) {
 
-        var getAthletes = function(agreement){
+        var getAthletes = function(id){
             return $http({
                 url: "/api/enroll/session/list/club/", 
                 method: "GET",
-                params: {agreement: agreement}
+                params: {clubid: id}
              });
         }
+
+        var getCellAthletes = function(clubId, week, cellId){
+            return [{firstname:'علیو', lastname:'رضا', isDone: true}]
+            // return $http({
+            //     url: "/api/enroll/session/", 
+            //     method: "GET",
+            //     params: {club : clubId, week : week, cellid : cellId}
+            //  });
+        }
+
+        getCellAthletes
         
         var addAthlete = function(athlete){
             
@@ -17,8 +28,12 @@
             return true;   
         }
         
-        var updateItem = function(item){
-            items.$save(item);
+        var athleteAttended = function(id){
+            return $http({
+              url: "/api/access/", 
+              method: "POST",
+              data: {enrollid : id}
+             });
         }
         var getSessionTable = function (clubId, week) {
             return $http({
@@ -68,7 +83,8 @@
             getAthletes : getAthletes,
             addAthlete : addAthlete,
             removeAthlete : removeAthlete,
-            updateItem : updateItem,
+            athleteAttended : athleteAttended,
+            getCellAthletes : getCellAthletes,
             /*delete : function(id){ // ng-resource 
                 return request.delete({id : id});
             }*/
