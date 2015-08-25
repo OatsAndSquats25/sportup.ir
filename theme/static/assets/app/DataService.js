@@ -9,19 +9,26 @@
              });
         }
 
+        var getClubs = function(){
+            return $http.get("/api/agreement/clubs/");
+        }
+
         var getCellAthletes = function(clubId, week, cellId){
-            return [{firstname:'علیو', lastname:'رضا', isDone: true}]
-            // return $http({
-            //     url: "/api/enroll/session/", 
-            //     method: "GET",
-            //     params: {club : clubId, week : week, cellid : cellId}
-            //  });
+            return $http({
+                url: "/api/enroll/session/", 
+                method: "GET",
+                params: {club : clubId, week : week, cellid : cellId}
+             });
         }
 
         getCellAthletes
         
-        var addAthlete = function(athlete){
-            
+        var addAthlete = function(clubId, week, id, firstname, lastname, email, phone){
+            return $http({
+              url: "/api/enroll/session/club/", 
+              method: "POST",
+              data: {club : clubId, week : week, cellid : id, firstName:firstname, lastName:lastname, eMail:email, cellPhone:phone}
+             });
         }
         
         var removeAthlete = function(index){
@@ -85,6 +92,7 @@
             removeAthlete : removeAthlete,
             athleteAttended : athleteAttended,
             getCellAthletes : getCellAthletes,
+            getClubs :getClubs,
             /*delete : function(id){ // ng-resource 
                 return request.delete({id : id});
             }*/

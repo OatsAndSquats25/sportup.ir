@@ -1,8 +1,9 @@
 app.controller('sessionClubCtlr',
     ["$scope", "$window", "DataService", "$modal", "$modal", "$location", "$rootScope",
     function sessionClubCtlr($scope, $window, DataService, $modal, $location, $rootScope) {
-        console.log("session controllerv start");
         $scope.timeTableRenderObject = [];
+
+        $scope.modalParams = {};
 
         $scope.openInfoModal = function () {
             var modalInstance = $modal.open({
@@ -11,19 +12,10 @@ app.controller('sessionClubCtlr',
               templateUrl: 'ClubinfoModal.html',
               controller: 'infoModalCtrl',
               resolve: {
-                info: function() {
-                  return $scope.info;
+                params: function() {
+                  return $scope.modalParams;
                 }
               }
-            });
-        modalInstance.result.then(function () {
-              DataService.enrollSession($scope.clubId, $scope.week, $scope.info.cellid).then(
-                    function (results) {
-                        $location.change('finance/checkout/');
-                    },
-                    function (results) {
-                        console.log("enrollment has error");
-                    });
             });
         }
 
@@ -70,22 +62,13 @@ app.controller('sessionClubCtlr',
         };
 
         $scope.getInfo = function (event) {
-          if(event.status) {
-            DataService.getInfo(event.prgid).then(
-                 function(results) {
-                     $scope.info = results.data;
-                     $scope.info.cellid = event.cellid;
-                     $scope.info.begin = Math.floor((event.begin) / 60) + ':' + ((((event.begin) % 60) < 10) ? '0' + ((event.begin) % 60) : ((event.begin) % 60));
-                     $scope.info.end = Math.floor((event.end) / 60) + ':' + ((((event.end) % 60) < 10) ? '0' + ((event.end) % 60) : ((event.end) % 60));
-                     $scope.info.date = event.date;
-                     $scope.info.format = 'yyyy/MM/dd'
-                     $scope.info.beginDate = $scope.beginDate;
-                     $scope.openInfoModal();
-                 },
-                 function (results) {
-                     alert(results.status + ': ' + results.statusText);
-                 });
-          }
+            console.log(event);
+            if(event.status) {
+                $scope.modalParams.cellid = event.cellid;
+                $scope.modalParams.clubId = $scope.clubId;
+                $scope.modalParams.week = $scope.week;
+                $scope.openInfoModal();
+            }
         };
 
         $scope.Dates = [];
@@ -196,59 +179,81 @@ app.controller('sessionClubCtlr',
                  });
         }
 
-      var initialTable = function(clubId, week){
+      var initialTable = function(week){
+        DataService.getClubs().then(
+            function(results) {
+                    $scope.clubId = results.data[0].id;
+                
             //$scope.data = DataService.getSessionTable(clubId, week);
             //renderTimeTable($scope.data);
-       DataService.getSessionTable(clubId, week).then(
-                 function(results) {
-                     $scope.data = results.data;
-                     renderTimeTable($scope.data);
-                 },
-                 function (results) {
-                     console.log(results.status + ': ' + results.statusText);
-                     alert(results.status + ': ' + results.statusText);
-                 });
+                DataService.getSessionTable($scope.clubId, week).then(
+                     function(results) {
+                         $scope.data = results.data;
+                         renderTimeTable($scope.data);
+                     },
+                     function (results) {
+                         console.log(results.status + ': ' + results.statusText);
+                         alert(results.status + ': ' + results.statusText);
+                     });
+            });
         }
-        $scope.clubId = $("#club").val();
         $scope.week = 0;
-    initialTable($scope.clubId, $scope.week);
+    initialTable( $scope.week);
 }]);
 
-app.controller('infoModalCtrl', function ($scope, $modalInstance, info) {
+app.controller('infoModalCtrl', function ($scope, DataService, $modalInstance, params) {
 
-  $scope.info = info;
+    getCellAthletes = function() {
+        DataService.getCellAthletes(params.clubId, params.week, params.cellid).then(
+            function (results) {
+                console.log(results);
+                $scope.athletes = results.data;
+                for(athlete in $scope.athletes)
+                    $scope.athletes[athlete].isDone = false;
+            });
+    }
+    getCellAthletes();
+    $scope.athlete = {};
+
+    $scope.addAthlete = function(){
+        var newAthlete = {
+            firstname : $scope.athlete.firstname,
+            lastname : $scope.athlete.lastname,
+            email : $scope.athlete.email,
+            phone : $scope.athlete.phone,
+            isDone : false
+        };
+        if(newAthlete.firstname.length > 0 && newAthlete.lastname.length > 0){
+          console.log(params.clubId+"week "+ params.week+"cell  "+ params.cellid+"name  "+ newAthlete.firstname+"last  "+ 
+                                  newAthlete.lastname+"mail  "+ newAthlete.email+"ph"+ newAthlete.phone)
+            DataService.addAthlete(params.clubId, params.week, params.cellid, newAthlete.firstname, 
+                                  newAthlete.lastname, newAthlete.email, newAthlete.phone).then(
+             function(results){
+                    newAthlete.id = results.data;
+                    $scope.athletes.push(newAthlete);
+                    $scope.athlete.firstname = "";
+                    $scope.athlete.lastname = "";
+                },
+                function(results){
+                 alert("اینترنت خود را بررسی کنید.");
+                });
+        }
+    }
+    
+     $scope.deleteAthlete = function(athlete){
+        // DataService.removeAthlete(index).then (
+        //  function(results){
+            $scope.athletes = jQuery.grep($scope.athletes, function(value) {
+              return value != athlete;
+            });
+                //$scope.athletes.splice(index,1);
+            // },
+            // function(results){
+            //  alert("اینترنت خود را بررسی کنید.");
+            // });
+     }
 
   $scope.ok = function () {
     $modalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-});
-
-app.controller('deleteModalCtrl', function ($scope, $modalInstance) {
-
-  //$scope.info = info;
-
-  $scope.ok = function () {
-    $modalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-});
-
-app.controller('addModalCtrl', function ($scope, $modalInstance) {
-
-  //$scope.info = info;
-
-  $scope.ok = function () {
-    $modalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
   };
 });

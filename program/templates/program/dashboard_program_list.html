@@ -1,8 +1,10 @@
 {% extends 'dashboard/dashboard.html' %}
 {% load i18n humanize generic_tags %}
-
+{% load i18n static future program_tags %}
 {% block dashboard %}
-    <div class="table-responsive">
+
+    
+    <section class="table-responsive">
         <header><h2>{% trans "Programs" %}</h2></header>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             {% for object in object_list %}
@@ -55,5 +57,29 @@
             {% endif %}
             {% endfor %}
         </div>
-    </div>
+    </section>
+        <section ng-app="app" >
+        <session-table-club></session-table-club>
+        <registered-sessions-club></registered-sessions-club>
+        {#<registered-sessions-cell></registered-sessions-cell>#}
+    </section>
+{% endblock %}
+{% block extra_js_end %}
+<script type="text/javascript" src="{% static "assets/js/angular.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/angular-route.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/ui-bootstrap-tpls.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/dateparser.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/persiandate.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/js/persian-datepicker-tpls.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/filters.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/app.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/DataService.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/Session/sessionCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/Session/sessionDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/SessionClub/sessionClubCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/SessionClub/sessionClubDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsCtlr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessions/registeredSessionsDirective.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubCltr.js" %}"></script>
+<script type="text/javascript" src="{% static "assets/app/registeredSessionsClub/registeredSessionsClubDirective.js" %}"></script>
 {% endblock %}
