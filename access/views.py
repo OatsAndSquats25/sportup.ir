@@ -32,11 +32,11 @@ class accessView(generics.GenericAPIView):
         """
         #todo  check is this enroll for this club
         # enrollInst = enrolledProgram.objects.get()
-        enrollid = request.DATA.get('enrollid','-1')
+        enrollid = request.data.get('enrollid','-1')
         if enrollid == '-1':
             return Response("Error", status=status.HTTP_204_NO_CONTENT)
         else:
-            enrollInst = enrolledProgram.objects.get(pk=request.DATA.get('enrollid'))
+            enrollInst = enrolledProgram.objects.get(pk=request.data.get('enrollid'))
             access.objects.create(enrollKey=enrollInst, user=self.request.user, expiry_date= now())
             return Response("Done")
 # ----------------------------------------------------
