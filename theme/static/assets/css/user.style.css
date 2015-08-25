@@ -714,3 +714,14 @@ ul#todo-list li .btn-remove:hover{
 #absence td{
     text-align: center;
 }
+
+.modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+#ClubinfoModal.html {
+top:5%;
+right:50%;
+outline: none;
+}

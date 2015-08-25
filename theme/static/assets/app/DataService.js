@@ -3,7 +3,7 @@
 
         var getAthletes = function(id){
             return $http({
-                url: "/api/enroll/session/list/club/", 
+                url: "/api/enroll/session/club/", 
                 method: "GET",
                 params: {clubid: id}
              });

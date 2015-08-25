@@ -22,7 +22,6 @@ app.controller('sessionCtlr',
                         $window.location.href = '/checkout/';
                     },
                     function (results) {
-                        console.log(results);
                         alert(results.statusText);
                     });
             });
@@ -41,7 +40,12 @@ app.controller('sessionCtlr',
                      $scope.openInfoModal();
                  },
                  function (results) {
-                     alert(results.status + ': ' + results.statusText);
+                    console.log(results.status);
+                        if(results.status == 403) {
+                            $window.location.href = '/accounts/login/?next=/' + window.location.pathname;
+                        }
+                        else
+                            alert(results.status + ': ' + results.statusText);
                  });
           }
         };

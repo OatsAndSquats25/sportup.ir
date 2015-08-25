@@ -26,11 +26,12 @@
                  </thead>
                  <tbody>
                     <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{isDone:status}) | orderBy:'firstname'">
-                <td colspan="2">{{athlete.firstname}}</td>
-                <td colspan="2">{{athlete.lastname}}</td>
-                <td>
-                  <button ng-click="deleteAthlete(athlete)" type="button" class="btn btn-danger">حذف</button>
-                </td>
+                      <td>{{athlete.firstname}}</td>
+                      <td>{{athlete.lastname}}</td>
+                      <td colspan="2">{{athlete.title}}</td>
+                      <td>
+                        <button ng-click="deleteAthlete(athlete)" type="button" class="btn btn-danger">حذف</button>
+                      </td>
                     </tr>
                  </tbody>
               </table>
