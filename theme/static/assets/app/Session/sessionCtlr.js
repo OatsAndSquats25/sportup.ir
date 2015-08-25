@@ -42,7 +42,7 @@ app.controller('sessionCtlr',
                  function (results) {
                     console.log(results.status);
                         if(results.status == 403) {
-                            $window.location.href = '/accounts/login/?next=/' + window.location.pathname;
+                            $window.location.href = '/accounts/login/?next=' + window.location.pathname;
                         }
                         else
                             alert(results.status + ': ' + results.statusText);
