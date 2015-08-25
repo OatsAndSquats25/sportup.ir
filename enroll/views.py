@@ -73,13 +73,13 @@ class enrollSessionClub(generics.GenericAPIView):
         """
         Enroll in a specific cell (anyone)
         """
-        _club    = int(request.DATA.get('club','-1'))
-        _week    = int(request.DATA.get('week','-1'))
-        _cellid  = int(request.DATA.get('cellid','-1'))
-        _first   = request.DATA.get('firstName', '')
-        _last    = request.DATA.get('lastName', '')
-        _email   = request.DATA.get('eMail', '')
-        _cellP   = request.DATA.get('cellPhone','')
+        _club    = int(request.data.get('club','-1'))
+        _week    = int(request.data.get('week','-1'))
+        _cellid  = int(request.data.get('cellid','-1'))
+        _first   = request.data.get('firstName', '')
+        _last    = request.data.get('lastName', '')
+        _email   = request.data.get('eMail', '')
+        _cellP   = request.data.get('cellPhone','')
         _desc    = ''
 
         if _club == -1 or _week == -1 or _cellid == -1 or _first == None or _last == None:
@@ -149,9 +149,9 @@ class enrollSession(generics.GenericAPIView):
         """
         Enroll in a specific cell (anyone)
         """
-        _club    = int(request.DATA.get('club','-1'))
-        _week    = int(request.DATA.get('week','-1'))
-        _cellid  = int(request.DATA.get('cellid','-1'))
+        _club    = int(request.data.get('club','-1'))
+        _week    = int(request.data.get('week','-1'))
+        _cellid  = int(request.data.get('cellid','-1'))
 
         if _club == -1 or _week == -1 or _cellid == -1:
             return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
