@@ -82,7 +82,7 @@ class enrollSessionClub(generics.GenericAPIView):
         _cellP   = request.data.get('cellPhone','')
         _desc    = ''
 
-        if _club == -1 or _week == -1 or _cellid == -1 or _first == None or _last == None:
+        if _club == -1 or _week == -1 or _cellid == -1 or _first == '' or _last == '':
             return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
 
         scheduleTable = sessionGenerateFull(_club, _week)
