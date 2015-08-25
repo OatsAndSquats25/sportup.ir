@@ -10,7 +10,7 @@ class clubEnrollmentCourseAdmin(admin.ModelAdmin):
 admin.site.register(enrolledProgramCourse, clubEnrollmentCourseAdmin)
 # ----------------------------------------------------
 class clubEnrollmentSessionAdmin(admin.ModelAdmin):
-    list_display = ('programDefinitionKey','status','invoiceKey','amount', 'user')
+    list_display = ('programDefinitionKey','date','sessionTimeBegin','sessionTimeEnd','status','invoiceKey','amount', 'user')
 
 admin.site.register(enrolledProgramSession, clubEnrollmentSessionAdmin)
 # ----------------------------------------------------

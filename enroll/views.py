@@ -16,7 +16,7 @@ from finance.functions import invoiceGenerate, paymentRequest
 
 from models import enrolledProgramSession, enrolledProgram
 from enrollcourse.function import enrollCourse
-from serializer import enrollProgramSerializer,enrollSessionSerializer
+from serializer import enrollProgramSerializer,enrollSessionSerializer, enrollSessionClubSerializer
 
 from agreement.models import agreement
 from programsession.views import sessionGenerateFull
@@ -42,7 +42,7 @@ class enrollConfirmed(View):
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect('directoryItemDetail', slug= programInst.clubSlug())
 # ----------------------------------------------------
-class enrollSessionList(generics.ListAPIView):
+class enrollSessionUser(generics.ListAPIView):
     """
     Return list of all enrolled sessions for current user (anyone)
     """
@@ -54,42 +54,22 @@ class enrollSessionList(generics.ListAPIView):
         return enrolledProgram.objects.instance_of(enrolledProgramSession).filter(user = user)
         # return enrolledProgram.objects.filter(user = user)
 # ----------------------------------------------------
-class enrollSessionListClub(generics.ListAPIView):
+class enrollSessionClub(generics.GenericAPIView):
     """
     Return list of all enrolled sessions for club (club permission)
     clubid -- aggreement id
     """
-    serializer_class = enrollProgramSerializer
+    serializer_class = enrollSessionClubSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get_queryset(self):
-        return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
+    # def get_queryset(self):
+    #     return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
         # agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.request.GET.get('agreement'))
         # return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst).select_related('user')
-# ----------------------------------------------------
-class enrollSession(generics.GenericAPIView):
-    """
-    Enroll session related operations
-    """
-    serializer_class = enrollSessionSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-    def get(self, request, *args, **kwargs):
-        """
-        Retrive enrolled for each session (Club permission)
-        club    -- club id
-        week    -- select week (current week is 0)
-        cellid  -- cellid
-        """
-        club= int(request.GET.get('club','-1'))
-        week= int(request.GET.get('week','-1'))
-        id  = int(request.GET.get('cellid','-1'))
-        scheduleTable = sessionGenerateFull(club, week)
-        cell = filter(lambda x: x.cellid == id, scheduleTable)
-        if not cell:
-            return Response("No cell exist.",status=status.HTTP_400_BAD_REQUEST)
 
-        enrolledInst = enrolledProgramSession.objects.filter(date = cell[0].date).filter(sessionTimeBegin = cell[0].begin).filter(sessionTimeEnd = cell[0].end)
-        return Response(enrollProgramSerializer(enrolledInst, many=True).data)
+    def get(self, request):
+        enrollInst = enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
+        return Response(enrollProgramSerializer(enrollInst).data)
 
     def post(self, request, *args, **kwargs):
         """
@@ -103,8 +83,6 @@ class enrollSession(generics.GenericAPIView):
         _email   = request.DATA.get('eMail', '')
         _cellP   = request.DATA.get('cellPhone','')
         _desc    = ''
-
-        # return Response(str(_club) + ' ' + str(_week) + ' ' + str(_cellid) + ' ' + _first + ' ' + _last + ' ' +  _email + ' ' + _cellP)
 
         if _club == -1 or _week == -1 or _cellid == -1 or _first == None or _last == None:
             return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
@@ -142,6 +120,58 @@ class enrollSession(generics.GenericAPIView):
                                               user = _user,
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
+
+        return Response("Done", status=status.HTTP_200_OK)
+# ----------------------------------------------------
+class enrollSession(generics.GenericAPIView):
+    """
+    Enroll session related operations
+    """
+    serializer_class = enrollSessionSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    def get(self, request, *args, **kwargs):
+        """
+        Retrive enrolled for each session (Club permission)
+        club    -- club id
+        week    -- select week (current week is 0)
+        cellid  -- cellid
+        """
+        club= int(request.GET.get('club','-1'))
+        week= int(request.GET.get('week','-1'))
+        id  = int(request.GET.get('cellid','-1'))
+        scheduleTable = sessionGenerateFull(club, week)
+        cell = filter(lambda x: x.cellid == id, scheduleTable)
+        if not cell:
+            return Response("No cell exist.",status=status.HTTP_400_BAD_REQUEST)
+
+        enrolledInst = enrolledProgramSession.objects.filter(date = cell[0].date).filter(sessionTimeBegin = cell[0].begin).filter(sessionTimeEnd = cell[0].end)
+        return Response(enrollProgramSerializer(enrolledInst, many=True).data)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Enroll in a specific cell (anyone)
+        """
+        _club    = int(request.DATA.get('club','-1'))
+        _week    = int(request.DATA.get('week','-1'))
+        _cellid  = int(request.DATA.get('cellid','-1'))
+
+        if _club == -1 or _week == -1 or _cellid == -1:
+            return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
+
+        scheduleTable = sessionGenerateFull(_club, _week)
+        cell = filter(lambda x: x.cellid == _cellid, scheduleTable)
+        if not cell:
+            return Response("No cell exist.",status=status.HTTP_400_BAD_REQUEST)
+        if cell[0].capacity <= 0:
+            return Response("Session does not have enough space.",status=status.HTTP_400_BAD_REQUEST)
+
+        prginst = programDefinition.objects.get(id = cell[0].prgid)
+        enrolledProgramSession.objects.create(programDefinitionKey = prginst,
+                                              amount = cell[0].price,
+                                              date = cell[0].date,
+                                              sessionTimeBegin = cell[0].begin,
+                                              sessionTimeEnd = cell[0].end,
+                                              user = self.request.user)
 
         return Response("Done", status=status.HTTP_200_OK)
 # ----------------------------------------------------

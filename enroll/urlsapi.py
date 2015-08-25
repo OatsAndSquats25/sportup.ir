@@ -10,9 +10,9 @@ import views
 
 urlpatterns = patterns('',
     # url(r'^enroll/session/(?P<club>\d+)/(?P<week>\d+)/(?P<id>\d+)/$',views.enrollSession.as_view(), name="Enroll_session"),
-    url(r'^enroll/session/$',views.enrollSession.as_view(), name="Enroll_session"),
-    url(r'^enroll/session/list/$',views.enrollSessionList.as_view(), name="Enroll_session_list_mine"),
-    url(r'^enroll/session/list/club/$',views.enrollSessionListClub.as_view(), name="Enroll_session_list_club"),
+    url(r'^enroll/session/$',views.enrollSession.as_view(), name="enrollSessionAPI"),
+    url(r'^enroll/session/user/$',views.enrollSessionUser.as_view(), name="enrollSessionListUserAPI"),
+    url(r'^enroll/session/club/$',views.enrollSessionClub.as_view(), name="enrollSessionListClubAPI"),
 )
 
 # urlpatterns += router.urls

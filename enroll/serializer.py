@@ -32,8 +32,11 @@ class enrollSessionSerializer(serializers.Serializer):
     club    = serializers.IntegerField()
     week    = serializers.IntegerField()
     cellid  = serializers.IntegerField()
+# ----------------------------------------------------
+class enrollSessionClubSerializer(enrollSessionSerializer):
     firstName=serializers.CharField(max_length=20)
     lastName =serializers.CharField(max_length=20)
     eMail    =serializers.EmailField(required=False)
     cellPhone=serializers.CharField(max_length=15, required=False)
+
 # ----------------------------------------------------
