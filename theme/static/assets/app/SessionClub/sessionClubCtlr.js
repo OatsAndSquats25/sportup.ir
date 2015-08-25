@@ -19,7 +19,8 @@ app.controller('sessionClubCtlr',
             });
         modalInstance.result.then(function () {
             initialTable($scope.week);
-        }
+        });
+      }
 
         $scope.deleteAthlete = function(idx) {
             var modalInstance = $modal.open({
