@@ -2,12 +2,15 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework import status
 
+from accounts.models import userProfile
 from program.models import programDefinition
 from finance.functions import invoiceGenerate, paymentRequest
 
@@ -92,22 +95,43 @@ class enrollSession(generics.GenericAPIView):
         """
         Enroll in a specific cell (anyone)
         """
-        club= int(request.DATA.get('club','-1'))
-        week= int(request.DATA.get('week','-1'))
-        id  = int(request.DATA.get('cellid','-1'))
+        _club    = int(request.DATA.get('club','-1'))
+        _week    = int(request.DATA.get('week','-1'))
+        _cellid  = int(request.DATA.get('cellid','-1'))
+        _first   = request.DATA.get('firstName', '')
+        _last    = request.DATA.get('lastName', '')
+        _email   = request.DATA.get('eMail', '')
+        _cellP   = request.DATA.get('cellPhone','')
+        _desc    = ''
 
-        if club == -1 or week == -1 or id == -1:
-            return Response('input parameters not valid',status=status.HTTP_400_BAD_REQUEST)
+        # return Response(str(_club) + ' ' + str(_week) + ' ' + str(_cellid) + ' ' + _first + ' ' + _last + ' ' +  _email + ' ' + _cellP)
 
-        # if club <= -1 or week <= -1 or id <= -1:
-        #     return Response({"detail":"negative value does not allow."})
+        if _club == -1 or _week == -1 or _cellid == -1 or _first == None or _last == None:
+            return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
 
-        scheduleTable = sessionGenerateFull(club, week)
-        cell = filter(lambda x: x.cellid == id, scheduleTable)
+        scheduleTable = sessionGenerateFull(_club, _week)
+        cell = filter(lambda x: x.cellid == _cellid, scheduleTable)
         if not cell:
             return Response("No cell exist.",status=status.HTTP_400_BAD_REQUEST)
         if cell[0].capacity <= 0:
             return Response("Session does not have enough space.",status=status.HTTP_400_BAD_REQUEST)
+
+        # email provide: user exist: enroll for user
+        # email provide: user not exist: create user and enroll for user
+        # email not provide: enroll with current user, add information to title
+        if _email:
+            UserModel   = get_user_model()
+            try:
+                userInst = UserModel.objects.get(email = _email)
+            except UserModel.DoesNotExist:
+                userInst = UserModel.objects.create_user(UserModel.objects.count(), email = _email, first_name = _first, last_name = _last)
+                userProfile.objects.create(user = userInst, cellPhone = _cellP)
+                # todo est cellphone number
+            _user = userInst
+        else:
+            _user = self.request.user
+            _desc = _first + ' ' + _last + "-" + _cellP
+            pass
 
         prginst = programDefinition.objects.get(id = cell[0].prgid)
         enrolledProgramSession.objects.create(programDefinitionKey = prginst,
@@ -115,7 +139,9 @@ class enrollSession(generics.GenericAPIView):
                                               date = cell[0].date,
                                               sessionTimeBegin = cell[0].begin,
                                               sessionTimeEnd = cell[0].end,
-                                              user = request.user)
+                                              user = _user,
+                                              status = programDefinition.CONTENT_STATUS_ACTIVE,
+                                              title= _desc)
 
         return Response("Done", status=status.HTTP_200_OK)
 # ----------------------------------------------------
