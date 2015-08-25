@@ -6,6 +6,9 @@ from django.db.models import Sum
 from django.shortcuts import redirect
 from django.http import Http404
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
 from enroll.models import enrolledProgram
 
 from payment import testPay,payline,paylineTest
@@ -75,8 +78,8 @@ def paymentRes(request, *args, **kwargs):
         messages.error(request, _("Payment has error"))
         return reverse('checkoutURL')
 # ----------------------------------------------------
+@method_decorator(csrf_exempt, name='dispatch')
 class paymentResponse(View):
-
     def get(self,request,*args,**kwargs):
         return redirect(paymentRes(request, *args, **kwargs))
     def post(self,request,*args,**kwargs):
