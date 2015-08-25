@@ -54,14 +54,15 @@ class enrollSessionList(generics.ListAPIView):
 class enrollSessionListClub(generics.ListAPIView):
     """
     Return list of all enrolled sessions for club (club permission)
-    agreement -- aggreement id
+    clubid -- aggreement id
     """
     serializer_class = enrollProgramSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.request.GET.get('agreement'))
-        return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst).select_related('user')
+        return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
+        # agreementInst = agreement.objects.active().filter(user = self.request.user).filter(id=self.request.GET.get('agreement'))
+        # return enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__agreementKey = agreementInst).select_related('user')
 # ----------------------------------------------------
 class enrollSession(generics.GenericAPIView):
     """
