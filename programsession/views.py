@@ -63,11 +63,9 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
                                 singleSession.price,
                                 singleSession.maxCapacity)
                 count += 1
-                if day < weekDay or cellDate > dateEnd:
-                    tempCell.status = 1
                 cells.append(tempCell)
                 bgn += datetime.timedelta(hours=duration.hour,minutes=duration.minute)
-        cellDate += datetime.timedelta(days=1)
+            cellDate += datetime.timedelta(days=1)
 
     # apply restriction condition on table
     # coditions for restrictions ---------

@@ -13,7 +13,7 @@ class cell(object):
         self.price  = price
         self.capacity= capacity
         self.enroll = 0
-        self.status = 0
+        self.status = 1
 # ----------------------------------------------------
 class cellSerializer(serializers.Serializer):
     prgid   = serializers.IntegerField()
