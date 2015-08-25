@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from models import agreement
+from models import club
 # ----------------------------------------------------
-class agreementSerializer(serializers.ModelSerializer):
+class clubSerializer(serializers.ModelSerializer):
     class Meta:
-        model = agreement
+        model = club
 # ----------------------------------------------------
