@@ -12,6 +12,7 @@
                 <th>{% trans "Begin date" %}</th>
                 <th>{% trans "End date" %}</th>
                 <th>{% trans "Status" %}</th>
+                <th>{% trans "Remain Days" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                     <td>{{ item.publish_date|g2j }}</td>
                     <td>{{ item.expiry_date|g2j }}</td>
                     <td>{{ item.get_status_display }}</td>
+                    <td>{{ item.remainDays }}</td>
                 </tr>
             {% endfor %}
             </tbody>
