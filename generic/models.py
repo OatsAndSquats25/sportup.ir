@@ -82,6 +82,8 @@ class Displayable(TimeStamped, Ownable):
             self.slug = u'%s%i%i' % (self.title, date.month, date.day)
         if self.publish_date is None:
             self.publish_date = now()
+        if self.expiry_date is None:
+            self.expiry_date = now()
         super(Displayable, self).save(*args, **kwargs)
 
     def remainDays(self):
