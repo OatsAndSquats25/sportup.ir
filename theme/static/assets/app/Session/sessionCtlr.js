@@ -22,7 +22,7 @@ app.controller('sessionCtlr',
                         $window.location.href = '/checkout/';
                     },
                     function (results) {
-                        alert(results.statusText);
+                        alert(results.status +": "+results.statusText);
                     });
             });
     }
@@ -144,7 +144,7 @@ app.controller('sessionCtlr',
                      renderTimeTable($scope.data);
                  },
                  function (results) {
-                     alert("این برنامه ها قابل رویت نیستند.");
+                     alert(results.status +": "+results.statusText);
                  });
         }
         $scope.previousWeek = function(){
@@ -155,7 +155,7 @@ app.controller('sessionCtlr',
                      renderTimeTable($scope.data);
                  },
                  function (results) {
-                     alert("این برنامه ها قابل رویت نیستند.");
+                     alert(results.status +": "+results.statusText);
                  });
         }
 

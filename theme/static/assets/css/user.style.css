@@ -427,6 +427,12 @@ caption, th, td {
   color: #474747;
 }
 
+#clubSchedule.timetable .event-red:hover a {
+    color: #ff513f;
+}
+#clubSchedule.timetable .event-red {
+    cursor: pointer;
+}
 
 .timetable .event-green:hover a {
     color: #ff513f;
