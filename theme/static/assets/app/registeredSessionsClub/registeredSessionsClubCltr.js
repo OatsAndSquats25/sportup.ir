@@ -14,6 +14,10 @@ app.controller("registeredSessionsClubCltr",function registeredSessionsClubCltr(
 		$scope.status = true;
 	}
 
+	$scope.$on("ChangeOnAthletes", function (event) {
+	   getAllAthletes();
+	});
+
 	getAllAthletes = function() {
 		DataService.getClubs().then(
             function(results) {
@@ -23,24 +27,22 @@ app.controller("registeredSessionsClubCltr",function registeredSessionsClubCltr(
             //renderTimeTable($scope.data);
             DataService.getAthletes($scope.clubId).then(
 			function (results) {
-				console.log(results)
+				console.log(results);
 				$scope.athletes = results.data;
 				for(athlete in $scope.athletes)
-					$scope.athletes[athlete].isDone = false;
+					$scope.athletes[athlete].isAttended = false;
 			});
         });
-	}
+	} 
 	getAllAthletes();
 	
 	 $scope.updateStatusAthlete = function(athlete){
-	 	console.log(athlete.id);
 	 	DataService.athleteAttended(athlete.id).then (
 	 		function(results) {
-	 			console.log(results.data+"  "+results.status);
-	 			athlete.isDone = !athlete.isDone;
+	 			athlete.isAttended = !athlete.isAttended;
 	 		},
 			function(results){
-	 			alert("مشکل در برقراری ارتباط.");
+	 			alert(results.status +": "+results.statusText);
 	 		});
 	 }
 	 $scope.deleteAthlete = function(athlete){
@@ -52,7 +54,7 @@ app.controller("registeredSessionsClubCltr",function registeredSessionsClubCltr(
 	 			//$scope.athletes.splice(index,1);
 	 		// },
 	 		// function(results){
-	 		// 	alert("اینترنت خود را بررسی کنید.");
+	 		// 	alert(results.status +": "+results.statusText);
 	 		// });
 	 }
 });

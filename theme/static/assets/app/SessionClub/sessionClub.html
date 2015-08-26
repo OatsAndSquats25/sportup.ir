@@ -14,7 +14,7 @@
                     <input  type="text"  ng-model="athlete.lastname" placeholder="نام خانوادگی" class="form-control"/>
                 </th>
                 <th>
-                  <input type="email" ng-model="athlete.email" placeholder="ایمیا" class="form-control"/>
+                  <input type="email" ng-model="athlete.email" placeholder="ایمیل" class="form-control"/>
                   </th>
                   <th>
                   <input type="text" ng-model="athlete.phone" placeholder="تلفن" class="form-control"/>
@@ -30,7 +30,7 @@
                       <td>{{athlete.lastname}}</td>
                       <td colspan="2">{{athlete.title}}</td>
                       <td>
-                        <button ng-click="deleteAthlete(athlete)" type="button" class="btn btn-danger">حذف</button>
+                        <button  ng-Disabled="true" ng-click="deleteAthlete(athlete)" type="button" class="btn btn-danger">حذف</button>
                       </td>
                     </tr>
                  </tbody>
@@ -49,7 +49,7 @@
         <a ng-click="nextWeek()" style="curser:pointer;"><i class="fa fa-arrow-left fa-lg"></i></a>
     </div>
 
-      <table class="timetable table table-bordered ">
+      <table id="clubSchedule"  class="timetable table table-bordered ">
           <thead>
               <tr>
                   <th></th>

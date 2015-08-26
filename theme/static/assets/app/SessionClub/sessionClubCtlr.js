@@ -11,6 +11,8 @@ app.controller('sessionClubCtlr',
               animation: $scope.animationsEnabled,
               templateUrl: 'ClubinfoModal.html',
               controller: 'infoModalCtrl',
+              keyboard: false,
+              backdrop: 'static',
               resolve: {
                 params: function() {
                   return $scope.modalParams;
@@ -18,7 +20,11 @@ app.controller('sessionClubCtlr',
               }
             });
         modalInstance.result.then(function () {
-            initialTable($scope.week);
+          $window.location.href = window.location.pathname;
+            // $scope.initRestId = function(){
+            //    $scope.$broadcast("ChangeOnAthletes");
+            // };
+            // initialTable($scope.week);
         });
       }
 
@@ -57,7 +63,7 @@ app.controller('sessionClubCtlr',
              renderTimeTable($scope.data);
              }
              else{
-             alert("connection failed");
+             alert(results.status +": "+results.statusText);
              }
              });*/
             $scope.data.splice(idx, 1);
@@ -65,7 +71,6 @@ app.controller('sessionClubCtlr',
         };
 
         $scope.getInfo = function (event) {
-            console.log(event);
             if(event.status) {
                 $scope.modalParams.cellid = event.cellid;
                 $scope.modalParams.clubId = $scope.clubId;
@@ -167,7 +172,7 @@ app.controller('sessionClubCtlr',
                      renderTimeTable($scope.data);
                  },
                  function (results) {
-                     alert("این برنامه ها قابل رویت نیستند.");
+                     alert(results.status +": "+results.statusText);
                  });
         }
         $scope.previousWeek = function(){
@@ -178,7 +183,7 @@ app.controller('sessionClubCtlr',
                      renderTimeTable($scope.data);
                  },
                  function (results) {
-                     alert("این برنامه ها قابل رویت نیستند.");
+                     alert(results.status +": "+results.statusText);
                  });
         }
 
@@ -195,7 +200,6 @@ app.controller('sessionClubCtlr',
                          renderTimeTable($scope.data);
                      },
                      function (results) {
-                         console.log(results.status + ': ' + results.statusText);
                          alert(results.status + ': ' + results.statusText);
                      });
             });
@@ -209,7 +213,6 @@ app.controller('infoModalCtrl', function ($scope, DataService, $modalInstance, p
     getCellAthletes = function() {
         DataService.getCellAthletes(params.clubId, params.week, params.cellid).then(
             function (results) {
-                console.log(results);
                 $scope.athletes = results.data;
                 for(athlete in $scope.athletes)
                     $scope.athletes[athlete].isDone = false;
@@ -236,7 +239,7 @@ app.controller('infoModalCtrl', function ($scope, DataService, $modalInstance, p
                     $scope.athlete.lastname = "";
                 },
                 function(results){
-                 alert("اینترنت خود را بررسی کنید.");
+                 alert(results.status +": "+results.statusText);
                 });
         }
     }
@@ -250,7 +253,7 @@ app.controller('infoModalCtrl', function ($scope, DataService, $modalInstance, p
                 //$scope.athletes.splice(index,1);
             // },
             // function(results){
-            //  alert("اینترنت خود را بررسی کنید.");
+            //  alert(results.status +": "+results.statusText);
             // });
      }
 

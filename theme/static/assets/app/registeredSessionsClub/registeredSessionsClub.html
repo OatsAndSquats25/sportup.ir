@@ -1,4 +1,4 @@
-<div class="col-sm-offset-3 col-sm-6" ng-controller="registeredSessionsClubCltr">
+<div class="col-sm-offset-2 col-sm-8" ng-controller="registeredSessionsClubCltr">
 	<header><h2>لیست حضور و غیاب</h2></header>
 	<nav id="menu">
 		<ul class="athleteList">
@@ -19,24 +19,33 @@
 
 	<div class="table-responsive">
       <table id="absence" class="table table-bordered table-striped">
+      	<thead>
+      		<th>
+      			<td>نام</td>
+      			<td>نام خانوادگی</td>
+      			<td>توضیحات</td>
+      			<td>ساعت شروع</td>
+      			<td>ساعت پایان</td>
+      		</th>
+      	</thead>
          <tbody>
-            <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{isDone:status}) | orderBy:'firstname'">
+            <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{isAttended:status}) | orderBy:'firstname'">
 				<td style="width:95px;">
-				  	<button ng-if="athlete.isDone == false" class="btn" ng-click="updateStatusAthlete(athlete)">
+				  	<button ng-if="athlete.isAttended == false" class="btn" ng-click="updateStatusAthlete(athlete)">
 						ثبت ورود
 					</button>
 				</td>
 				<td>{{athlete.firstname}}</td>
 				<td>{{athlete.lastname}}</td>
-				<td style="width:75px;">
-					<button ng-click="deleteAthlete(athlete)" type="button" class="btn btn-danger">حذف</button>
-				</td>
+				<td>{{athlete.title}}</td>
+				<td>{{athlete.sessionTimeBegin}}</td>
+				<td>{{athlete.sessionTimeEnd}}</td>
             </tr>
          </tbody>
       </table>
    </div>
 
-	<div ng-repeat="item in absent = (athletes | filter:{isDone:false})"></div>
+	<div ng-repeat="item in absent = (athletes | filter:{isAttended:false})"></div>
 	<footer id="task-counter">
 		<span ng-show="absent.length">
 			<span class="bold">تعداد کسانی که حضور نیافتند :</span> {{ absent.length }} / {{ athletes.length }}
