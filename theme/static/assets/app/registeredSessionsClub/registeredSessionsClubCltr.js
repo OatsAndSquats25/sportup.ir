@@ -21,17 +21,12 @@ app.controller("registeredSessionsClubCltr",function registeredSessionsClubCltr(
 	getAllAthletes = function() {
 		DataService.getClubs().then(
             function(results) {
-                    $scope.clubId = results.data[0].id;
-                
-            //$scope.data = DataService.getSessionTable(clubId, week);
-            //renderTimeTable($scope.data);
-            DataService.getAthletes($scope.clubId).then(
-			function (results) {
-				console.log(results);
-				$scope.athletes = results.data;
-				for(athlete in $scope.athletes)
-					$scope.athletes[athlete].isAttended = false;
-			});
+                $scope.clubId = results.data[0].id;
+	            DataService.getAthletes($scope.clubId).then(
+				function (results) {
+					$scope.athletes = results.data;
+					console.log($scope.athletes);
+				});
         });
 	} 
 	getAllAthletes();
@@ -39,7 +34,7 @@ app.controller("registeredSessionsClubCltr",function registeredSessionsClubCltr(
 	 $scope.updateStatusAthlete = function(athlete){
 	 	DataService.athleteAttended(athlete.id).then (
 	 		function(results) {
-	 			athlete.isAttended = !athlete.isAttended;
+	 			athlete.firstAccess = true;
 	 		},
 			function(results){
 	 			alert(results.status +": "+results.statusText);

@@ -29,9 +29,9 @@
       		</th>
       	</thead>
          <tbody>
-            <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{isAttended:status}) | orderBy:'firstname'">
+            <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{firstAccess:status}) | orderBy:'firstname'">
 				<td style="width:95px;">
-				  	<button ng-if="athlete.isAttended == false" class="btn" ng-click="updateStatusAthlete(athlete)">
+				  	<button ng-if="athlete.firstAccess == false" class="btn" ng-click="updateStatusAthlete(athlete)">
 						ثبت ورود
 					</button>
 				</td>
@@ -45,7 +45,7 @@
       </table>
    </div>
 
-	<div ng-repeat="item in absent = (athletes | filter:{isAttended:false})"></div>
+	<div ng-repeat="item in absent = (athletes | filter:{firstAccess:false})"></div>
 	<footer id="task-counter">
 		<span ng-show="absent.length">
 			<span class="bold">تعداد کسانی که حضور نیافتند :</span> {{ absent.length }} / {{ athletes.length }}
