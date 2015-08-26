@@ -29,7 +29,7 @@
       		</th>
       	</thead>
          <tbody>
-            <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{firstAccess:status}) | orderBy:'firstname'">
+            <tr ng-repeat="athlete in filteredAthletes = (athletes | filter:{firstAccess:status}) | orderBy:'sessionTimeBegin'">
 				<td style="width:95px;">
 				  	<button ng-if="athlete.firstAccess == false" class="btn" ng-click="updateStatusAthlete(athlete)">
 						ثبت ورود
