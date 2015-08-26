@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 from rest_framework import generics
 from rest_framework import permissions
@@ -66,7 +67,7 @@ class enrollSessionClub(generics.GenericAPIView):
         Return list of all enrolled sessions for club (club permission)
         clubid -- club id
         """
-        enrollInst = enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
+        enrollInst = enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).filter(date = now().date()).select_related('user')
         return Response(enrollProgramSerializer(enrollInst, many=True).data)
 
     def post(self, request, *args, **kwargs):
