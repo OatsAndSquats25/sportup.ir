@@ -38,6 +38,8 @@ class accessView(generics.GenericAPIView):
         else:
             enrollInst = enrolledProgram.objects.get(pk=request.data.get('enrollid'))
             access.objects.create(enrollKey=enrollInst, user=self.request.user, expiry_date= now())
+            enrollInst.firstAccess = True;
+            enrollInst.save()
             return Response("Done")
 # ----------------------------------------------------
 class accessRequest(views.APIView):
