@@ -142,7 +142,7 @@ USE_TZ = True
 # Allow any settings to be defined in local_settings.py which should be
 # ignored in your version control system allowing for settings to be
 # defined per machine.
-DEBUG_APPS = None
+DEBUG_APPS = (None,)
 try:
     from local_settings import *
     INSTALLED_APPS += DEBUG_APPS
