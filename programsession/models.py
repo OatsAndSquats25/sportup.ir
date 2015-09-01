@@ -13,7 +13,7 @@ class sessionDefinition(programDefinition):
     daySun              = models.BooleanField(_("Sunday"))
     dayMon              = models.BooleanField(_("Monday"))
     dayTue              = models.BooleanField(_("Tuesday"))
-    dayWed              = models.BooleanField(_("Wedensday"))
+    dayWed              = models.BooleanField(_("Wednesday"))
     dayThu              = models.BooleanField(_("Thursday"))
     dayFri              = models.BooleanField(_("Friday"))
     daysToShow          = models.IntegerField(_("Number of next days to show"), default=7)

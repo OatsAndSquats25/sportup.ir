@@ -7,5 +7,7 @@ class clubSessionAdmin(admin.ModelAdmin):
 
 admin.site.register(sessionDefinition, clubSessionAdmin)
 # ----------------------------------------------------
-admin.site.register(sessionRestriction)
+class clubSessionRestAdmin(admin.ModelAdmin):
+	list_display = ('sessionDefinitionKey','date','day','sessionTimeBegin','sessionTimeEnd','capacityDiff','blackout')
+admin.site.register(sessionRestriction,clubSessionRestAdmin)
 # ----------------------------------------------------
