@@ -79,21 +79,21 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
 
     restrictions = sessionRestriction.objects.filter(sessionDefinitionKey = singleSession)
     for restriction in restrictions:
-        if restriction.date:
+        if restriction.date is not None:
             if restriction.sessionTimeBegin and restriction.sessionTimeEnd:
                 for cellInst in filter(lambda x :(x.date == restriction.date and x.begin>= restriction.sessionTimeBegin and x.end<=restriction.sessionTimeEnd), cells):
                     applySessionRestriction(restriction,cellInst)
             else:
                 for cellInst in filter(lambda x :(x.date == restriction.date), cells):
                     applySessionRestriction(restriction,cellInst)
-        elif restriction.day:
+        elif restriction.day is not None:
             if restriction.sessionTimeBegin and restriction.sessionTimeEnd:
                 for cellInst in filter(lambda x :(x.day == restriction.day and x.begin>= restriction.sessionTimeBegin and x.end<=restriction.sessionTimeEnd), cells):
                     applySessionRestriction(restriction,cellInst)
             else:
                 for cellInst in filter(lambda x :(x.day == restriction.day), cells):
                     applySessionRestriction(restriction,cellInst)
-        elif restriction.sessionTimeBegin and restriction.sessionTimeEnd:
+        elif restriction.sessionTimeBegin is not None and restriction.sessionTimeEnd is not None:
             for cellInst in filter(lambda x :(x.begin>= restriction.sessionTimeBegin and x.end<=restriction.sessionTimeEnd), cells):
                     applySessionRestriction(restriction,cellInst)
         else:
