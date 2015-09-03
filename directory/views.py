@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 
-from accounts.views import MyRegistrationView
+# from accounts.views import MyRegistrationView
 from generic.models import Displayable
 from models import club
 from forms import clubRegistrationForm
@@ -20,7 +20,7 @@ class itemDetail(DetailView):
     template_name = "directory/item.html"
     model = club
 # -----------------------------------------------------------------------
-class clubRegistration(MyRegistrationView):
-    template_name = 'directory/club_registration.html'
-    form_class = clubRegistrationForm
+# class clubRegistration(MyRegistrationView):
+#     template_name = 'directory/club_registration.html'
+#     form_class = clubRegistrationForm
 # -----------------------------------------------------------------------
