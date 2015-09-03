@@ -82,7 +82,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'polymorphic',
     'generic',
-    #'django_jalali',
     'accounts',
     'directory',
     'agreement',
@@ -158,3 +157,4 @@ REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 AUTH_USER_MODEL = 'auth.User'
+AUTHENTICATION_BACKENDS = ('accounts.backends.EmailAuthBackend',)
