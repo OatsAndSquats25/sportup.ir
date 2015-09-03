@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-03 11:24+0430\n"
+"POT-Creation-Date: 2015-09-03 13:00+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: forms.py:10
-msgid "first name"
-msgstr "نام"
-
-#: forms.py:11
-msgid "last name"
-msgstr "نام خانوادگی"
-
-#: forms.py:33 forms.py:52
+#: forms.py:33 forms.py:67
 msgid "Email"
 msgstr ""
 
-#: forms.py:34 forms.py:53 templates/registration/login.html:40
+#: forms.py:34 forms.py:68 templates/registration/login.html:40
 msgid "Password"
 msgstr "رمز عبور"
 
 #: forms.py:35
-#, fuzzy
-#| msgid "first name"
-msgid "First Name"
+msgid "first name"
 msgstr "نام"
 
 #: forms.py:36
-#, fuzzy
-#| msgid "last name"
-msgid "Last Name"
+msgid "last name"
 msgstr "نام خانوادگی"
 
-#: forms.py:44
+#: forms.py:64
 msgid "Email address exist."
-msgstr ""
+msgstr "آدرس ایمیل تکراری است"
 
 #: models.py:9
 msgid "Photo"
@@ -92,7 +80,7 @@ msgstr "نام کاربری و رمز عبور صحیح نمی باشد. مجد�
 
 #: templates/accounts/login-register.html:18
 msgid "You have error in register form."
-msgstr "شما در اطلاعات ثبت نام مشکلی دارید."
+msgstr "شما در اطلاعات ثبت نام مشکل دارید."
 
 #: templates/accounts/login-register.html:35
 msgid "You are already loggin in"
@@ -118,13 +106,6 @@ msgstr "ثبت نام"
 #: templates/registration/registration_form.html:43
 msgid "Create an Account"
 msgstr "ثبت نام"
-
-#: templates/accounts/login-register.html:71
-#: templates/registration/registration_form.html:49
-msgid ""
-"By clicking the “Create an Account” button you agree with our <a href="
-"\"terms-conditions.html\" class=\"link\">Terms and conditions</a>"
-msgstr ""
 
 #: templates/accounts/profile_update.html:12
 msgid "Update"
@@ -155,9 +136,11 @@ msgstr "رمز مجدد"
 msgid "Reset my password"
 msgstr "ایجاد رمز مجدد"
 
-#: views.py:27
-msgid "You are successfuly registered."
-msgstr "شما با موفقیت ثبت نام کردید"
+#: templates/registration/registration_form.html:49
+msgid ""
+"By clicking the “Create an Account” button you agree with our <a href="
+"\"terms-conditions.html\" class=\"link\">Terms and conditions</a>"
+msgstr ""
 
 #: views.py:82
 msgid "Your profile updated successfully."
@@ -178,3 +161,16 @@ msgstr "ایمیل یا رمز معتبر نمی‌باشد"
 #: views.py:119
 msgid "Register successfully"
 msgstr "شما با موفقیت ثبت نام کردید."
+
+#, fuzzy
+#~| msgid "first name"
+#~ msgid "First Name"
+#~ msgstr "نام"
+
+#, fuzzy
+#~| msgid "last name"
+#~ msgid "Last Name"
+#~ msgstr "نام خانوادگی"
+
+#~ msgid "You are successfuly registered."
+#~ msgstr "شما با موفقیت ثبت نام کردید"

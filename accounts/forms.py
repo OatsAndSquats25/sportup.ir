@@ -35,18 +35,33 @@ class userRegisterForm(forms.Form):
     first_name  = forms.CharField(max_length=30, label=_("first name"))
     last_name   = forms.CharField(max_length=30, label=_("last name"))
 
+    def is_valid(self):
+        valid = super(userRegisterForm, self).is_valid()
+
+        # we're done now if not valid
+        if not valid:
+            return valid
+
+        emailData = self.cleaned_data.get('email')
+        try:
+            userInst = User.objects.get(email = emailData)
+
+        # no user with this username or email address
+        except User.DoesNotExist:
+            return True
+
+        # raise forms.ValidationError(_('Email address exist.'), code='email_duplicate',)
+        return False
 
     def clean(self):
-        emailData = self.cleaned_data.get('email')
+        cleaned_data = super(userRegisterForm, self).clean()
+        emailData = cleaned_data.get('email', None)
         if emailData is not None:
             try:
-                User.objects.get(email = emailData)
-                raise forms.ValidationError(_('Email address exist.'),
-                                            code='email_duplicate',)
-            except:
-                pass
-
-        return self.cleaned_data
+                userInst = User.objects.get(email = emailData)
+            except User.DoesNotExist:
+                return self.cleaned_data
+            raise forms.ValidationError(_('Email address exist.'), code='email_duplicate',)
 # -----------------------------------------------------------------------
 class userLoginForm(forms.Form):
     email   = forms.EmailField(label=_("Email"))
