@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-27 11:31+0430\n"
+"POT-Creation-Date: 2015-09-03 11:24+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
 "Language-Team: LANGUAGE <ll@sportup.ir>\n"
@@ -34,43 +34,39 @@ msgstr "خطا"
 msgid "Sorry, an error occurred."
 msgstr "متاسفانه شما با خطا مواجه شدید."
 
-#: templates/base.html:56
+#: templates/base.html:72
 msgid "Profile"
 msgstr "پروفایل"
 
-#: templates/base.html:57
-msgid "Dashboard"
-msgstr "داشبورد"
+#: templates/base.html:73
+msgid "Change Password"
+msgstr "تغییر رمز"
 
-#: templates/base.html:58
+#: templates/base.html:74
 msgid "Sign Out"
 msgstr "خروج"
 
-#: templates/base.html:60
-msgid "Register"
-msgstr "ثبت نام"
+#: templates/base.html:77
+msgid "Dashboard"
+msgstr "داشبورد"
 
-#: templates/base.html:61
+#: templates/base.html:79
+msgid "Shopping Cart"
+msgstr "سبد خرید"
+
+#: templates/base.html:83
 msgid "Sign In"
 msgstr "ورود"
 
-#: templates/base.html:66
-msgid "Submit Your Item"
-msgstr "ثبت باشگاه"
+#: templates/base.html:83
+msgid "Register"
+msgstr "ثبت نام"
 
-#: templates/base.html:81
-msgid "Please update your profile to finish your registration."
-msgstr "لطفا پروفایل خود را جهت تکمیل ثبت نام کامل نمایید"
-
-#: templates/base.html:81
-msgid "Click here"
-msgstr "اینجا کلیک کنید"
-
-#: templates/base.html:137
+#: templates/base.html:157
 msgid "Newsletter"
 msgstr "خبرنامه"
 
-#: templates/base.html:139
+#: templates/base.html:159
 msgid ""
 "Keep up on our always evolving product features. Enter your e-mail and "
 "subscribe to our newsletter."
@@ -78,23 +74,23 @@ msgstr ""
 "از امکانات جدید محصولات در حال توسعه ما با خبر باشد. ایمیل خود را برای عضویت "
 "در خبرنامه ما وارد کنید."
 
-#: templates/base.html:144
+#: templates/base.html:164
 msgid "<strong>Success!</strong> You've been added to our newsletter."
 msgstr " شما با <strong>موفقیت</strong> در خبر نامه ما عضو شدید"
 
-#: templates/base.html:150 templates/base.old.html:129
+#: templates/base.html:170 templates/base.old.html:129
 msgid "Email"
 msgstr "پست الکترونیک"
 
-#: templates/base.html:153
+#: templates/base.html:173
 msgid "Subscribe"
 msgstr "عضویت"
 
-#: templates/base.html:165
+#: templates/base.html:185
 msgid "Contact Us"
 msgstr "تماس با ما"
 
-#: templates/base.html:167
+#: templates/base.html:187
 msgid ""
 "5th Floor, Anestito-Mohandesi-Naft Building, Daneshkadeh-Fanni Tehran "
 "University, North Karegar Ave, Tehran, Iran"
@@ -102,19 +98,19 @@ msgstr ""
 "تهران، خیابان کارگر شمالی، دانشکده فنی دانشگاه تهران، ساختمان انستیتو مهندسی "
 "نفت، طبقه پنجم"
 
-#: templates/base.html:171
-msgid "+98-912-308-6945"
-msgstr "+۹۸-۹۱۲-۳۰۸-۶۹۴۵"
+#: templates/base.html:191
+msgid "+98-21-2296-7409"
+msgstr ""
 
-#: templates/base.html:190
+#: templates/base.html:210
 msgid "Follow Us"
 msgstr "ما را دنبال کنید"
 
-#: templates/base.html:198
+#: templates/base.html:218
 msgid "About Us"
 msgstr "درباره ما"
 
-#: templates/base.html:209
+#: templates/base.html:229
 msgid "(C) SportUp, All rights reserved"
 msgstr "تمامی حقوق برای SportUp محفوظ است."
 
@@ -157,3 +153,4 @@ msgstr ""
 #: templates/index.html:4 templates/index.html.py:5 templates/index.html:8
 msgid "Home"
 msgstr "خانه"
+

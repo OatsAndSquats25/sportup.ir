@@ -64,29 +64,30 @@
                 <nav class="navigation-items">
                     <div class="wrapper">
                         {% block authentication %}
-                        <ul class="user-area">
                         {% if user.is_authenticated %}
+                        <ul class="user-area">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'profileUpdate' %}">{% trans "Profile" %}</a></li>
-                                    <li><a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
+                                    <li><a href="{% url 'password_change' %}">{% trans "Change Password" %}</a></li>
+                                    <li><a href="{% url 'logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
-                        {% else %}
-                            {% block register %}<li><a href="{% url  'registration_register' %}?next={{ request.path }}">{% trans "Register" %}</a></li>{% endblock %}
-                            {% block login %}<li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>{% endblock %}
-                        {% endif %}
+                            {% if not perms.accounts.club_owner %}
+                            <li><a href="{% url 'checkoutURL' %}">{% trans "Shopping Cart" %}</a></li>
+                            {% endif %}
                         </ul>
+                        {% else %}
+                            {% block login_register %}<a class="btn btn-default" href="{% url  'accounts_login_register' %}?next={{ request.path }}"><i>{% trans "Sign In" %} / {% trans "Register" %}</i></a>{% endblock %}                        {% endif %}
                         {% endblock %}
-                        <a type="button" href="{% url 'directoryRegistration' %}" class="submit-item" data-toggle="tooltip" data-placement="bottom" title="{% trans "Submit Your Item" %}">
-                            <span id="club-register" class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                        
+{#                        <a type="button" href="{% url 'directoryRegistration' %}" class="submit-item" data-toggle="tooltip" data-placement="bottom" title="{% trans "Submit Your Item" %}">#}
+{#                            <span id="club-register" class="fa-stack fa-lg">#}
+{#                                <i class="fa fa-circle fa-stack-2x"></i>#}
+{#                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>#}
+{#                            </span>#}
+{#                        </a>#}
                         {% block toggle-nav %}{% endblock %}
                     </div>
                 </nav>
@@ -94,12 +95,12 @@
         </div>
 
 {#        {% nevercache %}#}
-        {% if user.is_authenticated and not perms.accounts.profile_is_update and not perms.accounts.club_owner %}
-        <div class="alert alert-dismissable alert-warning" data-alert="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {% trans "Please update your profile to finish your registration." %} <a href="{% url "profileUpdate" %}">{% trans "Click here" %}</a>
-        </div>
-        {% endif %}
+{#        {% if user.is_authenticated and not perms.accounts.profile_is_update and not perms.accounts.club_owner %}#}
+{#        <div class="alert alert-dismissable alert-warning" data-alert="alert">#}
+{#            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>#}
+{#            {% trans "Please update your profile to finish your registration." %} <a href="{% url "profileUpdate" %}">{% trans "Click here" %}</a>#}
+{#        </div>#}
+{#        {% endif %}#}
 
         {% if messages %}
         <div class="messages">
