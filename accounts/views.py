@@ -86,7 +86,7 @@ class loginRegister(View):
     def get(self, request, *args, **kwargs):
         formLog = userLoginForm(prefix='formLog')
         formReg = userRegisterForm(prefix='formReg')
-        return render(request, 'accounts/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
+        return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
 
     def post(self, request, *args, **kwargs):
         if request.POST.get('userAction', None) == "signIn":
@@ -119,5 +119,5 @@ class loginRegister(View):
             messages.info(request, _("Register successfully"))
             return HttpResponseRedirect(request.GET.get('next','/'))
 
-        return render(request, 'accounts/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
+        return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
 # -----------------------------------------------------------------------
