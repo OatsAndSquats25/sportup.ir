@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:14+0430\n"
+"POT-Creation-Date: 2015-09-05 10:50+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,134 +18,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: functions.py:16
-#, fuzzy
-#| msgid "Payment"
+#: functions.py:20
 msgid "Payment pending"
 msgstr "پرداخت"
 
-#: functions.py:26
-#, fuzzy
-#| msgid "Payment amount"
+#: functions.py:31
 msgid "Payment done"
 msgstr "مبلغ قابل پرداخت"
+
+#: functions.py:45
+msgid "Payment error"
+msgstr "پرداخت با خطا مواجه شد"
 
 #: models.py:16 models.py:17
 msgid "Invoice list"
 msgstr "لیست فاکتور"
 
-#: models.py:40
-msgid "None"
-msgstr "خالی"
-
-#: models.py:41
-msgid "No"
-msgstr "خیر"
-
-#: models.py:42
-msgid "Yes"
-msgstr "بلی"
-
-#: models.py:43
-msgid "Done"
-msgstr "تمام"
-
-#: models.py:49
-msgid "Debit"
-msgstr "بدهکار"
-
-#: models.py:50
-msgid "Credit"
-msgstr "بستانکار"
-
-#: models.py:51
-msgid "Company"
-msgstr "شرکت"
-
-#: models.py:52
-msgid "Defray status"
-msgstr "وضعیت تسویه"
-
-#: models.py:57 models.py:58
-msgid "Balance sheet"
-msgstr "دفتر توازن"
-
-#: models.py:75 models.py:76
-msgid "History"
-msgstr "تاریخچه"
-
-#: templates/finance/order.html:5
+#: templates/finance/checkout.html:9
 msgid "Order list"
 msgstr "لیست سفارش"
 
-#: templates/finance/order.html:13
+#: templates/finance/checkout.html:10
+msgid "Attention: You have only 30 minutes to pay and confirm your items."
+msgstr "احطار: شما فقط ۳۰ دقیقه زمان دارید تا خرید خود را با پرداخت قطعی نمایید."
+
+#: templates/finance/checkout.html:15
 msgid "Number"
 msgstr "شماره"
 
-#: templates/finance/order.html:14
+#: templates/finance/checkout.html:16
 msgid "Complex"
 msgstr "مجموعه"
 
-#: templates/finance/order.html:15
-msgid "Group"
-msgstr ""
-
-#: templates/finance/order.html:16
+#: templates/finance/checkout.html:18
 msgid "Program"
 msgstr "برنامه"
 
-#: templates/finance/order.html:17 templates/finance/order.html.py:47
-#: templates/finance/payment_request.html:6
+#: templates/finance/checkout.html:19 templates/finance/payment_request.html:6
 msgid "Amount"
 msgstr "مقدار"
 
-#: templates/finance/order.html:18
+#: templates/finance/checkout.html:19 templates/finance/checkout.html.py:59
+msgid "Rial"
+msgstr "ریال"
+
+#: templates/finance/checkout.html:20
 msgid "Delete"
 msgstr "حذف"
 
-#: templates/finance/order.html:43 templates/finance/order.html.py:70
-msgid "Discount"
-msgstr ""
-
-#: templates/finance/order.html:46
-msgid "Copoun"
-msgstr "کوپن"
-
-#: templates/finance/order.html:48
-msgid "Commit"
-msgstr "تایید"
-
-#: templates/finance/order.html:67
-msgid "Final Payment"
-msgstr "پرداخت نهایی"
-
-#: templates/finance/order.html:69
+#: templates/finance/checkout.html:51
 msgid "Total"
 msgstr "مجموع"
 
-#: templates/finance/order.html:71
+#: templates/finance/checkout.html:55
+msgid "Discount"
+msgstr "تخفیف"
+
+#: templates/finance/checkout.html:59
 msgid "Payment amount"
 msgstr "مبلغ قابل پرداخت"
 
-#: templates/finance/order.html:71
-msgid "Toman"
-msgstr ""
-
-#: templates/finance/order.html:80
-msgid "Test Bank"
-msgstr ""
-
-#: templates/finance/order.html:83
-msgid "Saman Bank"
-msgstr ""
-
-#: templates/finance/order.html:88
+#: templates/finance/checkout.html:98
 msgid "Payment"
 msgstr "پرداخت"
-
-#: templates/finance/order.html:89
-msgid "Update"
-msgstr "بروزرسانی"
 
 #: templates/finance/payment_request.html:5
 msgid "System automatically redirect you to payment gateway"
@@ -155,10 +90,21 @@ msgstr "بصورت خودکار به درگاه پرداخت منتقل می ش�
 msgid "Finance order"
 msgstr "فاکتور فروش"
 
-#: views.py:23
+#: views.py:33
+msgid ""
+"Please check your cart and remove yellow programs. This programs expired or "
+"do not have enough space."
+msgstr "لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
+"را حذف کنید."
+
+#: views.py:66
+msgid "We do not support this payment gateway"
+msgstr "این درگاه پرداخت الکترونیک پشتیبانی نمی‌شود"
+
+#: views.py:71
 msgid "Payment was successful."
 msgstr "پرداخت تکمیل شد"
 
-#: views.py:25
+#: views.py:75
 msgid "Payment has error"
 msgstr "پرداخت با خطا مواجه شد"

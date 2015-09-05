@@ -95,7 +95,7 @@
 {#                                <div>#}
 {#                                    <label><input type="radio" name="paymentGateway" id="optionsRadios2" value="saman"> {% trans "Saman Bank" %}</label>#}
 {#                                </div>#}
-                                <button><a href="{% url 'checkoutPayURL' %}">{% trans "Payment" %}</a></button>
+                                <a class="btn btn-default" href="{% url 'checkoutPayURL' %}">{% trans "Payment" %}</a>
                             </div>
                             <div class="col-md-8">
 {#                                <button><a href="{{ request.path }}">{% trans "Update" %}</a></button>#}
