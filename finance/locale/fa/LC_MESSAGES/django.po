@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-05 10:50+0430\n"
+"POT-Creation-Date: 2015-09-05 15:06+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr "پرداخت"
 
 #: functions.py:31
 msgid "Payment done"
-msgstr "مبلغ قابل پرداخت"
+msgstr "پرداخت انجام شد"
 
 #: functions.py:45
 msgid "Payment error"
@@ -40,7 +40,8 @@ msgstr "لیست سفارش"
 
 #: templates/finance/checkout.html:10
 msgid "Attention: You have only 30 minutes to pay and confirm your items."
-msgstr "اخطار: شما فقط ۳۰ دقیقه زمان دارید تا خرید خود را با پرداخت قطعی نمایید"
+msgstr ""
+"اخطار: شما فقط ۳۰ دقیقه زمان دارید تا خرید خود را با پرداخت قطعی نمایید"
 
 #: templates/finance/checkout.html:15
 msgid "Number"
@@ -94,7 +95,8 @@ msgstr "فاکتور فروش"
 msgid ""
 "Please check your cart and remove yellow programs. This programs expired or "
 "do not have enough space."
-msgstr "لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
+msgstr ""
+"لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
 "را حذف کنید."
 
 #: views.py:66
