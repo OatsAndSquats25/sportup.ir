@@ -40,7 +40,7 @@ msgstr "لیست سفارش"
 
 #: templates/finance/checkout.html:10
 msgid "Attention: You have only 30 minutes to pay and confirm your items."
-msgstr "احطار: شما فقط ۳۰ دقیقه زمان دارید تا خرید خود را با پرداخت قطعی نمایید."
+msgstr "اخطار: شما فقط ۳۰ دقیقه زمان دارید تا خرید خود را با پرداخت قطعی نمایید"
 
 #: templates/finance/checkout.html:15
 msgid "Number"
