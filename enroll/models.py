@@ -27,6 +27,10 @@ class enrolledProgram(PolymorphicModel, Displayable):
 
     def isValid(self):
         return self.programDefinitionKey.isValid()
+
+    def referenceNumber(self):
+        return str(self.programDefinitionKey.id) + "-" + str(self.id) + "-" + str(self.invoiceKey.id)
+
 # ----------------------------------------------------
 class enrolledProgramCourse(enrolledProgram):
     firstTime   = models.BooleanField(_('First time remaining flag'), default=True)
