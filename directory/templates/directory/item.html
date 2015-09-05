@@ -42,16 +42,15 @@
                                     <figure>
                                         <div class="info">
                                             <i class="fa fa-mobile"></i>
-                                            <span>{{ object.cell }}</span>
+                                            <span dir="LTR">{{ object.cell }}</span>
                                         </div>
                                         <div class="info">
                                             <i class="fa fa-phone"></i>
-                                            <span>{{ object.phone }}</span>
-                                            <span>{{ object.phone }}</span>
+                                            <span dir="LTR">{{ object.phone }}</span>
                                         </div>
                                         <div class="info">
                                             <i class="fa fa-globe"></i>
-                                            <a target="_blank" href="http://{{ object.website }}" >{{ object.website }}</a>
+                                            <a href="#" onclick="window.open('http://{{ object.website }}', '');return false" dir="LTR">{{ object.website }}</a>
                                         </div>
                                     </figure>
                                 </address>
