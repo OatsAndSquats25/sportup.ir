@@ -103,6 +103,7 @@ class enrollSessionClub(generics.GenericAPIView):
             except UserModel.DoesNotExist:
                 userInst = UserModel.objects.create_user(UserModel.objects.count()+1, email = _email, first_name = _first, last_name = _last)
                 userProfile.objects.create(user = userInst, cellPhone = _cellP)
+                send_approved_mail(request, userInst)
                 # todo est cellphone number
             _user = userInst
         else:
