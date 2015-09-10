@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from django.utils.translation import ugettext_lazy as _
-from registration.signals import user_registered
 
 #---------------------------------------------------------------------------------------------------
 class userProfile(models.Model):
@@ -31,8 +30,8 @@ class userProfile(models.Model):
     # def save(self):
     #     membership = YY,MM,DD,id
 #---------------------------------------------------------------------------------------------------
-def create_user_profile(**kwargs):
-    userProfile.objects.get_or_create(user=kwargs['user'])
+#def create_user_profile(**kwargs):
+#    userProfile.objects.get_or_create(user=kwargs['user'])
 #---------------------------------------------------------------------------------------------------
-user_registered.connect(create_user_profile)
+#user_registered.connect(create_user_profile)
 #---------------------------------------------------------------------------------------------------
