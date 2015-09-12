@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'django.contrib.gis',
     'rest_framework',
     'polymorphic',
     'generic',
@@ -111,9 +112,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication',),
 }
 
 ROOT_URLCONF = 'mms.urls'
