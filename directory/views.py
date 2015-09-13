@@ -103,7 +103,13 @@ class getItemList(generics.ListAPIView):
     """
     List Api for Search, filter and order clubs
     title       -- search in title
-    category    -- select category
+    category    -- sport category
+    genre       -- sport genre
+    gender      -- gender
+    price_min   -- price minimum
+    price_max   -- price maximum
+    location    -- athlete location
+    distance    -- distance from location
     """
     queryset        = club.objects.all()
     serializer_class= clubSerializer
@@ -143,4 +149,8 @@ class getItem(generics.RetrieveAPIView):
 
     # def get_queryset(self):
     #     return club.objects.get(pk = self.request.query_params.get('pk'))
+#---------------------------------------------------
+class getFav(generics.ListAPIView):
+    serializer_class = clubSerializer
+    queryset = club.objects.order_by('created')[:3]
 #---------------------------------------------------
