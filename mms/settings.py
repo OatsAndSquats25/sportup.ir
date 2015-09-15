@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'django.contrib.redirects',
     'django.contrib.gis',
     'rest_framework',
     'polymorphic',
@@ -101,6 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
