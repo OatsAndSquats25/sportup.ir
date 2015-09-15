@@ -6,12 +6,12 @@ from finance import models
 
 # ----------------------------------------------------
 class invoiceAdmin(timestampedAdmin):
-    list_display = ('id', 'status', 'amount', 'context')
+    list_display = ('id', 'status', 'amount', 'context', 'created', 'updated')
 
 admin.site.register(models.invoice, invoiceAdmin)
 # ----------------------------------------------------
 class transactionAdmin(timestampedAdmin):
-    list_display = ('id', 'invoiceKey', 'ref_id', 'trans_id' , 'amount', 'description')
+    list_display = ('id', 'invoiceKey', 'ref_id', 'trans_id' , 'amount', 'description', 'created', 'updated')
 admin.site.register(models.transaction, transactionAdmin)
 # ----------------------------------------------------
 # admin.site.register(models.accountingBook)
