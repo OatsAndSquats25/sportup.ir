@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 17:03+0430\n"
+"POT-Creation-Date: 2015-09-21 18:27+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
 "Language-Team: LANGUAGE <LL@sportup.ir>\n"
@@ -19,76 +19,78 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: dashboard.py:7 templates/program/program_list_tag.html:9
-#| msgid "Programs"
 msgid "Program"
 msgstr "برنامه ها"
 
-#: models.py:24
-#| msgid "Female"
+#: models.py:25
 msgid "Male/Female"
 msgstr "مرد/زن"
 
-#: models.py:25
+#: models.py:26
 msgid "Male"
 msgstr "مرد"
 
-#: models.py:26
+#: models.py:27
 msgid "Female"
 msgstr "زن"
 
-#: models.py:29
+#: models.py:28
+msgid "Seperate"
+msgstr ""
+
+#: models.py:31
 msgid "Agreement"
 msgstr "پیمان همکاری"
 
-#: models.py:30
+#: models.py:32
 msgid "Club"
 msgstr "باشگاه"
 
-#: models.py:32
+#: models.py:34
 msgid "Maximum capacity"
 msgstr "حداکثر ظرفیت"
 
-#: models.py:32
+#: models.py:34
 msgid "Please fill if your program has maximum capacity"
 msgstr "لطفا در صورتی که برنامه حداکثر ظرفیت دارد پر شود"
 
-#: models.py:33
+#: models.py:35
 msgid "Remain capacity"
 msgstr "ظرفیت باقی"
 
-#: models.py:34 templates/program/program_list_tag.html:11
+#: models.py:36 templates/program/program_list_tag.html:11
 msgid "Price"
 msgstr "هزینه"
 
-#: models.py:35
+#: models.py:37
 msgid "Age minimum"
 msgstr "حداقل سن"
 
-#: models.py:36
+#: models.py:38
 msgid "Age maximum"
 msgstr "حداکثر سن"
 
-#: models.py:37 templates/program/program_list_tag.html:12
+#: models.py:39 templates/program/program_list_tag.html:12
 msgid "Gender"
 msgstr "جنسیت"
 
-#: models.py:37
+#: models.py:39
 msgid "Please select gender if there is limitation"
 msgstr "در صورت محدودیت جنسیتی انتخاب شود"
 
-#: models.py:38
+#: models.py:40
 msgid "Sport insurance required"
 msgstr "نیار به بیمه ورزشی"
 
-#: models.py:38
+#: models.py:40
 msgid "Mark if your program needs sport insurance"
 msgstr "در صورت نیاز به بیمه ورزشی علامت زده شود"
 
-#: models.py:39
+#: models.py:41
 msgid "Multiple reserve eligibility"
 msgstr "اجازه چندین رزرو"
 
-#: models.py:39
+#: models.py:41
 msgid ""
 "Mark if you want to permit each account can reserve multiple instance of "
 "this program"
@@ -96,13 +98,32 @@ msgstr ""
 "در صورتی که تمایل به اجازه رزرو بیش از یکبار توسط یک کاربر را دارید این "
 "علامت زده شود"
 
-#: templates/program/dashboard_program_list.html:6
+#: models.py:42
+msgid "Brief"
+msgstr ""
+
+#: models.py:43
+msgid "Description about program"
+msgstr ""
+
+#: templates/program/dashboard_program_list.html:8
 #: templates/program/program_list_tag.html:5
 msgid "Programs"
 msgstr "برنامه ها"
 
+#: templates/program/dashboard_program_list.html:37
+msgid "username"
+msgstr ""
+
+#: templates/program/dashboard_program_list.html:38
+msgid "first name"
+msgstr ""
+
+#: templates/program/dashboard_program_list.html:39
+msgid "last name"
+msgstr ""
+
 #: templates/program/program_list_tag.html:10
-#| msgid "Remain capacity"
 msgid "Capacity"
 msgstr "ظرفیت"
 
@@ -115,7 +136,6 @@ msgid "Begin date"
 msgstr "تاریخ شروع"
 
 #: templates/program/program_list_tag.html:14
-#| msgid "Begin date"
 msgid "End date"
 msgstr "تاریخ پایان"
 

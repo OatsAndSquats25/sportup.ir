@@ -65,8 +65,8 @@
 					<h3>{% trans "Register" %}</h3>
 					<br>
                     {% for field in formReg %}
-                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
                         {{ field.errors }}
+                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
                     {% endfor %}
                     <input type="hidden" name="userAction" value="signUp" />
 					<input type="submit" value="ثبت نام" class="btn btn-default">

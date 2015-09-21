@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 20:22+0430\n"
+"POT-Creation-Date: 2015-09-21 18:27+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,55 +74,55 @@ msgstr "حداکثر جلسه"
 msgid "Membership expire date"
 msgstr "تاریخ اتمام اشتراک"
 
-#: models.py:29 templates/programcourse/course_edit.html:8
+#: models.py:26 templates/programcourse/course_edit.html:8
 msgid "Course definition"
 msgstr "تعریف دوره"
 
-#: models.py:30
+#: models.py:27
 msgid "Courses definition"
 msgstr "تعریف دوره ها"
 
-#: models.py:49
+#: models.py:50
 msgid "Saturday"
 msgstr "شنبه"
 
-#: models.py:50
+#: models.py:51
 msgid "Sunday"
 msgstr "یکشنبه"
 
-#: models.py:51
+#: models.py:52
 msgid "Monday"
 msgstr "دوشنبه"
 
-#: models.py:52
+#: models.py:53
 msgid "Tuesday"
 msgstr "سه شنبه"
 
-#: models.py:53
+#: models.py:54
 msgid "Wednesday"
 msgstr "چهارشنبه"
 
-#: models.py:54
+#: models.py:55
 msgid "Thursday"
 msgstr "پنج شنبه"
 
-#: models.py:55
+#: models.py:56
 msgid "Friday"
 msgstr "جمعه"
 
-#: models.py:61
+#: models.py:62
 msgid "Day of week"
 msgstr "روز هفته"
 
-#: models.py:62
+#: models.py:63
 msgid "Date of day"
 msgstr "تاریخ روز"
 
-#: models.py:63
+#: models.py:64
 msgid "Begin time"
 msgstr "زمان شروع"
 
-#: models.py:64
+#: models.py:65
 msgid "End time"
 msgstr "زمان پایان"
 
@@ -209,4 +209,3 @@ msgid ""
 "Your request added to your order and your place will reserve after "
 "successful online payment"
 msgstr ""
-
