@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-21 18:27+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
+"Language-Team: LANGUAGE <ll@sportup.ir>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:8 models.py:29
+msgid "Begin time"
+msgstr "زمان شروع"
+
+#: models.py:9 models.py:30
+msgid "End time"
+msgstr "زمان پایان"
+
+#: models.py:10
+msgid "Session duration"
+msgstr "مدت زمان هر جلسه"
+
+#: models.py:12
+msgid "Saturday"
+msgstr ""
+
+#: models.py:13
+msgid "Sunday"
+msgstr ""
+
+#: models.py:14
+msgid "Monday"
+msgstr ""
+
+#: models.py:15
+msgid "Tuesday"
+msgstr ""
+
+#: models.py:16
+msgid "Wednesday"
+msgstr ""
+
+#: models.py:17
+msgid "Thursday"
+msgstr ""
+
+#: models.py:18
+msgid "Friday"
+msgstr ""
+
+#: models.py:19
+msgid "Number of next days to show"
+msgstr "تعداد روز آتی قابل نمایش"
+
+#: models.py:22
+msgid "Definition"
+msgstr "تعریف"
+
+#: models.py:23
+msgid "Definitions"
+msgstr "تعریف ها"
+
+#: models.py:27
+msgid "Specific date"
+msgstr "تاریخ مشخص"
+
+#: models.py:28
+msgid "Day of week"
+msgstr "روز هفته"
+
+#: models.py:31
+msgid "Capacity Increase/Decrease"
+msgstr "افزایش-کاهش ظرفیت"
+
+#: models.py:32
+msgid "Blockout"
+msgstr "بلاک شده"
+
+#: models.py:35
+msgid "Restriction"
+msgstr "محدودیت"
+
+#: models.py:36
+msgid "Restrictions"
+msgstr "محدودیت ها"
