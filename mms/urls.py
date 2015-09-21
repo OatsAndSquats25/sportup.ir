@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
@@ -27,9 +28,10 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", content_type="text/plain")),
+    url(r'^pages/', include("flatpages.urls")),
     url(r'^accounts/', include("accounts.urls")),
     url(r'^enroll/', include("enroll.urls")),
     url(r'^checkout/', include("finance.urls")),
     url(r'^', include("directory.urls")),
+    url(r'^$', TemplateView.as_view(template_name="index.html")),
 )

@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'polymorphic',
     'generic',
+    'flatpages',
     'accounts',
     'directory',
     'agreement',
