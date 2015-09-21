@@ -1,0 +1,40 @@
+#social-holder{
+	width: 270px;
+	margin: 0 auto;
+}
+.social{
+	display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 15px;
+    color: #2B2D2E;
+}
+#nav-holder{
+	width: 805px;
+	margin: 0 auto;
+}
+.nav-item{
+	display: inline-block;
+    margin: 10px;
+    width: 110px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+.nav-item:hover{
+	color: #fff;
+}
+footer{
+	padding-top: 20px;
+	background-color: #2B2D2E;
+	/* height: 170px; */
+	padding-bottom: 20px;
+    clear: both;
+}
+footer hr{
+	border-color: #545454;
+}
