@@ -1,8 +1,9 @@
 (function () {
+
+	defaultImage = BASEURL + '/static/img/barbells.jpg';
+
 	home = {
 
-		defaultImage : BASEURL + '/img/barbells.jpg',
-		
 		init : function (cnf) {
 			this.config = cnf;
 			self = this;
@@ -42,7 +43,7 @@
 
 		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, BASEURL + '/directory/detail/' + club.pk + '/');
 		                if(club.imageCollection.length == 0){
-		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, self.defaultImage);
+		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, defaultImage);
 		                }else{
 		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, club.imageCollection[0].imageFile);
 		                }
@@ -136,97 +137,163 @@
 
 		setUrl : function (urlQuery) {
 			url = '';
-			for (var i = 0; i < urlQuery.length; i++) {
-				url += urlQuery[i];
-				if(i != urlQuery.length - 1){
-					url += '/';;
+			var i = 0;
+			var max = self.size(urlQuery) - 1;
+			for (var key in urlQuery){
+				url = url + key + '=' + urlQuery[key];
+				if(i != max){
+					url += '/';
 				}
+				i++;
 			}
 			document.location.hash = url;
 		},
 
+		size : function(obj) {
+		    var size = 0, key;
+		    for (key in obj) {
+		        if (obj.hasOwnProperty(key)) size++;
+		    }
+		    return size;
+		},
+
 		genderChange : function () {
-			hash = document.location.hash;
-			var temp = hash.split('#');
-			var urlQuery = temp[1].split('/');
-			urlQuery[0] = ($(this).val() == 1) ? 'آقایان' : 'بانوان';
+			var urlQuery = self.parseUrl(document.location.hash);
+
+			if($(this).val() == 0){
+				if(typeof(urlQuery['gender']) != "undefined"){
+					delete urlQuery["gender"];
+				}
+			}else{
+				urlQuery['gender'] = $(this).val();
+			}	
+			
 			self.setUrl(urlQuery); 
 		},
 
 		cityChange : function () {
-			hash = document.location.hash;
-			var temp = hash.split('#');
-			var urlQuery = temp[1].split('/');
-			urlQuery[1] = ($(this).val() == 0) ? 'شهر' : self.idToCity(parseInt($(this).val()));
-			self.setUrl(urlQuery); 
+			var urlQuery = self.parseUrl(document.location.hash);
+
+			if($(this).val() == 0){
+				if(typeof(urlQuery['city']) != "undefined"){
+					delete urlQuery["city"];
+				}
+			}else{
+				urlQuery['city'] = $(this).val();
+			}	
+			
+			self.setUrl(urlQuery);
 		},
 
 		districtChange : function () {
-			hash = document.location.hash;
-			var temp = hash.split('#');
-			var urlQuery = temp[1].split('/');
-			urlQuery[2] = ($(this).val() == 0) ? 'منطقه' : $(this).val();
-			self.setUrl(urlQuery); 
+			var urlQuery = self.parseUrl(document.location.hash);
+
+			if($(this).val() == 0){
+				if(typeof(urlQuery['region']) != "undefined"){
+					delete urlQuery["region"];
+				}
+			}else{
+				urlQuery['region'] = $(this).val();
+			}	
+			
+			self.setUrl(urlQuery);
 		},
 
 		fieldChange : function () {
-			hash = document.location.hash;
-			var temp = hash.split('#');
-			var urlQuery = temp[1].split('/');
-			urlQuery[3] = ($(this).val() == 0) ? 'فیلد' : $(this).val();
+			var urlQuery = self.parseUrl(document.location.hash);
+
+			if($(this).val() == 0){
+				if(typeof(urlQuery['category']) != "undefined"){
+					delete urlQuery["category"];
+				}
+			}else{
+				urlQuery['category'] = $(this).val();
+			}	
+			
 			self.setUrl(urlQuery);
 		},
 
 		categoryChange : function () {
-			hash = document.location.hash;
-			var temp = hash.split('#');
-			var urlQuery = temp[1].split('/');
-			urlQuery[4] = ($(this).val() == 0) ? 'گروه' : $(this).val();
+			var urlQuery = self.parseUrl(document.location.hash);
+
+			if($(this).val() == 0){
+				if(typeof(urlQuery['genre']) != "undefined"){
+					delete urlQuery["genre"];
+				}
+			}else{
+				urlQuery['genre'] = $(this).val();
+			}	
+			
 			self.setUrl(urlQuery);
 		},
 
 		clubNameChange : function (e) {
 			if (e.which === self.ENTER_KEY) {
-				hash = document.location.hash.split('#');
-				var urlQuery = hash[1].split('/');
-				urlQuery[6] = ($(this).val() == '') ? 'نام' : $(this).val();
+				var urlQuery = self.parseUrl(document.location.hash);
+
+				if($(this).val() == ''){
+					if(typeof(urlQuery['title']) != "undefined"){
+						delete urlQuery["title"];
+					}
+				}else{
+					urlQuery['title'] = $(this).val();
+				}	
+				
 				self.setUrl(urlQuery);
 			}
 		},
 
-		locator : function () {
-			var url = document.location.hash;
-			var res = (url == "") ? self.startUrl() : self.parseUrl(url);
-			if(res != "start"){
-				self.getData(res);
-			}
+		changeRange : function (e) {
+			self.cnf.range.html($(this).val());
+			var urlQuery = self.parseUrl(document.location.hash);
+
+			if($(this).val() == ''){
+				if(typeof(urlQuery['price']) != "undefined"){
+					delete urlQuery["price"];
+				}
+			}else{
+				urlQuery['price'] = $(this).val();
+			}	
+			self.setUrl(urlQuery);
 		},
 
-		startUrl : function () {
-			document.location.hash = 'آقایان/تهران/منطقه/فیلد/گروه/10000/نام';
-			return "start";
+		locator : function () {
+			var url = document.location.hash;
+			var res = self.parseUrl(url);
+			for (var key in res){
+				$('#' + key).val(res[key]);
+				if(key == 'price'){
+					self.cnf.range.html(res[key]);
+				}
+			}
+			self.getData(res);
 		},
 
 		getData : function (inputs) {
+
+ 			var allData = ['title', 'category', 'genre', 'gender', 'price_min', 'price_max', 'city', 'region']
+			req = {};
+			for (var i = 0; i < allData.length; i++) {
+				var key = allData[i];
+				if(typeof(inputs[key]) != 'undefined'){
+					req[key] = inputs[key];
+				}
+			};
+			
 			$.ajax({
-				url : 'http://localhost:8000/data',
-				type : 'GET',
-				data : {
-					gender : inputs[0],
-					city : inputs[1],
-					district : inputs[2],
-					field : inputs[3],
-					category : inputs[4],
-					price : inputs[5],
-					clubname : inputs[6]
-				},
+				url : '/api/directory/',
+				data : req,
 				success : function(res) {
 					var clubTemplate = self.cnf.clubTemplate.html();
 
 					self.cnf.content.html('');
 		            res.results.forEach(function(club) {
 		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, '#');
-		                var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, club.image);
+						if(club.imageCollection.length == 0){
+		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, defaultImage);
+		                }else{
+		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, club.imageCollection[0].imageFile);
+		                }
 		                var thisTemplate3 = thisTemplate2.replace(/<<logo>>/g, club.logo);
 		                var thisTemplate4 = thisTemplate3.replace(/<<title>>/g, club.title);
 
@@ -238,15 +305,19 @@
 
 		parseUrl : function (url) {
 			var temp = url.split('#');
+			if(temp == ''){
+				return [];
+			}
+
 			var urlQuery = temp[1].split('/');
-			var gender = (urlQuery[0] == "آقایان") ? 1 : 2;
-			var city = this.cityDetector(urlQuery[1]);
-			var district = (urlQuery[2] == "منطقه") ? 0 : parseInt(urlQuery[2]);
-			var field = (urlQuery[3] == "فیلد") ? 0 : parseInt(urlQuery[3]);
-			var category = (urlQuery[4] == "گروه") ? 0 : parseInt(urlQuery[4]);
-			var price = (urlQuery[5] == "قیمت") ? 0 : parseInt(urlQuery[5]);
-			var name = (urlQuery[6] == "نام") ? 0 : urlQuery[6];
-			var res = [gender, city, district, field, category, price, name];
+
+			var res = [];
+			for (var i = 0; i < urlQuery.length; i++) {
+				var key = urlQuery[i].split('=')[0];
+				var value = urlQuery[i].split('=')[1];
+				res[key] = value;
+			};
+
 			return res;
 		},
 
@@ -277,14 +348,6 @@
 				output += '<option value="'+ j +'">'+ Data.categories[i] +'</option>';
 			}
 			this.cnf.categoriesFilter.append(output);
-		},
-
-		changeRange : function () {
-			self.cnf.range.html($(this).val());
-			hash = document.location.hash.split('#');
-			var urlQuery = hash[1].split('/');
-			urlQuery[5] = $(this).val();
-			self.setUrl(urlQuery);
 		}
 
 	};
