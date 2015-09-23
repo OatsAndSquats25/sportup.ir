@@ -1,7 +1,30 @@
 (function () {
+	//=========================================================
+
+	var url = window.location.href.replace(BASEURL + '/', '').split('#')[0];
+
+	if(url != 'search'){
+		$('#title').on('keydown', function(e){
+			if (e.which === 13) {
+				var titleContent = $(this).val();
+				if(titleContent != ''){
+					window.location = BASEURL + '/search#title=' + titleContent;
+				}
+			}
+		});
+
+		$('#titleBtn').click(function(){
+			var titleContent = $('#titleHome').val();
+			if(titleContent != ''){
+				window.location = BASEURL + '/search#title=' + titleContent;
+			}
+		});
+	}
 
 	defaultImage = BASEURL + '/static/img/barbells.jpg';
 
+	//===========================================================
+	
 	home = {
 
 		init : function (cnf) {
@@ -28,6 +51,42 @@
 			this.config.window.scroll(this.scrollMenu);
 			this.config.aboutTop.click(this.generateAboutTop);
 			this.config.goToTop.click(this.goToTopAction);
+			this.config.category.change(this.changeCategory);
+			this.config.newsletterBtn.click(this.newsLetterSubscriber);
+		},
+
+		validateEmail : function(email) {
+		    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		    return re.test(email);
+		},
+
+		newsLetterSubscriber : function () {
+			var email = self.config.newsletter.val();
+			if(self.validateEmail(email) == false){
+				alert('ایمیل شما اشتباه وارد شده است لطفا مجدد وارد نمایید.');
+				return;
+			}
+
+			$.ajax({
+				url : 'https://app.mailerlite.com/api/v1/subscribers/2081231/',
+				type : 'POST',
+				data : {
+					apiKey : '6155b1d49ae1f44661d78c6a2de46adc',
+					id : 2081231,
+					email : email
+				},
+				success : function(res) {
+					self.config.newsLetterHolder.html('ضمن تشکر از عضویت شما یک ایمیل جهت تایید برای شما ارسال گردید.')
+				}
+
+			});
+		},
+
+		changeCategory : function () {
+			var category = $(this).val();
+			if(category != 0){
+				window.location = BASEURL + '/search#category=' + category;
+			}
 		},
 
 		getFeatureClubs : function () {
@@ -66,7 +125,7 @@
 				j = i + 1;
 				output += '<option value="'+ j +'">'+ Data.categories[i] +'</option>';
 			}
-			this.config.categoriesFilter.append(output);
+			this.config.category.append(output);
 		},
 
 		scrollMenu : function () {
@@ -106,9 +165,16 @@
 
 		init : function (config) {
 			this.cnf = config;
-			self = this;
+			//hiding boxes==========
+			this.cnf.gender.hide();
+			this.cnf.priceBar.hide();
+			this.cnf.filters.css('height', 160);
+			this.cnf.selectHolder.find('select').css('width', 'calc(25% - 4px)');
+			//======================
+			this.cnf.content.css('height', this.cnf.window.innerHeight() - 155);
+			//this.cnf.content.css('height', this.cnf.window.innerHeight() - 231);
+			//self = this;
 			this.generateFilters();
-			this.cnf.content.css('height', this.cnf.window.innerHeight() - 231);
 			this.locator();
 			this.bindEventes();
 
@@ -128,10 +194,10 @@
 			this.cnf.rangeBar.change(this.changeRange);
 			this.cnf.gender.change(this.genderChange);
 			this.cnf.city.change(this.cityChange);
-			this.cnf.district.change(this.districtChange);
-			this.cnf.field.change(this.fieldChange);
-			this.cnf.category.change(this.categoryChange);
-			this.cnf.clubname.on('keydown', this.clubNameChange);
+			this.cnf.region.change(this.districtChange);
+			this.cnf.category.change(this.fieldChange);
+			this.cnf.genre.change(this.categoryChange);
+			this.cnf.title.on('keydown', this.titleChange);
 			window.onhashchange = this.locator;
 		},
 
@@ -227,22 +293,6 @@
 			self.setUrl(urlQuery);
 		},
 
-		clubNameChange : function (e) {
-			if (e.which === self.ENTER_KEY) {
-				var urlQuery = self.parseUrl(document.location.hash);
-
-				if($(this).val() == ''){
-					if(typeof(urlQuery['title']) != "undefined"){
-						delete urlQuery["title"];
-					}
-				}else{
-					urlQuery['title'] = $(this).val();
-				}	
-				
-				self.setUrl(urlQuery);
-			}
-		},
-
 		changeRange : function (e) {
 			self.cnf.range.html($(this).val());
 			var urlQuery = self.parseUrl(document.location.hash);
@@ -255,6 +305,21 @@
 				urlQuery['price'] = $(this).val();
 			}	
 			self.setUrl(urlQuery);
+		},
+
+		titleChange : function (e) {
+			var urlQuery = self.parseUrl(document.location.hash);
+			if (e.which === self.ENTER_KEY) {
+				if($(this).val() == ''){
+					if(typeof(urlQuery['title']) != "undefined"){
+						delete urlQuery["title"];
+					}
+				}else{
+					urlQuery['title'] = $(this).val();
+				}	
+				
+				self.setUrl(urlQuery);
+			}
 		},
 
 		locator : function () {
@@ -340,14 +405,28 @@
 			for(i=1;i<=22;i++){
 				output += '<option value="'+ i +'">منطقه '+ i +'</option>';
 			}
-			this.cnf.disctrictFilter.append(output);
+			this.cnf.region.append(output);
+
+			var output = '';
+			for(i=0;i < Data.genre.length;i++){
+				j = i + 1;
+				output += '<option value="'+ j +'">'+ Data.genre[i] +'</option>';
+			}
+			this.cnf.genre.append(output);
 
 			var output = '';
 			for(i=0;i < Data.categories.length;i++){
 				j = i + 1;
 				output += '<option value="'+ j +'">'+ Data.categories[i] +'</option>';
 			}
-			this.cnf.categoriesFilter.append(output);
+			this.cnf.category.append(output);
+
+			var output = '';
+			for(i=0;i < Data.city.length;i++){
+				j = i + 1;
+				output += '<option value="'+ j +'">'+ Data.city[i] +'</option>';
+			}
+			this.cnf.city.append(output);
 		}
 
 	};
@@ -361,8 +440,7 @@
 			self = this;
 			this.bindEventes();
 			this.makeMapHeight();
-			//this.generateTimeTable();
-			this.getData();
+			this.getSessions();
 		},
 
 		makeMapHeight : function () {
@@ -414,7 +492,7 @@
 			}*/
 		},
 
-		getData : function (inputs) {
+		getSessions : function (inputs) {
 			$.ajax({
 				url : 'http://localhost:8000/datajson',
 				type : 'GET',

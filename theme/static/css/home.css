@@ -106,7 +106,10 @@ header{
 	text-align: center;
 	color: #fff;
 	font-size: 40px;
-	top: 230px;
+	top: 260px;
+	font-family: yekan;
+    font-weight: bold;
+    text-shadow: 0 0 2px #000;
 }
 #about button{
 	font-size: 16px;
@@ -130,7 +133,6 @@ header{
 }
 #sbholder {
     width: 600px;
-    background-color: #fff;
     margin: 30px auto 0;
     height: 44px;
     border-radius: 4px;
@@ -160,8 +162,15 @@ header{
     border: none;
     float: right;
     padding-right: 10px;
-    border-radius: 0 3px 3px 0;
+    border-radius: 3px;
     border-left: 1px solid #ccc;
+}
+.sbholder-a{
+	background-color: #fff;
+    width: 470px;
+    height: 44px;
+    float: left;
+    border-radius: 3px;
 }
 #news-letter{
 	background-image: url('../img/pricing.jpg');
@@ -178,6 +187,10 @@ header{
 	margin: 0 auto;
 	background-color: rgba(0,0,0,0.5);
 	padding: 30px 80px 30px;
+	color: #fff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 38px;
 }
 #news-letter-holder input[type=submit]{
 	color: #fff;
@@ -364,12 +377,12 @@ header{
 	text-align: center;
 }
 #club-register-holder a{
-	display: inline-block;
+	display : inline-block;
+	line-height: 40px;
 	color: #fff;
     background-color: #ff5a5f;
     border: none;
     height: 40px;
-	line-height: 40px;
     width: 140px;
     margin-top: 15px;
     font-size: 16px;
