@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 18:27+0430\n"
+"POT-Creation-Date: 2015-09-22 13:49+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,111 +18,115 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: models.py:13
+#: models.py:8
+msgid "Programcourse"
+msgstr "دوره‌ای"
+
+#: models.py:16
 msgid "Enrollment"
 msgstr "ثبت نام"
 
-#: models.py:14
+#: models.py:17
 msgid "First login"
 msgstr "اولین ورود"
 
-#: models.py:15
+#: models.py:18
 msgid "Specific date"
 msgstr "تاریخ مشخص"
 
-#: models.py:18 templates/programcourse/course_reserve.html:16
+#: models.py:21 templates/programcourse/course_reserve.html:16
 msgid "Usage can begin from"
 msgstr "شروع استفاده از"
 
-#: models.py:18
+#: models.py:21
 msgid "Usage begin policy since enroll"
 msgstr "سیاست شروع استفاده از زمان ثبت نام"
 
-#: models.py:19
+#: models.py:22
 msgid "Begin date of usage"
 msgstr "تاریخ شروع استفاده"
 
-#: models.py:19
+#: models.py:22
 msgid "Set this field if usage will start at specific date"
 msgstr "این فیلد در صورت انتخاب شروع از تاریخ مشخص تنظیم گردد"
 
-#: models.py:20
+#: models.py:23
 msgid "End date of usage"
 msgstr "تاریخ پایان استفاده"
 
-#: models.py:20
+#: models.py:23
 msgid "Set this field if usage will finish at specific date"
 msgstr "این فیلد در صورتی که پایان دوره مشخص باشد تنظیم گردد"
 
-#: models.py:21
+#: models.py:24
 msgid "Maximum valid day"
 msgstr "حداکثر روز قابل استفاده"
 
-#: models.py:21
+#: models.py:24
 msgid "Maximum valid days since enroll choice"
 msgstr "تعداد روز معتبر از ثبت نام(وابسته به انتخاب شروع استفاده)"
 
-#: models.py:22
+#: models.py:25
 msgid "Maximum allowed session"
 msgstr "حداکثر جلسه قابل استفاده"
 
-#: models.py:22
+#: models.py:25
 msgid "Maximum sessions"
 msgstr "حداکثر جلسه"
 
-#: models.py:23
+#: models.py:26
 msgid "Membership expire date"
 msgstr "تاریخ اتمام اشتراک"
 
-#: models.py:26 templates/programcourse/course_edit.html:8
+#: models.py:29 templates/programcourse/course_edit.html:8
 msgid "Course definition"
 msgstr "تعریف دوره"
 
-#: models.py:27
+#: models.py:30
 msgid "Courses definition"
 msgstr "تعریف دوره ها"
 
-#: models.py:50
+#: models.py:53
 msgid "Saturday"
 msgstr "شنبه"
 
-#: models.py:51
+#: models.py:54
 msgid "Sunday"
 msgstr "یکشنبه"
 
-#: models.py:52
+#: models.py:55
 msgid "Monday"
 msgstr "دوشنبه"
 
-#: models.py:53
+#: models.py:56
 msgid "Tuesday"
 msgstr "سه شنبه"
 
-#: models.py:54
+#: models.py:57
 msgid "Wednesday"
 msgstr "چهارشنبه"
 
-#: models.py:55
+#: models.py:58
 msgid "Thursday"
 msgstr "پنج شنبه"
 
-#: models.py:56
+#: models.py:59
 msgid "Friday"
 msgstr "جمعه"
 
-#: models.py:62
+#: models.py:65
 msgid "Day of week"
 msgstr "روز هفته"
 
-#: models.py:63
+#: models.py:66
 msgid "Date of day"
 msgstr "تاریخ روز"
 
-#: models.py:64
+#: models.py:67
 msgid "Begin time"
 msgstr "زمان شروع"
 
-#: models.py:65
+#: models.py:68
 msgid "End time"
 msgstr "زمان پایان"
 
