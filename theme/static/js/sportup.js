@@ -173,7 +173,7 @@
 			//======================
 			this.cnf.content.css('height', this.cnf.window.innerHeight() - 155);
 			//this.cnf.content.css('height', this.cnf.window.innerHeight() - 231);
-			//self = this;
+			self = this;
 			this.generateFilters();
 			this.locator();
 			this.bindEventes();
@@ -346,7 +346,7 @@
 			};
 			
 			$.ajax({
-				url : '/api/directory/',
+				url : BASEURL + '/api/directory/',
 				data : req,
 				success : function(res) {
 					var clubTemplate = self.cnf.clubTemplate.html();
