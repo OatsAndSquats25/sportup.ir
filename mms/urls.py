@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.views.decorators.cache import never_cache
+
 
 admin.autodiscover()
 
@@ -23,6 +25,7 @@ urlpatterns += patterns('',
     url(r'^api/', include("agreement.urlsapi")),
     url(r'^api/', include("directory.urlsapi")),
     url(r'^api/', include("program.urlsapi")),
+    url(r'^api/', include("programcourse.urlsapi")),
     url(r'^api/', include("programsession.urlsapi")),
     url(r'^api/', include("enroll.urlsapi")),
 )
@@ -33,5 +36,5 @@ urlpatterns += patterns('',
     url(r'^enroll/', include("enroll.urls")),
     url(r'^checkout/', include("finance.urls")),
     url(r'^', include("directory.urls")),
-    url(r'^$', TemplateView.as_view(template_name="index.html")),
+    url(r'^$', never_cache(TemplateView.as_view(template_name="index.html"))),
 )
