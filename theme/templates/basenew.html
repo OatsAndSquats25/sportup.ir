@@ -136,7 +136,8 @@
 	<script src={% static "js/libs/scrollReveal.min.js" %}></script>
 	<script src={% static "js/jalali/index.js" %}></script>
 	<script src={% static "js/data.js" %}></script>
-    <script>BASEURL = "{{ request.url }}";</script>
+{#    <script>BASEURL = "{{ request.url }}";</script>#}
+    <script>BASEURL = "http://{{ request.get_host }}";</script>
 	<script src={% static "js/sportup.js" %}></script>
     {% block extra_js_end %}{% endblock %}
 </body>
