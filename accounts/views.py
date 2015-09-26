@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.contenttypes.models import ContentType
 import importlib
 
-from generic.email import send_approved_mail
+from generic.email import emailNotifications
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -116,7 +116,7 @@ class loginRegister(View):
                                      last_name = formReg.cleaned_data['last_name'])
             userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
             login(request, userAuth)
-            send_approved_mail(request, userAuth)
+            emailNotifications.approvedAccount(request, userAuth)
             messages.info(request, _("Register successfully"))
             return HttpResponseRedirect(request.GET.get('next','/'))
 
@@ -125,5 +125,5 @@ class loginRegister(View):
 class emailTest(View):
     def get(self,request):
         userAuth = User.objects.get(id = request.user.id)
-        send_approved_mail(request, userAuth)
+        emailNotifications.approvedAccount(request, userAuth)
         return HttpResponse("test email sent.")
