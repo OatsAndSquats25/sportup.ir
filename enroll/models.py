@@ -29,7 +29,10 @@ class enrolledProgram(PolymorphicModel, Displayable):
         return self.programDefinitionKey.isValid()
 
     def referenceNumber(self):
-        return str(self.programDefinitionKey.id) + "-" + str(self.id) + "-" + str(self.invoiceKey.id)
+        if self.invoiceKey is not None:
+            return str(self.programDefinitionKey.id) + "-" + str(self.id) + "-" + str(self.invoiceKey.id)
+        else:
+            return str(self.programDefinitionKey.id) + "-" + str(self.id) + "-0"
 
 # ----------------------------------------------------
 class enrolledProgramCourse(enrolledProgram):
