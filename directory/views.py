@@ -3,8 +3,9 @@ from django.views.generic import ListView, DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from rest_framework import generics
-from rest_framework import filters
-import django_filters
+
+from django.contrib.gis.geos import *
+from django.contrib.gis.measure import D
 
 # from accounts.views import MyRegistrationView
 from generic.models import Displayable
@@ -99,7 +100,7 @@ class getItemDetail(DetailView):
 
         return context
 #---------------------------------------------------
-class getItemList(generics.ListAPIView):
+class getList(generics.ListAPIView):
     """
     List Api for Search, filter and order clubs
     title       -- search in title
@@ -108,18 +109,24 @@ class getItemList(generics.ListAPIView):
     gender      -- gender
     price_min   -- price minimum
     price_max   -- price maximum
-    location    -- athlete location
+    position    -- athlete location
     distance    -- distance from location
     """
     queryset        = club.objects.all()
-    serializer_class= clubSerializer
+    serializer_class= clubItemSerializer
     paginate_by = 20
 
     def get_queryset(self):
-        queryInst    = super(getItemList, self).get_queryset()
+        queryInst    = super(getList, self).get_queryset()
 
         categoryVal = self.request.query_params.get('category', None)
         titleVal    = self.request.query_params.get('title', None)
+        genre       = self.request.query_params.get('genre', None)
+        gender      = self.request.query_params.get('gender', None)
+        price_min   = self.request.query_params.get('price_min', None)
+        price_max   = self.request.query_params.get('price_max', None)
+        position    = self.request.query_params.get('position', None)
+        distance    = self.request.query_params.get('distance', 7)
 
         if titleVal is not None:
             try:
@@ -136,21 +143,34 @@ class getItemList(generics.ListAPIView):
             except:
                 return ''
 
+        if position is not None:
+            try:
+                pnt = fromstr('POINT(-96.876369 29.905320)', srid=4326)
+                queryInst = queryInst.objects.filter(point__distance_lte=(pnt, D(km=distance)))
+            except:
+                return ''
+
         queryInst = queryInst.select_related()
         return queryInst
 #---------------------------------------------------
 class getItem(generics.RetrieveAPIView):
     """
+    get club information
     """
-    # model = club
-    lookup_field = 'pk'
     queryset = club.objects.all().select_related()
     serializer_class = clubItemSerializer
 
+    # locationInst = complexLocation.objects.filter(pk = club.locationKey)
+    # locationInst.club_set().all()
+
     # def get_queryset(self):
-    #     return club.objects.get(pk = self.request.query_params.get('pk'))
+    #     return list(itertools.chain(Tweet.objects.all(), Article.objects.all()))
+        # return list(itertools.chain(Tweet.objects.all(), Article.objects.all()))
 #---------------------------------------------------
 class getFav(generics.ListAPIView):
-    serializer_class = clubSerializer
+    """
+    get 3 favorite club for home page
+    """
+    serializer_class = clubItemSerializer
     queryset = club.objects.order_by('created')[:3]
 #---------------------------------------------------

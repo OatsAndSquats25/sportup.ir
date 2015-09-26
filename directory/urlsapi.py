@@ -14,7 +14,7 @@ import views
 # )
 
 urlpatterns = patterns('',
-    url(r'^directory/fav/',views.getFav.as_view(), name="directoryFavAPI"),
-    url(r'^directory/(?P<pk>\d+)/',views.getItem.as_view(), name="directoryItemAPI"),
-    url(r'^directory/',views.getItemList.as_view(), name="directoryAPI"),
+    url(r'^directory/fav/$',views.getFav.as_view(), name="directoryFavAPI"),
+    url(r'^directory/(?P<pk>\d+)/$',views.getItem.as_view(), name="directoryItemAPI"),
+    url(r'^directory/',views.getList.as_view(), name="directoryAPI"),
     )

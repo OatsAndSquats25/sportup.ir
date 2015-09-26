@@ -65,6 +65,12 @@ class complexLocation(Displayable):
 
     def get_absolute_url(self):
         return reverse('itemDetail2', kwargs={'pk':self.complexKey.pk, 'locationId': self.id})
+
+    # def images(self):
+    #     return imageCollection.objects.filter(clubKey__in = self.club.all())
+        # return self.club.all()
+        # return self.club.all().imageCollection.all()
+
 #------------------------------------------
 class address(Displayable):
     locationKey = models.ForeignKey(complexLocation, verbose_name=_("Location"))
@@ -90,7 +96,7 @@ class address(Displayable):
         return reverse('itemDetail2', kwargs={'pk':self.locationKey.complexKey.pk, 'locationId': self.locationKey.id})
 #------------------------------------------
 class club(Displayable):
-    locationKey = models.ForeignKey(complexLocation, verbose_name=_("Location"), null =True, blank = True)
+    locationKey = models.ForeignKey(complexLocation, related_name='complexLocation', related_query_name='club', verbose_name=_("Location"), null =True, blank = True)
     categoryKeys= models.ManyToManyField(category, verbose_name=_("Category"), null =True, blank = True)
     summary = models.TextField(_("Summary"), max_length=200)
     detail  = models.TextField(_("Description"), null=True, blank=True)
@@ -119,8 +125,20 @@ class club(Displayable):
     def complex_name(self):
         return self.locationKey.complexKey.title
 
+    def complex_summary(self):
+        return self.locationKey.complexKey.summary
+
     def location_name(self):
         return self.locationKey.title
+
+    def location_address(self):
+        return address.objects.filter(locationKey = self.locationKey)
+
+    def club_related(self):
+        return club.objects.filter(locationKey = self.locationKey).exclude(pk = self.id)
+
+    def contacts(self):
+        return self.contact_set
 
     def __unicode__(self):
         return self.title

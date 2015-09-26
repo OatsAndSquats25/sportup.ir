@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from models import club, imageCollection, complexLocation
+from models import club, imageCollection, address, contact
 # ----------------------------------------------------
 class clubSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,18 +12,29 @@ class imageSerializer(serializers.ModelSerializer):
         model = imageCollection
         fields = ('title','imageFile')
 # ---------------------------------------------------
-# class locationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = complexLocation
-#         fields = ()
+class addressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = address
+# ---------------------------------------------------
+class contactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = contact
+# ---------------------------------------------------
+class clubTitleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = club
+        fields = ('pk','title')
 # ---------------------------------------------------
 class clubItemSerializer(serializers.ModelSerializer):
-    complexName = serializers.CharField(source='complex_name')
-    locationName = serializers.CharField(source='location_name')
+    complexName     = serializers.CharField(source='complex_name')
+    complexSummary  = serializers.CharField(source='complex_summary')
+    locationName    = serializers.CharField(source='location_name')
+    locationAddress = addressSerializer(source='location_address', many=True)
+    contacts        = contactSerializer(many=True)
+    clubs           = clubTitleSerializer(source='club_related', many=True)
     imageCollection = imageSerializer(many=True)
-    # imageCollection = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = club
-        fields =("complexName", "locationName", "pk", "title","slug", "status","summary", "detail", "address", "website","phone","cell","logo", "imageCollection")
+        # fields =("complexName", "complexSummary", "locationName", "locationAddress", "clubs", "pk", "title","slug", "status","summary", "detail", "address", "website","phone","cell","logo", "imageCollection")
 # ---------------------------------------------------

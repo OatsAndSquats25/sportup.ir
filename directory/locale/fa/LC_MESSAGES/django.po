@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 21:19+0430\n"
+"POT-Creation-Date: 2015-09-21 18:27+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <amandegar@sportup.ir>\n"
 "Language-Team: LANGUAGE <ll@sportup.ir>\n"
@@ -18,23 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: forms.py:15 models.py:26
+#: admin.py:18
+msgid "Edit"
+msgstr ""
+
+#: forms.py:15 models.py:140
 msgid "Title"
 msgstr "عنوان"
 
-#: forms.py:16 models.py:8
+#: forms.py:16 models.py:40 models.py:101
 msgid "Summary"
 msgstr "خلاصه"
 
-#: forms.py:17 models.py:9 templates/directory/item.html:97
+#: forms.py:17 models.py:102 models.py:160 templates/directory/item.html:100
 msgid "Description"
 msgstr "توضیحات"
 
-#: forms.py:18 models.py:10
+#: forms.py:18 models.py:77 models.py:89 models.py:103
+#: templates/directory/address.html:38
 msgid "Address"
 msgstr "آدرس"
 
-#: forms.py:19 models.py:11 templates/directory/listall.html:50
+#: forms.py:19 models.py:104 models.py:153 templates/directory/listall.html:50
 msgid "Website"
 msgstr "وب سایت"
 
@@ -42,22 +47,150 @@ msgstr "وب سایت"
 msgid "Landline"
 msgstr "تلفن ثابت"
 
-#: forms.py:21 models.py:13
+#: forms.py:21 models.py:106
 msgid "Cell"
 msgstr "موبایل"
 
-#: forms.py:22 models.py:14 templates/directory/item.html:33
+#: forms.py:22 models.py:39 models.py:107 templates/directory/item.html:36
 #: templates/directory/listall.html:40
 msgid "Logo"
 msgstr "لوگو"
 
-#: models.py:12
+#: models.py:9 models.py:28 models.py:108
+msgid "Visit"
+msgstr ""
+
+#: models.py:12 models.py:26 models.py:100
+msgid "Category"
+msgstr "گروه"
+
+#: models.py:13
+msgid "Categories"
+msgstr "گروه ها"
+
+#: models.py:23
+msgid "Behaviour"
+msgstr "رفتار"
+
+#: models.py:24
+msgid "Traditional"
+msgstr ""
+
+#: models.py:27 models.py:158
+msgid "Type"
+msgstr ""
+
+#: models.py:31
+msgid "Genre"
+msgstr "حس"
+
+#: models.py:32
+msgid "Genres"
+msgstr "حس ها"
+
+#: models.py:43 models.py:55
+msgid "Complex"
+msgstr "مجموعه"
+
+#: models.py:44
+msgid "Complexes"
+msgstr "مجموعه ها"
+
+#: models.py:59 models.py:76 models.py:99 models.py:156
+msgid "Location"
+msgstr "مکان"
+
+#: models.py:60
+msgid "Locations"
+msgstr "مکان ها"
+
+#: models.py:78 templates/directory/address.html:41
+msgid "Region"
+msgstr "منطقه"
+
+#: models.py:79
+msgid "Suburb"
+msgstr "محله"
+
+#: models.py:80
+msgid "City"
+msgstr "شهر"
+
+#: models.py:81 templates/directory/address.html:43
+msgid "Postal Code"
+msgstr "کد پستی"
+
+#: models.py:82 models.py:111
+msgid "coordinate"
+msgstr "مختصات"
+
+#: models.py:82 models.py:111
+msgid "Represented as (longitude, latitude)"
+msgstr "طول و عرض جغرافیایی"
+
+#: models.py:90
+#| msgid "Address"
+msgid "Addresses"
+msgstr "آدرس"
+
+#: models.py:105
 msgid "Phone"
 msgstr "تلفن"
 
-#: models.py:28
+#: models.py:119 models.py:120
+#| msgid "Clubs"
+msgid "Club"
+msgstr "باشگاه ها"
+
+#: models.py:142
 msgid "File"
 msgstr "فایل"
+
+#: models.py:149
+msgid "Tel"
+msgstr "تلفن"
+
+#: models.py:150
+msgid "Fax"
+msgstr "فکس"
+
+#: models.py:151
+msgid "TeleFax"
+msgstr "تلفکس"
+
+#: models.py:152
+msgid "Email"
+msgstr "ایمیل"
+
+#: models.py:154
+#| msgid "Phone"
+msgid "CellPhone"
+msgstr "تلفن"
+
+#: models.py:159
+#| msgid "Contact"
+msgid "Content"
+msgstr "تماس"
+
+#: models.py:163 templates/directory/item.html:38
+msgid "Contact"
+msgstr "تماس"
+
+#: models.py:164
+#| msgid "Contact"
+msgid "Contacts"
+msgstr "تماس"
+
+#: templates/directory/categoryItems.html:4
+#: templates/directory/categoryItems.html:6
+#| msgid "List of complex"
+msgid "List of complex has"
+msgstr "لیست مجموعه‌ها"
+
+#: templates/directory/categoryItems.html:9 templates/directory/item.html:9
+#: templates/directory/listall.html:9
+msgid "Directory"
+msgstr "دایرکتوری"
 
 #: templates/directory/club_registration.html:13
 msgid "Register Club"
@@ -80,15 +213,7 @@ msgstr ""
 msgid "List of complex"
 msgstr "لیست مجموعه‌ها"
 
-#: templates/directory/item.html:9 templates/directory/listall.html:9
-msgid "Directory"
-msgstr "دایرکتوری"
-
-#: templates/directory/item.html:35
-msgid "Contact"
-msgstr "تماس"
-
-#: templates/directory/item.html:87
+#: templates/directory/item.html:90
 msgid "More"
 msgstr "بیشتر"
 
