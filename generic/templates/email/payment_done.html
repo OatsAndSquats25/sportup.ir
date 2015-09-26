@@ -1,0 +1,7 @@
+{% load i18n future %}
+{% block emailmain %}
+<p>{% trans "Thank you for purchasing from SportUp.ir." %}</p>
+<p>{% trans "Please use the link below to log in." %}</p>
+<p>You bought program below.</p>
+<p><a href="http://{{ request.get_host }}{% url "dashboard" %}">http://{{ request.get_host }}{% url "dashboard" %}</a></p>
+{% endblock %}

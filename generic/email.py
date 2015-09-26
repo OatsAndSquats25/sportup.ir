@@ -42,18 +42,15 @@ def send_mail_template(subject, template, addr_from, addr_to, context=None,
         msg.attach(*attachment)
     msg.send(fail_silently=fail_silently)
 # ----------------------------------------------------
-def send_approved_mail(request, user):
-    """
-    Sends an email to a user once their ``is_active`` status goes from
-    ``False`` to ``True`` when the ``ACCOUNTS_APPROVAL_REQUIRED``
-    setting is ``True``.
-    """
+def sendEmailNotification(self, request, user, mailSubject, mailContext):
     context = {"request": request, "user": user}
-    subject = subject_template("email/account_approved_subject.txt", context)
-    send_mail_template(subject, "email/account_approved", DEFAULT_FROM_EMAIL, user.email, context=context)
+    subject = subject_template(mailSubject, context)
+    send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, user.email, context=context)
 # ----------------------------------------------------
-def send_payment_done_mail(request, user):
-    context = {"request": request, "user": user}
-    subject = subject_template("email/payment_done_subject.txt", context)
-    send_mail_template(subject, "email/payment_done", DEFAULT_FROM_EMAIL, user.email, context=context)
+class emailNotifications(object):
+    def approvedAccount(self, request, user):
+        sendEmailNotification(request, user, "email/account_approved_subject.txt", "email/account_approved.html")
+
+    def paymentDone(self, request, user):
+        sendEmailNotification(request, user, "email/payment_done_subject.txt", "email/payment_done.html")
 # ----------------------------------------------------
