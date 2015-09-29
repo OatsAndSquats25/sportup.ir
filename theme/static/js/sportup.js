@@ -163,6 +163,7 @@
 
 		ESC_KEY : 27,
 
+		defaultURL : '',
 		init : function (config) {
 			this.cnf = config;
 			//hiding boxes==========
@@ -212,6 +213,7 @@
 				}
 				i++;
 			}
+			
 			document.location.hash = url;
 		},
 
@@ -324,6 +326,13 @@
 
 		locator : function () {
 			var url = document.location.hash;
+
+			if (url.replace('#', '') == '') {
+				return self.startURL();
+			}else{
+				self.cookieSeter('search', url);
+			}
+
 			var res = self.parseUrl(url);
 			for (var key in res){
 				$('#' + key).val(res[key]);
@@ -332,6 +341,37 @@
 				}
 			}
 			self.getData(res);
+		},
+
+		startURL : function(){
+			var url = this.cookieGeter('search');
+
+			if(url){
+				return self.redirect(url);
+			}
+
+			return self.redirect(self.defaultURL);
+		},
+
+		redirect : function (url) {
+			document.location.hash = url;
+		},
+
+		cookieGeter : function(cookieName){
+			
+			var cookies = document.cookie.split(';');
+				
+			for (var i = 0; i < cookies.length; i++) {
+				if (cookies[i].search('search=') == 1) {
+					return cookies[i].trim().replace('search=', '');
+				}
+			}
+
+			return false;
+		},
+
+		cookieSeter : function(cookieName, url){
+			document.cookie = cookieName + "=" + url;
 		},
 
 		getData : function (inputs) {
