@@ -346,7 +346,7 @@
 			};
 			
 			$.ajax({
-				url : BASEURL + '/api/directory/',
+				url : '/api/directory/',
 				data : req,
 				success : function(res) {
 					var clubTemplate = self.cnf.clubTemplate.html();
@@ -369,12 +369,12 @@
 		},
 
 		parseUrl : function (url) {
-			var temp = url.split('#');
+			var temp = url.replace('#', '');
 			if(temp == ''){
 				return [];
 			}
 
-			var urlQuery = temp[1].split('/');
+			var urlQuery = temp.split('/');
 
 			var res = [];
 			for (var i = 0; i < urlQuery.length; i++) {
@@ -438,9 +438,40 @@
 		init : function (cnf) {
 			this.config = cnf;
 			self = this;
+			this.week = 0;
+			this.club = parseInt(document.location.hash.replace('#', ''));
 			this.bindEventes();
 			this.makeMapHeight();
-			this.getSessions();
+			this.locator();
+		},
+
+		bindEventes : function () {
+			this.config.goToCourse.click(this.goToCourseAction);
+			this.config.goToSession.click(this.goToSessionAction);
+			this.config.goToTop.click(this.goToTopAction);
+			this.config.nextWeek.click(this.generateNextWeek);
+			this.config.prevWeek.click(this.generatePrevWeek);
+			window.onhashchange = this.locator;
+		},
+
+		locator : function () {
+			self.getData(self.club);
+			self.getCourse(self.club);
+			self.getSessions(self.club, this.week);
+		},
+
+		generateNextWeek : function () {
+			if (self.week < self.maxWeek - 1) {
+				self.week++;
+				self.getSessions(self.club, self.week);
+			};
+		},
+
+		generatePrevWeek : function () {
+			if(self.week > 0){
+				self.week--;
+				self.getSessions(self.club, self.week);
+			}
 		},
 
 		makeMapHeight : function () {
@@ -449,57 +480,129 @@
 			this.config.map.css('height', height - mapTop);
 		},
 
-		bindEventes : function () {
-			this.config.window.scroll(this.scrollToBottom);
-			this.config.goToCourse.click(this.goToCourseAction);
-			this.config.goToSession.click(this.goToSessionAction);
-			this.config.goToTop.click(this.goToTopAction);
-		},
-
-		scrollToBottom : function () {
-			var varscroll = $(this).scrollTop();
-			var max = self.config.program1.offset().top;
-
-			/*if(varscroll == 0){
-				$('#club-subnav').hide();
-				$('#box-club-info').hide();
-				$('#box').removeAttr('style');
-				return;
-			}
-
-			if(varscroll <= max - 200){
-				$('#club-subnav').show();
-				$('#box-club-info').slideDown(1000);
-				$('#box').css({
-					'position' : 'fixed',
-					'top' : '101px'
-				});
-			}
-		
-			if(varscroll >= 360){
-				$('#club-subnav').show();
-				$('#box-club-info').slideDown(1000);
-				$('#box').css({
-					'position' : 'fixed',
-					'top' : '101px'
-				});
-				$('#go-to-top').fadeIn();
-			}else{
-				$('#club-subnav').hide();
-				$('#box-club-info').hide();
-				$('#box').removeAttr('style');
-				$('#go-to-top').hide();
-			}*/
-		},
-
-		getSessions : function (inputs) {
+		getData : function (clubId) {
 			$.ajax({
-				url : 'http://localhost:8000/datajson',
+				url : BASEURL + '/api/directory/' + clubId + '/',
+				type : 'GET',
+				//data : {
+				//	pk : clubId
+				//},
+				cache : false,
+				success : function(res) {
+					$('#club-title').html(res.complexName);
+					$('#club-address').html(res.locationAddress[0].address);
+					$('#club-phone').html(res.phone + ' | ' + res.cell);
+					$('#description').html(res.complexSummary);
+					$('#summary').html(res.summary);
+					$('#club-web').html('<a href="'+ res.website +'" target="_blank">'+ res.website +'</a>');
+					
+					$('#subclub-titles').html('<li role="presentation" class="active"><a class="club-item" id="' + res.id + '" role="tab" data-toggle="tab">' + res.title + '</a></li>');
+					$('.category-title').html(res.title);
+
+					if(res.clubs.length){
+						res.clubs.forEach(function(club){
+							$('#subclub-titles').append('<li role="presentation"><a class="club-item" id="' + club.id + '" role="tab" data-toggle="tab">' + club.title + '</a></li>');
+						});
+					}
+
+					if(res.imageCollection.length){
+						$('#image-holder').html('');
+						res.imageCollection.forEach(function(image){
+							$('#image-holder').append('<div class="item"><img src="' + image.imageFile + '" width="100%"></div>');
+						});
+						$('#image-holder').find('div.item:first').addClass('active');
+					}
+					
+					self.makeMapHeight();
+
+					//OTHER TABS EVENT
+					$('.club-item').click(function(){
+						document.location.hash = $(this).attr('id');
+					});
+
+					var coordinate = res.locationAddress[0].coordinate.match(/\(.+\)/g)[0].replace('(', '').replace(')', '').split(' ');
+					self.googleMap(coordinate[0], coordinate[1]);
+				}
+			});
+		},
+
+		googleMap : function (lat, lang) {
+			google.maps.event.addDomListener(window, 'load', initialize(lat, lang));
+		},
+
+		getCourse : function (clubId) {
+			$.ajax({
+				url : BASEURL + '/api/course/' + clubId + '/',
+				type : 'GET',
+				//data : {
+				//	pk : clubId
+				//},
+				cache : false,
+				success : function(res) {
+					var sessionTemplate = self.config.courseTemplate.html();
+
+					self.config.courseHolder.html('<tr style="background-color:#888;color:#fff;"><td class="program1-title">برنامه ها</td><td class="program1-title">ظرفیت</td><td class="program1-title">هزینه(ریال)</td><td class="program1-title">جنسیت</td><td class="program1-title">تاریخ شروع</td><td class="program1-title">تاریخ پایان</td><td class="program1-title">مهلت ثبت نام</td><td class="program1-title">ثبت نام</td></tr>');
+							            
+		            res.forEach(function(course) {
+
+	            		temp = sessionTemplate.replace(/<<title>>/g, course.title);
+	            		temp = temp.replace(/<<capacity>>/g, course.remainCapacity);
+	            		temp = temp.replace(/<<price>>/g, self.priceSeperator(course.price));
+	            		temp = temp.replace(/<<gender>>/g, course.genderLimit);
+
+	            		if (course.usageBeginDate == null) {
+	            			temp = temp.replace(/<<begin>>/g, '-');
+	            		}else{
+	            			temp = temp.replace(/<<begin>>/g, self.readyDate(course.usageBeginDate));
+	            		}
+
+	            		if (course.usageEndDate == null) {
+	            			temp = temp.replace(/<<end>>/g, '-');
+	            		}else{
+	            			temp = temp.replace(/<<end>>/g, self.readyDate(course.usageEndDate));
+	            		}
+	            		
+	            		if (course.expiry_date == null) {
+	            			temp = temp.replace(/<<deadline>>/g, '-');
+	            		}else{
+	            			temp = temp.replace(/<<deadline>>/g, self.readyDateTime(course.expiry_date));
+	            		}
+
+	            		temp = temp.replace(/<<id>>/g, course.id);
+	            		
+	            		self.config.courseHolder.append(temp);
+		            });
+
+					$('.course-item').click(function(){
+						$('#myModal').modal('show');
+					});
+				}
+			});
+		},
+
+		readyDate : function (date) {
+			var finalDate = toJalaali(parseInt(date.split('-')[0]), parseInt(date.split('-')[1]), parseInt(date.split('-')[2]));
+			return finalDate.jy + '/' + finalDate.jm + '/' + finalDate.jd;
+		},
+
+		readyDateTime : function (dateTime) {
+			var date = dateTime.split('T')[0];
+			var finalDate = toJalaali(parseInt(date.split('-')[0]), parseInt(date.split('-')[1]), parseInt(date.split('-')[2]));
+			return finalDate.jy + '/' + finalDate.jm + '/' + finalDate.jd;
+		},
+
+		getSessions : function (clubId, weekId) {
+			self.config.loadingSession.show();
+			$.ajax({
+				url : BASEURL + '/api/session/schedules/',
 				type : 'GET',
 				data : {
-					id : 1
+					club : clubId,
+					week : weekId
 				},
+				cache : false,
 				success : function(res) {
+					self.config.loadingSession.hide();
 					var sessionTemplate = self.config.sessionTemplate.html();
 
 					self.config.sessionsHolder.html('');
@@ -512,21 +615,44 @@
 		            		self.generateTimeTable(session.begin, session.end, session.date, session.day);
 		            		startHours = session.begin;
 							endHours = session.end;	
+							self.maxWeek = session.capacity;
 		            	}else{
-		            		var right = (session.day + 1) * 125;
+		            		var right = (session.day + 1) * (self.config.sessions.innerWidth() / 8);
 		            		var top = self.generateTop(session.begin, startHours) * 30;
 		            		var height = (self.generateDuration(session.begin, session.end) / 2);
 		            		var price = self.priceSeperator(session.price);
-		            		var thisTemplate1 = sessionTemplate.replace(/<<id>>/g, session.prgid);
-		            		var thisTemplate2 = thisTemplate1.replace(/<<top>>/g, top + 'px');
-		            		var thisTemplate3 = thisTemplate2.replace(/<<right>>/g, right + 'px');
-		            		var thisTemplate4 = thisTemplate3.replace(/<<height>>/g, height + 'px');
-		            		var thisTemplate5 = thisTemplate4.replace(/<<price>>/g, price);
-		            		var thisTemplate6 = thisTemplate5.replace(/<<begin>>/g, session.begin);
-		            		var thisTemplate7 = thisTemplate6.replace(/<<end>>/g, session.end);
-		            		var thisTemplate8 = thisTemplate7.replace(/<<capacity>>/g, session.capacity);
+
+		            		var theme = sessionTemplate.replace(/<<id>>/g, session.prgid);
+		            		theme = theme.replace(/<<top>>/g, top + 'px');
+		            		theme = theme.replace(/<<right>>/g, right + 'px');
+		            		theme = theme.replace(/<<height>>/g, height + 'px');
+		            		theme = theme.replace(/<<price>>/g, price);
+		            		theme = theme.replace(/<<begin>>/g, session.begin);
+		            		theme = theme.replace(/<<end>>/g, session.end);
+		            		theme = theme.replace(/<<capacity>>/g, session.capacity);
 		            		
-		            		self.config.sessionsHolder.append(thisTemplate8);
+		            		if (session.status == 0) {
+		            			theme = theme.replace(/<<backgroundColor>>/g, '#9E9E9E');
+		            			theme = theme.replace(/<<noclick>>/g, 'noclick');
+		            			theme = theme.replace(/<<title>>/g, '');
+		            			theme = theme.replace(/<<popUpContent>>/g, 'data-content="در حال حاضر غیر فعال می باشد"');
+		            		}else{
+		            			if (session.capacity <= 0) {
+		            				theme = theme.replace(/<<title>>/g, '');
+		            				theme = theme.replace(/<<noclick>>/g, 'noclick');
+		            				theme = theme.replace(/<<popUpContent>>/g, 'data-content="ظرفیت تکمیل است"');
+		            			}else{
+			            			theme = theme.replace(/<<title>>/g, 'title="برای انتخاب برنامه روی آن کلیک نمایید"');
+			            			theme = theme.replace(/<<noclick>>/g, '');
+			            			theme = theme.replace(/<<popUpContent>>/g, 'data-content="'+ session.begin +' - '+ session.end +' | ظرفیت : '+ session.capacity +' | قیمت : '+ price +' ریال"');
+		            			}
+		            		}
+
+		            		if (session.capacity <= 0) {
+		            			theme = theme.replace(/<<backgroundColor>>/g, '#FF8A80');
+		            		};
+
+		            		self.config.sessionsHolder.append(theme);
 		            	}
 		            	$('[data-toggle="popover"]').popover();
 		            });
@@ -572,33 +698,36 @@
 		},
 
 		generateTimeTable : function (start, end, date, day) {
-			var exactDate = toJalaali(parseInt(date.split('-')[0]), parseInt(date.split('-')[1]), parseInt(date.split('-')[2]));
-			
+
+			this.config.program2.find('table').html('');
 			slices = '<tr>';
 			var days = ['ساعت','شنبه','یکشنبه','دوشنبه','سه شنبه','چهارشنبه','پنجشنبه','جمعه'];
 			for (var i = 0; i < days.length; i++) {
+				var curDate = new Date.parse(date).addDays(i - day - 1).toString("yyyy-MM-dd");
+				var exactDate = toJalaali(parseInt(curDate.split('-')[0]), parseInt(curDate.split('-')[1]), parseInt(curDate.split('-')[2]));
+
 				if(i > day){
-					slices += '<td>' + days[i] + '<br>' + exactDate.jy + '/' + exactDate.jm + '/' + (exactDate.jd + (i - day - 1))  + '</td>'; 
+					slices += '<td class="program2-title">' + days[i] + '<br>' + exactDate.jy + '/' + exactDate.jm + '/' + exactDate.jd + '</td>'; 
 				}else{
-					slices += '<td>' + days[i] + '</td>';
+					slices += '<td class="program2-title">' + days[i] + '</td>';
 				}
 			};
 			slices += '</tr>';
-			for (var i = parseInt(start.split(':')[0]); i <= parseInt(end.split(':')[0]); i++) {
+			for (var i = parseInt(start.split(':')[0]); i < parseInt(end.split(':')[0]); i++) {
 				var j = i + 1;
-				slices += '<tr><td class="hours">'+ i + ' - ' + j +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>/tr>';
+				slices += '<tr><td class="hours">'+ i + ' - ' + j +'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
 			};
 			this.config.program2.find('table').append(slices);
 		},
 
 		goToCourseAction : function () {
 			var program1Top = self.config.program1.offset().top;
-			self.config.body.animate({scrollTop: program1Top - 80},'slow');
+			self.config.body.animate({scrollTop: program1Top - 100},'slow');
 		},
 
 		goToSessionAction : function () {
 			var program2Top = self.config.program2.offset().top;
-			self.config.body.animate({scrollTop: program2Top - 80},'slow');
+			self.config.body.animate({scrollTop: program2Top - 100},'slow');
 		},
 
 		goToTopAction : function () {
