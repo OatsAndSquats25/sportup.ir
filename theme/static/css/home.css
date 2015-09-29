@@ -376,9 +376,7 @@ header{
 	font-weight: normal;
 	text-align: center;
 }
-#club-register-holder a{
-	display : inline-block;
-	line-height: 40px;
+#club-register-holder input[type=submit]{
 	color: #fff;
     background-color: #ff5a5f;
     border: none;
