@@ -160,3 +160,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 AUTH_USER_MODEL = 'auth.User'
 AUTHENTICATION_BACKENDS = ('accounts.backends.EmailAuthBackend',)
+
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {message_constants.ERROR: 'danger'}
