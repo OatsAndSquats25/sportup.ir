@@ -61,7 +61,14 @@ def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
                                 bgn.time(),
                                 (bgn + datetime.timedelta(hours=duration.hour,minutes=duration.minute)).time(),
                                 singleSession.price,
-                                singleSession.maxCapacity)
+                                singleSession.maxCapacity,
+                                singleSession.ageMin,
+                                singleSession.ageMax,
+                                singleSession.get_genderLimit_display(),
+                                singleSession.needInsurance,
+                                singleSession.brief,
+                                singleSession.description,
+                                singleSession.title)
                 # count += 1
                 cells.append(tempCell)
                 bgn += datetime.timedelta(hours=duration.hour,minutes=duration.minute)
@@ -160,7 +167,7 @@ def sessionGenerateFull(club , showWeek):
                          min,
                          max,
                          -1,
-                         -1)
+                         2)
         scheduleTable.insert(0,firstCell)
 
         return scheduleTable
