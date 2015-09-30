@@ -1,5 +1,88 @@
 {% extends 'basenew.html' %}
 {% load i18n static %}
 
+{% block extra_css %}
+	<style>
+		body{
+			background-color: #f5f5f5;
+		}
+		h2{
+			margin: 0 0 20px;
+			font-weight: bold;
+			padding: 10px;
+			display: inline-block;
+		}
+		.container-fluid{
+			padding: 101px 101px 50px;
+			color: #333;
+			line-height: 30px;
+			background-color: #fff;
+			box-shadow: 0 0 5px #ccc;
+		}
+		#map-holder{
+			width: 100%;
+			height: 210px;
+		}
+		#contact-info{
+			text-align: left !important;
+		    direction: ltr !important;
+		    font-family: mitra, monospace !important;
+		    font-size: 16px !important;
+		}
+	</style>
+{% endblock %}
+
 {% block main %}
+    	<div class="container-fluid">
+		<h2>تماس با ما</h2>
+
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" method="">
+					<input type="text" name="name" class="form-control form-group" placeholder="نام">
+					<input type="text" name="email" class="form-control form-group" placeholder="ایمیل">
+					<input type="text" name="title" class="form-control form-group" placeholder="عنوان">
+					<textarea name="message" id="message" class="form-control form-group" cols="30" rows="10" placeholder="متن پیام"></textarea>
+					<input type="submit" class="btn btn-success" value="ارسال پیام">
+				</form>
+			</div>
+			<div class="col-md-6">
+				آدرس : تهران، خیابان کارگر شمالی، دانشکده فنی دانشگاه تهران، ساختمان انستیتو مهندسی نفت، طبقه پنجم
+				<div id="contact-info">
+					<i class="fa fa-phone"></i>  +98 21 2296 7409
+					<br>
+					<i class="fa fa-envelope"></i>  hi@sportup.ir
+				</div>
+				<br>
+				<div id="map-holder"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block extra_js_end %}
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script>
+		var styles = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":
+36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}];
+		var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
+		var mapProp = {
+			center:new google.maps.LatLng(35.7262284,51.3848359),
+			zoom:15,
+			disableDefaultUI:true,
+			 mapTypeControlOptions: {
+			      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+			    },
+			mapTypeId:google.maps.MapTypeId.ROADMAP
+		};
+		var map=new google.maps.Map(document.getElementById("map-holder"),mapProp);
+		map.mapTypes.set('map_style', styledMap);
+		map.setMapTypeId('map_style');
+
+		var marker=new google.maps.Marker({
+			position: new google.maps.LatLng(35.7262284,51.3848359),
+		});
+
+		marker.setMap(map);
+	</script>
 {% endblock %}
