@@ -1,0 +1,322 @@
+{% extends "basenew.html" %}
+{% load i18n future staticfiles %}
+
+
+{% block meta_title %}{% trans "Search" %}{% endblock %}
+{% block title %}{% trans "Search" %}{% endblock %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href={% static "css/club.css" %}>
+{% endblock %}
+
+
+{% block main %}
+	<div id="club-subnav"></div>
+
+	<div id="wrapper">
+		<div id="info">
+			<div class="img">
+				<!-- <img src="{% static "img/barbells.jpg" %}" alt="" width="100%"> -->
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox" id="image-holder"></div>
+
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+						<span class="fa fa-angle-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+						<span class="fa fa-angle-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="logo">
+							<img src="{% static "img/clubs/logos/1.jpg" %}" alt="" width="100%" height="100%">
+						</div>
+						<div class="title">
+							<div id="club-title"></div>
+							<small>
+								<br>
+								<div id="club-address"></div>
+								<br>
+								<div id="club-phone" style="direction:ltr;display: inline-block;"></div>
+								<br>
+								<div id="club-web"></div>
+							</small>
+						</div>
+					</div>
+					<div class="col-md-4" style="position: relative;direction: ltr;">
+						<div id="box" class="hidden-sm hidden-xs">
+							<div id="box-title">
+								<div class="acidjs-rating-stars">
+								    <form>
+								        <input type="radio" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label>
+								        <input type="radio" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label>
+								        <input type="radio" name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label>
+								        <input type="radio" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label>
+								        <input type="radio" name="group-2" id="group-2-4"  value="1" /><label for="group-2-4"></label>
+								    </form>
+								</div>
+							</div>
+
+							<div id="box-content">
+								<div id="box-club-info">
+									<img src="{% static "img/clubs/logos/1.jpg" %} alt="">
+									<br>
+									<b>مجموعه ورزشی آرون</b>
+									<br>
+									تهران, یوسف آباد
+									<br>
+									<div style="direction:ltr;display: inline-block;margin-bottom:10px;">
+										021 290 44 74
+									</div>
+								</div>
+								<button id="go-to-course">رزرو دوره</button>
+								<button id="go-to-session">رزرو جلسه</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div id="description"></div>
+
+					<div id="sports">
+						<div>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist" id="subclub-titles"></ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="home">
+									<div id="summary"></div>
+									<!-- <hr>
+									<b>امکانات : </b>
+									<ul class="equipment" id="equipment"></ul> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div id="map">
+						<div id="map-holder"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+				<div id="program1">
+					<div class="program-title">برنامه دوره ای <div class="category-title"></div></div>
+					<table class="table table-responsive" id="course-holder"></table>
+				</div>
+
+				<div id="program2">
+					<div class="program-title">برنامه جلسه ای <div class="category-title"></div></div>
+					<div id="change-week">
+						<div id="next-week">
+							هفته بعد
+							<i class="fa fa-angle-left"></i>
+						</div>
+						<div id="prev-week">
+							<i class="fa fa-angle-right"></i>
+							هفته قبل
+						</div>
+					</div>
+					<table align="center" class="table table-responsive"></table>
+					<div id="sessions">
+						<div id="loadingSession"></div>
+						<div id="sessions-holder"></div>
+					</div>
+				</div>
+			</div>
+
+	</div>
+
+	<!-- Modal -->
+
+	<div class="modal fade bs-example-modal-lg" id="course-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+
+				<form action="{% url 'enrollCourseURL' %}" method="POST">
+                    {% csrf_token %}
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">تایید نهایی دوره</h4>
+					</div>
+					<div class="modal-body" id="course-approve-holder"></div>
+					<div class="modal-footer">
+						<input type="submit" value="تایید" class="btn btn-lg btn-success" style="float:left;"/>
+	      </div>
+				</form>
+
+	        		</div>
+	        	</div>
+	      </div>
+
+	<div class="modal fade bs-example-modal-lg" id="session-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+
+				<form action="{% url 'enrollSessionURL' %}" method="POST">
+                    {% csrf_token %}
+					<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">تایید نهایی جلسه</h4>
+					</div>
+					<div class="modal-body" id="session-approve-holder"></div>
+	      <div class="modal-footer">
+						<input type="submit" value="تایید" class="btn btn-lg btn-success" style="float:left;"/>
+	      </div>
+				</form>
+
+	    </div>
+	  </div>
+	</div>
+{% endblock %}
+
+{% block extra_js_end %}
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script>
+		function initialize(lat, lang) {
+			var styles = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}];
+			var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
+			var mapProp = {
+				center:new google.maps.LatLng(lat, lang),
+				zoom:15,
+				disableDefaultUI:true,
+				 mapTypeControlOptions: {
+				      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+				    },
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("map-holder"),mapProp);
+			map.mapTypes.set('map_style', styledMap);
+			map.setMapTypeId('map_style');
+
+			var marker=new google.maps.Marker({
+				position: new google.maps.LatLng(lat, lang),
+			});
+
+			marker.setMap(map);
+		}
+	</script>
+	<script type="text/template" data-template="session">
+		<div class="session"<<noclick>>id="<<id>>" style="top:<<top>>;right:<<right>>;height:<<height>>;line-height:<<height>>;background-color:<<backgroundColor>>;" data-container="body" data-trigger="hover" <<title>> data-toggle="popover" data-placement="right" <<popUpContent>> >
+			<<price>> ریال
+		</div>
+	</script>
+	<script type="text/template" data-template="course-modal-template">
+		<input name="club" type="hidden" value="<<clubid>>">
+		<input name="courseid" type="hidden" value="<<courseid>>">
+		<table class="table table-responsive">
+			<tr>
+				<th style="border-top: none;text-align:center;">نام دوره</th>
+				<th style="border-top: none;text-align:center;">گروه سن</th>
+				<th style="border-top: none;text-align:center;">جنسیت</th>
+				<th style="border-top: none;text-align:center;">نیاز به بیمه ورزشی</th>
+				<th style="border-top: none;text-align:center;">زمان شروع</th>
+				<th style="border-top: none;text-align:center;">زمان پایان</th>
+				<th style="border-top: none;text-align:center;">قیمت</th>
+			</tr>
+			<tr>
+				<td style="text-align:center;"><<title>></td>
+				<td style="text-align:center;"><<age>></td>
+				<td style="text-align:center;"><<gender>></td>
+				<td style="text-align:center;"><<ensurance>></td>
+				<td style="text-align:center;"><<begin>></td>
+				<td style="text-align:center;"><<end>></td>
+				<td style="text-align:center;"><<price>></td>
+			</tr>
+			<<description>>
+		</table>
+	</script>
+	<script type="text/template" data-template="session-modal-template">
+		<input name="week" type="hidden" value="<<week>>">
+		<input name="cellid" type="hidden" value="<<cellid>>">
+		<input name="club" type="hidden" value="<<clubid>>">
+		<table class="table table-responsive">
+			<tr>
+				<th style="border-top: none;text-align:center;">نام دوره</th>
+				<th style="border-top: none;text-align:center;">گروه سن</th>
+				<th style="border-top: none;text-align:center;">جنسیت</th>
+				<th style="border-top: none;text-align:center;">نیاز به بیمه ورزشی</th>
+				<th style="border-top: none;text-align:center;">زمان شروع</th>
+				<th style="border-top: none;text-align:center;">زمان پایان</th>
+				<th style="border-top: none;text-align:center;">قیمت</th>
+			</tr>
+			<tr>
+				<td style="text-align:center;"><<title>></td>
+				<td style="text-align:center;"><<age>></td>
+				<td style="text-align:center;"><<gender>></td>
+				<td style="text-align:center;"><<ensurance>></td>
+				<td style="text-align:center;"><<begin>></td>
+				<td style="text-align:center;"><<end>></td>
+				<td style="text-align:center;"><<price>></td>
+			</tr>
+			<<description>>
+		</table>
+	</script>
+	<script type="text/template" data-template="course">
+		<tr style="height: 50px;line-height: 50px;border-bottom: 1px solid #dcdcdc;">
+			<td><<title>></td>
+			<td><<capacity>></td>
+			<td><<price>></td>
+			<td><<gender>></td>
+			<td><<begin>></td>
+			<td><<end>></td>
+			<td><<deadline>></td>
+			<td>
+				<button class="btn btn-info course-item" id="<<id>>">ثبت نام</button>
+			</td>
+		</tr>
+	</script>
+	<script>
+		club.init({
+			body : $('body'),
+			window : $(window),
+			program1 : $('#program1'),
+			program2 : $('#program2'),
+			goToCourse : $('#go-to-course'),
+			goToSession : $('#go-to-session'),
+			goToTop : $('#go-to-top'),
+			map : $('#map'),
+			program2 : $('#program2'),
+			sessionTemplate : $('script[data-template="session"]'),
+			sessions : $('#sessions'),
+			sessionsHolder : $('#sessions-holder'),
+			sessionItem : '.session',
+			nextWeek : $('#next-week'),
+			prevWeek : $('#prev-week'),
+			loadingSession : $('#loadingSession'),
+			courseTemplate : $('script[data-template="course"]'),
+			imageTemplate : $('script[data-template="image"]'),
+			courseModalTemplate : $('script[data-template="course-modal-template"]'),
+			sessionModalTemplate : $('script[data-template="session-modal-template"]'),
+			courseModal : $('#course-modal'),
+			courseApproveHolder : $('#course-approve-holder'),
+			sessionModal : $('#session-modal'),
+			sessionApproveHolder : $('#session-approve-holder'),
+			courseHolder : $('#course-holder'),
+            sports : $('#sports')
+		});
+	</script>
+
+{% endblock %}
