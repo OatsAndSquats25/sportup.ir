@@ -5,6 +5,9 @@ from programcourse.models import courseDefinition
 
 # ----------------------------------------------------
 class courseDefinitionSerializer(serializers.ModelSerializer):
+    genderLimit = serializers.CharField(source='get_genderLimit_display')
+    # usageBeginChoices = serializers.CharField(source='get_usageBeginChoices_display')
+
     class Meta:
         model = courseDefinition
 # ----------------------------------------------------
