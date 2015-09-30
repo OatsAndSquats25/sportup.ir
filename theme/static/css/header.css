@@ -175,3 +175,8 @@ ul li a{
     font-size: 10px;
     line-height: 34px;
 }
+.persian-number
+{
+    font-family: mitra, monospace;
+    font-size: 18px;
+}

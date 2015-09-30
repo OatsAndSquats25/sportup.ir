@@ -438,9 +438,3 @@ footer{
     -moz-pointer-events: none;
     pointer-events: none;
 }
-
-.persian-number
-{
-    font-family: mitra, monospace;
-    font-size: 18px;
-}
