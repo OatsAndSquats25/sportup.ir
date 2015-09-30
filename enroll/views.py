@@ -16,7 +16,8 @@ from program.models import programDefinition
 from finance.functions import invoiceGenerate, paymentRequest
 
 from models import enrolledProgramSession, enrolledProgram
-from enrollcourse.function import enrollCourse
+from enrollcourse.function import enrollCourseFunction
+from enrollsession.function import enrollSessionFunction
 from serializer import enrollProgramSerializer,enrollSessionSerializer, enrollSessionClubSerializer
 
 from agreement.models import agreement
@@ -174,4 +175,26 @@ class enrollSession(generics.GenericAPIView):
                                               user = self.request.user)
 
         return Response("Done", status=status.HTTP_200_OK)
+# ----------------------------------------------------
+class enrollInCourse(View):
+    """
+    Enroll in course and redirect to shopping cart
+    """
+    def post(self, request, *args, **kwargs):
+        if enrollCourseFunction(request):
+            return redirect('checkoutURL')
+        else:
+            messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
+            return redirect(request.META.get('HTTP_REFERER'))
+# ----------------------------------------------------
+class enrollInSession(View):
+    """
+    Enroll in session and redirect to shopping cart
+    """
+    def post(self, request, *args, **kwargs):
+        if enrollSessionFunction(request):
+            return redirect('checkoutURL')
+        else:
+            messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
+            return redirect(request.META.get('HTTP_REFERER'))
 # ----------------------------------------------------
