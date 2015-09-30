@@ -172,12 +172,17 @@ class getCourses(generics.GenericAPIView):
             # currentAgreement = agreement.objects.get(clubKey = id)
             currentAgreement = agreement.objects.active().get(clubKey = id)
         except ObjectDoesNotExist:
-            return Response(status.HTTP_204_NO_CONTENT)
+            Response("Data not found", status=status.HTTP_204_NO_CONTENT)
 
         # if not currentAgreement.isValid():
         #     return {}
 
         courseInst = programDefinition.objects.instance_of(courseDefinition).filter(agreementKey = currentAgreement)
+        # if not courseInst:
+        # if not courseInst.exist():
+        if courseInst.count() == 0:
+            return Response("Data not found", status=status.HTTP_204_NO_CONTENT)
+
         serializer = self.serializer_class(courseInst, many=True)
         return Response(serializer.data)
 # ----------------------------------------------------
