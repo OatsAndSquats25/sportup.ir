@@ -159,3 +159,19 @@ nav ul li:last-of-type{
 ul li a{
 	color: #333;
 }
+.alert{
+	margin : 0;
+	position: fixed;
+    top: 61px;
+	    width: 100%;
+    z-index: 1000;
+    border-radius: 0;
+    box-shadow: 0 0 3px #ccc;
+    transition: 0.4s top;
+}
+.copy-right{
+	color: #ccc;
+    text-align: center;
+    font-size: 10px;
+    line-height: 34px;
+}

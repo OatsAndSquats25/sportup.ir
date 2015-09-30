@@ -3,6 +3,10 @@
 
 	var url = window.location.href.replace(BASEURL + '/', '').split('#')[0];
 
+	if (parseInt($('nav').css('top')) == -100) {
+		$('.alert').css('top', 0);
+	};
+
 	if(url != 'search'){
 		$('#title').on('keydown', function(e){
 			if (e.which === 13) {
@@ -100,7 +104,7 @@
 					self.config.contentHolder.html('');
 		            res.forEach(function(club) {
 
-		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, BASEURL + '/directory/detail/' + club.pk + '/');
+		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, BASEURL + '/club#' + club.id);
 		                if(club.imageCollection.length == 0){
 		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, defaultImage);
 		                }else{
@@ -163,7 +167,6 @@
 
 		ESC_KEY : 27,
 
-		defaultURL : '',
 		init : function (config) {
 			this.cnf = config;
 			//hiding boxes==========
@@ -176,7 +179,7 @@
 			//this.cnf.content.css('height', this.cnf.window.innerHeight() - 231);
 			self = this;
 			this.generateFilters();
-			this.locator();
+			this.locator(1);
 			this.bindEventes();
 
 			$.ajaxSetup({
@@ -199,7 +202,12 @@
 			this.cnf.category.change(this.fieldChange);
 			this.cnf.genre.change(this.categoryChange);
 			this.cnf.title.on('keydown', this.titleChange);
+			self.cnf.window.resize(this.searchItemsHeightFix);
 			window.onhashchange = this.locator;
+		},
+
+		searchItemsHeightFix : function () {
+			self.cnf.content.css('height', self.cnf.window.innerHeight() - 155);
 		},
 
 		setUrl : function (urlQuery) {
@@ -277,7 +285,7 @@
 			}else{
 				urlQuery['category'] = $(this).val();
 			}	
-			
+
 			self.setUrl(urlQuery);
 		},
 
@@ -324,14 +332,19 @@
 			}
 		},
 
-		locator : function () {
+		locator : function (first) {
+			var detector = (first == 1)? 1 : 0;
 			var url = document.location.hash;
 
-			if (url.replace('#', '') == '') {
+			if (detector && url.replace('#', '') == '') {
 				return self.startURL();
-			}else{
-				self.cookieSeter('search', url);
 			}
+
+			return self.callData(url);
+		},
+
+		callData : function (url) {
+			self.cookieSeter('search', url);
 
 			var res = self.parseUrl(url);
 			for (var key in res){
@@ -350,7 +363,7 @@
 				return self.redirect(url);
 			}
 
-			return self.redirect(self.defaultURL);
+			return self.redirect('title=');
 		},
 
 		redirect : function (url) {
@@ -362,8 +375,10 @@
 			var cookies = document.cookie.split(';');
 				
 			for (var i = 0; i < cookies.length; i++) {
-				if (cookies[i].search('search=') == 1) {
-					return cookies[i].trim().replace('search=', '');
+
+				if (cookies[i].search('search=') != -1) {
+					var temp = cookies[i].trim().replace('search=', '');
+					return decodeURI(temp);
 				}
 			}
 
@@ -371,7 +386,7 @@
 		},
 
 		cookieSeter : function(cookieName, url){
-			document.cookie = cookieName + "=" + url;
+			document.cookie = cookieName + "=" + encodeURI(url);
 		},
 
 		getData : function (inputs) {
@@ -393,7 +408,7 @@
 
 					self.cnf.content.html('');
 		            res.results.forEach(function(club) {
-		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, '#');
+		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, '/club#' + club.id);
 						if(club.imageCollection.length == 0){
 		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, defaultImage);
 		                }else{
@@ -474,7 +489,9 @@
 	//===============================================
 
 	club = {
-		
+
+		defaultURL : 1,
+
 		init : function (cnf) {
 			this.config = cnf;
 			self = this;
@@ -495,9 +512,50 @@
 		},
 
 		locator : function () {
+			var url = document.location.hash;
+
+			if (url.replace('#', '') == '') {
+				return self.startURL();
+			}else{
+				self.cookieSeter('club', url);
+			}
+
+			self.club = parseInt(url.replace('#', ''));
+
 			self.getData(self.club);
 			self.getCourse(self.club);
 			self.getSessions(self.club, this.week);
+		},
+
+		startURL : function(){
+			var url = this.cookieGeter('club');
+
+			if(url){
+				return self.redirect(url);
+			}
+
+			return self.redirect(self.defaultURL);
+		},
+
+		redirect : function (url) {
+			document.location.hash = url;
+		},
+
+		cookieGeter : function(cookieName){
+			
+			var cookies = document.cookie.split(';');
+				
+			for (var i = 0; i < cookies.length; i++) {
+				if (cookies[i].search('club=') == 1) {
+					return cookies[i].trim().replace('club=', '');
+				}
+			}
+
+			return false;
+		},
+
+		cookieSeter : function(cookieName, url){
+			document.cookie = cookieName + "=" + url;
 		},
 
 		generateNextWeek : function () {
@@ -515,9 +573,13 @@
 		},
 
 		makeMapHeight : function () {
-			var height = this.config.program1.offset().top - 50;
+			var height = this.config.sports.offset().top + this.config.sports.innerHeight();
 			var mapTop = this.config.map.offset().top;
 			this.config.map.css('height', height - mapTop);
+		},
+
+		setTitle : function (title) {
+			document.title = title;
 		},
 
 		getData : function (clubId) {
@@ -529,6 +591,9 @@
 				//},
 				cache : false,
 				success : function(res) {
+					self.clubId = res.id;
+					self.setTitle(res.complexName);
+
 					$('#club-title').html(res.complexName);
 					$('#club-address').html(res.locationAddress[0].address);
 					$('#club-phone').html(res.phone + ' | ' + res.cell);
@@ -536,7 +601,7 @@
 					$('#summary').html(res.summary);
 					$('#club-web').html('<a href="'+ res.website +'" target="_blank">'+ res.website +'</a>');
 					
-					$('#subclub-titles').html('<li role="presentation" class="active"><a class="club-item" id="' + res.id + '" role="tab" data-toggle="tab">' + res.title + '</a></li>');
+					$('#subclub-titles').html('');
 					$('.category-title').html(res.title);
 
 					if(res.clubs.length){
@@ -544,6 +609,8 @@
 							$('#subclub-titles').append('<li role="presentation"><a class="club-item" id="' + club.id + '" role="tab" data-toggle="tab">' + club.title + '</a></li>');
 						});
 					}
+
+					$('.club-item[id='+ res.id +']').parent().addClass('active');
 
 					if(res.imageCollection.length){
 						$('#image-holder').html('');
@@ -567,7 +634,7 @@
 		},
 
 		googleMap : function (lat, lang) {
-			google.maps.event.addDomListener(window, 'load', initialize(lat, lang));
+			google.maps.event.addDomListener(window, 'load', initialize(lang, lat));
 		},
 
 		getCourse : function (clubId) {
@@ -578,7 +645,16 @@
 				//	pk : clubId
 				//},
 				cache : false,
-				success : function(res) {
+				error : function (xhr,status,error) {
+					self.config.program1.hide();
+				},
+				success : function(res, string, xhr) {
+					if(xhr.status == 204){
+						return self.config.program1.hide();
+					}
+					self.config.program1.show();
+					self.courseData = res;
+
 					var sessionTemplate = self.config.courseTemplate.html();
 
 					self.config.courseHolder.html('<tr style="background-color:#888;color:#fff;"><td class="program1-title">برنامه ها</td><td class="program1-title">ظرفیت</td><td class="program1-title">هزینه(ریال)</td><td class="program1-title">جنسیت</td><td class="program1-title">تاریخ شروع</td><td class="program1-title">تاریخ پایان</td><td class="program1-title">مهلت ثبت نام</td><td class="program1-title">ثبت نام</td></tr>');
@@ -614,7 +690,53 @@
 		            });
 
 					$('.course-item').click(function(){
-						$('#myModal').modal('show');
+						var id = $(this).attr('id');
+						self.courseData.forEach(function(course){
+							if (course.id == id) {
+								var sessionTemplate = self.config.courseModalTemplate.html();
+								
+								var temp = sessionTemplate.replace(/<<title>>/g, course.title);
+								if (course.ageMin == 0) {
+									temp = temp.replace(/<<age>>/g, 'محدودیت سنی ندارد');
+								}else {
+									temp = temp.replace(/<<age>>/g, course.ageMin + ' تا ' + course.ageMax + ' سال');
+								}
+								
+								temp = temp.replace(/<<gender>>/g, course.genderLimit);
+
+								if (course.ensurance) {
+										temp = temp.replace(/<<ensurance>>/g, 'دارد');
+									}else{
+										temp = temp.replace(/<<ensurance>>/g, 'ندارد');				
+									}
+
+								if (course.usageBeginDate == null) {
+			            			temp = temp.replace(/<<begin>>/g, '-');
+			            		}else{
+			            			temp = temp.replace(/<<begin>>/g, self.readyDate(course.usageBeginDate));
+			            		}
+
+			            		if (course.usageEndDate == null) {
+			            			temp = temp.replace(/<<end>>/g, '-');
+			            		}else{
+			            			temp = temp.replace(/<<end>>/g, self.readyDate(course.usageEndDate));
+			            		}
+								temp = temp.replace(/<<price>>/g, self.priceSeperator(course.price) + 'ریال');
+								
+								if (course.description == '') {
+									temp = temp.replace(/<<description>>/g, '');
+								}else {
+									temp = temp.replace(/<<description>>/g, '<tr><td colspan="7">توضیحات'+ course.description +'</td></tr>');
+								}
+
+								temp = temp.replace(/<<clubid>>/g, self.clubId);
+								temp = temp.replace(/<<courseid>>/g, course.id);
+
+								self.config.courseApproveHolder.html(temp);
+							}
+						});
+
+						self.config.courseModal.modal('show');
 					});
 				}
 			});
@@ -641,7 +763,16 @@
 					week : weekId
 				},
 				cache : false,
-				success : function(res) {
+				error : function (xhr,status,error){
+					self.config.program2.hide();
+				},
+				success : function(res, string, xhr) {
+					if(xhr.status == 204){
+						return self.config.program2.hide();
+					}
+					self.config.program2.show();
+					self.sessionData = res;
+
 					self.config.loadingSession.hide();
 					var sessionTemplate = self.config.sessionTemplate.html();
 
@@ -673,13 +804,13 @@
 		            		
 		            		if (session.status == 0) {
 		            			theme = theme.replace(/<<backgroundColor>>/g, '#9E9E9E');
-		            			theme = theme.replace(/<<noclick>>/g, 'noclick');
+		            			theme = theme.replace(/<<noclick>>/g, ' action="noclick" ');
 		            			theme = theme.replace(/<<title>>/g, '');
 		            			theme = theme.replace(/<<popUpContent>>/g, 'data-content="در حال حاضر غیر فعال می باشد"');
 		            		}else{
 		            			if (session.capacity <= 0) {
 		            				theme = theme.replace(/<<title>>/g, '');
-		            				theme = theme.replace(/<<noclick>>/g, 'noclick');
+		            				theme = theme.replace(/<<noclick>>/g, ' action="noclick" ');
 		            				theme = theme.replace(/<<popUpContent>>/g, 'data-content="ظرفیت تکمیل است"');
 		            			}else{
 			            			theme = theme.replace(/<<title>>/g, 'title="برای انتخاب برنامه روی آن کلیک نمایید"');
@@ -694,6 +825,52 @@
 
 		            		self.config.sessionsHolder.append(theme);
 		            	}
+
+		            	$('.session').click(function(){
+							var id = $(this).attr('id');
+							self.sessionData.forEach(function(session){
+
+								if (session.cellid == parseInt(id)) {
+									var sessionTemplate = self.config.sessionModalTemplate.html();
+									
+									var temp = sessionTemplate.replace(/<<title>>/g, session.title);
+									if (session.ageMin == 0) {
+										temp = temp.replace(/<<age>>/g, 'محدودیت سنی ندارد');
+									}else {
+										temp = temp.replace(/<<age>>/g, session.ageMin + ' تا ' + session.ageMax + ' سال');
+									}
+									
+									temp = temp.replace(/<<gender>>/g, session.genderLimit);
+
+									if (session.ensurance) {
+										temp = temp.replace(/<<ensurance>>/g, 'دارد');
+									}else{
+										temp = temp.replace(/<<ensurance>>/g, 'ندارد');				
+									}
+
+				            		temp = temp.replace(/<<begin>>/g, session.begin);
+				            		temp = temp.replace(/<<end>>/g, session.end);
+									temp = temp.replace(/<<price>>/g, self.priceSeperator(session.price) + 'ریال');
+									
+									if (session.description == '') {
+										temp = temp.replace(/<<description>>/g, '');
+									}else {
+										temp = temp.replace(/<<description>>/g, '<tr><td colspan="7">توضیحات'+ session.description +'</td></tr>');
+									}
+
+									temp = temp.replace(/<<clubid>>/g, self.clubId);
+									temp = temp.replace(/<<week>>/g, self.week);
+									temp = temp.replace(/<<cellid>>/g, session.cellid);
+
+									self.config.sessionApproveHolder.html(temp);
+								}
+							});
+
+							if ($(this).attr('action') != 'noclick') {
+								self.config.sessionModal.modal('show');
+							};
+						});
+
 		            	$('[data-toggle="popover"]').popover();
 		            });
 				}
