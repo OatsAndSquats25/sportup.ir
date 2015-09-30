@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.conf import settings
 from .models import club,imageCollection, category, address, contact, complexLocation, complexTitle, genre
 from django.contrib.gis import admin as gis_admin
 from django.contrib.gis.maps.google import GoogleMap
@@ -34,20 +35,22 @@ admin.site.register(category, directoryAdmin)
 #------------------------------------------------
 admin.site.register(genre)
 #------------------------------------------------
-class addressAdmin(admin.ModelAdmin):
-# class addressAdmin(admin.ModelAdmin, gis_admin.OSMGeoAdmin):
-    #GMAP = GoogleMap(settings.GOOGLE_MAPS_API_KEY)
-    #extra_js = [GMAP.api_url + GMAP.key]
-    #map_template = 'gis/google/google-map.html'
-    default_lon = 5722859
-    default_lat = 4259682
-    default_zoom = 11
+#class addressAdmin(admin.ModelAdmin):
+class addressAdmin(gis_admin.OSMGeoAdmin):
+    GMAP = GoogleMap(key='AIzaSyALKj27AmoXMsdv5imGeXvookdxG3C0Ics')
+    # GMAP = GoogleMap(settings.GOOGLE_MAPS_API_KEY)
+    extra_js = [GMAP.api_url + GMAP.key]
+    map_template = 'gis/google/google-map.html'
+    # default_lon = 5722859
+    # default_lat = 4259682
+    # default_zoom = 11
     # address_fieldsets[0][1]["fields"].extend(['address','region','suburb','city','postalCode','coordinate'])
 
-    def in_menu(self):
-        return False
+    #def in_menu(self):
+    #    return False
 
-admin.site.register(address, addressAdmin)
+#admin.site.register(address, addressAdmin)
+admin.site.register(address)
 #------------------------------------------------
 class contactInline(admin.TabularInline):
     model = contact

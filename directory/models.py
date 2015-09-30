@@ -135,7 +135,7 @@ class club(Displayable):
         return address.objects.filter(locationKey = self.locationKey)
 
     def club_related(self):
-        return club.objects.filter(locationKey = self.locationKey).exclude(pk = self.id)
+        return club.objects.filter(locationKey = self.locationKey)
 
     def contacts(self):
         return self.contact_set
