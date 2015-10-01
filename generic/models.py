@@ -21,8 +21,8 @@ class TimeStamped(models.Model):
     """
     Provides created and updated timestamps on models.
     """
-    created = models.DateTimeField(_("created"), null=True)
-    updated = models.DateTimeField(_("updated"), null=True)
+    created = models.DateTimeField(_("created"), null=True, editable=False)
+    updated = models.DateTimeField(_("updated"), null=True, editable=False)
 
     class Meta:
         abstract = True

@@ -1,24 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'basenew.html' %}
 {% load i18n dashboard_tags %}
 
-{% block toggle-nav %}
-    <div class="toggle-navigation">
-        <div class="icon">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-    </div>
-{% endblock %}
+{#{% block toggle-nav %}#}
+{#    <div class="toggle-navigation">#}
+{#        <div class="icon">#}
+{#            <div class="line"></div>#}
+{#            <div class="line"></div>#}
+{#            <div class="line"></div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
 
-{% block navigation %}
-	<nav class="off-canvas-navigation">
-        <header>{% trans "Navigation" %}</header>
-        <div class="main-navigation navigation-off-canvas">
-            {% generateMenuDashboard %}
-        </div>
-    </nav>
-{% endblock %}
+{#{% block navigation %}#}
+{#	<nav class="off-canvas-navigation">#}
+{#        <header>{% trans "Navigation" %}</header>#}
+{#        <div class="main-navigation navigation-off-canvas">#}
+{#            {% generateMenuDashboard %}#}
+{#        </div>#}
+{#    </nav>#}
+{#{% endblock %}#}
 
 {% block main %}
     <div class="container">

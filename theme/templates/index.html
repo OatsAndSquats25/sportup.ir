@@ -1,13 +1,237 @@
-{% extends "base.html" %}
-{% load i18n %}
+{% extends "basenew.html" %}
+{% load i18n future staticfiles %}
 
-{% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Home" %}{% endblock %}
 
-{% block breadcrumb_menu %}
-<li class="active">{% trans "Home" %}</li>
+{% block meta_title %}{% trans "SportUp" %}{% endblock %}
+{% block title %}{% trans "SportUp" %}{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href={% static "css/home.css" %}>
 {% endblock %}
 
-{% block main %}
+{#{% block breadcrumb_menu %}#}
+{#<li class="active">{% trans "Home" %}</li>#}
+{#{% endblock %}#}
 
+{% block main %}
+	<section id="about-user">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="about-user-img">
+						<img src={% static "img/user1.png" %} alt="" width="100%">
+					</div>
+					<h3>جستجوی آنلاین</h3>
+					<p>جستجو برای کسانی که به دنبال پیدا کردن باشگاه مطلوب خود هستند</p>
+				</div>
+				<div class="col-md-3">
+					<div class="about-user-img">
+						<img src={% static "img/user2.png" %} alt="" width="100%">
+					</div>
+					<h3>برنامه ریزی</h3>
+					<p>فعالیت های ورزشی خود را در باشگاه مورد نظر برنامه ریزی کنید</p>
+				</div>
+				<div class="col-md-3">
+					<div class="about-user-img">
+						<img src={% static "img/user3.png" %} alt="" width="100%">
+					</div>
+					<h3>پرداخت الکترونیک</h3>
+					<p>به صورت آنلاین هزینه برنامه خود را پرداخت نمایید</p>
+				</div>
+				<div class="col-md-3">
+					<div class="about-user-img">
+						<img src={% static "img/user4.png" %} alt="" width="100%">
+					</div>
+					<h3>استفاده از خدمات</h3>
+					<p>با مراجعه به باشگاه منتخب خود از طریق سرویس ما حسی متفاوت را تجربه کنید</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<header>
+
+		<div class="nav">
+			<ul class="hidden-xs">
+            {% if not user.is_authenticated %}
+
+            {% block login_register %}<li><a id="signup"  href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Register" %}</a></li>{% endblock %}
+            {% block login_register2 %}<li><a href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>{% endblock %}
+
+            {% endif %}
+			</ul>
+
+			<a href="#" id="nav-logo"></a>
+		</div>
+
+		<div id="about">
+			فاصله تا تندرستی کمتر می شود
+			<br>
+			<button id="aboutTop">با یک کلیک</button>
+		</div>
+
+		<div id="searchbox">
+			<div id="sbholder" style="visibility: visible; ">
+				<select name="category" id="category">
+					<option value="0">نوع ورزش</option>
+				</select>
+				<div class="sbholder-a">
+					<input type="text" id="titleHome" placeholder="جستجو بر اساس نام باشگاه" class="searchInput">
+					<input type="submit" id="titleBtn" value="جستجو" class="searchButton">
+				</div>
+
+			</div>
+		</div>
+	</header>
+
+	<div class="clearFix"></div>
+
+		<section class="container" id="feature-clubs">
+
+		<div class="title">
+			باشگاه های پرطرفدار
+		</div>
+
+		<div class="subtitle"></div>
+        <div class="row" id="feature-club-holder"></div>
+	</section>
+
+	<section id="news-letter">
+		<div class="container" id="news-letter-holder">
+			<input id="newsletterInput" name="email" type="text" placeholder="ایمیل خود را وارد کنید">
+			<input id="newsletterBtn" type="submit" value="ثبت">
+		</div>
+	</section>
+	<div class="clearFix"></div>
+
+	<section class="sec">
+
+		<div class="title">
+			کدام جذاب تر است
+		</div>
+
+		<div class="subtitle"></div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<a href="/search#genre=1" class="items">
+						<img src={% static "img/sports/3.jpg" %} alt="">
+						<div class="items-title">لوکس</div>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="items">
+						<img src={% static "img/sports/7.jpg" %} alt="" style="opacity: 0.4;">
+						<div class="items-title">تفریحی <small>(به زودی)</small></div>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="items">
+						<img src={% static "img/sports/1.jpg" %} alt="" style="opacity: 0.4;">
+						<div class="items-title">تناسب اندام <small>(به زودی)</small></div>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="items">
+						<img src={% static "img/sports/4.jpg" %} alt="" style="opacity: 0.4;">
+						<div class="items-title">ریتمیک <small>(به زودی)</small></div>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="items">
+						<img src={% static "img/sports/2.jpg" %} alt="" style="opacity: 0.4;">
+						<div class="items-title">آرامش بخش <small>(به زودی)</small></div>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="items">
+						<img src={% static "img/sports/5.jpg" %} alt="" style="opacity: 0.4;">
+						<div class="items-title">مبارزه ای <small>(به زودی)</small></div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<section id="video">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="about-user-img">
+						<img src={% static "img/club1.png" %} alt="" width="100%">
+					</div>
+					<h3>ثبت باشگاه به صورت آنلاین</h3>
+					<p>پس از درخواست ثبت باشگاه به صورت آنلاین در کمتر از 24 ساعت با شما تماس حاصل می گردد</p>
+				</div>
+				<div class="col-md-4">
+					<div class="about-user-img">
+						<img src={% static "img/club2.png" %} alt="" width="100%">
+					</div>
+					<h3>مدیریت برنامه ها</h3>
+					<p>برنامه های باشگاه را در پنل اختصاصی خود تعریف کنید تا مشتریان شما به آسانی امکان ثبت نام داشته باشند</p>
+				</div>
+				<div class="col-md-4">
+					<div class="about-user-img">
+						<img src={% static "img/club3.png" %} alt="" width="100%">
+					</div>
+					<h3>مدیریت مشتریان</h3>
+					<p>ارتباط با مشتری های خود را با صرف کمترین زمان به صورت آنلاین مدیریت کنید و زمان باقی مانده را به بهبود کیفیت باشگاه خود اختصاص دهید</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="club-register">
+		<div class="container" id="club-register-holder">
+			باشگاه خود را با ما همراه کنید
+			<br>
+			<a href="{% url  'clubRegisterURL' %}" >
+                ثبت باشگاه
+            </a>
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block extra_js_end %}
+	<script type="text/template" data-template="club">
+		<a href="<<link>>" class="col-md-4 col-sm-6 col-xs-12 item">
+			<img src="<<img>>" width="100%" height="240px">
+			<div class="item-club-holder-a">
+				<img class="item-logo" src="<<logo>>" alt="">
+				<div class="acidjs-rating-stars acidjs-rating-disabled">
+				    <form>
+				        <input disabled="disabled" type="radio" name="group-3" id="group-3-0" value="5" /><label for="group-3-0"></label>
+				        <input disabled="disabled" type="radio" name="group-3" id="group-3-1" value="4" /><label for="group-3-1"></label>
+				        <input disabled="disabled" type="radio" name="group-3" id="group-3-2" value="3" /><label for="group-3-2"></label>
+				        <input disabled="disabled" type="radio" name="group-3" id="group-3-3" value="2" /><label for="group-3-3"></label>
+				        <input disabled="disabled" type="radio" name="group-3" id="group-3-4"  value="1" /><label for="group-3-4"></label>
+				    </form>
+				</div>
+				<div class="item-title"><<title>></div>
+			</div>
+		</a>
+	</script>
+	<script>
+		home.init({
+			body : $('body'),
+			window : $(window),
+			nav : $('nav'),
+			subsearch : $('#subsearch'),
+			logo : $('#logo'),
+			li : 'header nav ul li',
+			datalist : $('#district'),
+			aboutBox : $('#about-user'),
+			aboutTop : $('#aboutTop'),
+			contentHolder : $('#feature-club-holder'),
+			clubTemplate : $('script[data-template="club"]'),
+			goToTop : $('#go-to-top'),
+			category : $('#category'),
+			newsletter : $('#newsletterInput'),
+			newsletterBtn : $('#newsletterBtn'),
+			newsLetterHolder : $('#news-letter-holder')
+		});
+	</script>
 {% endblock %}

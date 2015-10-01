@@ -1,9 +1,12 @@
+from django.apps import AppConfig
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 #from django_jalali.db import models as jmodels
 from program.models import programDefinition
-
+# ----------------------------------------------------
+VERBOSE_NAME = _('Programcourse')
+# ----------------------------------------------------
 class courseDefinition(programDefinition):
 
     USAGE_BEGIN_ENROLLMENT  = 1

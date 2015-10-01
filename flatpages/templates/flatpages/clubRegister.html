@@ -1,0 +1,39 @@
+{% extends 'basenew.html' %}
+{% load i18n static %}
+
+{% block extra_css %}
+<style>
+    body{
+        background-color: #f5f5f5;
+    }
+    footer{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+	<div class="container" style="padding-top: 100px;">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<form method="post" action="{% url "clubRegisterURL" %}">
+                {% csrf_token %}
+					<h3>پیوستن باشگاه شما</h3>
+					<br>
+                    {% for field in form %}
+                        {{ field.errors }}
+                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
+                    {% endfor %}
+
+{#					<input type="text" class="form-control form-group" placeholder="نام باشگاه">#}
+{#					<input type="text" class="form-control form-group" placeholder="نام و نام خانوادگی">#}
+{#					<input type="text" class="form-control form-group" placeholder="شماره تماس">#}
+					<input type="submit" value="ثبت باشگاه" class="btn btn-default">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

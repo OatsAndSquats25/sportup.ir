@@ -1,0 +1,48 @@
+/* --- Fonts ---*/
+
+
+@font-face{
+
+	font-family: IranSan;
+
+	src: url('../fonts/IranSan.ttf'),
+
+	     url('../fonts/IranSan.otf')
+}
+
+@font-face{
+
+	font-family: mitra;
+
+	src: url('../fonts/BMitra.ttf'),
+
+	     url('../fonts/BMitra.eot'),
+
+	     url('../fonts/BMitra.woff'); 
+
+}
+
+
+
+@font-face{
+
+font-family: yekan;
+
+src: url('../fonts/BYekan.ttf'),
+
+     url('../fonts/BYekan.eot'),
+
+	 url('../fonts/BYekan.woff');
+
+}
+
+@font-face{
+
+font-family: shokraneh;
+
+src: url('../fonts/Shokraneh-93 arabic.ttf')
+
+}
+
+
+/*----------------*/

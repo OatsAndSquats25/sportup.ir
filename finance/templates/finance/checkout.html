@@ -1,14 +1,121 @@
-{% extends "base.html" %}
+{% extends "basenew.html" %}
 {% load i18n static humanize generic_tags %}
 
+{% block extra_css %}
+	<style>
+		body{
+			background-color: #f5f5f5;
+		}
+		.container-fluid{
+			padding: 61px 101px 50px;
+			color: #333;
+			line-height: 30px;
+			box-shadow: 0 0 5px #ccc;
+		}
+		table{
+			background-color: #fff;
+		}
+		th{
+			height: 50px;
+			line-height: 50px !important;
+			text-align: center;
+			border-top: none !important;
+		}
+		td{
+			text-align: center;
+		}
+	</style>
+{% endblock %}
+
+{% block main1 %}
+	<div class="container">
+		<table class="table">
+			<tr style="background-color: #f9f9f9;">
+				<th>حذف</th>
+				<th>شماره</th>
+				<th>مجموعه</th>
+				<th>برنامه ها</th>
+				<th>هزینه ریال</th>
+			</tr>
+			<tr>
+				<td>
+					<a href="#">
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</td>
+				<td>1</td>
+				<td>مجموعه آرون</td>
+				<td>دوره دو ماه</td>
+				<td>265,000 تومان</td>
+			</tr><tr>
+				<td>
+					<a href="#">
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</td>
+				<td>1</td>
+				<td>مجموعه آرون</td>
+				<td>دوره دو ماه</td>
+				<td>265,000 تومان</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="#">
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</td>
+				<td>1</td>
+				<td>مجموعه آرون</td>
+				<td>دوره دو ماه</td>
+				<td>265,000 تومان</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="#">
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</td>
+				<td>1</td>
+				<td>مجموعه آرون</td>
+				<td>دوره دو ماه</td>
+				<td>265,000 تومان</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="#">
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</td>
+				<td>1</td>
+				<td>مجموعه آرون</td>
+				<td>دوره دو ماه</td>
+				<td>265,000 تومان</td>
+			</tr>
+			<tr style="background-color: #f9f9f9;border-top:none;">
+				<td colspan="4">مجموع</td>
+				<td>250,000,000 تومان</td>
+			</tr>
+			<tr style="background-color: #f9f9f9;border-top:none;">
+				<td colspan="4">تخفیف</td>
+				<td>250,000,000 تومان</td>
+			</tr>
+			<tr style="background-color: #f9f9f9;border-top:none;">
+				<td colspan="4">مبلغ قابل پرداخت(ریال)</td>
+				<td>250,000,000 تومان</td>
+			</tr>
+		</table>
+	</div>
+
+{% endblock %}
+
 {% block main %}
-    <section class="container">
+    <div class="container-fluid">
         <div class="row">
             <!--Content-->
             <div class="col-md-12">
                 <h1>{% trans "Order list" %}</h1>
-                <h3>{% trans "Attention: You have only 30 minutes to pay and confirm your items." %}</h3>
-                    <div class="table">
+                <h4>{% trans "Attention: You have only 30 minutes to pay and confirm your items." %}</h4>
+                    <div class="table persian-number">
                         <table class="table table-bordered">
                             <thead>
                             <tr class="success">
@@ -33,8 +140,7 @@
 {#                            <td>{{ item.clubItemDefinitionKey.clubItemCategoryKey }}</td>#}
                             <td>{{ item.programDefinitionKey }}</td>
                             <td>{{ item.amount|floatformat:2|intcomma }}</td>
-                            <td><a style="color: red" href="{% url 'checkoutDeleteItem' item.pk %}"><span
-                                    class="glyphicon glyphicon-remove"></span></a></td>
+                            <td><a style="color: red" href="{% url 'checkoutDeleteItem' item.pk %}"><i class="fa fa-trash-o"></i></a></td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -43,7 +149,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="table">
+                            <div class="table persian-number">
                                 <table class="table table-bordered">
 {#                                    <caption>{% trans "Final Payment" %}</caption>#}
                                     <tbody>
@@ -103,6 +209,5 @@
                         </div>
             </div>
         </div>
-    </section>
-
+    </div>
 {% endblock %}

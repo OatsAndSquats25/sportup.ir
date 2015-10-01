@@ -17,6 +17,10 @@ class sessionDefinition(programDefinition):
     dayThu              = models.BooleanField(_("Thursday"))
     dayFri              = models.BooleanField(_("Friday"))
     daysToShow          = models.IntegerField(_("Number of next days to show"), default=7)
+
+    class Meta:
+        verbose_name =_("Definition")
+        verbose_name_plural =_("Definitions")
 # ----------------------------------------------------
 class sessionRestriction(models.Model):
     sessionDefinitionKey    = models.ForeignKey(sessionDefinition)
@@ -27,6 +31,9 @@ class sessionRestriction(models.Model):
     capacityDiff        = models.IntegerField(_("Capacity Increase/Decrease"),blank=True, null=True)
     blackout            = models.BooleanField(_("Blockout"))
 
+    class Meta:
+        verbose_name =_("Restriction")
+        verbose_name_plural =_("Restrictions")
 # ----------------------------------------------------
 
 

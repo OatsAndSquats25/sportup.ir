@@ -1,5 +1,20 @@
-{% extends 'base.html' %}
-{%  load i18n static %}
+{% extends 'basenew.html' %}
+{%  load i18n staticfiles %}
+
+{% block extra_css %}
+<style>
+    body{
+        background-color: #f5f5f5;
+    }
+    footer{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+{% endblock %}
+
+{% block meta_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block main %}
 
@@ -19,62 +34,47 @@
         </div>
     {% endif %}
 
-{#    {% if next %}#}
-{#        {% if user.is_authenticated %}#}
-{#        <div class="alert alert-warning">#}
-{#            <p>{% trans "Your account doesn't have access to this page. To proceed, please login with an account that has access." %}</p>#}
-{#        </div>#}
-{#        {% else %}#}
-{#        <div class="alert alert-info">#}
-{#            <p>{% trans "Please login to see this page." %}</p>#}
-{#        </div>#}
-{#        {% endif %}#}
-{#    {% endif %}#}
-
     {% if user.is_authenticated %}
         <h1>{% trans "You are already loggin in" %}</h1>
     {% else %}
-    <section class="container">
-        <div class="block">
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-md-offset-1">
-                    <header>
-                        <h1 class="page-title">{%trans "Sign In" %}</h1>
-                    </header>
-                    <hr>
-                    <form role="form" id="form-sign-in-account" method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
-                        {% csrf_token %}
-                        {{ formLog }}
-                        <input type="hidden" name="userAction" value="signIn" />
-                        <div class="form-group clearfix">
-                            <button type="submit" class="btn pull-left btn-default" id="account-submit">{% trans "Sign In" %}</button>
-                        </div>
-                    </form>
-                    <hr>
-                    <a href="{% url 'password_reset' %}" class="link">{% trans "Lost your password?" %}</a>
-                </div>
-                <div class="col-md-4 col-sm-4 col-md-offset-1">
-                    <header>
-                        <h1 class="page-title">{% trans "Register" %}</h1>
-                    </header>
-                    <hr>
-                    <form role="form" id="form-register" method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
-                        {% csrf_token %}
-                        {{ formReg }}
-                        <input type="hidden" name="userAction" value="signUp" />
-                        <div class="form-group clearfix">
-                            <button type="submit" class="btn pull-left btn-default" id="account-submit">{% trans "Create an Account" %}</button>
-                        </div>
-                    </form>
-                    <hr>
-                    <div class="center">
-{#                        <figure class="note">{% trans 'By clicking the “Create an Account” button you agree with our <a href="terms-conditions.html" class="link">Terms and conditions</a>' %}</figure>#}
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    {%  endif %}
+	<div class="container" style="padding-top: 100px;">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-4">
+				<form role="form" id="form-sign-in-account"  method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+                    {% csrf_token %}
+					<h3>{% trans "Sign In" %}</h3>
+					<br>
+                    {% for field in formLog %}
+                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
+                        {{ field.errors }}
+                    {% endfor %}
+                    <input type="hidden" name="userAction" value="signIn" />
+                    <a href="{% url 'password_reset' %}"><small>{% trans "Lost your password?" %}</small></a>
+					<br>
+					<br>
+					<input type="submit" value="{% trans "Sign In" %}" class="btn btn-default">
+				</form>
+
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-4">
+
+				<form role="form" id="form-register" method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+                    {% csrf_token %}
+					<h3>{% trans "Register" %}</h3>
+					<br>
+                    {% for field in formReg %}
+                        {{ field.errors }}
+                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
+                    {% endfor %}
+                    <input type="hidden" name="userAction" value="signUp" />
+					<input type="submit" value="ثبت نام" class="btn btn-default">
+				</form>
+			</div>
+		</div>
+	</div>
+    {% endif %}
+
 {% endblock %}
 {% block extra_js_end %}<script type="text/javascript" src="{% static "assets/js/icheck.min.js" %}"></script>{% endblock %}
