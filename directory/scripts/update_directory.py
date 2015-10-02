@@ -15,6 +15,19 @@ def run():
             user = userInst
     )
 
+    # genInst = category.objects.create(
+    #         title = u"لوکس",
+    #         slug = u"لوکس",
+    #         status = 2,
+    #         type = 1,
+    #         publish_date = now(),
+    #         created = now(),
+    #         updated = now(),
+    #         user = userInst
+    # )
+
+    genInst.categoryKeys.add(catInst)
+
     for object in club.objects.all():
 
         titleInst = complexTitle.objects.create(
