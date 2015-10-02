@@ -116,7 +116,7 @@ class loginRegister(View):
                                      last_name = formReg.cleaned_data['last_name'])
             userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
             login(request, userAuth)
-            emailNotifications.approvedAccount(request, userAuth)
+#            emailNotifications.approvedAccount(request, userAuth)
             messages.info(request, _("Register successfully"))
             return HttpResponseRedirect(request.GET.get('next','/'))
 
