@@ -10,7 +10,7 @@ from programcourse.models import courseDefinition, courseDays
 #        return False
 #
 #admin.site.register(courseDays, courseDaysAdmin)
-admin.site.register(courseDays)
+# admin.site.register(courseDays)
 #------------------------------------------------
 #class courseDaysInline(admin.TabularInline):
 #    model = courseDays
