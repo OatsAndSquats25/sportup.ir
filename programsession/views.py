@@ -25,7 +25,7 @@ def applySessionRestriction(restriction, cellInst):
     if restriction.capacityDiff:
         cellInst.capacity += restriction.capacityDiff
     if restriction.blackout:
-        cellInst.status = 1
+        cellInst.status = 0
 # ----------------------------------------------------
 def sessionGenerate(singleSession, dateBegin, dateEnd, weekDay):
     """
