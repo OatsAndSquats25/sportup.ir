@@ -9,7 +9,7 @@ from django.contrib.gis.measure import D
 
 # from accounts.views import MyRegistrationView
 from generic.models import Displayable
-from models import club, category, contact, address, complexTitle, complexLocation
+from directory.models import club, category, contact, address, complexTitle, complexLocation, genre
 from forms import clubRegistrationForm
 from serializers import clubSerializer, clubItemSerializer
 
@@ -107,12 +107,14 @@ class getList(generics.ListAPIView):
     category    -- sport category
     genre       -- sport genre
     gender      -- gender
+    region      -- region
+    city        -- city
     price_min   -- price minimum
     price_max   -- price maximum
     position    -- athlete location
     distance    -- distance from location
     """
-    queryset        = club.objects.all()
+    queryset        = club.objects.all().distinct()
     serializer_class= clubItemSerializer
     paginate_by = 20
 
@@ -121,8 +123,10 @@ class getList(generics.ListAPIView):
 
         categoryVal = self.request.query_params.get('category', None)
         titleVal    = self.request.query_params.get('title', None)
-        genre       = self.request.query_params.get('genre', None)
-        gender      = self.request.query_params.get('gender', None)
+        genreVal    = self.request.query_params.get('genre', None)
+        regionVal   = self.request.query_params.get('region', None)
+        cityVal     = self.request.query_params.get('city', None)
+        genderVal   = self.request.query_params.get('gender', None)
         price_min   = self.request.query_params.get('price_min', None)
         price_max   = self.request.query_params.get('price_max', None)
         position    = self.request.query_params.get('position', None)
@@ -134,9 +138,47 @@ class getList(generics.ListAPIView):
             except:
                 return ''
 
+        if genreVal is not None:
+            try:
+                genreInst = genre.objects.get(id = genreVal)
+                genreInst.visit += 1
+                genreInst.save()
+                queryInst = queryInst.filter(categoryKeys__in = genreInst.categoryKeys.all)
+            except:
+                return ''
+
+        if cityVal is not None:
+            try:
+                locationInst = complexLocation.objects.filter(address__city = cityVal)
+                queryInst = queryInst.filter(locationKey__in = locationInst )
+            except:
+                return ''
+
+        if regionVal is not None:
+            try:
+                locationInst = complexLocation.objects.filter(address__region = regionVal)
+                queryInst = queryInst.filter(locationKey__in = locationInst )
+            except:
+                return ''
+
+        # if price_min is not None:
+        #     try:
+        #     except:
+        #         return ''
+
+        # if price_max is not None:
+        #     try:
+        #     except:
+        #         return ''
+
+        # if genderVal is not None:
+        #     try:
+        #     except:
+        #         return ''
+
         if categoryVal is not None:
             try:
-                categoryObject = category.objects.get(title = categoryVal)
+                categoryObject = category.objects.get(id = categoryVal)
                 categoryObject.visit += 1
                 categoryObject.save()
                 queryInst = queryInst.filter(categoryKeys = categoryObject)
