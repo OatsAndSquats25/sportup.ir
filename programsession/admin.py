@@ -4,6 +4,7 @@ from models import sessionDefinition, sessionRestriction
 # ----------------------------------------------------
 class sessionRestrictionAdmin(admin.TabularInline):
     model = sessionRestriction
+    extra = 10
 
 class clubSessionAdmin(admin.ModelAdmin):
     inlines = [sessionRestrictionAdmin,]
