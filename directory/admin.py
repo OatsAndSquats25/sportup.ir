@@ -35,7 +35,12 @@ admin.site.register(category, directoryAdmin)
 #------------------------------------------------
 admin.site.register(genre)
 #------------------------------------------------
-# class addressAdmin(gis_admin.OSMGeoAdmin):
+class addressAdmin(gis_admin.OSMGeoAdmin):
+    ordering = ('locationKey__complexKey',)
+    list_display = ('__unicode__', 'publish_date', 'expiry_date', 'status')
+    search_fields = ('locationKey__complexKey__title',)
+    list_filter = ('locationKey',)
+
 #     GMAP = GoogleMap(key='AIzaSyALKj27AmoXMsdv5imGeXvookdxG3C0Ics')
     # GMAP = GoogleMap(settings.GOOGLE_MAPS_API_KEY)
     # extra_js = [GMAP.api_url + GMAP.key]
@@ -48,8 +53,8 @@ admin.site.register(genre)
     #def in_menu(self):
     #    return False
 
-#admin.site.register(address, addressAdmin)
-admin.site.register(address, gis_admin.OSMGeoAdmin)
+admin.site.register(address, addressAdmin)
+# admin.site.register(address, gis_admin.OSMGeoAdmin)
 #------------------------------------------------
 class contactInline(admin.TabularInline):
     model = contact
@@ -61,6 +66,11 @@ class imageViewsInline(admin.TabularInline):
 #
 class clubAdmin(admin.ModelAdmin):
     inlines = [imageViewsInline, contactInline]
+    ordering = ('locationKey__complexKey',)
+    list_display = ('__unicode__', 'publish_date', 'expiry_date', 'status')
+    search_fields = ('locationKey__complexKey__title',)
+    list_filter = ('locationKey',)
+    # filter_horizontal = ('categoryKeys',)
 
     def in_menu(self):
         return False
@@ -96,3 +106,7 @@ class complexAdmin(admin.ModelAdmin):
 
 admin.site.register(complexTitle, complexAdmin)
 #------------------------------------------------
+
+# list_display =
+# list_filter =
+# filter_horizontal = ("categories", "related_posts",)

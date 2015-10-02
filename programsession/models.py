@@ -21,6 +21,9 @@ class sessionDefinition(programDefinition):
     class Meta:
         verbose_name =_("Definition")
         verbose_name_plural =_("Definitions")
+
+    def __unicode__(self):
+        return self.title
 # ----------------------------------------------------
 class sessionRestriction(models.Model):
     sessionDefinitionKey    = models.ForeignKey(sessionDefinition)

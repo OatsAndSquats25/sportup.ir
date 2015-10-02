@@ -90,7 +90,7 @@ class address(Displayable):
         verbose_name_plural =_("Addresses")
 
     def __unicode__(self):
-        return self.title
+        return self.locationKey.complexKey.title + ":" + self.locationKey.title + ":" + self.title
 
     def get_absolute_url(self):
         return reverse('itemDetail2', kwargs={'pk':self.locationKey.complexKey.pk, 'locationId': self.locationKey.id})
@@ -141,12 +141,7 @@ class club(Displayable):
         return self.contact_set
 
     def __unicode__(self):
-        return self.title
-    #     #return self.complex_name() + ":" + self.title
-    #     if self.locationKey.title == _('Main'):
-    #         return self.complex_name() + ":" + self.title
-    #     else:
-    #         return self.complex_name() + ":" + self.location_name() + ":" + self.title
+        return self.locationKey.complexKey.title + ":" + self.locationKey.title + ":" + self.title
 # -------------------------------------------------------------------------------
 class imageCollection(models.Model):
     title       = models.CharField(_("Title"), max_length= 200)

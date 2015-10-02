@@ -33,10 +33,9 @@ class courseDefinition(programDefinition):
         return "Not work"
     #TODO fix this
 
-    #def __unicode__(self):
-    #    return self.agreementKey.facilityKey.complex_name() + ":" + \
-    #           self.agreementKey.facilityKey.location_name() + ":"  +\
-    #           self.agreementKey.facilityKey.title + ":" + self.title
+    def __unicode__(self):
+        return self.title
+        # return self.clubKey.title + ":" + self.title
 
     def save(self, *args, **kwargs):
         if not self.remainCapacity:

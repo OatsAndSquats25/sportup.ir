@@ -3,11 +3,18 @@ from models import sessionDefinition, sessionRestriction
 
 # ----------------------------------------------------
 class clubSessionAdmin(admin.ModelAdmin):
-    list_display = ('title','clubKey', 'agreementKey','user','sessionTimeBegin','sessionTimeEnd','sessionDuration','daySat','daySun','dayMon','dayTue','dayWed','dayThu','dayFri','daysToShow')
+    list_display = ('clubKey', '__unicode__', 'agreementKey','user','sessionTimeBegin','sessionTimeEnd','sessionDuration','daySat','daySun','dayMon','dayTue','dayWed','dayThu','dayFri','daysToShow', 'remainDays')
+    ordering = ('clubKey',)
+    search_fields = ('clubKey',)
+    # list_filter = ('clubKey',)
 
 admin.site.register(sessionDefinition, clubSessionAdmin)
 # ----------------------------------------------------
 class clubSessionRestAdmin(admin.ModelAdmin):
 	list_display = ('sessionDefinitionKey','date','day','sessionTimeBegin','sessionTimeEnd','capacityDiff','blackout')
+    # ordering = ('clubKey',)
+    # search_fields = ('clubKey',)
+    # list_filter = ('clubKey',)
+
 admin.site.register(sessionRestriction,clubSessionRestAdmin)
 # ----------------------------------------------------
