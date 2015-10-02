@@ -35,12 +35,11 @@ admin.site.register(category, directoryAdmin)
 #------------------------------------------------
 admin.site.register(genre)
 #------------------------------------------------
-#class addressAdmin(admin.ModelAdmin):
-class addressAdmin(gis_admin.OSMGeoAdmin):
-    GMAP = GoogleMap(key='AIzaSyALKj27AmoXMsdv5imGeXvookdxG3C0Ics')
+# class addressAdmin(gis_admin.OSMGeoAdmin):
+#     GMAP = GoogleMap(key='AIzaSyALKj27AmoXMsdv5imGeXvookdxG3C0Ics')
     # GMAP = GoogleMap(settings.GOOGLE_MAPS_API_KEY)
-    extra_js = [GMAP.api_url + GMAP.key]
-    map_template = 'gis/google/google-map.html'
+    # extra_js = [GMAP.api_url + GMAP.key]
+    # map_template = 'gis/google/google-map.html'
     # default_lon = 5722859
     # default_lat = 4259682
     # default_zoom = 11
@@ -50,7 +49,7 @@ class addressAdmin(gis_admin.OSMGeoAdmin):
     #    return False
 
 #admin.site.register(address, addressAdmin)
-admin.site.register(address)
+admin.site.register(address, gis_admin.OSMGeoAdmin)
 #------------------------------------------------
 class contactInline(admin.TabularInline):
     model = contact
