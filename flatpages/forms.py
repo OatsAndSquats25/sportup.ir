@@ -9,3 +9,10 @@ class clubRegisterForm(forms.Form):
     ownerName   = forms.CharField(label=_("last name"))
     contact     = forms.CharField(label=_("Cell Phone"))
     email       = forms.EmailField(label=_("Email"), required=False)
+# -----------------------------------------------------------------------
+class contactForm(forms.Form):
+    name    = forms.CharField(label=_("last name"))
+    email   = forms.EmailField(label=_("Email"))
+    title   = forms.CharField(label=_("Title"))
+    message = forms.CharField(label=_("Message"), widget=forms.Textarea(attrs={'cols':30, 'rows':10}))
+# -----------------------------------------------------------------------
