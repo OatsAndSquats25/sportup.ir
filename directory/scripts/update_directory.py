@@ -3,6 +3,13 @@ from directory.models import complexTitle, complexLocation, club, address, conta
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
+
+# install geos
+# python manage.py collectstatics
+# python manage.py migrate
+# python manage.py runscript update_directory
+
+
 def run():
     userInst = User.objects.get(email='admin@sportup.ir')
     catInst = category.objects.create(
@@ -26,7 +33,7 @@ def run():
     #         user = userInst
     # )
 
-    genInst.categoryKeys.add(catInst)
+    # genInst.categoryKeys.add(catInst)
 
     for object in club.objects.all():
 
