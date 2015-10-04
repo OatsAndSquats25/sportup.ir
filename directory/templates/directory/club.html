@@ -155,7 +155,7 @@
 		<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 
-				<form action="{% url 'enrollCourseURL' %}" method="POST">
+				<form action="{% if user.is_authenticated %}{% url 'enrollCourseURL' %}{% endif %}" method="POST">
                     {% csrf_token %}
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -163,7 +163,9 @@
 					</div>
 					<div class="modal-body" id="course-approve-holder"></div>
 					<div class="modal-footer">
+                        {% if user.is_authenticated %}
 						<input type="submit" value="تایید" class="btn btn-lg btn-success" style="float:left;"/>
+                        {% endif %}
 	      </div>
 				</form>
 
@@ -175,7 +177,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 
-				<form action="{% url 'enrollSessionURL' %}" method="POST">
+				<form action="{% if user.is_authenticated %}{% url 'enrollSessionURL' %}{% endif %}" method="POST">
                     {% csrf_token %}
 					<div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -183,7 +185,9 @@
 					</div>
 					<div class="modal-body" id="session-approve-holder"></div>
 	      <div class="modal-footer">
+                        {% if user.is_authenticated %}
 						<input type="submit" value="تایید" class="btn btn-lg btn-success" style="float:left;"/>
+                        {% endif %}
 	      </div>
 				</form>
 
@@ -227,6 +231,7 @@
 		<input name="club" type="hidden" value="<<clubid>>">
 		<input name="courseid" type="hidden" value="<<courseid>>">
 		<table class="table table-responsive">
+            {% if user.is_authenticated %}
 			<tr>
 				<th style="border-top: none;text-align:center;">نام دوره</th>
 				<th style="border-top: none;text-align:center;">گروه سن</th>
@@ -246,6 +251,12 @@
 				<td style="text-align:center;"><<price>></td>
 			</tr>
 			<<description>>
+            {% else %}
+                <div style="text-align:center;">
+                <h3>برای مشاهده اطلاعات لطفا وارد سیستم شوید.</h3>
+                <a id="signup" href="{% url "accounts_login_register" %}?next=/club">{% trans "Sign In" %}</a>
+                </div>
+            {% endif %}
 		</table>
 	</script>
 	<script type="text/template" data-template="session-modal-template">
@@ -253,6 +264,7 @@
 		<input name="cellid" type="hidden" value="<<cellid>>">
 		<input name="club" type="hidden" value="<<clubid>>">
 		<table class="table table-responsive">
+            {% if user.is_authenticated %}
 			<tr>
 				<th style="border-top: none;text-align:center;">نام دوره</th>
 				<th style="border-top: none;text-align:center;">گروه سن</th>
@@ -272,6 +284,12 @@
 				<td style="text-align:center;"><<price>></td>
 			</tr>
 			<<description>>
+            {% else %}
+                <div style="text-align:center;">
+                <h3>برای مشاهده اطلاعات لطفا وارد سیستم شوید.</h3>
+                <a id="signup" href="{% url "accounts_login_register" %}?next=/club">{% trans "Sign In" %}</a>
+                </div>
+            {% endif %}
 		</table>
 	</script>
 	<script type="text/template" data-template="course">
