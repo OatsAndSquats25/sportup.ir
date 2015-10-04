@@ -114,7 +114,7 @@ class getList(generics.ListAPIView):
     position    -- athlete location
     distance    -- distance from location
     """
-    queryset        = club.objects.all().distinct()
+    queryset        = club.objects.active().distinct()
     serializer_class= clubItemSerializer
     paginate_by = 20
 
@@ -199,7 +199,7 @@ class getItem(generics.RetrieveAPIView):
     """
     get club information
     """
-    queryset = club.objects.all().select_related()
+    queryset = club.objects.active().select_related()
     serializer_class = clubItemSerializer
 
     # locationInst = complexLocation.objects.filter(pk = club.locationKey)
@@ -214,5 +214,5 @@ class getFav(generics.ListAPIView):
     get 3 favorite club for home page
     """
     serializer_class = clubItemSerializer
-    queryset = club.objects.order_by('created')[:3]
+    queryset = club.objects.active().order_by('created')[:3]
 #---------------------------------------------------
