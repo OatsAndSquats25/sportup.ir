@@ -112,12 +112,15 @@ class loginRegister(View):
                                      password = formReg.cleaned_data['password'],
                                      first_name = formReg.cleaned_data['first_name'],
                                      last_name = formReg.cleaned_data['last_name'])
+            # return messages.error(_("Email address exist. Please try another email address."))
             userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
             login(request, userAuth)
 #            emailNotifications.approvedAccount(request, userAuth)
             approvedAccount(request, userAuth)
             messages.info(request, _("Register successfully"))
             return HttpResponseRedirect(request.GET.get('next','/'))
+        else:
+            messages.error(request, _("Email address exist. Please try another email address."))
 
         return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
 # -----------------------------------------------------------------------

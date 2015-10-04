@@ -2,20 +2,27 @@
 {% load i18n static %}
 
 {% block extra_css %}
-<style>
-    body{
-        background-color: #f5f5f5;
-    }
-    footer{
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-    }
-</style>
+	<style>
+		body{
+			background-color: #f5f5f5;
+		}
+		h2{
+			margin: 0 0 20px;
+			font-weight: bold;
+			padding: 10px;
+			display: inline-block;
+		}
+		.container-fluid{
+			padding: 101px 101px 50px;
+			color: #333;
+			line-height: 30px;
+			box-shadow: 0 0 5px #ccc;
+		}
+	</style>
 {% endblock %}
 
 {% block main %}
-	<div class="container" style="padding-top: 100px;">
+	<div class="container-fluid" style="padding-top: 100px;">
 		<div class="row">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
@@ -24,7 +31,7 @@
 					<h3>پیوستن باشگاه شما</h3>
 					<br>
                     {% for field in form %}
-                        {{ field.errors }}
+                        <a style="color: red">{{ field.errors }}</a>
                         <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
                     {% endfor %}
 

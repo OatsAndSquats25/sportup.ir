@@ -38,11 +38,16 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<form action="" method="">
-					<input type="text" name="name" class="form-control form-group" placeholder="نام">
-					<input type="text" name="email" class="form-control form-group" placeholder="ایمیل">
-					<input type="text" name="title" class="form-control form-group" placeholder="عنوان">
-					<textarea name="message" id="message" class="form-control form-group" cols="30" rows="10" placeholder="متن پیام"></textarea>
+				<form action="{% url "contactURL" %}" method="post">
+                {% csrf_token %}
+                    {% for field in form %}
+                        <a style="color: red">{{ field.errors }}</a>
+                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
+                    {% endfor %}
+{#					<input type="text" name="name" class="form-control form-group" placeholder="نام">#}
+{#					<input type="text" name="email" class="form-control form-group" placeholder="ایمیل">#}
+{#					<input type="text" name="title" class="form-control form-group" placeholder="عنوان">#}
+{#					<textarea name="message" id="message" class="form-control form-group" cols="30" rows="10" placeholder="متن پیام"></textarea>#}
 					<input type="submit" class="btn btn-success" value="ارسال پیام">
 				</form>
 			</div>
