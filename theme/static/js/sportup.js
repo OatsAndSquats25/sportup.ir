@@ -793,7 +793,7 @@
 		            		var height = (self.generateDuration(session.begin, session.end) / 2);
 		            		var price = self.priceSeperator(session.price);
 
-		            		var theme = sessionTemplate.replace(/<<id>>/g, session.prgid);
+		            		var theme = sessionTemplate.replace(/<<id>>/g, session.cellid);
 		            		theme = theme.replace(/<<top>>/g, top + 'px');
 		            		theme = theme.replace(/<<right>>/g, right + 'px');
 		            		theme = theme.replace(/<<height>>/g, height + 'px');
