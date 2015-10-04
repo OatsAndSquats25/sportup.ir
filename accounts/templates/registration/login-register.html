@@ -2,16 +2,33 @@
 {%  load i18n staticfiles %}
 
 {% block extra_css %}
-<style>
-    body{
-        background-color: #f5f5f5;
-    }
-    footer{
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-    }
-</style>
+	<style>
+		body{
+			background-color: #f5f5f5;
+		}
+		h2{
+			margin: 0 0 20px;
+			font-weight: bold;
+			padding: 10px;
+			display: inline-block;
+		}
+		.container-fluid{
+			padding: 101px 101px 50px;
+			color: #333;
+			line-height: 30px;
+			box-shadow: 0 0 5px #ccc;
+		}
+		#map-holder{
+			width: 100%;
+			height: 210px;
+		}
+		#contact-info{
+			text-align: left !important;
+		    direction: ltr !important;
+		    font-family: mitra, monospace !important;
+		    font-size: 16px !important;
+		}
+	</style>
 {% endblock %}
 
 {% block meta_title %}{% trans "Sign In" %}{% endblock %}
@@ -28,16 +45,16 @@
     {% endif %}
 
 
-    {% if formReg.errors %}
-        <div class="alert alert-danger">
-            <p>{% trans "You have error in register form." %}</p>
-        </div>
-    {% endif %}
+{#    {% if formReg.errors %}#}
+{#        <div class="alert alert-danger">#}
+{#            <p>{% trans "You have error in register form." %}</p>#}
+{#        </div>#}
+{#    {% endif %}#}
 
     {% if user.is_authenticated %}
         <h1>{% trans "You are already loggin in" %}</h1>
     {% else %}
-	<div class="container" style="padding-top: 100px;">
+	<div class="container-fluid" style="padding-top: 100px;">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-4">
@@ -46,8 +63,8 @@
 					<h3>{% trans "Sign In" %}</h3>
 					<br>
                     {% for field in formLog %}
+                        <a style="color:red">{{ field.errors }}</a>
                         <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
-                        {{ field.errors }}
                     {% endfor %}
                     <input type="hidden" name="userAction" value="signIn" />
                     <a href="{% url 'password_reset' %}"><small>{% trans "Lost your password?" %}</small></a>
@@ -65,7 +82,7 @@
 					<h3>{% trans "Register" %}</h3>
 					<br>
                     {% for field in formReg %}
-                        {{ field.errors }}
+                        <a style="color:red">{{ field.errors }}</a>
                         <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
                     {% endfor %}
                     <input type="hidden" name="userAction" value="signUp" />
