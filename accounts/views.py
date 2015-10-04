@@ -9,8 +9,9 @@ from django.contrib.auth.models import Permission
 from django.contrib.auth import authenticate, login
 from django.contrib.contenttypes.models import ContentType
 import importlib
+import jdatetime
 
-from generic.email import emailNotifications
+from generic.email import approvedAccount, clubSignUp, clubSignUpConfirm, reserveFromDashboard, threee_days_later, newsletter, changePassword
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -114,13 +115,19 @@ class loginRegister(View):
             userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
             login(request, userAuth)
 #            emailNotifications.approvedAccount(request, userAuth)
+            approvedAccount(request, userAuth)
             messages.info(request, _("Register successfully"))
             return HttpResponseRedirect(request.GET.get('next','/'))
 
         return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
 # -----------------------------------------------------------------------
 class emailTest(View):
+    #def get(self,request):
+    #    userAuth = User.objects.get(id = request.user.id)
+    #    approvedAccount(request, userAuth)
+    #    return HttpResponse("test email sent.")
     def get(self,request):
         userAuth = User.objects.get(id = request.user.id)
         emailNotifications.approvedAccount(request, userAuth)
         return HttpResponse("test email sent.")
+
