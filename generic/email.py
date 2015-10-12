@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.template import loader, Context
 from django.core.mail import EmailMultiAlternatives
+from django.utils.timezone import now
 import time
 from accounts.models import userProfile
 from generic.templatetags import generic_tags
@@ -46,7 +47,7 @@ def send_mail_template(subject, template, addr_from, addr_to, context=None,
     msg.send(fail_silently=fail_silently)
 # ----------------------------------------------------
 def sendEmailNotification(request, user, mailSubject, mailContext):
-    context = {"request": request, "user": user, "date":time.strftime("%x"), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
+    context = {"request": request, "user": user, "date":now(), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
     subject = subject_template(mailSubject, context)
     send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, user.email, context=context)
 # ----------------------------------------------------
