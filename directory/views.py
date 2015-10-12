@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
+from django.db.models import Q
+
 from rest_framework import generics
 
 from django.contrib.gis.geos import *
@@ -134,7 +136,8 @@ class getList(generics.ListAPIView):
 
         if titleVal is not None:
             try:
-                queryInst = queryInst.filter(title__icontains = titleVal)
+                queryInst = queryInst.filter(locationKey__complexKey__title__icontains = titleVal)
+                # queryInst = queryInst.filter(Q(locationKey__complexKey__title__icontains = titleVal) | Q(title__icontains = titleVal))
             except:
                 return ''
 
