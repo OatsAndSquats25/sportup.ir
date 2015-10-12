@@ -11,8 +11,9 @@ from django.contrib.contenttypes.models import ContentType
 import importlib
 import jdatetime
 
-from generic.email import approvedAccount, reserveFromDashboard, threee_days_later, newsletter, changePassword #,clubSignUp, clubSignUpConfirm
-# from generic.sms import SendOneMessage
+from generic.email import approvedAccount, reserveFromDashboard, threee_days_later, newsletter, \
+    changePassword  # ,clubSignUp, clubSignUpConfirm
+from generic.sms import SendOneMessage
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -31,8 +32,8 @@ User = get_user_model()
 # -----------------------------------------------------------------------
 class dashboard(View):
     def get(self, request, *args, **kwargs):
-        app = self.request.GET.get('app' ,None)
-        cls = self.request.GET.get('cls',None)
+        app = self.request.GET.get('app', None)
+        cls = self.request.GET.get('cls', None)
 
         if app == None or cls == None:
             # app = 'accounts'
@@ -51,24 +52,28 @@ class dashboard(View):
             raise Http404
 
         return HttpResponse(clas().generate(request))
+
+
 # -----------------------------------------------------------------------
 class profileView(DetailView):
     template_name = 'accounts/profile_detail.html'
     model = userProfile
 
     def get_object(self):
-        return self.model.objects.get(user = self.request.user)
+        return self.model.objects.get(user=self.request.user)
+
+
 # -----------------------------------------------------------------------
 class profileUpdate(UpdateView):
     template_name = 'accounts/profile_update.html'
     model = userProfile
-    fields = ['photo', 'nid','insurance', 'cellPhone', 'landline', 'address', 'postalcode' ]
+    fields = ['photo', 'nid', 'insurance', 'cellPhone', 'landline', 'address', 'postalcode']
 
     # def get_queryset(self):
     def get_object(self):
-       	obj, created = self.model.objects.get_or_create(user = self.request.user)
-	return obj
-	
+        obj, created = self.model.objects.get_or_create(user=self.request.user)
+        return obj
+
     def get_success_url(self):
         content_type = ContentType.objects.get_for_model(userProfile)
         permission = Permission.objects.get(content_type=content_type, codename='profile_is_update')
@@ -80,12 +85,15 @@ class profileUpdate(UpdateView):
 
         messages.info(self.request, _("Your profile updated successfully."))
         return reverse('profileUpdate')
+
+
 # -----------------------------------------------------------------------
 class loginRegister(View):
     def get(self, request, *args, **kwargs):
         formLog = userLoginForm(prefix='formLog')
         formReg = userRegisterForm(prefix='formReg')
-        return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
+        return render(request, 'registration/login-register.html',
+                      {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
 
     def post(self, request, *args, **kwargs):
         if request.POST.get('userAction', None) == "signIn":
@@ -97,44 +105,46 @@ class loginRegister(View):
 
         if request.POST.get('userAction', None) == "signIn":
             if formLog.is_valid():
-                userAuth = authenticate(username=formLog.cleaned_data['email'], password=formLog.cleaned_data['password'])
+                userAuth = authenticate(username=formLog.cleaned_data['email'],
+                                        password=formLog.cleaned_data['password'])
                 if userAuth is not None:
                     if userAuth.is_active:
                         login(request, userAuth)
                         messages.info(request, _("Logged in successfully"))
-                        return HttpResponseRedirect(request.GET.get('next','/'))
+                        return HttpResponseRedirect(request.GET.get('next', '/'))
                     else:
                         messages.error(request, _("Your account has been disabled. Please contact info@sportup.ir"))
                 else:
                     messages.error(request, _("email or password is not correct."))
-
         elif request.POST.get('userAction', None) == "signUp":
             if formReg.is_valid():
-                userInst = User.objects.create_user(User.objects.count()+1,
-                                         email = formReg.cleaned_data['email'],
-                                         password = formReg.cleaned_data['password'],
-                                         first_name = formReg.cleaned_data['first_name'],
-                                         last_name = formReg.cleaned_data['last_name'])
+                userInst = User.objects.create_user(User.objects.count() + 1,
+                                                    email=formReg.cleaned_data['email'],
+                                                    password=formReg.cleaned_data['password'],
+                                                    first_name=formReg.cleaned_data['first_name'],
+                                                    last_name=formReg.cleaned_data['last_name'])
                 # return messages.error(_("Email address exist. Please try another email address."))
-                userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
+                userAuth = authenticate(username=formReg.cleaned_data['email'],
+                                        password=formReg.cleaned_data['password'])
                 login(request, userAuth)
-    #            emailNotifications.approvedAccount(request, userAuth)
-    #             approvedAccount(request, userAuth)
+                #            emailNotifications.approvedAccount(request, userAuth)
                 messages.info(request, _("Register successfully"))
-                return HttpResponseRedirect(request.GET.get('next','/'))
+                return HttpResponseRedirect(request.GET.get('next', '/'))
             else:
                 messages.error(request, _("Email address exist. Please try another email address."))
 
-            return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
+        return render(request, 'registration/login-register.html',
+                      {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
+
+
 # -----------------------------------------------------------------------
 class emailTest(View):
-    #def get(self,request):
+    # def get(self,request):
     #    userAuth = User.objects.get(id = request.user.id)
     #    approvedAccount(request, userAuth)
     #    return HttpResponse("test email sent.")
-    def get(self,request):
-        userAuth = User.objects.get(id = request.user.id)
-        changePassword(request, userAuth)
-        # SendOneMessage(request, userAuth)
+    def get(self, request):
+        userAuth = User.objects.get(id=request.user.id)
+        # changePassword(request, userAuth)
+        SendOneMessage("", "", "")
         return HttpResponse("test email sent.")
-
