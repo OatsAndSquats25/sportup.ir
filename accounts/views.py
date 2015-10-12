@@ -9,8 +9,9 @@ from django.contrib.auth.models import Permission
 from django.contrib.auth import authenticate, login
 from django.contrib.contenttypes.models import ContentType
 import importlib
+import jdatetime
 
-from generic.email import emailNotifications
+from generic.email import approvedAccount, clubSignUp, clubSignUpConfirm, reserveFromDashboard, threee_days_later, newsletter, changePassword
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -94,37 +95,44 @@ class loginRegister(View):
             formLog = userLoginForm(prefix='formLog')
 
 	if request.POST.get('userAction', None) == "signIn":
-	    if formLog.is_valid():
-		userAuth = authenticate(username=formLog.cleaned_data['email'], password=formLog.cleaned_data['password'])
-		if userAuth is not None:
-		    if userAuth.is_active:
-			login(request, userAuth)
-			messages.info(request, _("Logged in successfully"))
-			return HttpResponseRedirect(request.GET.get('next','/'))
-		    else:
-			messages.error(request, _("Your account has been disabled. Please contact info@sportup.ir"))
-		else:
-		    messages.error(request, _("email or password is not correct."))
+        if formLog.is_valid():
+            userAuth = authenticate(username=formLog.cleaned_data['email'], password=formLog.cleaned_data['password'])
+            if userAuth is not None:
+                if userAuth.is_active:
+                    login(request, userAuth)
+                    messages.info(request, _("Logged in successfully"))
+                    return HttpResponseRedirect(request.GET.get('next','/'))
+                else:
+                    messages.error(request, _("Your account has been disabled. Please contact info@sportup.ir"))
+            else:
+                messages.error(request, _("email or password is not correct."))
+
 	elif request.POST.get('userAction', None) == "signUp":
-	    if formReg.is_valid():
-		userInst = User.objects.create_user(User.objects.count()+1,
-					email = formReg.cleaned_data['email'],
-					password = formReg.cleaned_data['password'],
-					first_name = formReg.cleaned_data['first_name'],
-					last_name = formReg.cleaned_data['last_name'])
-		# return messages.error(_("Email address exist. Please try another email address."))
-		userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
-		login(request, userAuth)
-    #            emailNotifications.approvedAccount(request, userAuth)
-		messages.info(request, _("Register successfully"))
-		return HttpResponseRedirect(request.GET.get('next','/'))
-	    else:
-		messages.error(request, _("Email address exist. Please try another email address."))
+        if formReg.is_valid():
+            userInst = User.objects.create_user(User.objects.count()+1,
+                                     email = formReg.cleaned_data['email'],
+                                     password = formReg.cleaned_data['password'],
+                                     first_name = formReg.cleaned_data['first_name'],
+                                     last_name = formReg.cleaned_data['last_name'])
+            # return messages.error(_("Email address exist. Please try another email address."))
+            userAuth = authenticate(username=formReg.cleaned_data['email'], password=formReg.cleaned_data['password'])
+            login(request, userAuth)
+#            emailNotifications.approvedAccount(request, userAuth)
+#             approvedAccount(request, userAuth)
+            messages.info(request, _("Register successfully"))
+            return HttpResponseRedirect(request.GET.get('next','/'))
+        else:
+            messages.error(request, _("Email address exist. Please try another email address."))
 
         return render(request, 'registration/login-register.html', {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next','/')})
 # -----------------------------------------------------------------------
 class emailTest(View):
+    #def get(self,request):
+    #    userAuth = User.objects.get(id = request.user.id)
+    #    approvedAccount(request, userAuth)
+    #    return HttpResponse("test email sent.")
     def get(self,request):
         userAuth = User.objects.get(id = request.user.id)
-        emailNotifications.approvedAccount(request, userAuth)
+        # emailNotifications.approvedAccount(request, userAuth)
         return HttpResponse("test email sent.")
+

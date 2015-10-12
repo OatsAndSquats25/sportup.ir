@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 16:13+0430\n"
+"POT-Creation-Date: 2015-10-04 18:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dashboard.py:9 templatetags/enroll_tags.py:9
+#: dashboard.py:9
 msgid "Enrollment"
 msgstr "ثبت نام"
 
-#: models.py:31
+#: models.py:15
 msgid "Amount"
 msgstr "مقدار"
 
-#: models.py:36 models.py:37
+#: models.py:19 models.py:20
 msgid "Enroll"
 msgstr "ثبت نام"
 
-#: models.py:55
+#: models.py:39
 msgid "First time remaining flag"
 msgstr ""
+
+#: models.py:42
+#, fuzzy
+#| msgid "Begin date"
+msgid "Specific date"
+msgstr "تاریخ شروع"
+
+#: models.py:43
+#, fuzzy
+#| msgid "Begin date"
+msgid "Begin time"
+msgstr "تاریخ شروع"
+
+#: models.py:44
+#, fuzzy
+#| msgid "End date"
+msgid "End time"
+msgstr "تاریخ پایان"
 
 #: templates/enroll/dashboard_enrolled_list.html:6
 msgid "Enrolled list"
@@ -59,20 +77,16 @@ msgid "Invoice"
 msgstr "فاکتور"
 
 #: templates/enroll/dashboard_enrolled_list.html:17
-msgid "Receipt"
-msgstr "رسید"
+msgid "Reference Number"
+msgstr ""
 
-#: templates/enroll/dashboard_enrolled_list.html:34
+#: templates/enroll/dashboard_enrolled_list.html:35
 msgid "Active"
 msgstr "فعال"
 
-#: templates/enroll/dashboard_enrolled_list.html:36
+#: templates/enroll/dashboard_enrolled_list.html:37
 msgid "Inactive"
 msgstr "غیرفعال"
-
-#: templates/enroll/dashboard_enrolled_list.html:39
-msgid "Print"
-msgstr "چاپ"
 
 #: templates/enroll/enrollment_confirmation.html:10
 msgid "Your programs to buy"
@@ -139,12 +153,18 @@ msgstr "ریال"
 msgid "Payment"
 msgstr "پرداخت"
 
-#: views.py:29
+#: views.py:44 views.py:187 views.py:198
 msgid ""
 "This program is not valid for enroll. Validation expired or no free spcae."
 msgstr ""
-"این برنامه جهت خردی معتبر نمی باشد. اعتبار پایان رسیده یا ظرفیت آن تمام شده "
+"این برنامه جهت خرید معتبر نمی باشد. اعتبار پایان رسیده یا ظرفیت آن تمام شده "
 "است"
+
+#~ msgid "Receipt"
+#~ msgstr "رسید"
+
+#~ msgid "Print"
+#~ msgstr "چاپ"
 
 #~ msgid "toman"
 #~ msgstr "تومان"

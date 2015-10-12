@@ -2,6 +2,9 @@ from __future__ import unicode_literals
 
 from django.template import loader, Context
 from django.core.mail import EmailMultiAlternatives
+import time
+from accounts.models import userProfile
+from generic.templatetags import generic_tags
 # from django.contrib.auth.tokens import default_token_generator
 # ----------------------------------------------------
 
@@ -42,15 +45,33 @@ def send_mail_template(subject, template, addr_from, addr_to, context=None,
         msg.attach(*attachment)
     msg.send(fail_silently=fail_silently)
 # ----------------------------------------------------
-def sendEmailNotification(self, request, user, mailSubject, mailContext):
-    context = {"request": request, "user": user}
+def sendEmailNotification(request, user, mailSubject, mailContext):
+    context = {"request": request, "user": user, "date":time.strftime("%x"), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
     subject = subject_template(mailSubject, context)
     send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, user.email, context=context)
 # ----------------------------------------------------
-class emailNotifications(object):
-    def approvedAccount(self, request, user):
-        sendEmailNotification(request, user, "email/account_approved_subject.txt", "email/account_approved.html")
 
-    def paymentDone(self, request, user):
-        sendEmailNotification(request, user, "email/payment_done_subject.txt", "email/payment_done.html")
+def approvedAccount(request, user):
+    sendEmailNotification(request, user, "email/account_approved_subject.txt", "email/account_approved")
+
+def paymentDone(request, user):
+    sendEmailNotification(request, user, "email/payment_done_subject.txt", "email/payment_done")
+
+def newsletter(request, user):
+    sendEmailNotification(request, user, "email/newsletter_subject.txt", "email/newsletter")
+
+def clubSignUp(request, user):
+    sendEmailNotification(request, user, "email/club_signUp_subject.txt", "email/club_signUp")
+
+def clubSignUpConfirm(request, user):
+    sendEmailNotification(request, user, "email/club_signUp_confirm_subject.txt", "email/club_signUp_confirm")
+
+def reserveFromDashboard(request, user):
+    sendEmailNotification(request, user, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard")
+
+def threee_days_later(request, user):
+    sendEmailNotification(request, user, "email/3days_later_subject.txt", "email/3days_later")
+
+def changePassword(request, user):
+    sendEmailNotification(request, user, "email/change_password_subject.txt", "email/change_password")
 # ----------------------------------------------------
