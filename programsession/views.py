@@ -185,9 +185,11 @@ class sessionSchedule(generics.GenericAPIView):
         week        -- week number >=0 (0 is current week)
         """
         #input parameter club, week and validation #todo
-        club = int(request.GET.get('club','0'))
-        showWeek = int(request.GET.get('week','0'))
+        club = int(request.GET.get('club',0))
+        showWeek = int(request.GET.get('week',0))
 
+        if club == 0:
+            return Response("Data not found", status=status.HTTP_204_NO_CONTENT)
         sessionTable = sessionGenerateFull(club, showWeek)
         if sessionTable == 0:
             return Response("Data not found", status=status.HTTP_204_NO_CONTENT)

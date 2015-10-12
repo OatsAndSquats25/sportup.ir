@@ -171,15 +171,10 @@ class getCourses(generics.GenericAPIView):
         try:
             # currentAgreement = agreement.objects.get(clubKey = id)
             currentAgreement = agreement.objects.active().get(clubKey = id)
+            courseInst = programDefinition.objects.instance_of(courseDefinition).filter(agreementKey = currentAgreement)
         except ObjectDoesNotExist:
             Response("Data not found", status=status.HTTP_204_NO_CONTENT)
 
-        # if not currentAgreement.isValid():
-        #     return {}
-
-        courseInst = programDefinition.objects.instance_of(courseDefinition).filter(agreementKey = currentAgreement)
-        # if not courseInst:
-        # if not courseInst.exist():
         if courseInst.count() == 0:
             return Response("Data not found", status=status.HTTP_204_NO_CONTENT)
 
