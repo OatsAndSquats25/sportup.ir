@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 16:28+0430\n"
+"POT-Creation-Date: 2015-10-10 07:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,50 +18,148 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: models.py:14
+#: models.py:12
 msgid "Owner"
 msgstr "مالک"
 
-#: models.py:98
+#: models.py:24
+msgid "created"
+msgstr ""
+
+#: models.py:25
+msgid "updated"
+msgstr ""
+
+#: models.py:42
 msgid "Inactive"
 msgstr "غیرفعال"
 
-#: models.py:99
+#: models.py:43
 msgid "Active"
 msgstr "فعال"
 
-#: models.py:108
+#: models.py:44
+msgid "Draft"
+msgstr ""
+
+#: models.py:53
 msgid "Title"
 msgstr "عنوان"
 
-#: models.py:109
+#: models.py:54
 msgid "URL"
 msgstr ""
 
-#: models.py:110
+#: models.py:55
 msgid "Leave blank to have the URL auto-generated from the title."
 msgstr ""
 
-#: models.py:113
+#: models.py:58
 msgid "Status"
 msgstr "وضعیت"
 
-#: models.py:115
+#: models.py:60
 msgid "With Draft chosen, will only be shown for admin users on the site."
 msgstr ""
 
-#: models.py:117 models.py:152
+#: models.py:62
 msgid "Published from"
 msgstr ""
 
-#: models.py:119
+#: models.py:63
 msgid "With Published chosen, won't be shown until this time"
 msgstr ""
 
-#: models.py:122
+#: models.py:64
 msgid "Expires on"
 msgstr ""
 
-#: models.py:123
+#: models.py:65
 msgid "With Published chosen, won't be shown after this time"
+msgstr ""
+
+#: templates/email/3days_later.txt:4
+msgid "ye jafange engilisi"
+msgstr "کاربر گرامی"
+
+#: templates/email/3days_later.txt:5
+msgid "ye jafange dg bazam engilisi."
+msgstr "اسپورت آپ به همراهی شما به عنوان عضوی از این گروه مفتخر است.امیدواریم در طول این 3 روز، قسمت های مختلف سایت را مشاهده کرده باشید و نیازهای شما از این طریق برآورده شده باشد.همچنین خواهشمندیم به توضیحاتی که در پایین برای آشنایی بیشتر با سایت آورده شده توجه فرمایید."
+
+#: templates/email/account_approved.html:3
+#: templates/email/account_approved.txt:3
+msgid "Hey there, your account has been activated."
+msgstr ""
+
+#: templates/email/account_approved.html:4
+#: templates/email/account_approved.txt:4 templates/email/payment_done.html:4
+msgid "Please use the link below to log in."
+msgstr ""
+
+#: templates/email/account_approved_subject.txt:2
+msgid "Your account has been activated"
+msgstr ""
+
+#: templates/email/payment_done.html:3
+msgid "Thank you for purchasing from SportUp.ir."
+msgstr ""
+
+#: templates/email/payment_done_subject.txt:2
+msgid "Your payment has been done"
+msgstr ""
+
+#: templates/email/sample/account_approve.html:3
+#: templates/email/sample/account_approve.txt:3
+msgid "Hey there, a new account has been created and requires activation."
+msgstr ""
+
+#: templates/email/sample/account_approve.html:5
+#: templates/email/sample/account_approve.txt:5
+msgid "Name"
+msgstr ""
+
+#: templates/email/sample/account_approve.html:6
+#: templates/email/sample/account_approve.txt:6
+msgid "Email"
+msgstr ""
+
+#: templates/email/sample/account_approve.html:11
+#: templates/email/sample/account_approve.txt:9
+#: templates/email/sample/signup_verify.html:4
+#: templates/email/sample/signup_verify.txt:4
+msgid "Please use the link below to activate it."
+msgstr ""
+
+#: templates/email/sample/account_approve_subject.txt:2
+msgid "An account requires activation"
+msgstr ""
+
+#: templates/email/sample/password_reset_verify.html:3
+#: templates/email/sample/password_reset_verify.txt:3
+msgid "Hey there, the password reset form was used for your account."
+msgstr ""
+
+#: templates/email/sample/password_reset_verify.html:4
+#: templates/email/sample/password_reset_verify.txt:4
+msgid "Please use the link below to log in and update your password."
+msgstr ""
+
+#: templates/email/sample/password_reset_verify.html:6
+#: templates/email/sample/password_reset_verify.txt:6
+msgid ""
+"If you didn't request for your password to be reset, please ignore this "
+"email."
+msgstr ""
+
+#: templates/email/sample/password_reset_verify_subject.txt:2
+msgid "Reset your password"
+msgstr ""
+
+#: templates/email/sample/signup_verify.html:3
+#: templates/email/sample/signup_verify.txt:3
+msgid "Hey there, thanks for creating your account."
+msgstr ""
+
+#: templates/email/sample/signup_verify_subject.txt:2
+msgid "Activate your account"
 msgstr ""

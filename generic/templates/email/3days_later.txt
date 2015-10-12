@@ -1,0 +1,7 @@
+{% load i18n future%}
+{% block main %}
+<p>
+{% trans "ye jafange engilisi" %}
+{% trans "ye jafange dg bazam engilisi." %}
+</p>
+{% endblock %}
