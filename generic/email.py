@@ -60,11 +60,11 @@ def paymentDone(request, user):
 def newsletter(request, user):
     sendEmailNotification(request, user, "email/newsletter_subject.txt", "email/newsletter")
 
-def clubSignUp(request, user):
-    sendEmailNotification(request, user, "email/club_signUp_subject.txt", "email/club_signUp")
+#def clubSignUp(request, user):
+#    sendEmailNotification(request, user, "email/club_signUp_subject.txt", "email/club_signUp")
 
-def clubSignUpConfirm(request, user):
-    sendEmailNotification(request, user, "email/club_signUp_confirm_subject.txt", "email/club_signUp_confirm")
+#def clubSignUpConfirm(request, user):
+#    sendEmailNotification(request, user, "email/club_signUp_confirm_subject.txt", "email/club_signUp_confirm")
 
 def reserveFromDashboard(request, user):
     sendEmailNotification(request, user, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard")

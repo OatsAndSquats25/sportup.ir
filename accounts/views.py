@@ -11,7 +11,8 @@ from django.contrib.contenttypes.models import ContentType
 import importlib
 import jdatetime
 
-from generic.email import approvedAccount, clubSignUp, clubSignUpConfirm, reserveFromDashboard, threee_days_later, newsletter, changePassword
+from generic.email import approvedAccount, reserveFromDashboard, threee_days_later, newsletter, changePassword #,clubSignUp, clubSignUpConfirm
+# from generic.sms import SendOneMessage
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -133,6 +134,6 @@ class emailTest(View):
     #    return HttpResponse("test email sent.")
     def get(self,request):
         userAuth = User.objects.get(id = request.user.id)
-        # emailNotifications.approvedAccount(request, userAuth)
+        # SendOneMessage(request, userAuth)
         return HttpResponse("test email sent.")
 

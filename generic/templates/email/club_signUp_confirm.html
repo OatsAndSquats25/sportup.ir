@@ -1,0 +1,23 @@
+{% load i18n %}
+{% block main %}
+<p>
+    مدیر محترم باشگاه:{{ user.get_username }}
+</p>
+<br>
+<p>
+    حساب کاربری شما در سایت sportup.ir ایجاد شد.لطفا برای فعال شدن این حساب به لینک زیر بروید:
+</p>
+
+<p>
+مشخصات حساب کاربری شما:
+</p>
+<p>
+نام و نام خانوادگ: {{ user.get_full_name }}
+</p>
+<p>
+نام کاربری: {{ user.get_username }}
+</p>
+با سپاس
+Sportup
+<p><a href="http://{{ request.get_host }}{{ change_url }}">http://{{ request.get_host }}{{ change_url }}</a></p>
+{% endblock %}

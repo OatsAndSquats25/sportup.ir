@@ -1,0 +1,9 @@
+{% load i18n accounts_tags %}
+{% block main %}
+<p>مدیر محترم باشگاه: {{ user.get_full_name }}</p>
+<br>
+<p>درخواست شما در خصوص ثبت نام در  سایت sportup.ir ثبت گردید.
+همکاران ما در کمتر از 24 ساعت با شما تماس میگیرند
+با تشکر از اعتماد شما</p>
+<p><a href="http://{{ request.get_host }}{{ change_url }}">http://{{ request.get_host }}{{ change_url }}</a></p>
+{% endblock %}
