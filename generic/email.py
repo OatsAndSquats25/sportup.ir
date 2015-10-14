@@ -4,6 +4,10 @@ from django.template import loader, Context
 from django.core.mail import EmailMultiAlternatives
 from django.utils.timezone import now
 import time
+
+from enroll.models import enrolledProgram
+from program.models import programDefinition
+
 from accounts.models import userProfile
 from generic.templatetags import generic_tags
 # from django.contrib.auth.tokens import default_token_generator
@@ -45,12 +49,19 @@ def send_mail_template(subject, template, addr_from, addr_to, context=None,
     for attachment in attachments:
         msg.attach(*attachment)
     msg.send(fail_silently=fail_silently)
+
 # ----------------------------------------------------
 def sendEmailNotification(request, user, mailSubject, mailContext):
     context = {"request": request, "user": user, "date":now(), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
     subject = subject_template(mailSubject, context)
     send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, user.email, context=context)
+#-----------------------------------------------------
+def sendEmailNotification(request, user, club, mailSubject, mailContext):
+    context = {"club": club, "request": request, "user": user, "date":now(), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
+    subject = subject_template(mailSubject, context)
+    send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, user.email, context=context)
 # ----------------------------------------------------
+
 
 def approvedAccount(request, user):
     sendEmailNotification(request, user, "email/account_approved_subject.txt", "email/account_approved")
@@ -67,12 +78,24 @@ def newsletter(request, user):
 #def clubSignUpConfirm(request, user):
 #    sendEmailNotification(request, user, "email/club_signUp_confirm_subject.txt", "email/club_signUp_confirm")
 
-def reserveFromDashboard(request, user):
-    sendEmailNotification(request, user, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard")
+def reserveFromDashboard(request, user, _invoicekey):
+    enrollItems = enrolledProgram.objects.filter(invoiceKey = _invoicekey)
+    for enrl in enrollItems:
+        club = enrl.programDefinitionKey.clubKey.title
+        sendEmailNotification(request, user, club, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard")
 
 def threee_days_later(request, user):
     sendEmailNotification(request, user, "email/3days_later_subject.txt", "email/3days_later")
 
 def changePassword(request, user):
     sendEmailNotification(request, user, "email/change_password_subject.txt", "email/change_password")
+
+def reserve(request, user, _invoicekey):
+    enrollItems = enrolledProgram.objects.filter(invoiceKey = _invoicekey)
+    clubs = []
+    for enrl in enrollItems:
+        club = enrl.programDefinitionKey.clubKey.title
+        clubs.append(club)
+        sendEmailNotification(request, user, club, "email/reserve_club_subject.txt", "email/reserve_club")
+
 # ----------------------------------------------------

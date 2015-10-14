@@ -1,3 +1,4 @@
+{% extends "email/emailbase.html" %}
 {% load i18n future %}
 {% block main %}
 {% trans "Hey there, your account has been activated." %}

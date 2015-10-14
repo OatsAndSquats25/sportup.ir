@@ -89,24 +89,24 @@ msgstr "اسپورت آپ به همراهی شما به عنوان عضوی از
 #: templates/email/account_approved.html:3
 #: templates/email/account_approved.txt:3
 msgid "Hey there, your account has been activated."
-msgstr ""
+msgstr "سلام، حساب کاربری شما فعال شد."
 
 #: templates/email/account_approved.html:4
 #: templates/email/account_approved.txt:4 templates/email/payment_done.html:4
 msgid "Please use the link below to log in."
-msgstr ""
+msgstr "لطفا از لینک زیر برای ورود به حساب کاربری خود استفاده کنید."
 
 #: templates/email/account_approved_subject.txt:2
 msgid "Your account has been activated"
-msgstr ""
+msgstr "حساب کاربری شما فعال شد."
 
 #: templates/email/payment_done.html:3
 msgid "Thank you for purchasing from SportUp.ir."
-msgstr ""
+msgstr "از شما به خاطر همکاری با اسپرتآپ تشکر می‌کنیم."
 
 #: templates/email/payment_done_subject.txt:2
 msgid "Your payment has been done"
-msgstr ""
+msgstr "پرداخت با موفقیت انجام شد."
 
 #: templates/email/sample/account_approve.html:3
 #: templates/email/sample/account_approve.txt:3
@@ -116,12 +116,12 @@ msgstr ""
 #: templates/email/sample/account_approve.html:5
 #: templates/email/sample/account_approve.txt:5
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
 #: templates/email/sample/account_approve.html:6
 #: templates/email/sample/account_approve.txt:6
 msgid "Email"
-msgstr ""
+msgstr "ایمیل"
 
 #: templates/email/sample/account_approve.html:11
 #: templates/email/sample/account_approve.txt:9

@@ -17,6 +17,9 @@ from generic.sms import SendOneMessage
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
+from finance.models import invoice
+from enroll.models import enrolledProgram
+
 
 User = get_user_model()
 # -----------------------------------------------------------------------
@@ -143,8 +146,10 @@ class emailTest(View):
     #    userAuth = User.objects.get(id = request.user.id)
     #    approvedAccount(request, userAuth)
     #    return HttpResponse("test email sent.")
-    def get(self, request):
-        userAuth = User.objects.get(id=request.user.id)
-        # changePassword(request, userAuth)
-        SendOneMessage("", "", "")
+    def get(self,request):
+        userAuth = User.objects.get(id = request.user.id)
+        #inv = invoice.objects.filter(id = 3)
+        #reserveFromDashboard(request, userAuth, inv)
+        reserveClub(request, userAuth, enrolledProgram.programDefinitionKey.title)
+        # SendOneMessage(request, userAuth)
         return HttpResponse("test email sent.")

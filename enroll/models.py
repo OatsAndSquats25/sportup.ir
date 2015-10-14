@@ -12,7 +12,7 @@ from program.models import programDefinition
 class enrolledProgram(PolymorphicModel, Displayable):
     programDefinitionKey= models.ForeignKey(programDefinition)
     invoiceKey          = models.ForeignKey('finance.invoice', blank=True, null=True)
-    amount              = models.DecimalField(_("Amount"), max_digits=12, decimal_places=2)
+    amount                = models.DecimalField(_("Amount"), max_digits=12, decimal_places=2)
     firstAccess         = models.BooleanField(default=False)
 
     class Meta:

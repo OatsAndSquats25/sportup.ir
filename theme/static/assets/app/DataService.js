@@ -92,7 +92,7 @@
             removeAthlete : removeAthlete,
             athleteAttended : athleteAttended,
             getCellAthletes : getCellAthletes,
-            getClubs :getClubs,
+            getClubs :getClubs
             /*delete : function(id){ // ng-resource 
                 return request.delete({id : id});
             }*/
