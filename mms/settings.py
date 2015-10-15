@@ -71,6 +71,7 @@ SITE_ID=1
 # Application definition
 INSTALLED_APPS = (
     'theme',
+    'rest_framework_swagger',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -164,3 +165,4 @@ AUTHENTICATION_BACKENDS = ('accounts.backends.EmailAuthBackend',)
 
 from django.contrib.messages import constants as message_constants
 MESSAGE_TAGS = {message_constants.ERROR: 'danger'}
+

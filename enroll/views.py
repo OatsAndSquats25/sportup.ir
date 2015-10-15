@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.shortcuts import get_object_or_404
 
 from rest_framework import generics
 from rest_framework import permissions
@@ -64,7 +65,7 @@ class enrollSessionClub(generics.GenericAPIView):
     serializer_class = enrollSessionClubSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         """
         Return list of all enrolled sessions for club (club permission)
         clubid -- club id
@@ -113,7 +114,7 @@ class enrollSessionClub(generics.GenericAPIView):
             pass
 
         prginst = programDefinition.objects.get(id = cell[0].prgid)
-        enrolledProgramSession.objects.create(programDefinitionKey = prginst,
+        enrollInst = enrolledProgramSession.objects.create(programDefinitionKey = prginst,
                                               amount = cell[0].price,
                                               date = cell[0].date,
                                               sessionTimeBegin = cell[0].begin,
@@ -122,14 +123,16 @@ class enrollSessionClub(generics.GenericAPIView):
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
 
-        return Response("Done", status=status.HTTP_200_OK)
-    #def delete(self, request, *args, **kwargs):
-    #    _id = request.data.get('enrollId', '-1')
-    #    enrollInst = enrolledProgramSession.objects.filter(id = _id).filter(user = request.user).delete()
-    #
-    #    Response(status=status.HTTP_200_OK)
-    #    Response("you can not delete this user.",status=status.HTTP_400_BAD_REQUEST)
+        return Response(enrollInst.id, status=status.HTTP_200_OK)
 
+    def delete(self, request, *args, **kwargs):
+        _id = kwargs.get("pk", "-1")
+        try:
+            enrollInst = enrolledProgramSession.objects.filter(id = _id).filter(user = request.user).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response("you can not delete this user.",status=status.HTTP_404_NOT_FOUND)
+            #return super(enrollSessionClub, self).destroy(request,args, kwargs)
 # ----------------------------------------------------
 class enrollSession(generics.GenericAPIView):
     """
@@ -212,7 +215,7 @@ class enrollCourseClub(generics.GenericAPIView):
     serializer_class = enrollCourseClubSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         """
         Return list of all enrolled sessions for club (club permission)
         clubid -- club id
@@ -255,10 +258,18 @@ class enrollCourseClub(generics.GenericAPIView):
             _user = self.request.user
             pass
 
-        enrolledProgramCourse.objects.create(programDefinitionKey = courseInst,
+        enrollInst = enrolledProgramCourse.objects.create(programDefinitionKey = courseInst,
                                               amount = courseInst.price,
                                               user = _user,
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
 
-        return Response("Done", status=status.HTTP_200_OK)
+        return Response(enrollInst.id, status=status.HTTP_200_OK)
+
+    def delete(self, request, *args, **kwargs):
+        _id = kwargs.get("pk", "-1")
+        try:
+            enrollInst = enrolledProgramCourse.objects.filter(id = _id).filter(user = request.user).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response("you can not delete this user.",status=status.HTTP_404_NOT_FOUND)

@@ -20,6 +20,7 @@ if settings.DEBUG:
     )
 
 urlpatterns += patterns('',
+    url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include("access.urlsapi")),
     url(r'^api/', include("agreement.urlsapi")),
