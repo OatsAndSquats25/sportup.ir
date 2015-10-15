@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^enroll/session/$',views.enrollSession.as_view(), name="enrollSessionAPI"),
     url(r'^enroll/session/user/$',views.enrollSessionUser.as_view(), name="enrollSessionListUserAPI"),
     url(r'^enroll/session/club/$',views.enrollSessionClub.as_view(), name="enrollSessionListClubAPI"),
+    url(r'^enroll/course/club/$',views.enrollCourseClub.as_view(), name="enrollCourseListClubAPI"),
 )
 
 # urlpatterns += router.urls

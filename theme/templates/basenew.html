@@ -59,13 +59,15 @@
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.last_name }} <span class="caret"></span></a>
 				<ul class="dropdown-menu">
+                    {% if not perms.accounts.club_owner %}<li style="border:none;"><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>{% endif %}
                     <li style="border:none;"><a href="{% url 'profileUpdate' %}">{% trans "Profile" %}</a></li>
                     <li style="border:none;"><a href="{% url 'password_change' %}">{% trans "Change Password" %}</a></li>
                     <li style="border:none;"><a href="{% url 'logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
 				</ul>
 	        </li>
-            <li><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
-                {% if not perms.accounts.club_owner %}
+                {% if perms.accounts.club_owner %}
+                    <li><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
+                {% else %}
                     <li><a href="{% url 'checkoutURL' %}"><i class="fa fa-shopping-cart"></i>{% trans "Shopping Cart" %}</a></li>
                 {% endif %}
             {% endif %}

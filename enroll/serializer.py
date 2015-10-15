@@ -40,3 +40,12 @@ class enrollSessionClubSerializer(enrollSessionSerializer):
     cellPhone=serializers.CharField(max_length=15, required=False)
 
 # ----------------------------------------------------
+#class enrollCourseClubSerializer (serializers.Serializer):
+class enrollCourseSerializer(serializers.Serializer):
+    courseId    = serializers.IntegerField()
+# ----------------------------------------------------
+class enrollCourseClubSerializer(enrollCourseSerializer):
+    firstName=serializers.CharField(max_length=20)
+    lastName =serializers.CharField(max_length=20)
+    eMail    =serializers.EmailField(required=False)
+    cellPhone=serializers.CharField(max_length=15, required=False)

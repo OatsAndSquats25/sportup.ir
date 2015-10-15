@@ -14,5 +14,6 @@ import views
 # )
 
 urlpatterns = patterns('',
-    url(r'^course/(?P<pk>\d+)/$',views.getCourses.as_view(), name="coursesAPI"),
+    #url(r'^course/(?P<pk>\d+)/$',views.getCourses.as_view(), name="coursesAPI"),
+    url(r'^course/$',views.getCourses.as_view(), name="coursesAPI"),
 )

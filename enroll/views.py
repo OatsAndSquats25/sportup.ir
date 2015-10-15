@@ -15,10 +15,11 @@ from accounts.models import userProfile
 from program.models import programDefinition
 from finance.functions import invoiceGenerate, paymentRequest
 
-from models import enrolledProgramSession, enrolledProgram
+from models import enrolledProgramSession, enrolledProgram, enrolledProgramCourse
+from programcourse.models import courseDefinition
 from enrollcourse.function import enrollCourseFunction
 from enrollsession.function import enrollSessionFunction
-from serializer import enrollProgramSerializer,enrollSessionSerializer, enrollSessionClubSerializer
+from serializer import enrollProgramSerializer,enrollSessionSerializer, enrollSessionClubSerializer, enrollCourseClubSerializer
 
 from agreement.models import agreement
 from programsession.views import sessionGenerateFull
@@ -38,7 +39,7 @@ class enrollConfirmed(View):
         programInst = programDefinition.objects.get(pk = kwargs['pk'])
         if programInst.isValid():
             # if programInst.type == :
-            enrollInst = enrollCourse(request, programInst)
+            #enrollInst = enrollCourse(request, programInst) #:commented by ali since it has an error (could not find enroll course)
             return redirect('checkoutURL')
         else:
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
@@ -68,7 +69,7 @@ class enrollSessionClub(generics.GenericAPIView):
         Return list of all enrolled sessions for club (club permission)
         clubid -- club id
         """
-        enrollInst = enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).filter(date = now().date()).select_related('user')
+        enrollInst = enrolledProgramSession.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).filter(date = now().date()).select_related('user').order_by("firstAccess", "sessionTimeBegin")
         return Response(enrollProgramSerializer(enrollInst, many=True).data)
 
     def post(self, request, *args, **kwargs):
@@ -82,7 +83,7 @@ class enrollSessionClub(generics.GenericAPIView):
         _last    = request.data.get('lastName', '')
         _email   = request.data.get('eMail', '')
         _cellP   = request.data.get('cellPhone','')
-        _desc    = ''
+        _desc    = _first + ' ' + _last + "-" + _cellP
 
         if _club == -1 or _week == -1 or _cellid == -1 or _first == '' or _last == '':
             return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
@@ -104,12 +105,11 @@ class enrollSessionClub(generics.GenericAPIView):
             except UserModel.DoesNotExist:
                 userInst = UserModel.objects.create_user(UserModel.objects.count()+1, email = _email, first_name = _first, last_name = _last)
                 userProfile.objects.create(user = userInst, cellPhone = _cellP)
-                send_approved_mail(request, userInst)
+                #send_approved_mail(request, userInst)
                 # todo est cellphone number
             _user = userInst
         else:
             _user = self.request.user
-            _desc = _first + ' ' + _last + "-" + _cellP
             pass
 
         prginst = programDefinition.objects.get(id = cell[0].prgid)
@@ -123,6 +123,13 @@ class enrollSessionClub(generics.GenericAPIView):
                                               title= _desc)
 
         return Response("Done", status=status.HTTP_200_OK)
+    #def delete(self, request, *args, **kwargs):
+    #    _id = request.data.get('enrollId', '-1')
+    #    enrollInst = enrolledProgramSession.objects.filter(id = _id).filter(user = request.user).delete()
+    #
+    #    Response(status=status.HTTP_200_OK)
+    #    Response("you can not delete this user.",status=status.HTTP_400_BAD_REQUEST)
+
 # ----------------------------------------------------
 class enrollSession(generics.GenericAPIView):
     """
@@ -198,3 +205,60 @@ class enrollInSession(View):
             messages.error(request, _('This program is not valid for enroll. Validation expired or no free spcae.'))
             return redirect(request.META.get('HTTP_REFERER'))
 # ----------------------------------------------------
+class enrollCourseClub(generics.GenericAPIView):
+    """
+    enroll session club
+    """
+    serializer_class = enrollCourseClubSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        """
+        Return list of all enrolled sessions for club (club permission)
+        clubid -- club id
+         """
+        enrollInst = enrolledProgramCourse.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
+        return Response(enrollProgramSerializer(enrollInst, many=True).data)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Enroll in a specific cell (anyone)
+        """
+        _course  = int(request.data.get('courseId', '-1'))
+        _first   = request.data.get('firstName', '')
+        _last    = request.data.get('lastName', '')
+        _email   = request.data.get('eMail', '')
+        _cellP   = request.data.get('cellPhone','')
+        _desc    = _first + ' ' + _last + "-" + _cellP
+
+        if _course == -1 or _first == '' or _last == '':
+            return Response('Input parameters are not valid !',status=status.HTTP_400_BAD_REQUEST)
+
+        courseInst = courseDefinition.objects.get(id = _course)
+        if courseInst.remainCapacity <= 0:
+            return Response("Session does not have enough space.",status=status.HTTP_400_BAD_REQUEST)
+
+        # email provide: user exist: enroll for user
+        # email provide: user not exist: create user and enroll for user
+        # email not provide: enroll with current user, add information to title
+        if _email:
+            UserModel = get_user_model()
+            try:
+                userInst = UserModel.objects.get(email = _email)
+            except UserModel.DoesNotExist:
+                userInst = UserModel.objects.create_user(UserModel.objects.count()+1, email = _email, first_name = _first, last_name = _last)
+                userProfile.objects.create(user = userInst, cellPhone = _cellP)
+                #send_approved_mail(request, userInst)
+                # todo est cellphone number
+            _user = userInst
+        else:
+            _user = self.request.user
+            pass
+
+        enrolledProgramCourse.objects.create(programDefinitionKey = courseInst,
+                                              amount = courseInst.price,
+                                              user = _user,
+                                              status = programDefinition.CONTENT_STATUS_ACTIVE,
+                                              title= _desc)
+
+        return Response("Done", status=status.HTTP_200_OK)

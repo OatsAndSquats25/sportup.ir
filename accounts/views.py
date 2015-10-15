@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View, DetailView, UpdateView
+from django.views.generic import View, DetailView, UpdateView, TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -14,6 +14,9 @@ import jdatetime
 from generic.email import approvedAccount, reserveFromDashboard, threee_days_later, newsletter, \
     changePassword  # ,clubSignUp, clubSignUpConfirm
 from generic.sms import SendOneMessage
+from enroll.models import enrolledProgram
+from agreement.models import agreement
+from directory.models import club
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -55,6 +58,26 @@ class dashboard(View):
             raise Http404
 
         return HttpResponse(clas().generate(request))
+
+
+# -----------------------------------------------------------------------
+class dashboardSelector(TemplateView):
+    def get_template_names(self):
+        if self.request.user.has_perm('accounts.club_owner'):
+            return 'dashboard/dashboardClub.html'
+        else:
+            return 'dashboard/dashboardUser.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(dashboardSelector, self).get_context_data()
+        if self.request.user.has_perm('accounts.club_owner'):
+            agreementInst = agreement.objects.filter(user = self.request.user)
+            context = {'object_list': agreementInst}
+        else:
+            enrollInst = enrolledProgram.objects.filter(user = self.request.user).exclude(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
+            context = {'object_list': enrollInst}
+        return context
+        # raise Http404
 
 
 # -----------------------------------------------------------------------
@@ -146,10 +169,11 @@ class emailTest(View):
     #    userAuth = User.objects.get(id = request.user.id)
     #    approvedAccount(request, userAuth)
     #    return HttpResponse("test email sent.")
-    def get(self,request):
-        userAuth = User.objects.get(id = request.user.id)
-        #inv = invoice.objects.filter(id = 3)
-        #reserveFromDashboard(request, userAuth, inv)
-        reserveClub(request, userAuth, enrolledProgram.programDefinitionKey.title)
-        # SendOneMessage(request, userAuth)
-        return HttpResponse("test email sent.")
+    def get(self, request):
+        userAuth = User.objects.get(id=request.user.id)
+        # changePassword(request, userAuth)
+        res = SendOneMessage("09123086945", "Salam from Sportup")
+        if res == 200:
+            return HttpResponse("test sms sent.")
+        else:
+            return HttpResponse("test sms has error." + str(res))

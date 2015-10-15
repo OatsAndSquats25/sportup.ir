@@ -166,8 +166,10 @@ class getCourses(generics.GenericAPIView):
     serializer_class = courseDefinitionSerializer
     def get(self, request, *args, **kwargs):
         """
+        list of club courses
+        pk  --  clubid
         """
-        id = self.kwargs['pk']
+        id = self.request.query_params.get('pk',0)
         try:
             # currentAgreement = agreement.objects.get(clubKey = id)
             currentAgreement = agreement.objects.active().get(clubKey = id)

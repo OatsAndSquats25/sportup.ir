@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-03 13:00+0430\n"
+"POT-Creation-Date: 2015-10-13 13:41+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: forms.py:33 forms.py:67
 msgid "Email"
-msgstr ""
+msgstr "ایمیل"
 
 #: forms.py:34 forms.py:68 templates/registration/login.html:40
 msgid "Password"
@@ -38,87 +38,122 @@ msgstr "نام خانوادگی"
 msgid "Email address exist."
 msgstr "آدرس ایمیل تکراری است"
 
-#: models.py:9
+#: models.py:8
 msgid "Photo"
 msgstr "تصویر"
 
-#: models.py:10
+#: models.py:9
 msgid "National Identity"
 msgstr "کدملی"
 
-#: models.py:11
+#: models.py:10
 msgid "Sport`s Insurance Number"
 msgstr "شماره بیمه ورزشی"
 
-#: models.py:12
+#: models.py:11
 msgid "Cell Phone"
 msgstr "تلفن همراه"
 
-#: models.py:12
+#: models.py:11
 msgid "example: 09121231234"
 msgstr "مثال: ۰۹۱۲۱۲۳۱۲۳۴"
 
-#: models.py:13
+#: models.py:12
 msgid "Landline"
 msgstr "تلفن ثابت"
 
-#: models.py:13
+#: models.py:12
 msgid "With area code - example: 02122334455"
 msgstr "همراه با کد شهر - مثال: ۰۲۱۲۲۳۳۴۴۵۵"
 
-#: models.py:14
+#: models.py:13
 msgid "Postal Code"
 msgstr "کدپستی ۱۰ رقمی"
 
-#: models.py:15
+#: models.py:14
 msgid "Address"
 msgstr "آدرس"
 
-#: templates/accounts/login-register.html:11
-msgid "Your username and password didn't match. Please try again."
-msgstr "نام کاربری و رمز عبور صحیح نمی باشد. مجددا تلاش کنید."
+#: templates/accounts/profile_update.html:40
+msgid "Profile"
+msgstr "پروفایل"
 
-#: templates/accounts/login-register.html:18
-msgid "You have error in register form."
-msgstr "شما در اطلاعات ثبت نام مشکل دارید."
-
-#: templates/accounts/login-register.html:35
-msgid "You are already loggin in"
-msgstr "شما قبلا وارد شده اید"
-
-#: templates/accounts/login-register.html:42
-#: templates/accounts/login-register.html:50
-#: templates/registration/login.html:30 templates/registration/login.html:46
-msgid "Sign In"
-msgstr "ورود"
-
-#: templates/accounts/login-register.html:54
-#: templates/registration/login.html:45
-msgid "Lost your password?"
-msgstr "رمز عبور خود را فراموش کرده اید؟"
-
-#: templates/accounts/login-register.html:58
-#: templates/registration/registration_form.html:14
-msgid "Register"
-msgstr "ثبت نام"
-
-#: templates/accounts/login-register.html:66
-#: templates/registration/registration_form.html:43
-msgid "Create an Account"
-msgstr "ثبت نام"
-
-#: templates/accounts/profile_update.html:12
+#: templates/accounts/profile_update.html:50
 msgid "Update"
 msgstr "بروزرسانی"
 
-#: templates/dashboard/dashboard.html:16
-#: templates/registration/dashboard.html:15
-msgid "Navigation"
+#: templates/dashboard/dashboardUser.html:7
+msgid "Enrolled list"
+msgstr "لیست ثبت نام"
+
+#: templates/dashboard/dashboardUser.html:12
+msgid "Complex"
+msgstr "مجموعه"
+
+#: templates/dashboard/dashboardUser.html:13
+msgid "Program"
+msgstr "برنامه"
+
+#: templates/dashboard/dashboardUser.html:16
+msgid "Status"
+msgstr ".ضعیت"
+
+#: templates/dashboard/dashboardUser.html:17
+msgid "Invoice"
 msgstr ""
+
+#: templates/dashboard/dashboardUser.html:18
+msgid "Reference Number"
+msgstr "شماره پیگیری"
+
+#: templates/dashboard/dashboardUser.html:19
+msgid "Receipt"
+msgstr "رسید"
+
+#: templates/dashboard/dashboardUser.html:37
+msgid "Active"
+msgstr ""
+
+#: templates/dashboard/dashboardUser.html:39
+msgid "Inactive"
+msgstr ""
+
+#: templates/dashboard/dashboardUser.html:43
+msgid "Print"
+msgstr "چاپ"
 
 #: templates/dashboard/homepage.html:5
 msgid "Dashboard Home Page"
 msgstr ""
+
+#: templates/registration/dashboard.html:15
+msgid "Navigation"
+msgstr ""
+
+#: templates/registration/login-register.html:34
+#: templates/registration/login-register.html:63
+#: templates/registration/login-register.html:73
+#: templates/registration/login.html:30 templates/registration/login.html:46
+msgid "Sign In"
+msgstr "ورود"
+
+#: templates/registration/login-register.html:43
+msgid "Your username and password didn't match. Please try again."
+msgstr "نام کاربری و رمز عبور صحیح نمی باشد. مجددا تلاش کنید."
+
+#: templates/registration/login-register.html:55
+msgid "You are already loggin in"
+msgstr "شما قبلا وارد شده اید"
+
+#: templates/registration/login-register.html:70
+#: templates/registration/login.html:45
+msgid "Lost your password?"
+msgstr "رمز عبور خود را فراموش کرده اید؟"
+
+#: templates/registration/login-register.html:82
+#: templates/registration/registration_form.html:14
+msgid "Register"
+msgstr "ثبت نام"
 
 #: templates/registration/login.html:10
 msgid "Your username and password didn't match. Please try again"
@@ -128,13 +163,9 @@ msgstr "نام کاربری و رمز عبور صحیح نمی باشد. مجد�
 msgid "Username"
 msgstr "نام کاربری"
 
-#: templates/registration/password_reset_form.html:10
-msgid "Password reset"
-msgstr "رمز مجدد"
-
-#: templates/registration/password_reset_form.html:19
-msgid "Reset my password"
-msgstr "ایجاد رمز مجدد"
+#: templates/registration/registration_form.html:43
+msgid "Create an Account"
+msgstr "ثبت نام"
 
 #: templates/registration/registration_form.html:49
 msgid ""
@@ -142,35 +173,26 @@ msgid ""
 "\"terms-conditions.html\" class=\"link\">Terms and conditions</a>"
 msgstr ""
 
-#: views.py:82
+#: views.py:112
 msgid "Your profile updated successfully."
 msgstr "پروفایل شما با موفقت بروز رسانی گردید"
 
-#: views.py:104
+#: views.py:139
 msgid "Logged in successfully"
 msgstr "با موفقیت وارد شدید."
 
-#: views.py:107
+#: views.py:142
 msgid "Your account has been disabled. Please contact info@sportup.ir"
 msgstr "حساب شما غیرفعال است. لطفا با info@sportup.ir ارتباط برقرار کنید."
 
-#: views.py:109
+#: views.py:144
 msgid "email or password is not correct."
 msgstr "ایمیل یا رمز معتبر نمی‌باشد"
 
-#: views.py:119
+#: views.py:157
 msgid "Register successfully"
 msgstr "شما با موفقیت ثبت نام کردید."
 
-#, fuzzy
-#~| msgid "first name"
-#~ msgid "First Name"
-#~ msgstr "نام"
-
-#, fuzzy
-#~| msgid "last name"
-#~ msgid "Last Name"
-#~ msgstr "نام خانوادگی"
-
-#~ msgid "You are successfuly registered."
-#~ msgstr "شما با موفقیت ثبت نام کردید"
+#: views.py:160
+msgid "Email address exist. Please try another email address."
+msgstr ""

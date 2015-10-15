@@ -1,0 +1,281 @@
+{% load i18n static %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+<head>
+	<meta charset="UTF-8">
+	<meta name="csrf-token" content="{{ csrf_token }}">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" type="text/css">
+	<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" type="text/css">
+	<link rel="stylesheet" href="{% static "css/fonts.css" %}" type="text/css">
+	<link rel="stylesheet" href="{% static "css/dashboard.css" %}" type="text/css">
+</head>
+<body>
+	<div id="loading">
+		<div id="loading-a">در حال بارگذاری</div>
+	</div>
+
+	<div id="overlay"></div>
+
+	<header>
+		<div id="menu-btn">
+			<img src="{% static "img/logo2.png" %}" alt="" height="40">
+		</div>
+		
+		<a href="#" class="user-actions-holder">
+			<i class="fa fa-lock"></i>
+		</a>
+		<a href="#" class="user-actions-holder">
+			<i class="fa fa-user"></i>
+		</a>
+	</header>
+
+	<nav>
+		<a href="#dashboard" id="dashboard" class="menu-item">
+			<i class="fa fa-home"></i>
+			<br>
+			خانه
+		</a>
+		<a href="#courses" id="courses" class="menu-item">
+			<i class="fa fa-list-alt"></i>
+			<br>
+			دوره ها
+		</a>
+		<a href="#sessions" id="sessions" class="menu-item">
+			<i class="fa fa-table"></i>
+			<br>
+			جلسه ها
+		</a>
+		<a href="#contracts" id="contracts" class="menu-item">
+			<i class="fa fa-file-text"></i>
+			<br>
+			قرارداد ها
+		</a>
+	</nav>
+
+	<div id="content"></div>
+
+	<div class="modal fade bs-example-modal-lg" id="sessionModal" tabindex="-1" role="dialog" aria-labelledby="sessionModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" >لیست ثبت نام</h4>
+				</div>
+				<div class="modal-body table-responsive" id="modalBody">
+					<table class="table table-bordered" id="eachSessionRegList"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="courseModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" >لیست ثبت نام</h4>
+				</div>
+				<div class="modal-body table-responsive" id="modalBody">
+					<table class="table table-bordered" id="eachCourseRegList"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Contracts -->
+	<script type="text/template" id="contracts-item-template">
+		<tr>
+			<td><%= title %></td>
+			<td><%= clubKey %></td>
+			<td><%= agreementStatus %></td>
+			<td><%= beginTime %></td>
+			<td><%= endTime %></td>
+		</tr>
+	</script>
+	<script type="text/template" id="contracts-template">
+		<div class="panel panel-default table-responsive">
+			<div class="panel-body">
+				<h3 class="panel-title">قرارداد ها</h3>
+				<table class="table table-bordered" id="contracts-table">
+					<tr>
+						<th>عنوان</th>
+						<th>نام باشگاه</th>
+						<th>وضعیت</th>
+						<th>تاریخ شروع</th>
+						<th>تاریخ پایان</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</script>
+
+	<!-- Courses -->
+
+	<script type="text/template" id="each-course-attendance-template">
+		<tr id="<%= id %>">
+			<td><%= status %></td>
+			<td><%= firstname %></td>
+			<td><%= lastname %></td>
+			<td></td>
+			<td></td>
+			<td>
+				<button class="btn btn-danger btn-sm courseRegListdelete">
+					<i class="fa fa-trash-o"></i>
+				</button>
+			</td>
+		</tr>
+	</script>
+
+	<script type="text/template" id="course-item-template">
+		<tr id="<%= id %>">
+			<td><%= clubKey %></td>
+			<td><%= title %></td>
+			<td><%= maxCapacity %></td>
+			<td><%= remainCapacity %></td>
+			<td>ندارد!</td>
+			<td><%= usageBeginDate %></td>
+			<td><%= usageEndDate %></td>
+			<td>ندارد!</td>
+			<td>ندارد!</td>
+			<td>
+				<button class="btn btn-info course-list">
+					<i class="fa fa-pencil-square-o"></i>
+				</button>
+			</td>
+		</tr>
+	</script>
+	<script type="text/template" id="course-template">
+		<div class="panel panel-default table-responsive">
+			<div class="panel-body">
+				<h3 class="panel-title">دوره ها</h3>
+				<table class="table table-bordered" id="course-table">
+					<tr>
+						<th>نام مجموعه</th>
+						<th>نام برنامه</th>
+						<th>ظرفیت کل</th>
+						<th>ظرفیت باقیمانده</th>
+						<th>روز برنامه</th>
+						<th>تاریخ شروع</th>
+						<th>تاریخ پایان</th>
+						<th>ساعت شروع</th>
+						<th>ساعت پایان</th>
+						<th>لیست ثبت نام</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</script>
+
+	<!-- Sessions -->
+	<script type="text/template" id="sessions-template">
+		<div class="panel panel-default table-responsive">
+			<div class="panel-body" style="position:relative;">
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active">
+						<a href="#session-tab" aria-controls="session-tab" role="tab" data-toggle="tab">جلسه ها</a>
+					</li>
+					<li role="presentation">
+						<a href="#session-attendance" aria-controls="session-attendance" role="tab" data-toggle="tab">حضور و غیاب</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="session-tab">
+
+						<div id="change-week">
+							<div id="next-week">
+								هفته بعد
+								<i class="fa fa-angle-left"></i>
+							</div>
+							<div id="prev-week">
+								<i class="fa fa-angle-right"></i>
+								هفته قبل
+							</div>
+						</div>
+
+						<table class="table table-bordered" id="session-table"></table>
+
+						<div id="sessions-wrapper">
+							<div id="sessions-holder"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="session-attendance">
+						
+						<table class="table table-bordered" id="attendance-table">
+							<tr>
+								<th>حاضر</th>
+								<th>نام</th>
+								<th>نام خانوادگی</th>
+								<th>تلفن</th>
+								<th>توضیحات</th>
+								<th>ساعت شروع</th>
+								<th>ساعت ‍پایان</th>
+							</tr>
+						</table>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</script>
+	
+	<script type="text/template" id="sessions-item-template">
+		<div class="session"<<noclick>>id="<<id>>" style="top:<<top>>;right:<<right>>;height:<<height>>;line-height:<<height>>;background-color:<<backgroundColor>>;" data-container="body" data-trigger="hover" <<title>> data-toggle="popover" data-placement="right" <<popUpContent>> >
+			<<price>> ریال
+		</div>
+	</script>
+		
+	<script type="text/template" id="each-session-attendance-template">
+		<tr id="<%= id %>">
+			<td><%= firstname %></td>
+			<td><%= lastname %></td>
+			<td></td>
+			<td></td>
+			<td>
+				<button class="btn btn-danger btn-sm sessionRegListdelete">
+					<i class="fa fa-trash-o"></i>
+				</button>
+			</td>
+		</tr>
+	</script>
+
+	<script type="text/template" id="session-attendance-template">
+		<tr id="<%= id %>">
+			<td>
+				<%= status %>
+			</td>
+			<td><%= firstname %></td>
+			<td><%= lastname %></td>
+			<td></td>
+			<td><%= title %></td>
+			<td><%= sessionTimeBegin %></td>
+			<td><%= sessionTimeEnd %></td>
+		</tr>
+	</script>
+	<script type="text/javascript" src="{% static "js/libs/jquery.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/libs/underscore.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/libs/date.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/libs/bootstrap.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/jalali/index.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/data.js" %}"></script>
+	<script>
+		BASEURL = "{{ request.get_host }}";
+		CLUBS = [
+		{% for object in object_list %}
+			{"title": "{{ object.clubKey.title }}", "id": "{{ object.clubKey.id }}" },
+		{% endfor %}
+		];		
+	</script>	
+
+	<script type="text/javascript" src="{% static "js/dashboard.js" %}"></script>
+	<script>
+		dashboard.init();
+	</script>
+</body>
+</html>
