@@ -594,6 +594,7 @@
 					self.clubId = res.id;
 					self.setTitle(res.complexName);
 
+					$('.logo-image').attr('src', res.logo);
 					$('#club-title').html(res.complexName);
 					$('#club-address').html(res.locationAddress[0].address);
 					$('#club-phone').html(res.phone + ' | ' + res.cell);
