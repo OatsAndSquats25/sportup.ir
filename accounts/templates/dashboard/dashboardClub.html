@@ -20,7 +20,7 @@
 
 	<header>
 		<div id="menu-btn">
-			<img src="{% static "img/logo2.png" %}" alt="" height="40">
+			<a href="http://{{ request.get_host }}"><img src="{% static "img/logo2.png" %}" alt="" height="40"></a>
 		</div>
 		
 		<a href="#" class="user-actions-holder">
@@ -133,11 +133,11 @@
 			<td><%= title %></td>
 			<td><%= maxCapacity %></td>
 			<td><%= remainCapacity %></td>
-			<td>ندارد!</td>
+			<td><%= genderLimit %></td>
 			<td><%= usageBeginDate %></td>
 			<td><%= usageEndDate %></td>
-			<td>ندارد!</td>
-			<td>ندارد!</td>
+{#			<td>ندارد!</td>#}
+{#			<td>ندارد!</td>#}
 			<td>
 				<button class="btn btn-info course-list">
 					<i class="fa fa-pencil-square-o"></i>
@@ -155,11 +155,11 @@
 						<th>نام برنامه</th>
 						<th>ظرفیت کل</th>
 						<th>ظرفیت باقیمانده</th>
-						<th>روز برنامه</th>
+						<th>جنسیت</th>
 						<th>تاریخ شروع</th>
 						<th>تاریخ پایان</th>
 						<th>ساعت شروع</th>
-						<th>ساعت پایان</th>
+{#						<th>ساعت پایان</th>#}
 						<th>لیست ثبت نام</th>
 					</tr>
 				</table>
