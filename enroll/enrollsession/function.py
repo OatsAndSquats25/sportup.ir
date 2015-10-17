@@ -16,13 +16,14 @@ def enrollSessionFunction(request):
             return False
         if cell[0].capacity <= 0:
             return False
-
+        _desc    = request.user.get_full_name()
         prginst = programDefinition.objects.get(id = cell[0].prgid)
         enrolledProgramSession.objects.create(programDefinitionKey = prginst,
                                               amount = cell[0].price,
                                               date = cell[0].date,
                                               sessionTimeBegin = cell[0].begin,
                                               sessionTimeEnd = cell[0].end,
-                                              user = request.user)
+                                              user = request.user,
+                                              title = _desc)
 
         return True

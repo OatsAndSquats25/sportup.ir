@@ -175,14 +175,15 @@ class enrollSession(generics.GenericAPIView):
             return Response("No cell exist.",status=status.HTTP_400_BAD_REQUEST)
         if cell[0].capacity <= 0:
             return Response("Session does not have enough space.",status=status.HTTP_400_BAD_REQUEST)
-
+        _desc    = request.user.get_full_name()
         prginst = programDefinition.objects.get(id = cell[0].prgid)
         enrolledProgramSession.objects.create(programDefinitionKey = prginst,
                                               amount = cell[0].price,
                                               date = cell[0].date,
                                               sessionTimeBegin = cell[0].begin,
                                               sessionTimeEnd = cell[0].end,
-                                              user = self.request.user)
+                                              user = self.request.user,
+                                              title = _desc)
 
         return Response("Done", status=status.HTTP_200_OK)
 # ----------------------------------------------------
@@ -218,9 +219,10 @@ class enrollCourseClub(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         """
         Return list of all enrolled sessions for club (club permission)
-        clubid -- club id
+        clubId -- club id
+        courseId -- course id
          """
-        enrollInst = enrolledProgramCourse.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__clubKey = self.request.GET.get('clubid')).select_related('user')
+        enrollInst = enrolledProgramCourse.objects.filter(status = enrolledProgramSession.CONTENT_STATUS_ACTIVE).filter(programDefinitionKey__id = self.request.GET.get('courseId')).select_related('user')
         return Response(enrollProgramSerializer(enrollInst, many=True).data)
 
     def post(self, request, *args, **kwargs):
@@ -240,7 +242,8 @@ class enrollCourseClub(generics.GenericAPIView):
         courseInst = courseDefinition.objects.get(id = _course)
         if courseInst.remainCapacity <= 0:
             return Response("Session does not have enough space.",status=status.HTTP_400_BAD_REQUEST)
-
+        courseInst.remainCapacity -= 1
+        courseInst.save()
         # email provide: user exist: enroll for user
         # email provide: user not exist: create user and enroll for user
         # email not provide: enroll with current user, add information to title
