@@ -20,7 +20,7 @@
 
 	<header>
 		<div id="menu-btn">
-			<img src="{% static "img/logo2.png" %}" alt="" height="40">
+			<a href="http://{{ request.get_host }}"><img src="{% static "img/logo2.png" %}" alt="" height="40"></a>
 		</div>
 		
 		<a href="#" class="user-actions-holder">
@@ -159,7 +159,7 @@
 						<th>جنسیت</th>
 						<th>تاریخ شروع</th>
 						<th>تاریخ پایان</th>
-{#						<th>ساعت شروع</th>#}
+						<th>ساعت شروع</th>
 {#						<th>ساعت پایان</th>#}
 						<th>لیست ثبت نام</th>
 					</tr>
