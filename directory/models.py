@@ -141,7 +141,8 @@ class club(Displayable):
         return self.contact_set
 
     def __unicode__(self):
-        return self.locationKey.complexKey.title + ":" + self.locationKey.title + ":" + self.title
+        return self.locationKey.complexKey.title + ":" + self.title
+        # return self.locationKey.complexKey.title + ":" + self.locationKey.title + ":" + self.title
 # -------------------------------------------------------------------------------
 class imageCollection(models.Model):
     title       = models.CharField(_("Title"), max_length= 200)
