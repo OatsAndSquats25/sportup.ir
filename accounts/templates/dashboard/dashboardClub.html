@@ -116,8 +116,7 @@
 	<script type="text/template" id="each-course-attendance-template">
 		<tr id="<%= id %>">
 			<td><%= status %></td>
-			<td><%= firstname %></td>
-			<td><%= lastname %></td>
+			<td colspan="2"><%= title %></td>
 			<td></td>
 			<td></td>
 			<td>
@@ -227,14 +226,13 @@
 	
 	<script type="text/template" id="sessions-item-template">
 		<div class="session"<<noclick>>id="<<id>>" style="top:<<top>>;right:<<right>>;height:<<height>>;line-height:<<height>>;background-color:<<backgroundColor>>;" data-container="body" data-trigger="hover" <<title>> data-toggle="popover" data-placement="right" <<popUpContent>> >
-			<<price>> ریال
+			<<capacity>> نفر
 		</div>
 	</script>
 		
 	<script type="text/template" id="each-session-attendance-template">
 		<tr id="<%= id %>">
-			<td><%= firstname %></td>
-			<td><%= lastname %></td>
+			<td colspan="2"><%= title %></td>
 			<td></td>
 			<td></td>
 			<td>
@@ -250,8 +248,7 @@
 			<td>
 				<%= status %>
 			</td>
-			<td><%= firstname %></td>
-			<td><%= lastname %></td>
+			<td colspan="2"><%= title %></td>
 			<td></td>
 			<td><%= title %></td>
 			<td><%= sessionTimeBegin %></td>

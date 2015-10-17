@@ -109,6 +109,7 @@
 				url : '/api/course/',
 				data : { pk : self.clubID }, 
 				success : function(res) {
+                    console.log(res)
 					courseListItems = _.template($('#course-item-template').html());
 
 					_.each(res , function(eachModel){
@@ -126,12 +127,12 @@
 			$.ajax({
 				url : '/api/enroll/course/club/0/',
 				data : {
-					clubid : self.clubID
+                    courseId : self.courseID
 				},
 				type : 'GET',
 				cache : false,
 				success : function(res) {
-					console.log(res);
+                    console.log(res)
 					$('#eachCourseRegList').html('<tr><th>خاضر</th><th>نام</th><th>نام خانوادگی</th><th>ایمیل</th><th>تلفن</th><th>حذف</th></tr><tr><td></td><td><input type="text" class="edit" id="firstname" name="firstname"></td><td><input type="text" class="edit" name="lastname" id="lastname"></td><td><input type="text" class="edit" name="email" id="email"></td><td><input type="text" class="edit" name="telephone" id="telephone"></td><td><button class="btn btn-sm btn-success courseRegListadd"><i class="fa fa-plus"></i></button></td></tr>');
 
 					var template = _.template( $('#each-course-attendance-template').html() );
@@ -157,7 +158,9 @@
 			var lastnameVal = tr.find('#lastname').val();
 			var emailVal = tr.find('#email').val();
 			var telephoneVal = tr.find('#telephone').val();
+            var status = self.detectStatus(false);
 
+            console.log(status)
 			if(firstnameVal  != '' && lastnameVal  != ''){
 				if (!self.validateEmail('email', emailVal) && emailVal != '') {
 					alert('ایمیل شما صحیح نمی باشد!');
@@ -183,13 +186,15 @@
 						};
 					},
 					success : function(res) {
-						$('<tr id="'+ res +'"><td>'+ firstnameVal +'</td><td>'+ lastnameVal +'</td><td>'+ emailVal +'</td><td>'+ telephoneVal +'</td><td><button class="btn btn-danger btn-sm sessionRegListdelete"><i class="fa fa-trash-o"></i></button></td></tr>').insertAfter('#eachCourseRegList tbody');
+                        console.log(res)
+						$('<tr id="'+ res +'"><td>' + status.status + '</td><td colspan="2">'+ firstnameVal +' '+ lastnameVal +'</td><td>'+ emailVal +'</td><td>'+ telephoneVal +'</td><td><button class="btn btn-danger btn-sm sessionRegListdelete"><i class="fa fa-trash-o"></i></button></td></tr>').insertAfter('#eachCourseRegList tbody');
 						tr.find('#firstname').val('');
 						tr.find('#lastname').val('');
 						tr.find('#email').val('');
 						tr.find('#telephone').val('');
 
 						$('.sessionRegListdelete').click(self.deleteItem);
+					    $('.present-btn').click( self.approvePresent );
 					}
 				});
 			}
@@ -294,6 +299,7 @@
 		},
 
 		hiddenSession : function () {
+            console.log(self.flagModifySessionList);
 			if (self.flagModifySessionList) {
 				self.getSessions(self.week);
 				self.sessionAttendanceList();
@@ -335,8 +341,7 @@
 
 		approvePresent : function () {
 			var item = $(this);
-			var id = $(this).parent().parent().attr("id");
-
+            var id = $(this).parent().parent().attr('id');
 			$.ajax({
 				url : '/api/access/',
 				type : 'POST',
@@ -406,7 +411,7 @@
 					success : function(res) {
 
 						self.flagModifySessionList = 1;
-						$('<tr id="'+ res +'"><td>'+ firstnameVal +'</td><td>'+ lastnameVal +'</td><td>'+ emailVal +'</td><td>'+ telephoneVal +'</td><td><button class="btn btn-danger btn-sm sessionRegListdelete"><i class="fa fa-trash-o"></i></button></td></tr>').insertAfter('#eachSessionRegList tbody');
+						$('<tr id="'+ res +'"><td colspan="2">'+ firstnameVal +' '+ lastnameVal +'</td><td>'+ emailVal +'</td><td>'+ telephoneVal +'</td><td><button class="btn btn-danger btn-sm sessionRegListdelete"><i class="fa fa-trash-o"></i></button></td></tr>').insertAfter('#eachSessionRegList tbody');
 						tr.find('#firstname').val('');
 						tr.find('#lastname').val('');
 						tr.find('#email').val('');
@@ -436,7 +441,7 @@
 					type : 'DELETE',
 					cache : false,
 					success : function() {
-						self.flagModifySessionList = 1;
+                        self.flagModifySessionList = 1;
 						self.parent().parent().remove();
 					}
 				});
@@ -556,7 +561,7 @@
 		//
 		goToAttendance : function () {
 
-		},
+		}
 
 	}
 
