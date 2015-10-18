@@ -9,7 +9,7 @@ from managers import DisplayableManager
 # -------------------------------------------------------------------------------------
 class Ownable(models.Model):
     # user = models.ForeignKey(get_user_model(), verbose_name=_("Owner"))
-    user = models.ForeignKey(User, verbose_name=_("Owner"))
+    user = models.ForeignKey(User, verbose_name=_("Owner"), default=1)
 
     class Meta:
         abstract = True
