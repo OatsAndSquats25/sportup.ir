@@ -1,0 +1,5 @@
+{% extends "sms/smsbase.txt" %}
+{% load i18n generic_tags%}
+{% block main %}
+{{ request.user.get_full_name }} در برنامه {{ enroll }} به تاریخ {{ enroll.date|g2j }} و ساعت {{ enroll.sessionTimeBegin }} ثبت نام کرد.
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "sms/smsbase.txt" %}
+{% load i18n  %}
+{% block main %}
+{{ request.user.get_full_name }} در برنامه {{ enroll }} ثبت نام کرد.
+{% endblock %}
