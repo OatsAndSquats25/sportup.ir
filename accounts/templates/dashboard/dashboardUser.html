@@ -13,7 +13,7 @@
                 <th>{% trans "Program" %}</th>
 {#                <th>{% trans "Amount" %}</th>#}
 {#                <th>{% trans "Status" %}</th>#}
-                <th>{% trans "Status" %}</th>
+{#                <th>{% trans "Status" %}</th>#}
                 <th>{% trans "Invoice" %}</th>
                 <th>{% trans "Reference Number" %}</th>
                 <th>{% trans "Receipt" %}</th>
@@ -24,7 +24,7 @@
             {% for item in object_list %}
                 <tr>
 {#                    <td>{{ item.user.email }}</td>#}
-                    <td>{{ item.programDefinitionKey.agreementKey.clubKey.title }}</td>
+                    <td>{{ item.programDefinitionKey.agreementKey.clubKey }}</td>
                     <td>{{ item.programDefinitionKey.title }}</td>
 {#                    <td>{{ item.amount }}</td>#}
 {#                    {% if item.status == 3 %}#}
@@ -33,11 +33,11 @@
 {#                        <td style="color: red">#}
 {#                    {% endif %}#}
 {#                    {{ item.get_status_display }}</td>#}
-                    {% if item.isValid %}
-                        <td style="color: green">{% trans "Active" %}</td>
-                    {% else %}
-                        <td style="color: red">{% trans "Inactive" %}</td>
-                    {% endif %}
+{#                    {% if item.isValid %}#}
+{#                        <td style="color: green">{% trans "Active" %}</td>#}
+{#                    {% else %}#}
+{#                        <td style="color: red">{% trans "Inactive" %}</td>#}
+{#                    {% endif %}#}
                     <td>{{ item.invoiceKey.context }}</td>
                     <td>{{ item.referenceNumber }}</td>
                     <td><a href="#{{ item.id }}">{% trans "Print" %}</a></td>
