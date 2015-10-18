@@ -1,5 +1,5 @@
 from django import template
-from datetime import datetime, time
+from datetime import datetime, time, date
 import jdatetime
 
 
@@ -11,6 +11,8 @@ def g2j(gregorian):
         return jdatetime.date.fromgregorian(date=gregorian)
     elif isinstance(gregorian, datetime):
         return jdatetime.date.fromgregorian(date=gregorian.date())
+    elif isinstance(gregorian, date):
+        return jdatetime.date.fromgregorian(date=gregorian)
     else:
         return gregorian
 # -----------------------------------------------------------------------
