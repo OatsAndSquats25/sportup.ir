@@ -640,11 +640,11 @@
 
 		getCourse : function (clubId) {
 			$.ajax({
-				url : BASEURL + '/api/course/' + clubId + '/',
+				url : BASEURL + '/api/course/',
 				type : 'GET',
-				//data : {
-				//	pk : clubId
-				//},
+				data : {
+					pk : clubId
+				},
 				cache : false,
 				error : function (xhr,status,error) {
 					self.config.program1.hide();
