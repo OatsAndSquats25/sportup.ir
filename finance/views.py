@@ -6,6 +6,7 @@ from django.db.models import Sum
 from django.shortcuts import redirect
 from django.http import Http404
 
+from generic import email,sms
 from enroll.models import enrolledProgram
 
 from payment import testPay,payline,paylineTest
@@ -69,6 +70,8 @@ def paymentRes(request, *args, **kwargs):
     if payRes['status'] == True :
         invoicePayed(payRes['invoiceId'])
         messages.success(request, _("Payment was successful."))
+        sms.reservedByAthlete(request, payRes['invoiceId'])
+        # email.reservedByAthlete(request, payRes['invoiceId']) #todo
         return reverse('dashboard')
     else:
         invoiceError(payRes['invoiceId'])
