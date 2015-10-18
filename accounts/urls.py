@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
 
-from views import dashboard, profileUpdate, loginRegister, emailTest, dashboardSelector
+from views import dashboard, profileUpdate, loginRegister, emailTest, smsTest, dashboardSelector
 
 urlpatterns = patterns('',
 
@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     # url(r'^', include('registration.backends.simple.urls')),
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^email/$', login_required(emailTest.as_view()), name='emailURL'),
+    url(r'^sms/$', login_required(smsTest.as_view()), name='smsURL'),
 )

@@ -11,9 +11,8 @@ from django.contrib.contenttypes.models import ContentType
 import importlib
 import jdatetime
 
-from generic.email import approvedAccount, reserveFromDashboard, threee_days_later, newsletter, \
-    changePassword  # ,clubSignUp, clubSignUpConfirm
-from generic.sms import SendOneMessage
+from generic import email
+from generic import sms
 from enroll.models import enrolledProgram
 from agreement.models import agreement
 from directory.models import club
@@ -171,9 +170,19 @@ class emailTest(View):
     #    return HttpResponse("test email sent.")
     def get(self, request):
         userAuth = User.objects.get(id=request.user.id)
-        # changePassword(request, userAuth)
-        res = SendOneMessage("09123086945", "Salam from Sportup")
+        res = email.changePassword(request, userAuth)
+        if res == 200:
+            return HttpResponse("test email sent.")
+        else:
+            return HttpResponse("test email has error." + str(res))
+# -----------------------------------------------------------------------
+class smsTest(View):
+    def get(self, request):
+        userAuth = User.objects.get(id=request.user.id)
+        # res = sms.SendOneMessage("09123086945", "Salam from Sportup")
+        res = sms.reservedByAthlete(request, userAuth, "09123086945",)
         if res == 200:
             return HttpResponse("test sms sent.")
         else:
             return HttpResponse("test sms has error." + str(res))
+# -----------------------------------------------------------------------
