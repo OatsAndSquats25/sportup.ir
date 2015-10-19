@@ -94,7 +94,7 @@ INSTALLED_APPS = (
     'enroll',
     'finance',
     'access',
-    #'suds',
+    'credit',
 )
 
 MIDDLEWARE_CLASSES = (

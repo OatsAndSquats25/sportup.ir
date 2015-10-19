@@ -33,6 +33,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
     url(r'^pages/', include("flatpages.urls")),
+    url(r'^credit/', include("credit.urls")),
     url(r'^accounts/', include("accounts.urls")),
     url(r'^enroll/', include("enroll.urls")),
     url(r'^checkout/', include("finance.urls")),

@@ -315,7 +315,7 @@
 				type : 'GET',
 				cache : false,
 				success : function(res) {
-					$('#attendance-table').html('<tr><th>حاضر</th><th>نام</th><th>نام خانوادگی</th><th>تلفن</th><th>توضیحات</th><th>ساعت شروع</th><th>ساعت ‍پایان</th></tr>');
+					$('#attendance-table').html('<tr><th>حاضر</th><th>نام و نام خانوادگی</th><th>تلفن</th><th>ساعت شروع</th><th>ساعت ‍پایان</th></tr>');
 					var template =  _.template($('#session-attendance-template').html());
 
 					res.forEach(function(item){

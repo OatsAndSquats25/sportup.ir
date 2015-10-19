@@ -14,6 +14,17 @@
 {#{% endblock %}#}
 
 {% block main %}
+
+    	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		    <div class="modal-dialog">
+	            <div class="modal-content" width ="200px">
+                    <a href="/search#genre=1">
+                        <img src={% static "img/tenis-toop.png" %} alt="" width="100%">
+                    </a>
+	        	</div>
+	        </div>
+	    </div>
+
 	<section id="about-user">
 		<div class="container">
 			<div class="row">
@@ -234,4 +245,9 @@
 			newsLetterHolder : $('#news-letter-holder')
 		});
 	</script>
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('#myModal').modal('show');
+        });
+    </script>
 {% endblock %}
