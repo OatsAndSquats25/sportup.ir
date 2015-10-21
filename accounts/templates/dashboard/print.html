@@ -1,9 +1,11 @@
 {% load i18n static generic_tags%}
     <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "css/fonts.css" %}>
+<link rel="stylesheet" href={% static "css/home.css" %}>
     <style>
-
             #mydiv {
                 display: block;
+                font-family: Iransan;
             }
             footer {
                 display: none;
@@ -43,6 +45,10 @@
             .header {
                 height: 100px;
             }
+            .phone {
+                direction: ltr;
+                text-align: right;
+            }
 
     </style>
 
@@ -50,7 +56,7 @@
 {#{% for object in object_list %}#}
 {#       {% if object.id == printedItemId %}#}
    <h3>
-      فرم خرید از وبسایت اسپرتآپ
+      فرم خرید از وب سایت اسپرتآپ
    </h3>
 
    <div class="row">
@@ -60,7 +66,7 @@
             سلام دوست اسپرتآپی عزیز
              </br>
              درخواست شما برای استفاده از مجموعه‌ی
-             {{ object.clubName }}
+             {{ object.programDefinitionKey.clubKey.title }}
              ثبت گردید. از علاقه‌مندی به ورزش و اعتماد شما سپاسگزاریم
          </div>
          <div class="panel panel-default">
@@ -84,7 +90,7 @@
                            </td>
                            <td colspan="4">
                                کد سفارش:
-                               {{ object.id }}
+                               {{ object.referenceNumber }}
                            </td>
                         </tr>
                         <tr>
@@ -98,22 +104,24 @@
                         </tr>
                         <tr>
                            <td>شماره تماس</td>
-                           <td colspan="4">{{ object.programDefinitionKey.clubKey.phone }}</td>
+                           <td colspan="4" class="phone">{{ object.programDefinitionKey.clubKey.phone }}</td>
                         </tr>
                         <tr>
-                           <td rowspan="2" class="main">توضیحات خرید</td>
+                           <td rowspan="3" class="main">توضیحات خرید</td>
                            <td>نام برنامه</td>
                            <td>تاریخ استفاده</td>
                            <td>زمان استفاده</td>
                            <td>قیمت</td>
-                           <td>توضیحات</td>
                         </tr>
                         <tr>
                            <td>{{ object.programDefinitionKey.title }}</td>
                            <td>{{ object.programDefinitionKey.publish_date | g2j }}</td>
                            <td>{{ object.programDefinitionKey.publish_date.time}}</td>
                            <td>{{ object.amount }}</td>
-                           <td>{{ object.programDefinitionKey.brief }}</td>
+                        </tr>
+                        <tr>
+                           <td>توضیحات</td>
+                           <td colspan="4">{{ object.programDefinitionKey.brief }}</td>
                         </tr>
                         <tr>
                            <td rowspan="2" class="main">خریدار</td>
@@ -122,7 +130,7 @@
                         </tr>
                         <tr>
                            <td>تلفن</td>
-                           <td colspan="5">{{ user.cellPhone }}</td>
+                           <td colspan="5" class="phone">{{ user.cellPhone }}</td>
                         </tr>
                      </tbody>
                   </table>
