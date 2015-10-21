@@ -1,0 +1,145 @@
+{% load i18n static generic_tags%}
+    <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <style>
+
+            #mydiv {
+                display: block;
+            }
+            footer {
+                display: none;
+            }
+            .main {
+                 width: 25%;
+                 text-align: center;
+                 background-color: rgb(77, 106, 253);
+            }
+            h3 {
+                margin: 20px;
+            }
+            tr {
+                height: 50px;
+            }
+            .panel {
+                margin-top: 30px;
+            }
+            .panel-heading{
+                background-color: #333;
+                height: 90px;
+                padding: 0 50px;
+                color: #fff;
+            }
+            #comment {
+                margin: 20px;
+            }
+            #date{
+                float: right;
+            }
+            #order{
+                float: left;
+            }
+            .panel-heading div {
+                margin-top: 20px;
+            }
+            .header {
+                height: 100px;
+            }
+
+    </style>
+
+<div id="mydiv" dir="rtl">
+{#{% for object in object_list %}#}
+{#       {% if object.id == printedItemId %}#}
+   <h3>
+      فرم خرید از وبسایت اسپرتآپ
+   </h3>
+
+   <div class="row">
+      <div class="col-lg-12">
+         <!-- START panel-->
+         <div id="comment">
+            سلام دوست اسپرتآپی عزیز
+             </br>
+             درخواست شما برای استفاده از مجموعه‌ی
+             {{ object.clubName }}
+             ثبت گردید. از علاقه‌مندی به ورزش و اعتماد شما سپاسگزاریم
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <!-- START table-responsive-->
+               <div class="table-responsive">
+                  <table class="table table-bordered">
+                     <tbody>
+                        <tr class="header">
+                           <td>
+                              تاریخ:
+                               {{ date|g2j }}
+                              </br>
+                              ساعت:
+                               {{ time }}
+                           </td>
+                           <td colspan="3">
+                              <a id="logo" href="http://{{ request.get_host }}">
+                                 <img src="{% static "img/logo2.png" %}" alt="" height="40">
+                              </a>
+                           </td>
+                           <td colspan="4">
+                               کد سفارش:
+                               {{ object.id }}
+                           </td>
+                        </tr>
+                        <tr>
+                           <td rowspan="3" class="main">مجموعه ورزشی</td>
+                           <td>نام</td>
+                           <td colspan="4">{{ object.programDefinitionKey.clubKey.title }}</td>
+                        </tr>
+                        <tr>
+                           <td>آدرس</td>
+                           <td colspan="4">{{ object.programDefinitionKey.clubKey.address }}</td>
+                        </tr>
+                        <tr>
+                           <td>شماره تماس</td>
+                           <td colspan="4">{{ object.programDefinitionKey.clubKey.phone }}</td>
+                        </tr>
+                        <tr>
+                           <td rowspan="2" class="main">توضیحات خرید</td>
+                           <td>نام برنامه</td>
+                           <td>تاریخ استفاده</td>
+                           <td>زمان استفاده</td>
+                           <td>قیمت</td>
+                           <td>توضیحات</td>
+                        </tr>
+                        <tr>
+                           <td>{{ object.programDefinitionKey.title }}</td>
+                           <td>{{ object.programDefinitionKey.publish_date | g2j }}</td>
+                           <td>{{ object.programDefinitionKey.publish_date.time}}</td>
+                           <td>{{ object.amount }}</td>
+                           <td>{{ object.programDefinitionKey.brief }}</td>
+                        </tr>
+                        <tr>
+                           <td rowspan="2" class="main">خریدار</td>
+                           <td>نام و نام خانوادگی</td>
+                           <td colspan="5">{{ user.user.get_full_name }}</td>
+                        </tr>
+                        <tr>
+                           <td>تلفن</td>
+                           <td colspan="5">{{ user.cellPhone }}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <!-- END table-responsive-->
+            </div>
+         </div>
+         <!-- END panel-->
+      </div>
+   </div>
+{#       {% endif %}#}
+{#{% endfor %}#}
+</div>
+<script src={% static "js/libs/jquery.js" %}></script>
+<script type="text/javascript">
+    $(window).load(function(){
+        window.print();
+    });
+</script>
+

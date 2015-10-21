@@ -24,3 +24,4 @@ def g2jdate(gregorian):
 def g2jdatetime(gregorian):
     return jdatetime.datetime.fromgregorian(datetime=gregorian)
 # -----------------------------------------------------------------------
+# -----------------------------------------------------------------------

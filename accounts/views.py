@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Permission
 from django.contrib.auth import authenticate, login
 from django.contrib.contenttypes.models import ContentType
+from django.utils.timezone import now
+import time
 import importlib
 import jdatetime
 
@@ -60,6 +62,16 @@ class dashboard(View):
 
 
 # -----------------------------------------------------------------------
+class printForUser(TemplateView):
+    template_name = 'dashboard/print.html'
+    def get_context_data(self, **kwargs):
+        itemId = kwargs.get("pk", "-1")
+        userInst = userProfile.objects.get(user = self.request.user)
+        context = super(printForUser, self).get_context_data()
+        enrollInst = enrolledProgram.objects.get(id = itemId)#.filter(user = self.request.user).exclude(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
+        context = {'object': enrollInst, "user": userInst, "date":now(), "time":time.strftime("%X")}
+        return context
+
 class dashboardSelector(TemplateView):
     def get_template_names(self):
         if self.request.user.has_perm('accounts.club_owner'):
@@ -71,10 +83,10 @@ class dashboardSelector(TemplateView):
         context = super(dashboardSelector, self).get_context_data()
         if self.request.user.has_perm('accounts.club_owner'):
             agreementInst = agreement.objects.filter(user = self.request.user)
-            context = {'object_list': agreementInst}
+            context = {'object_list': agreementInst, "user": self.request.user, "datetime":time.mktime(now().timetuple())*1000}
         else:
             enrollInst = enrolledProgram.objects.filter(user = self.request.user).exclude(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
-            context = {'object_list': enrollInst}
+            context = {'object_list': enrollInst, "user": self.request.user, "datetime":now()}
         return context
         # raise Http404
 

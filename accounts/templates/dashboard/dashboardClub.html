@@ -174,10 +174,10 @@
 
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active">
+					<li role="presentation" class="active" id="1">
 						<a href="#session-tab" aria-controls="session-tab" role="tab" data-toggle="tab">جلسه ها</a>
 					</li>
-					<li role="presentation">
+					<li role="presentation" id="2">
 						<a href="#session-attendance" aria-controls="session-attendance" role="tab" data-toggle="tab">حضور و غیاب</a>
 					</li>
 				</ul>
@@ -230,7 +230,7 @@
 		
 	<script type="text/template" id="each-session-attendance-template">
 		<tr id="<%= id %>">
-			<td><%= title %></td>
+			<td colspan="2"><%= title %></td>
 			<td></td>
 			<td></td>
 			<td>
@@ -269,6 +269,10 @@
 
 	<script type="text/javascript" src="{% static "js/dashboard.js" %}"></script>
 	<script>
+        TIME = {{ datetime }};
+
+        clubOwnerID = {{ request.user.id }};
+
 		dashboard.init();
 	</script>
 </body>

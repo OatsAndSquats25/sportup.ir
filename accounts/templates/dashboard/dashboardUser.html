@@ -1,7 +1,8 @@
 {% extends 'basenew.html' %}
-{% load i18n static%}
+{% load i18n static generic_tags %}
 
 {% block main %}
+
 <div class="container-fluid" id="wrapper">
     <div class="table-responsive">
         <header><h2>{% trans "Enrolled list" %}</h2></header>
@@ -40,12 +41,46 @@
 {#                    {% endif %}#}
                     <td>{{ item.invoiceKey.context }}</td>
                     <td>{{ item.referenceNumber }}</td>
-                    <td><a href="#{{ item.id }}">{% trans "Print" %}</a></td>
-{#                    <td><a href="#">{% trans "Print" %}</a></td>#}
+{#                    <td><a onclick="PrintElem('#mydiv')" >{% trans "Print" %}</a></td>#}
+                    <td><a href="/accounts/print/{{ item.id }}">{% trans "Print" %}</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+{% endblock %}
+{% block extra_js_end %}
+    <script type="text/javascript">
+
+    function PrintElem(elem)
+    {
+        printedItemId = id;
+        console.log(printedItemId);
+        window.print();
+        //Popup($(elem).html());
+    }
+
+    function Popup(data)
+    {
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title>رسید خرید</title>');
+{#        mywindow.document.write("<link rel=\"stylesheet\" href=\"bootstrap.css\" type=\"text/css\" media=\"print\" />");#}
+{#         mywindow.document.write("<link rel=\"stylesheet\" href=\"myCss.css\" type=\"text/css\"  />");#}
+        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+        mywindow.document.write('</head><body dir="rtl">');
+        mywindow.document.write(data);
+        console.log(data);
+        console.log(mywindow.document);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    }
+</script>
 {% endblock %}

@@ -10,6 +10,14 @@
 			this.week = 0;
 			this.router();
 			this.bindEvents();
+			this.clubOwnerID = clubOwnerID;
+
+            setInterval(function(){
+                if (self.isSession){
+                	self.getSessions(self.week);
+					self.sessionAttendanceList();
+                }
+            }, 500000);
 
 			$.ajaxSetup({
 				cache : false,
@@ -39,9 +47,11 @@
 				self.changeColor(url);
 			};
 
+			self.isSession = 0;
+
 			switch (url) {
 				case '': {
-					self.redirect('dashboard');
+					self.redirect('sessions');
 				};break;
 				case 'dashboard': {
 					self.goToDashboard();
@@ -51,6 +61,7 @@
 				};break;
 				case 'sessions': {
 					self.goToSessions();
+					self.isSession = 1;
 				};break;
 				case 'contracts': {
 					self.goToContracts();
@@ -133,7 +144,7 @@
 				cache : false,
 				success : function(res) {
                     console.log(res)
-					$('#eachCourseRegList').html('<tr><th>خاضر</th><th>نام</th><th>نام خانوادگی</th><th>ایمیل</th><th>تلفن</th><th>حذف</th></tr><tr><td></td><td><input type="text" class="edit" id="firstname" name="firstname"></td><td><input type="text" class="edit" name="lastname" id="lastname"></td><td><input type="text" class="edit" name="email" id="email"></td><td><input type="text" class="edit" name="telephone" id="telephone"></td><td><button class="btn btn-sm btn-success courseRegListadd"><i class="fa fa-plus"></i></button></td></tr>');
+					$('#eachCourseRegList').html('<tr><th>حاضر</th><th>نام</th><th>نام خانوادگی</th><th>ایمیل</th><th>تلفن</th><th>حذف</th></tr><tr><td></td><td><input type="text" class="edit" id="firstname" name="firstname"></td><td><input type="text" class="edit" name="lastname" id="lastname"></td><td><input type="text" class="edit" name="email" id="email"></td><td><input type="text" class="edit" name="telephone" id="telephone"></td><td><button class="btn btn-sm btn-success courseRegListadd"><i class="fa fa-plus"></i></button></td></tr>');
 
 					var template = _.template( $('#each-course-attendance-template').html() );
 
@@ -186,7 +197,7 @@
 						};
 					},
 					success : function(res) {
-                        console.log(res)
+
 						$('<tr id="'+ res +'"><td>' + status.status + '</td><td colspan="2">'+ firstnameVal +' '+ lastnameVal +'</td><td>'+ emailVal +'</td><td>'+ telephoneVal +'</td><td><button class="btn btn-danger btn-sm sessionRegListdelete"><i class="fa fa-trash-o"></i></button></td></tr>').insertAfter('#eachCourseRegList tbody');
 						tr.find('#firstname').val('');
 						tr.find('#lastname').val('');
@@ -435,14 +446,15 @@
 			console.log(id);
 			res = confirm('آیا از حذف رکورد انتخاب شده مطمئن هستید ؟');
 			if(res){
-				var self = $(this);
+				var item = $(this);
 				$.ajax({
 					url : '/api/enroll/session/club/'+id+'/',
 					type : 'DELETE',
 					cache : false,
 					success : function() {
                         self.flagModifySessionList = 1;
-						self.parent().parent().remove();
+                        console.log(self.flagModifySessionList);
+						item.parent().parent().remove();
 					}
 				});
 			}

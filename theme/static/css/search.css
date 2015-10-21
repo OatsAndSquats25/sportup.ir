@@ -201,3 +201,21 @@ body, html{
     -moz-pointer-events: none;
     pointer-events: none;
 }
+.verify{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-image: url("../img/verify.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    top: -3px;
+    right: 13px;
+    z-index: 100;
+    /* font-size: 23px; */
+    color: #fff;
+    padding: 20px 20px;
+}
+.verify i{
+    ont-size: 25px;
+}
