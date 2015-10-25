@@ -24,6 +24,8 @@ from serializer import enrollProgramSerializer,enrollSessionSerializer, enrollSe
 
 from agreement.models import agreement
 from programsession.views import sessionGenerateFull
+from generic import email
+
 # ----------------------------------------------------
 class enrollConfirmation(DetailView):
     """
@@ -123,6 +125,7 @@ class enrollSessionClub(generics.GenericAPIView):
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
 
+        email.reservedByClub(request, _email, enrollInst.invoiceKey)
         return Response(enrollInst.id, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
@@ -177,7 +180,7 @@ class enrollSession(generics.GenericAPIView):
             return Response("Session does not have enough space.",status=status.HTTP_400_BAD_REQUEST)
         _desc    = request.user.get_full_name()
         prginst = programDefinition.objects.get(id = cell[0].prgid)
-        enrolledProgramSession.objects.create(programDefinitionKey = prginst,
+        enrollInst = enrolledProgramSession.objects.create(programDefinitionKey = prginst,
                                               amount = cell[0].price,
                                               date = cell[0].date,
                                               sessionTimeBegin = cell[0].begin,
@@ -185,6 +188,7 @@ class enrollSession(generics.GenericAPIView):
                                               user = self.request.user,
                                               title = _desc)
 
+        #email.reservedByAthlete(request, self.request.user.email, enrollInst.invoiceKey)
         return Response("Done", status=status.HTTP_200_OK)
 # ----------------------------------------------------
 class enrollInCourse(View):

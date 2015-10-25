@@ -53,16 +53,20 @@ def send_mail_template(subject, template, addr_from, addr_to, context=None,
     msg.send(fail_silently=fail_silently)
 
 # ----------------------------------------------------
-def sendEmailNotification(request, user, mailSubject, mailContext, club=0):
-    context = {"club": club, "request": request, "user": user, "date":now(), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
+def sendEmailNotification(request, user, mailSubject, mailContext, object=0, _email=0):
+    context = {"object": object, "request": request, "user": user, "date":now(), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
     subject = subject_template(mailSubject, context)
     try:
         if not settings.EMAILNOTIFICATION:
             return 400
     except:
         return 400
+    if _email == 0:
+        email = user.email
+    else:
+        email = _email
 
-    send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, user.email, context=context)
+    send_mail_template(subject, mailContext, DEFAULT_FROM_EMAIL, email, context=context)
     return 200
 # ----------------------------------------------------
 # ----------------------------------------------------
@@ -84,25 +88,31 @@ def clubSignUpConfirm(request, user):
     pass
 #    return sendEmailNotification(request, user, "email/club_signUp_confirm_subject.txt", "email/club_signUp_confirm")
 # ----------------------------------------------------
-def reservedByClub(request, user, _invoicekey):
+
+def reservedByClub(request, user, _invoicekey, email):
     enrollItem = enrolledProgram.objects.get(invoiceKey = _invoicekey)
-    club = enrollItem.programDefinitionKey.clubKey.title
-    return sendEmailNotification(request, user, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard", club)
+    club = enrollItem.programDefinitionKey.clubKey
+    return sendEmailNotification(request, user, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard", club, email)
 # ----------------------------------------------------
+
 def canceledByClub(request, user):
     pass
 # ----------------------------------------------------
+
 def three_days_later(request, user):
     return sendEmailNotification(request, user, "email/3days_later_subject.txt", "email/3days_later")
 # ----------------------------------------------------
+
 def changePassword(request, user):
     return sendEmailNotification(request, user, "email/change_password_subject.txt", "email/change_password")
 # ----------------------------------------------------
-def reservedByAthlete(request, _invoicekey):
+
+def reservedByAthlete(request, email, _invoicekey):
     enrollItems = enrolledProgram.objects.filter(invoiceKey = _invoicekey)
     clubs = []
     for enrl in enrollItems:
-        club = enrl.programDefinitionKey.clubKey.title
-        clubs.append(club)
+        club = enrl.programDefinitionKey.clubKey
+        clubs.append(club.title)
         sendEmailNotification(request, request.user, "email/reserve_club_subject.txt", "email/reserve_club", club)
+    sendEmailNotification(request, request.user, "email/reserve_subject.txt", "email/reserve", clubs, email)
 # ----------------------------------------------------

@@ -69,7 +69,7 @@ class printForUser(TemplateView):
         userInst = userProfile.objects.get(user = self.request.user)
         context = super(printForUser, self).get_context_data()
         enrollInst = enrolledProgram.objects.get(id = itemId)#.filter(user = self.request.user).exclude(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
-        if enrollInst.user == self.request.user:
+        if enrollInst.user == self.request.user and not enrollInst.status == enrolledProgram.CONTENT_STATUS_INACTIVE:
             context = {'object': enrollInst, "user": userInst, "date":now(), "time":time.strftime("%X")}
             return context
         return

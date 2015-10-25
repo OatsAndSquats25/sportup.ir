@@ -1,0 +1,40 @@
+{% extends 'basenew.html' %}
+{% load i18n %}
+
+{% block extra_css %}
+	<style>
+		body{
+			background-color: #f5f5f5;
+		}
+		h2{
+			margin: 0 0 20px;
+			font-weight: bold;
+			padding: 10px;
+			display: inline-block;
+		}
+		.container-fluid{
+			padding: 101px 101px 50px;
+			color: #333;
+			line-height: 30px;
+			box-shadow: 0 0 5px #ccc;
+		}
+	</style>
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="padding-top: 100px;">
+        <div class="row">
+        <div class="col-md-4"></div>
+            <div class="col-md-offset-4 col-md-4">
+                <h2>افزایش اعتبار</h2>
+                <form method="post" action="{% url 'addCreditURL' %}">{% csrf_token %}
+                    {% for field in form %}
+                        <a style="color: red">{{ field.errors }}</a>
+                        <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="اعتبار به ریال" >
+                    {% endfor %}
+                    <input type="submit" value="add credit" class="btn btn-default"/>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
