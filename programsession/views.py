@@ -138,7 +138,7 @@ def sessionGenerateFull(club , showWeek):
         dateEnd = today.date() + datetime.timedelta(days=(6-weekDay))
 
         # retrive layout definition from database and make schedule table
-        definitions = programDefinition.objects.instance_of(sessionDefinition).filter(clubKey = club).active()
+        definitions = programDefinition.objects.instance_of(sessionDefinition).filter(clubKey = club).filter(status=programDefinition.CONTENT_STATUS_ACTIVE)
         scheduleTable = []
         for definition in definitions:
             if definition.expiry_date.date() < dateEnd:             # check for end of the date must be same as program expire date
