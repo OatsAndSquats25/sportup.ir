@@ -1,5 +1,5 @@
 <ul>
     {% for object in object_list.items %}
-        <li><a href="{% url 'dashboard' %}?app={{ object.0 }}&cls={{ object.1.class }}" data-toggle="tab"><i class="{{ object.1.badge }}"></i> {{ object.1.title }}</a></li>
+        <li><a href="{% url 'dashboardURL' %}?app={{ object.0 }}&cls={{ object.1.class }}" data-toggle="tab"><i class="{{ object.1.badge }}"></i> {{ object.1.title }}</a></li>
     {% endfor %}
 </ul>
