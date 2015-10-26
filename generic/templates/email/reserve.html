@@ -10,7 +10,7 @@
     {{ date|g2j }}
 در برنامه(ها)ی زیر ثبت نام کردید.
     </p>
-    <table style="border-spacing:0; width: 100%; margin: 10px;">
+    <table style="border-spacing:0; width: 95%; margin: 10px;">
         <tr>
             <td style="border: 1px solid #000000;">
                 نام ورزشگاه
@@ -40,7 +40,8 @@
     </table>
    <p>
     لطفا برگه‌ی ثبت نام این دوره را از
-       <a href="www.sportup.ir/accounts/dashboard" target="_blank">داشبورد</a>
+
+       <a href="http://{{ request.get_host }}{% url 'dashboardURL' %}" target="_blank">داشبورد</a>
  خود چاپ نمایید و زمان استفاده همراه خود داشته باشید.
     لطفا 15 دقیقه قبل از زمان مشخص شده در باشگاه حاضر باشید
 با تشکر از وقت شناسی شما.
