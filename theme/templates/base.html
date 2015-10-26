@@ -74,7 +74,7 @@
                                     <li><a href="{% url 'logout' %}?next={{ request.path }}">{% trans "Sign Out" %}</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
+                            <li><a href="{% url 'dashboardURL' %}">{% trans "Dashboard" %}</a></li>
                             {% if not perms.accounts.club_owner %}
                             <li><a href="{% url 'checkoutURL' %}">{% trans "Shopping Cart" %}</a></li>
                             {% endif %}
