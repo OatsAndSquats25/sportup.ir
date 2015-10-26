@@ -188,7 +188,6 @@ class enrollSession(generics.GenericAPIView):
                                               user = self.request.user,
                                               title = _desc)
 
-        #email.reservedByAthlete(request, self.request.user.email, enrollInst.invoiceKey)
         return Response("Done", status=status.HTTP_200_OK)
 # ----------------------------------------------------
 class enrollInCourse(View):
@@ -271,6 +270,7 @@ class enrollCourseClub(generics.GenericAPIView):
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
 
+        email.reservedByClub(request, userInst, enrollInst.invoiceKey)
         return Response(enrollInst.id, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):

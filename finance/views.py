@@ -69,6 +69,8 @@ def paymentRes(request, *args, **kwargs):
 
     if payRes['status'] == True :
         invoicePayed(payRes['invoiceId'])
+        #userInst = User.objects.get(id=request.user.id)
+        email.reservedByAthlete(request, request.user, payRes['invoiceId'])
         messages.success(request, _("Payment was successful."))
         sms.reservedByAthlete(request, payRes['invoiceId'])
         # email.reservedByAthlete(request, payRes['invoiceId']) #todo

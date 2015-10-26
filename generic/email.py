@@ -7,7 +7,7 @@ from django.conf import settings
 
 import time
 
-from enroll.models import enrolledProgram
+from enroll.models import enrolledProgram, enrolledProgramCourse, enrolledProgramSession
 from program.models import programDefinition
 
 from accounts.models import userProfile
@@ -107,12 +107,14 @@ def changePassword(request, user):
     return sendEmailNotification(request, user, "email/change_password_subject.txt", "email/change_password")
 # ----------------------------------------------------
 
-def reservedByAthlete(request, email, _invoicekey):
+def reservedByAthlete(request, user, _invoicekey):
     enrollItems = enrolledProgram.objects.filter(invoiceKey = _invoicekey)
     clubs = []
-    for enrl in enrollItems:
-        club = enrl.programDefinitionKey.clubKey
-        clubs.append(club.title)
-        sendEmailNotification(request, request.user, "email/reserve_club_subject.txt", "email/reserve_club", club)
-    sendEmailNotification(request, request.user, "email/reserve_subject.txt", "email/reserve", clubs, email)
+    for enroll in enrollItems:
+        #clubs.append(enroll.programDefinitionKey.clubKey.title)
+        if isinstance(enroll, enrolledProgramCourse):
+            sendEmailNotification(request, enroll.programDefinitionKey.clubKey.user, "email/reserve_club_subject.txt", "email/reserve_course_club", enroll)
+        elif isinstance(enroll, enrolledProgramSession):
+            sendEmailNotification(request, enroll.programDefinitionKey.clubKey.user, "email/reserve_club_subject.txt", "email/reserve_session_club", enroll)
+    sendEmailNotification(request, user, "email/reserve_subject.txt", "email/reserve", enrollItems)
 # ----------------------------------------------------

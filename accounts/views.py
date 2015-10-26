@@ -184,7 +184,7 @@ class emailTest(View):
     #    return HttpResponse("test email sent.")
     def get(self, request):
         userAuth = User.objects.get(id=request.user.id)
-        res = email.changePassword(request, userAuth)
+        res = email.reservedByAthlete(request, userAuth, 7)
         if res == 200:
             return HttpResponse("test email sent.")
         else:

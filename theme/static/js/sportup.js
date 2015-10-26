@@ -544,9 +544,11 @@
 		cookieGeter : function(cookieName){
 			
 			var cookies = document.cookie.split(';');
+
 				
 			for (var i = 0; i < cookies.length; i++) {
 				if (cookies[i].search('club=') == 1) {
+                    console.log(cookies[i].trim().replace('club=', ''));
 					return cookies[i].trim().replace('club=', '');
 				}
 			}
