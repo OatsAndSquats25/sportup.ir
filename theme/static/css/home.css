@@ -499,3 +499,15 @@ header{
     -moz-pointer-events: none;
     pointer-events: none;
 }
+
+#campaign-modal {
+    width: 500px;
+    position: relative;
+}
+
+#campaign-modal button{
+    position: absolute;
+    color: red;
+    margin-top: 15px;
+    margin-right: 15px;
+}
