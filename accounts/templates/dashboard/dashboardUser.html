@@ -1,5 +1,12 @@
 {% extends 'basenew.html' %}
 {% load i18n static generic_tags %}
+{% block extra_css %}
+    <style>
+    td, th {
+        text-align: center;
+    }
+    </style>
+{% endblock %}
 
 {% block main %}
 
@@ -42,7 +49,7 @@
                     <td>{{ item.invoiceKey.context }}</td>
                     <td>{{ item.referenceNumber }}</td>
 {#                    <td><a onclick="PrintElem('#mydiv')" >{% trans "Print" %}</a></td>#}
-                    <td><a href="/accounts/print/{{ item.id }}">{% trans "Print" %}</a></td>
+                    <td><a href="/accounts/print/{{ item.id }}" target="_blank">{% trans "Print" %}</a></td>
                 </tr>
             {% endfor %}
             </tbody>
