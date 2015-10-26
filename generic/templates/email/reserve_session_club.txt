@@ -18,7 +18,7 @@
 </p>
    <p>
    شما می‌توانید در
-       <a href="www.sportup.ir/accounts/dashboard" target="_blank">داشبورد</a>
+       <a href="http://{{ request.get_host }}{% url 'dashboardURL' %}" target="_blank">داشبورد</a>
        خود لیست افراد ثبت نام شده را مشاهده نمایید.
    </p>
 {% endblock %}

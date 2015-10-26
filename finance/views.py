@@ -74,7 +74,7 @@ def paymentRes(request, *args, **kwargs):
         messages.success(request, _("Payment was successful."))
         sms.reservedByAthlete(request, payRes['invoiceId'])
         # email.reservedByAthlete(request, payRes['invoiceId']) #todo
-        return reverse('dashboard')
+        return reverse('dashboardURL')
     else:
         invoiceError(payRes['invoiceId'])
         messages.error(request, _("Payment has error"))
