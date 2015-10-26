@@ -1,0 +1,24 @@
+{% extends "email/emailbase.html" %}
+{% load i18n generic_tags %}
+{% block main %}
+<p>
+آقا/خانم
+    {{ object.user.get_full_name }}
+    در ساعت
+    {{ time }}
+    تاریخ
+    {{ date|g2j }}
+در دوره‌ی
+{{ object.programDefinitionKey.title }}
+    در روز
+    {{ object.programDefinitionKey.publish_date | g2j }}
+    در ساعت
+    {{ object.programDefinitionKey.publish_date.time}}
+ ثبت نام کرد.
+</p>
+   <p>
+   شما می‌توانید در
+       <a href="www.sportup.ir/accounts/dashboard" target="_blank">داشبورد</a>
+       خود لیست افراد ثبت نام شده را مشاهده نمایید.
+   </p>
+{% endblock %}
