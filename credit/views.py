@@ -7,7 +7,10 @@ from django.core.context_processors import csrf
 from django.db import models
 from django.http import HttpResponseRedirect
 from datetime import datetime, timedelta
+from django.shortcuts import redirect
 
+from finance.functions import paymentRequest
+from finance.models import invoice
 from models import userCredit
 from forms import creditForm
 # ----------------------------------------------------
@@ -35,10 +38,18 @@ class addCredit(FormView):
     """
     form_class = creditForm
     template_name = "credit/credit.html"
-    success_url = "/"
+    # success_url = "/"
     def form_valid(self, form):
-        messages.info(self.request,_("credit has been successfully added."))
-        return super(addCredit, self).form_valid(form)
+        invoiceInst = invoice.objects.create(amount=form.cleaned_data['value'], context=_("Payment pending"), user= self.request.user)
+        userCredit.objects.create(originValue = form.cleaned_data['value'],
+                                  value = form.cleaned_data['value'],
+                                  status = userCredit.CONTENT_STATUS_INACTIVE,
+                                  invoiceKey = invoiceInst,
+                                  user_id = self.request.user.id,
+                                  expiry_date = datetime.now()+timedelta(days=400))
+        return redirect(paymentRequest(self.request, invoiceInst))
+        # messages.info(self.request,_("credit has been successfully added."))
+        # return super(addCredit, self).form_valid(form)
 
 
 
