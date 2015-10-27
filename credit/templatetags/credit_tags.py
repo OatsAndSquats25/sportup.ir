@@ -8,6 +8,6 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def get_credit(context):
     request = context['request']
-    validCredits = userCredit.objects.active(request.user).aggregate(overallCredit = Sum('value'))
+    validCredits = userCredit.objects.active().filter(user = request.user).aggregate(overallCredit = Sum('value'))
     return validCredits['overallCredit']
 # -----------------------------------------------------------------------
