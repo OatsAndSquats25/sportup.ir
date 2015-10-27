@@ -124,8 +124,8 @@ class enrollSessionClub(generics.GenericAPIView):
                                               user = _user,
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
-
-        email.reservedByClub(request, _email, enrollInst.invoiceKey)
+        if _email :
+            email.reservedByClub(request, request.user, enrollInst.programDefinitionKey.clubKey, _email)
         return Response(enrollInst.id, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
@@ -269,8 +269,8 @@ class enrollCourseClub(generics.GenericAPIView):
                                               user = _user,
                                               status = programDefinition.CONTENT_STATUS_ACTIVE,
                                               title= _desc)
-
-        email.reservedByClub(request, userInst, enrollInst.invoiceKey)
+        if _email :
+            email.reservedByClub(request, request.user, enrollInst.programDefinitionKey.clubKey, _email)
         return Response(enrollInst.id, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
