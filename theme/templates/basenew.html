@@ -46,16 +46,17 @@
 <body>
     {% block navigation %}
     <!-- NAV bar -->
-    {% if user.is_authenticated %}
-    <a href="#" id="user-credit">اعتبار شما : {% get_credit %} ریال</a>
-    {% endif %}
 	<nav>
 		<ul class="hidden-xs">
             {% block authentication %}
             {% if not user.is_authenticated %}
 
-            {% block login_register %}<li><a id="signup"  href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Register" %}</a></li>{% endblock %}
-            {% block login_register2 %}<li><a href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>{% endblock %}
+            {% block login_register %}
+            <li><a id="signup"  href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Register" %}</a></li>
+            {% endblock %}
+            {% block login_register2 %}
+            <li><a href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>
+            {% endblock %}
 
             {% else %}
 
@@ -73,6 +74,11 @@
                 {% else %}
                     <li><a href="{% url 'checkoutURL' %}"><i class="fa fa-shopping-cart"></i>{% trans "Shopping Cart" %}</a></li>
                 {% endif %}
+                <li>
+                    <a href="#">
+                        اعتبار شما : {% get_credit %} ریال
+                    </a>
+                </li>
             {% endif %}
             {% endblock %}
 
