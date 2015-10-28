@@ -10,7 +10,7 @@ from finance.models import transaction
 def paymentRequest(request, InvoiceInst):
 
     amount = InvoiceInst.amount
-    validCredits = userCredit.objects.active().filter(user = request.user).order_by("expiry_day")
+    validCredits = userCredit.objects.active().filter(user = request.user).order_by("expiry_date")
     for credit in validCredits:
         if credit.value >= amount:
             credit.value -= amount
