@@ -50,8 +50,12 @@ def send_mail_template(subject, template, addr_from, addr_to, context=None,
     msg.attach_alternative(render("html"), "text/html")
     for attachment in attachments:
         msg.attach(*attachment)
-    msg.send(fail_silently=fail_silently)
+    try:
+        msg.send(fail_silently=fail_silently)
+    except:
+        return False
 
+    return True
 # ----------------------------------------------------
 def sendEmailNotification(request, user, mailSubject, mailContext, object=0, _email=0):
     context = {"object": object, "request": request, "user": user, "date":now(), "time":time.strftime("%X")}                   #, "userProfile": userProfile.objects.get( id = user.id)
