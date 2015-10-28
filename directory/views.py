@@ -194,9 +194,9 @@ class getList(generics.ListAPIView):
                 queryInst = queryInst.objects.filter(point__distance_lte=(pnt, D(km=distance)))
             except:
                 return ''
-
+        # queryInst = sorted(queryInst, key=lambda a: int(a.has_agreement), reverse=True)
         queryInst = queryInst.select_related()
-        return sorted(queryInst, key=lambda a: a.has_agreement, reverse=True)
+        return sorted(queryInst, key=lambda a: a.has_agreement(), reverse=True)
 #---------------------------------------------------
 class getItem(generics.RetrieveAPIView):
     """
