@@ -53,6 +53,10 @@ class checkoutPay(View):
         gateway = self.request.POST.get('gateway','0')
 
         object_list = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).select_related()
+        if not object_list:
+            messages.error(self.request, _("Your shopping cart is empty."))
+            return redirect('checkoutURL')
+
         for object in object_list:
             if not object.isValid():
                 messages.error(self.request, _("Please check your cart and remove yellow programs. This programs expired or do not have enough space."))
