@@ -7,9 +7,10 @@ from django.shortcuts import redirect
 from django.http import Http404
 
 from generic import email,sms
+from credit.views import userCredit
 from enroll.models import enrolledProgram
 
-from payment import testPay,payline,paylineTest
+from payment import testPay,payline,paylineTest,creditpay
 from functions import invoicePayed, invoiceError, invoiceGenerate, paymentRequest
 # ----------------------------------------------------
 class checkout(ListView):
@@ -35,7 +36,6 @@ class checkout(ListView):
         else:
             context = super(checkout, self).get_context_data()
             amount = 0
-            discount = 0
 
             itemsInst = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
             if itemsInst:
@@ -45,10 +45,30 @@ class checkout(ListView):
             #    discount = 0
 
             context['totalAmount'] = amount
-            context['discount'] = discount
-            context['payable'] = amount - discount
 
         return super(checkout, self).render_to_response(context)
+# ----------------------------------------------------
+class checkoutPay(View):
+    def post(self,request,*args,**kwargs):
+        gateway = self.request.POST.get('gateway','0')
+
+        object_list = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).select_related()
+        for object in object_list:
+            if not object.isValid():
+                messages.error(self.request, _("Please check your cart and remove yellow programs. This programs expired or do not have enough space."))
+                return redirect('checkoutURL')
+
+        if gateway == 'creditpay':
+            validCredits = int((userCredit.objects.active().filter(user = request.user).aggregate(overallCredit = Sum('value')))['overallCredit'])
+            remainEnroll = int((enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).aggregate(payable = Sum('amount')))['payable'])
+
+            if remainEnroll > validCredits:
+                messages.error(self.request, _("You do not have enough credit to pay your invoice!"))
+                return redirect('checkoutURL')
+
+        invoiceInst = invoiceGenerate(self.request)
+        return redirect(paymentRequest(self.request, invoiceInst, gateway))
+
 # ----------------------------------------------------
 class fianceDeleteItem(View):
     def get(self,request,*args,**kwargs):
@@ -68,13 +88,9 @@ def paymentRes(request, *args, **kwargs):
         raise Http404
 
     if payRes['status'] == True :
-        invoicePayed(payRes['invoiceId'])
-        #userInst = User.objects.get(id=request.user.id)
-        email.reservedByAthlete(request, request.user, payRes['invoiceId'])
+        invoicePayed(request, payRes['invoiceId'])
         messages.success(request, _("Payment was successful."))
-        sms.reservedByAthlete(request, payRes['invoiceId'])
-        # email.reservedByAthlete(request, payRes['invoiceId']) #todo
-        return reverse('dashboardURL')
+        return reverse('checkoutURL')
     else:
         invoiceError(payRes['invoiceId'])
         messages.error(request, _("Payment has error"))
