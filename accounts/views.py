@@ -87,7 +87,7 @@ class dashboardSelector(TemplateView):
             agreementInst = agreement.objects.filter(user = self.request.user)
             context = {'object_list': agreementInst, "user": self.request.user, "datetime":time.mktime(now().timetuple())*1000}
         else:
-            enrollInst = enrolledProgram.objects.filter(user = self.request.user).exclude(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
+            enrollInst = enrolledProgram.objects.filter(user = self.request.user).exclude(status = enrolledProgram.CONTENT_STATUS_INACTIVE).order_by("-pk")
             context = {'object_list': enrollInst, "user": self.request.user, "datetime":now()}
         return context
         # raise Http404
