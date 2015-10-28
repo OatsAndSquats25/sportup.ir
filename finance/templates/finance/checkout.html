@@ -1,5 +1,5 @@
 {% extends "basenew.html" %}
-{% load i18n static humanize generic_tags %}
+{% load i18n static humanize generic_tags credit_tags%}
 
 {% block extra_css %}
 	<style>
@@ -153,17 +153,9 @@
                                 <table class="table table-bordered">
 {#                                    <caption>{% trans "Final Payment" %}</caption>#}
                                     <tbody>
-                                    <tr>
-                                        <td>{% trans "Total" %}</td>
-                                        <td>{{ totalAmount|floatformat:2|intcomma }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{% trans "Discount" %}</td>
-                                        <td>{{ discount|floatformat:2|intcomma }}</td>
-                                    </tr>
                                     <tr class="danger">
                                         <td><h5><b>{% trans "Payment amount" %}({% trans "Rial" %})</b></h5></td>
-                                        <td><h5><b>{{ payable|floatformat:2|intcomma }}</b></h5></td>
+                                        <td><h5><b>{{ totalAmount|floatformat:2|intcomma }}</b></h5></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -195,17 +187,17 @@
                     </div>
                         <div class="row">
                             <div class="col-md-4">
-{#                                <div>#}
-{#                                    <label><input type="radio" name="paymentGateway" id="optionsRadios1" value="test" checked>{% trans "Test Bank" %}</label>#}
-{#                                </div>#}
-{#                                <div>#}
-{#                                    <label><input type="radio" name="paymentGateway" id="optionsRadios2" value="saman"> {% trans "Saman Bank" %}</label>#}
-{#                                </div>#}
-                                <a class="btn btn-default" href="{% url 'checkoutPayURL' %}">{% trans "Payment" %}</a>
+                                <form method="post" action="{% url 'checkoutPayURL' %}">
+                                    {% csrf_token %}
+                                    <input checked type="radio" name="gateway" value="0">{% trans "Electronic Payment" %}<br>
+                                    <input type="radio" name="gateway" value="creditpay">{% trans "Credit payment" %}<a href="{% url 'addCreditURL' %}"> ({% trans "Increase Credit" %}) </a><br>
+                                    <input class="btn btn-danger" type="submit" value="{% trans "Payment" %}" class="btn btn-default">
+                                </form>
+{#                                <a class="btn btn-default" href="{% url 'checkoutPayURL' %}">{% trans "Payment" %}</a>#}
                             </div>
-                            <div class="col-md-8">
+{#                            <div class="col-md-8">#}
 {#                                <button><a href="{{ request.path }}">{% trans "Update" %}</a></button>#}
-                            </div>
+{#                            </div>#}
                         </div>
             </div>
         </div>

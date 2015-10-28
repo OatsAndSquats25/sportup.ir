@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-05 15:06+0430\n"
+"POT-Creation-Date: 2015-10-27 12:24+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: functions.py:20
+#: functions.py:21
 msgid "Payment pending"
 msgstr "پرداخت"
 
-#: functions.py:31
+#: functions.py:32
 msgid "Payment done"
 msgstr "پرداخت انجام شد"
 
-#: functions.py:45
+#: functions.py:49
 msgid "Payment error"
 msgstr "پرداخت با خطا مواجه شد"
 
@@ -34,52 +34,77 @@ msgstr "پرداخت با خطا مواجه شد"
 msgid "Invoice list"
 msgstr "لیست فاکتور"
 
-#: templates/finance/checkout.html:9
+#: views.py:34
+msgid ""
+"Please check your cart and remove yellow programs. This programs expired or "
+"do not have enough space."
+msgstr ""
+"لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
+"را حذف کنید."
+
+#: views.py:67
+msgid "We do not support this payment gateway"
+msgstr "این درگاه پرداخت الکترونیک پشتیبانی نمی‌شود"
+
+#: views.py:74
+msgid "Payment was successful."
+msgstr "پرداخت تکمیل شد"
+
+#: views.py:80
+msgid "Payment has error"
+msgstr "پرداخت با خطا مواجه شد"
+
+#: templates/finance/checkout.html:116
 msgid "Order list"
 msgstr "لیست سفارش"
 
-#: templates/finance/checkout.html:10
+#: templates/finance/checkout.html:117
 msgid "Attention: You have only 30 minutes to pay and confirm your items."
 msgstr ""
 "اخطار: شما فقط ۳۰ دقیقه زمان دارید تا خرید خود را با پرداخت قطعی نمایید"
 
-#: templates/finance/checkout.html:15
+#: templates/finance/checkout.html:122
 msgid "Number"
 msgstr "شماره"
 
-#: templates/finance/checkout.html:16
+#: templates/finance/checkout.html:123
 msgid "Complex"
 msgstr "مجموعه"
 
-#: templates/finance/checkout.html:18
+#: templates/finance/checkout.html:125
 msgid "Program"
 msgstr "برنامه"
 
-#: templates/finance/checkout.html:19 templates/finance/payment_request.html:6
+#: templates/finance/checkout.html:126
+#: templates/finance/payment_request.html:6
 msgid "Amount"
 msgstr "مقدار"
 
-#: templates/finance/checkout.html:19 templates/finance/checkout.html.py:59
+#: templates/finance/checkout.html:126 templates/finance/checkout.html:165
 msgid "Rial"
 msgstr "ریال"
 
-#: templates/finance/checkout.html:20
+#: templates/finance/checkout.html:127
 msgid "Delete"
 msgstr "حذف"
 
-#: templates/finance/checkout.html:51
-msgid "Total"
-msgstr "مجموع"
-
-#: templates/finance/checkout.html:55
-msgid "Discount"
-msgstr "تخفیف"
-
-#: templates/finance/checkout.html:59
+#: templates/finance/checkout.html:165
 msgid "Payment amount"
 msgstr "مبلغ قابل پرداخت"
 
-#: templates/finance/checkout.html:98
+#: templates/finance/checkout.html:206
+msgid "Electronic Payment"
+msgstr "پرداخت الکترونیک"
+
+#: templates/finance/checkout.html:207
+msgid "Credit payment"
+msgstr "پرداخت از اعتبار"
+
+#: templates/finance/checkout.html:207
+msgid "Increase Credit"
+msgstr "افزایش اعتبار"
+
+#: templates/finance/checkout.html:208
 msgid "Payment"
 msgstr "پرداخت"
 
@@ -90,23 +115,3 @@ msgstr "بصورت خودکار به درگاه پرداخت منتقل می ش�
 #: templatetags/finance_tags.py:9
 msgid "Finance order"
 msgstr "فاکتور فروش"
-
-#: views.py:33
-msgid ""
-"Please check your cart and remove yellow programs. This programs expired or "
-"do not have enough space."
-msgstr ""
-"لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
-"را حذف کنید."
-
-#: views.py:66
-msgid "We do not support this payment gateway"
-msgstr "این درگاه پرداخت الکترونیک پشتیبانی نمی‌شود"
-
-#: views.py:71
-msgid "Payment was successful."
-msgstr "پرداخت تکمیل شد"
-
-#: views.py:75
-msgid "Payment has error"
-msgstr "پرداخت با خطا مواجه شد"
