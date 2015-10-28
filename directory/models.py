@@ -106,6 +106,7 @@ class club(Displayable):
     cell    = models.CharField(_("Cell"), max_length=20)
     logo    = models.ImageField(_("Logo"), ) #height=200, width=350
     visit   = models.IntegerField(verbose_name=_("Visit"), default=0)
+    homepage= models.BooleanField(_("Home page selected club"), default=False)
     # comments 		= CommentsField(verbose_name=_("Comments")) #todo: must ASAP
     # rating		  = RatingField(verbose_name=_("Rating"))
     coordinate  = gis_models.PointField(_("coordinate"), geography=True, blank=True, null=True, help_text=_("Represented as (longitude, latitude)"))

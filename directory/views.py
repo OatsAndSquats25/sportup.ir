@@ -217,5 +217,6 @@ class getFav(generics.ListAPIView):
     get 3 favorite club for home page
     """
     serializer_class = clubItemSerializer
-    queryset = club.objects.active().order_by('created')[:3]
+    queryset = club.objects.active().filter(homepage = True)[:3]
+    # queryset = club.objects.active().order_by('created')[:3]
 #---------------------------------------------------

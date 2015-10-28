@@ -67,7 +67,7 @@ class imageViewsInline(admin.TabularInline):
 class clubAdmin(admin.ModelAdmin):
     inlines = [imageViewsInline, contactInline]
     ordering = ('locationKey__complexKey',)
-    list_display = ('__unicode__', 'publish_date', 'expiry_date', 'status')
+    list_display = ('__unicode__', 'publish_date', 'expiry_date', 'status', 'homepage')
     search_fields = ('locationKey__complexKey__title',)
     list_filter = ('locationKey',)
     # filter_horizontal = ('categoryKeys',)
