@@ -40,11 +40,8 @@ def invoicePayed(request, idValue):
     creditInst = userCredit.objects.select_related().filter(invoiceKey = invoiceInst).update(status = enrolledProgram.CONTENT_STATUS_ACTIVE)
 
     if enrolledInst:
-        try:
-            sms.reservedByAthlete(request, invoiceInst)
-            email.reservedByAthlete(request, request.user, invoiceInst)
-        except:
-            pass
+        sms.reservedByAthlete(request, invoiceInst)
+        email.reservedByAthlete(request, request.user, invoiceInst)
 
     return True
 #----------------------------------------------------------------------
