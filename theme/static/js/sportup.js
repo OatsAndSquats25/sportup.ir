@@ -423,7 +423,11 @@
 
 					self.cnf.content.html('');
 		            res.results.forEach(function(club) {
-		                var thisTemplate1 = clubTemplate.replace(/<<link>>/g, '/club#' + club.id);
+                        if (club.hasAgreement == 0)
+                            var thisTemplate0 = clubTemplate.replace(/<<hasAgreement>>/g, 'hidden');
+                        else
+                            var thisTemplate0 = clubTemplate.replace(/<<hasAgreement>>/g, '');
+		                var thisTemplate1 = thisTemplate0.replace(/<<link>>/g, '/club#' + club.id);
 						if(club.imageCollection.length == 0){
 		                	var thisTemplate2 = thisTemplate1.replace(/<<img>>/g, defaultImage);
 		                }else{
