@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-28 10:29+0330\n"
+"POT-Creation-Date: 2015-10-28 12:20+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,37 +34,9 @@ msgstr "پرداخت با خطا مواجه شد"
 msgid "Invoice list"
 msgstr "لیست فاکتور"
 
-#: views.py:35 views.py:62
-msgid ""
-"Please check your cart and remove yellow programs. This programs expired or "
-"do not have enough space."
-msgstr ""
-"لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
-"را حذف کنید."
-
-#: views.py:57
-msgid "Your shopping cart is empty."
-msgstr "سبد خرید شما خالی است."
-
-#: views.py:70
-msgid "You do not have enough credit to pay your invoice!"
-msgstr ""
-
-#: views.py:91
-msgid "We do not support this payment gateway"
-msgstr "این درگاه پرداخت الکترونیک پشتیبانی نمی‌شود"
-
-#: views.py:96
-msgid "Payment was successful."
-msgstr "پرداخت تکمیل شد"
-
-#: views.py:100
-msgid "Payment has error"
-msgstr "پرداخت با خطا مواجه شد"
-
 #: payment/creditpay.py:31
 msgid "Your payment has been done by your credit."
-msgstr ""
+msgstr "پرداخت شما از طریق اعتبار انجام گردید."
 
 #: templates/finance/checkout.html:116
 msgid "Order list"
@@ -127,3 +99,31 @@ msgstr "بصورت خودکار به درگاه پرداخت منتقل می ش�
 #: templatetags/finance_tags.py:9
 msgid "Finance order"
 msgstr "فاکتور فروش"
+
+#: views.py:40
+msgid "Your shopping cart is empty."
+msgstr "سبد خرید شما خالی است."
+
+#: views.py:45
+msgid ""
+"Please check your cart and remove yellow programs. This programs expired or "
+"do not have enough space."
+msgstr ""
+"لطفا سبد خرید خود را بررسی کنید. موارد رنگی فابل خرید نمی باشند. لطفا آن ها "
+"را حذف کنید."
+
+#: views.py:53
+msgid "You do not have enough credit to pay your invoice!"
+msgstr ""
+
+#: views.py:74
+msgid "We do not support this payment gateway"
+msgstr "این درگاه پرداخت الکترونیک پشتیبانی نمی‌شود"
+
+#: views.py:79
+msgid "Payment was successful."
+msgstr "پرداخت تکمیل شد"
+
+#: views.py:83
+msgid "Payment has error"
+msgstr "پرداخت با خطا مواجه شد"

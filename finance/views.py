@@ -20,31 +20,14 @@ class checkout(ListView):
         return enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).select_related()
 
     def render_to_response(self, context, **response_kwargs):
-        if self.kwargs.get('command',None) == 'pay':
-            Payable = True
+        context = super(checkout, self).get_context_data()
+        amount = 0
 
-            for object in self.object_list:
-                if not object.isValid():
-                    Payable = False
-                    # break
+        itemsInst = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
+        if itemsInst:
+            amount = itemsInst.aggregate(total = Sum('amount'))['total']
 
-            if Payable:
-                invoiceInst = invoiceGenerate(self.request)
-                return redirect(paymentRequest(self.request, invoiceInst))
-            else:
-                messages.error(self.request, _("Please check your cart and remove yellow programs. This programs expired or do not have enough space."))
-        else:
-            context = super(checkout, self).get_context_data()
-            amount = 0
-
-            itemsInst = enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE)
-            if itemsInst:
-                amount = itemsInst.aggregate(total = Sum('amount'))['total']
-
-            #if discountInst:
-            #    discount = 0
-
-            context['totalAmount'] = amount
+        context['totalAmount'] = amount
 
         return super(checkout, self).render_to_response(context)
 # ----------------------------------------------------
