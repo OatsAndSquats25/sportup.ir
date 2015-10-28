@@ -10,18 +10,16 @@ from finance.models import transaction
 def paymentRequest(request, InvoiceInst):
 
     amount = InvoiceInst.amount
-    validCredits = userCredit.objects.active().filter(user = request.user)
+    validCredits = userCredit.objects.active().filter(user = request.user).order_by("expiry_day")
     for credit in validCredits:
-        if amount == 0:
+        if credit.value >= amount:
+            credit.value -= amount
+            amount = 0
             break
         else:
-            if credit.value > amount:
-                credit.value -= amount
-                amount = 0
-            else:
-                credit.value = 0
-                amount -= credit.value
-            credit.save()
+            credit.value = 0
+            amount -= credit.value
+        credit.save()
 
     transaction.objects.create(invoiceKey = InvoiceInst,
                                ref_id='credit',
