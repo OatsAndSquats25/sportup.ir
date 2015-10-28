@@ -130,7 +130,7 @@ class profileUpdate(UpdateView):
 # -----------------------------------------------------------------------
 class loginRegister(View):
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated():
             return redirect(request.GET.get('next','/'))
         formLog = userLoginForm(prefix='formLog')
         formReg = userRegisterForm(prefix='formReg')
