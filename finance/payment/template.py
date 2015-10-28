@@ -6,23 +6,25 @@ def paymentRequest(request, InvoiceInst):
     # generate transaction
     # gateway behavior
     # redirect to gateway
-    transaction.objects.create(invoiceKey = InvoiceInst,
-                               ref_id=<<<<id>>>>,
-                               amount=InvoiceInst.amount,
-                               user=request.user)
-    return redirect(<<<<->>>>)
+    # transaction.objects.create(invoiceKey = InvoiceInst,
+    #                            ref_id=<<<<id>>>>,
+    #                            amount=InvoiceInst.amount,
+    #                            user=request.user)
+    # return redirect(<<<<->>>>)
+    pass
 
 def paymentResponse(request,*args,**kwargs):
-    transInst = transaction.objects.get(ref_id=<<<<id>>>>)
+    # transInst = transaction.objects.get(ref_id=<<<<id>>>>)
 
     # gateway behavior
     # set result and transaction based result
     #Error
-        transInst.description = resCode
-        transInst.save()
-        return { 'status' : False}
+        # transInst.description = resCode
+        # transInst.save()
+        # return { 'status' : False}
     #Correct
-    transInst.trans_id = <<<<trans_id>>>>
-    transInst.save()
+    # transInst.trans_id = <<<<trans_id>>>>
+    # transInst.save()
 
-    return{ 'status' : True, 'invoiceId' : transInst.invoiceKey.id }
+    # return{ 'status' : True, 'invoiceId' : transInst.invoiceKey.id }
+    pass
