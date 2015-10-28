@@ -38,6 +38,10 @@ class addCredit(FormView):
     """
     form_class = creditForm
     template_name = "credit/credit.html"
+    def get_context_data(self, **kwargs):
+        context = super(addCredit, self).get_context_data(**kwargs)
+        context['object_list'] = userCredit.objects.filter(user = self.request.user).order_by('expiry_date')
+        return context
     # success_url = "/"
     def form_valid(self, form):
         invoiceInst = invoice.objects.create(amount=form.cleaned_data['value'], context=_("Payment pending"), user= self.request.user)
