@@ -89,9 +89,7 @@ def clubSignUpConfirm(request, user):
 #    return sendEmailNotification(request, user, "email/club_signUp_confirm_subject.txt", "email/club_signUp_confirm")
 # ----------------------------------------------------
 
-def reservedByClub(request, user, _invoicekey, email):
-    enrollItem = enrolledProgram.objects.get(invoiceKey = _invoicekey)
-    club = enrollItem.programDefinitionKey.clubKey
+def reservedByClub(request, user, club, email):
     return sendEmailNotification(request, user, "email/reserve_from_dashboard_subject.txt", "email/reserve_from_dashboard", club, email)
 # ----------------------------------------------------
 

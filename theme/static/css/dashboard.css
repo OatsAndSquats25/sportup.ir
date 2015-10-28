@@ -210,6 +210,7 @@ td{
 #prev-week{
     float: right;
     cursor: pointer;
+    display: none;
 }
 .nav-tabs>li{
 	float: right;

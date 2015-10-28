@@ -49,6 +49,8 @@
 
 			self.isSession = 0;
 
+            $('body').animate({scrollTop: 0},'slow');
+
 			switch (url) {
 				case '': {
 					self.redirect('sessions');
@@ -120,7 +122,6 @@
 				url : '/api/course/',
 				data : { pk : self.clubID }, 
 				success : function(res) {
-                    console.log(res)
 					courseListItems = _.template($('#course-item-template').html());
 
 					_.each(res , function(eachModel){
@@ -143,13 +144,12 @@
 				type : 'GET',
 				cache : false,
 				success : function(res) {
-                    console.log(res)
 					$('#eachCourseRegList').html('<tr><th>حاضر</th><th>نام</th><th>نام خانوادگی</th><th>ایمیل</th><th>تلفن</th><th>حذف</th></tr><tr><td></td><td><input type="text" class="edit" id="firstname" name="firstname"></td><td><input type="text" class="edit" name="lastname" id="lastname"></td><td><input type="text" class="edit" name="email" id="email"></td><td><input type="text" class="edit" name="telephone" id="telephone"></td><td><button class="btn btn-sm btn-success courseRegListadd"><i class="fa fa-plus"></i></button></td></tr>');
 
 					var template = _.template( $('#each-course-attendance-template').html() );
 
 					res.forEach(function(item){
-						_.extend(item, self.detectStatus(item.firstAccess));
+						_.extend(item, self.detectStatus(item.firstAccess), self.courseDeletePermission(item.user));
 						$('#eachCourseRegList').append( template( item ) );
 					});
 					
@@ -171,7 +171,6 @@
 			var telephoneVal = tr.find('#telephone').val();
             var status = self.detectStatus(false);
 
-            console.log(status)
 			if(firstnameVal  != '' && lastnameVal  != ''){
 				if (!self.validateEmail('email', emailVal) && emailVal != '') {
 					alert('ایمیل شما صحیح نمی باشد!');
@@ -262,6 +261,18 @@
 		            		startHours = session.begin;
 							endHours = session.end;	
 							self.maxWeek = session.capacity;
+
+							if (self.week == 0){
+								$('#prev-week').hide();
+							}else{
+								$('#prev-week').show();
+							}
+
+							if (self.maxWeek - self.week == 1) {
+								$('#next-week').hide();
+							}else{
+								$('#next-week').show();
+							}
 		            	}else{
 		            		var right = (session.day + 1) * ($('#sessions-holder').innerWidth() / 8);
 		            		var top = self.generateTop(session.begin, startHours) * 30;
@@ -310,7 +321,6 @@
 		},
 
 		hiddenSession : function () {
-            console.log(self.flagModifySessionList);
 			if (self.flagModifySessionList) {
 				self.getSessions(self.week);
 				self.sessionAttendanceList();
@@ -350,6 +360,24 @@
 			return res;
 		},
 
+        sessionDeletePermission : function (userID) {
+			if (self.clubOwnerID == userID) {
+				res = {'deleteItem' : '<button class="btn btn-danger btn-sm sessionRegListdelete"><i class="fa fa-trash-o"></i></button>'};
+				return res;
+			};
+			var res = {'deleteItem' : ''};
+			return res;
+		},
+
+		courseDeletePermission : function (userID) {
+			if (self.clubOwnerID == userID) {
+				res = {'deleteItem' : '<button class="btn btn-danger btn-sm courseRegListdelete"><i class="fa fa-trash-o"></i></button>'};
+				return res;
+			};
+			var res = {'deleteItem' : ''};
+			return res;
+		},
+
 		approvePresent : function () {
 			var item = $(this);
             var id = $(this).parent().parent().attr('id');
@@ -380,9 +408,11 @@
 
 					$('#eachSessionRegList').html('<tr><th>نام</th><th>نام خانوادگی</th><th>ایمیل</th><th>تلفن</th><th>حذف</th></tr><tr><td><input type="text" class="edit" id="firstname" name="firstname"></td><td><input type="text" class="edit" name="lastname" id="lastname"></td><td><input type="text" class="edit" name="email" id="email"></td><td><input type="text" class="edit" name="telephone" id="telephone"></td><td><button class="btn btn-sm btn-success sessionRegListadd"><i class="fa fa-plus"></i></button></td></tr>');
 
-					var template = _.template( $('#each-session-attendance-template').html() );
+
+					var template = _.template($('#each-session-attendance-template').html());
 
 					res.forEach(function(item){
+                        _.extend(item, self.sessionDeletePermission(item.user));
 						$('#eachSessionRegList').append( template( item ) );
 					});
 					
@@ -443,7 +473,6 @@
 
 		deleteItem: function () {
 			var id = $(this).parent().parent().attr('id');
-			console.log(id);
 			res = confirm('آیا از حذف رکورد انتخاب شده مطمئن هستید ؟');
 			if(res){
 				var item = $(this);
@@ -453,7 +482,6 @@
 					cache : false,
 					success : function() {
                         self.flagModifySessionList = 1;
-                        console.log(self.flagModifySessionList);
 						item.parent().parent().remove();
 					}
 				});
@@ -520,6 +548,7 @@
 		},
 
 		generateNextWeek : function () {
+			$('#prev-week').show();
 			if (self.week < self.maxWeek - 1) {
 				self.week++;
 				self.getSessions(self.week);
@@ -527,6 +556,7 @@
 		},
 
 		generatePrevWeek : function () {
+			$('#next-week').show();
 			if(self.week > 0){
 				self.week--;
 				self.getSessions(self.week);

@@ -186,3 +186,23 @@ ul li a{
 	margin-top: 61px;
 	min-height: calc(100% - 270px);
 }
+#user-credit{
+	position: fixed;
+	bottom: 15px;
+	left: 15px;
+	height: 40px;
+	width: 300px;
+	margin: 0 auto;
+	overflow: hidden;
+	border-radius: 3px;
+	line-height: 40px;
+	background-color: #F9EDBE;
+	border: 1px solid #F0C36D;
+	box-shadow: 0 0 5px #ccc;
+	font-family: yekan;
+	font-size: 18px;
+  	color: #333;
+	text-align: center;
+	z-index: 10000;
+	display: inline-block;
+}

@@ -219,3 +219,8 @@ body, html{
 .verify i{
     ont-size: 25px;
 }
+.noresult{
+	width: 300px;
+	margin: 0 auto;
+	text-align: center;
+}

@@ -126,8 +126,7 @@
 		generateCategory : function () {
 			var output = '';
 			for(i=0;i < Data.categories.length;i++){
-				j = i + 1;
-				output += '<option value="'+ j +'">'+ Data.categories[i] +'</option>';
+				output += '<option value="'+ Data.categories[i].id +'">'+ Data.categories[i].title +'</option>';
 			}
 			this.config.category.append(output);
 		},
@@ -204,6 +203,18 @@
 			this.cnf.title.on('keydown', this.titleChange);
 			self.cnf.window.resize(this.searchItemsHeightFix);
 			window.onhashchange = this.locator;
+			// Infinite scroll
+			//$('#content').scroll(this.infinitescroll);
+		},
+
+		infinitescroll : function () {
+			var item = $(this).context;
+			if (item.offsetHeight + item.scrollTop == item.scrollHeight) {
+				if (self.nextPageURL && self.flagOnceInfiniteRequest) {
+					self.flagOnceInfiniteRequest = 0;
+					//self.getData(self.Query, self.nextPageURL, true);
+				};
+			};
 		},
 
 		searchItemsHeightFix : function () {
@@ -391,7 +402,7 @@
 
 		getData : function (inputs) {
 
- 			var allData = ['title', 'category', 'genre', 'gender', 'price_min', 'price_max', 'city', 'region']
+ 			var allData = ['title', 'category', 'genre', 'gender', 'price_min', 'price_max', 'city', 'region'];
 			req = {};
 			for (var i = 0; i < allData.length; i++) {
 				var key = allData[i];
@@ -404,6 +415,10 @@
 				url : '/api/directory/',
 				data : req,
 				success : function(res) {
+					if (res.count == 0) {
+						return self.cnf.content.html('<div class="noresult">نتیجه ای یافت نشد.</div>');
+					}
+					self.flagOnceInfiniteRequest = 1;
 					var clubTemplate = self.cnf.clubTemplate.html();
 
 					self.cnf.content.html('');
@@ -464,22 +479,19 @@
 
 			var output = '';
 			for(i=0;i < Data.genre.length;i++){
-				j = i + 1;
-				output += '<option value="'+ j +'">'+ Data.genre[i] +'</option>';
+				output += '<option value="'+ Data.genre[i].id +'">'+ Data.genre[i].title +'</option>';
 			}
 			this.cnf.genre.append(output);
 
 			var output = '';
 			for(i=0;i < Data.categories.length;i++){
-				j = i + 1;
-				output += '<option value="'+ j +'">'+ Data.categories[i] +'</option>';
+				output += '<option value="'+ Data.categories[i].id +'">'+ Data.categories[i].title +'</option>';
 			}
 			this.cnf.category.append(output);
 
 			var output = '';
 			for(i=0;i < Data.city.length;i++){
-				j = i + 1;
-				output += '<option value="'+ j +'">'+ Data.city[i] +'</option>';
+				output += '<option value="'+ Data.city[i].id +'">'+ Data.city[i].title +'</option>';
 			}
 			this.cnf.city.append(output);
 		}
@@ -790,6 +802,18 @@
 		            		startHours = session.begin;
 							endHours = session.end;	
 							self.maxWeek = session.capacity;
+
+							if (self.week == 0){
+								$('#prev-week').hide();
+							}else{
+								$('#prev-week').show();
+							}
+
+							if (self.maxWeek - self.week == 1) {
+								$('#next-week').hide();
+							}else{
+								$('#next-week').show();
+							}
 		            	}else{
 		            		var right = (session.day + 1) * (self.config.sessions.innerWidth() / 8);
 		            		var top = self.generateTop(session.begin, startHours) * 30;
