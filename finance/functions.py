@@ -3,11 +3,13 @@ from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Sum
 
+from generic import email,sms
 from models import invoice
+from credit.models import userCredit
 from program.models import programDefinition
 from enroll.models import enrolledProgram
 from finance.models import transaction
-from payment import testPay, payline, paylineTest
+from payment import testPay, payline, paylineTest, creditpay
 #----------------------------------------------------------------------
 def invoiceGenerate(request):
     """
@@ -21,7 +23,7 @@ def invoiceGenerate(request):
     enrolledProgram.objects.filter(user_id = request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).update(invoiceKey = invoiceInst)
     return invoiceInst
 #----------------------------------------------------------------------
-def invoicePayed(idValue):
+def invoicePayed(request, idValue):
     """
     Successful payment of each invoice call this function to update invoice and enroll status
     """
@@ -32,7 +34,14 @@ def invoicePayed(idValue):
     invoiceInst.save()
 
     # change enroll`s status to active
+    # enrolledInst = enrolledProgram.objects.select_related().filter(invoiceKey = invoiceInst).update(status = enrolledProgram.CONTENT_STATUS_ACTIVE)
+
     enrolledInst = enrolledProgram.objects.select_related().filter(invoiceKey = invoiceInst).update(status = enrolledProgram.CONTENT_STATUS_ACTIVE)
+    creditInst = userCredit.objects.select_related().filter(invoiceKey = invoiceInst).update(status = enrolledProgram.CONTENT_STATUS_ACTIVE)
+
+    if enrolledInst:
+        email.reservedByAthlete(request, request.user, invoiceInst)
+        sms.reservedByAthlete(request, invoiceInst)
 
     return True
 #----------------------------------------------------------------------
@@ -47,10 +56,13 @@ def invoiceError(idValue):
 
     return True
 #----------------------------------------------------------------------
-def paymentRequest(request, invoiceInst):
+def paymentRequest(request, invoiceInst, _gateway='0'):
 
     try:
-        default_gateway = settings.DEFAULT_PAYMENT_GATEWAY
+        if _gateway == '0':
+            default_gateway = settings.DEFAULT_PAYMENT_GATEWAY
+        else:
+            default_gateway = _gateway
     except:
         raise Http404
 
@@ -60,5 +72,8 @@ def paymentRequest(request, invoiceInst):
         return payline.paymentRequest(request, invoiceInst)
     elif default_gateway == 'paylinetest':
         return paylineTest.paymentRequest(request, invoiceInst)
+    elif default_gateway == 'creditpay':
+        invoicePayed(request, invoiceInst.id)
+        return creditpay.paymentRequest(request, invoiceInst)
 
 #----------------------------------------------------------------------
