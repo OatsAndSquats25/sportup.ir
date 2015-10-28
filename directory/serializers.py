@@ -26,6 +26,7 @@ class clubTitleSerializer(serializers.ModelSerializer):
         fields = ('id', 'pk','title')
 # ---------------------------------------------------
 class clubItemSerializer(serializers.ModelSerializer):
+    hasAgreement    = serializers.CharField(source='has_agreement')
     complexName     = serializers.CharField(source='complex_name')
     complexSummary  = serializers.CharField(source='complex_summary')
     locationName    = serializers.CharField(source='location_name')

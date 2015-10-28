@@ -141,6 +141,9 @@ class club(Displayable):
     def contacts(self):
         return self.contact_set
 
+    def has_agreement(self):
+        return self.agreement_set.active().count()
+
     def __unicode__(self):
         return self.locationKey.complexKey.title + ":" + self.title
         # return self.locationKey.complexKey.title + ":" + self.locationKey.title + ":" + self.title
