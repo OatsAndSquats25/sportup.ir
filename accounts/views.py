@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Permission
 from django.contrib.auth import authenticate, login
 from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import redirect
 from django.utils.timezone import now
 import time
 import importlib
@@ -129,6 +130,8 @@ class profileUpdate(UpdateView):
 # -----------------------------------------------------------------------
 class loginRegister(View):
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(request.GET.get('next','/'))
         formLog = userLoginForm(prefix='formLog')
         formReg = userRegisterForm(prefix='formReg')
         return render(request, 'registration/login-register.html',
