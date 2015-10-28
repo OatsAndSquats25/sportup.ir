@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-04 18:22+0000\n"
+"POT-Creation-Date: 2015-10-28 12:21+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dashboard.py:9
+#: dashboard.py:9 templatetags/enroll_tags.py:9
 msgid "Enrollment"
 msgstr "ثبت نام"
 
@@ -153,12 +153,16 @@ msgstr "ریال"
 msgid "Payment"
 msgstr "پرداخت"
 
-#: views.py:44 views.py:187 views.py:198
+#: views.py:48 views.py:205 views.py:220
 msgid ""
 "This program is not valid for enroll. Validation expired or no free spcae."
 msgstr ""
 "این برنامه جهت خرید معتبر نمی باشد. اعتبار پایان رسیده یا ظرفیت آن تمام شده "
 "است"
+
+#: views.py:199 views.py:214
+msgid "Club account does not permission to buy."
+msgstr "حساب باشگاه مجوز خرید ندارد. لطفا از حسبا شخصی خود استفاده کنید."
 
 #~ msgid "Receipt"
 #~ msgstr "رسید"

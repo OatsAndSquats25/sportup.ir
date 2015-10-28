@@ -195,6 +195,10 @@ class enrollInCourse(View):
     Enroll in course and redirect to shopping cart
     """
     def post(self, request, *args, **kwargs):
+        if request.user.has_perm('accounts.club_owner'):
+            messages.error(request, _('Club account does not permission to buy.'))
+            return redirect(request.META.get('HTTP_REFERER'))
+
         if enrollCourseFunction(request):
             return redirect('checkoutURL')
         else:
@@ -206,6 +210,10 @@ class enrollInSession(View):
     Enroll in session and redirect to shopping cart
     """
     def post(self, request, *args, **kwargs):
+        if request.user.has_perm('accounts.club_owner'):
+            messages.error(request, _('Club account does not permission to buy.'))
+            return redirect(request.META.get('HTTP_REFERER'))
+
         if enrollSessionFunction(request):
             return redirect('checkoutURL')
         else:
