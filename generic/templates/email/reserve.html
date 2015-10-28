@@ -32,8 +32,8 @@
         <tr>
             <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.programDefinitionKey.clubKey.title }}</td>
             <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.programDefinitionKey.title }}</td>
-            <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.programDefinitionKey.publish_date | g2j }}</td>
-            <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.programDefinitionKey.publish_date.time}}</td>
+            <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.date | g2j }}</td>
+            <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.sessionTimeBegin }}</td>
             <td style="border: 1px solid #000000; padding: 2px; border-top: none;">{{ obj.amount }}</td>
         </tr>
         {% endfor %}

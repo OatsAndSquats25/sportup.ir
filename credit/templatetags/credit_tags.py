@@ -9,5 +9,8 @@ register = template.Library()
 def get_credit(context):
     request = context['request']
     validCredits = userCredit.objects.active().filter(user = request.user).aggregate(overallCredit = Sum('value'))
-    return validCredits['overallCredit']
+    if validCredits['overallCredit']:
+        return validCredits['overallCredit']
+    else:
+        return 0
 # -----------------------------------------------------------------------
