@@ -73,12 +73,11 @@
                     <li><a href="{% url 'dashboardURL' %}">{% trans "Dashboard" %}</a></li>
                 {% else %}
                     <li><a href="{% url 'checkoutURL' %}"><i class="fa fa-shopping-cart"></i>{% trans "Shopping Cart" %}</a></li>
-                {% endif %}
-                <li>
-                    <a href="/credit">
+                    <li><a href="/credit">
                         اعتبار شما : {% get_credit %} ریال
-                    </a>
-                </li>
+                    </a></li>
+
+                {% endif %}
             {% endif %}
             {% endblock %}
 
