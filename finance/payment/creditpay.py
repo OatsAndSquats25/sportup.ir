@@ -15,10 +15,9 @@ def paymentRequest(request, InvoiceInst):
         if credit.value >= amount:
             credit.value -= amount
             amount = 0
-            break
         else:
-            credit.value = 0
             amount -= credit.value
+            credit.value = 0
         credit.save()
 
     transaction.objects.create(invoiceKey = InvoiceInst,

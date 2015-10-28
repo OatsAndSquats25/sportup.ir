@@ -40,8 +40,11 @@ def invoicePayed(request, idValue):
     creditInst = userCredit.objects.select_related().filter(invoiceKey = invoiceInst).update(status = enrolledProgram.CONTENT_STATUS_ACTIVE)
 
     if enrolledInst:
-        email.reservedByAthlete(request, request.user, invoiceInst)
-        sms.reservedByAthlete(request, invoiceInst)
+        try:
+            sms.reservedByAthlete(request, invoiceInst)
+            email.reservedByAthlete(request, request.user, invoiceInst)
+        except:
+            pass
 
     return True
 #----------------------------------------------------------------------
@@ -73,7 +76,8 @@ def paymentRequest(request, invoiceInst, _gateway='0'):
     elif default_gateway == 'paylinetest':
         return paylineTest.paymentRequest(request, invoiceInst)
     elif default_gateway == 'creditpay':
+        returnAddress = creditpay.paymentRequest(request, invoiceInst)
         invoicePayed(request, invoiceInst.id)
-        return creditpay.paymentRequest(request, invoiceInst)
+        return returnAddress
 
 #----------------------------------------------------------------------
