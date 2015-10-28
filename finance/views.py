@@ -46,7 +46,10 @@ class checkoutPay(View):
                 return redirect('checkoutURL')
 
         if gateway == 'creditpay':
-            validCredits = int((userCredit.objects.active().filter(user = request.user).aggregate(overallCredit = Sum('value')))['overallCredit'])
+            try:
+                validCredits = int((userCredit.objects.active().filter(user = request.user).aggregate(overallCredit = Sum('value')))['overallCredit'])
+            except:
+                validCredits = 0
             remainEnroll = int((enrolledProgram.objects.filter(user_id = self.request.user.id).filter(status = enrolledProgram.CONTENT_STATUS_INACTIVE).aggregate(payable = Sum('amount')))['payable'])
 
             if remainEnroll > validCredits:

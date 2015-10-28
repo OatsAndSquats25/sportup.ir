@@ -114,7 +114,7 @@ msgstr ""
 
 #: views.py:53
 msgid "You do not have enough credit to pay your invoice!"
-msgstr ""
+msgstr "اعتبار شما برای پرداخت کافی نمی باشد."
 
 #: views.py:74
 msgid "We do not support this payment gateway"
