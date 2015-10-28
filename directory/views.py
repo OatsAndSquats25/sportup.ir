@@ -116,7 +116,7 @@ class getList(generics.ListAPIView):
     position    -- athlete location
     distance    -- distance from location
     """
-    queryset        = club.objects.active().distinct().order_by('-homepage')
+    queryset        = club.objects.active().distinct()
     serializer_class= clubItemSerializer
     paginate_by = 20
 
@@ -196,7 +196,7 @@ class getList(generics.ListAPIView):
                 return ''
 
         queryInst = queryInst.select_related()
-        return queryInst
+        return sorted(queryInst, key=lambda a: a.has_agreement, reverse=True)
 #---------------------------------------------------
 class getItem(generics.RetrieveAPIView):
     """
