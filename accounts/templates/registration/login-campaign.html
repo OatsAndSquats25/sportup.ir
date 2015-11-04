@@ -1,0 +1,113 @@
+{% extends 'basenew.html' %}
+{%  load i18n staticfiles %}
+
+{% block extra_css %}
+	<style>
+		body{
+			background-color: #ffffff;
+		}
+		h2{
+			margin: 0 0 20px;
+			font-weight: bold;
+			padding: 10px;
+			display: inline-block;
+		}
+		.container-fluid{
+			padding: 101px 101px 50px;
+			color: #333;
+			line-height: 30px;
+			box-shadow: 0 0 5px #ccc;
+		}
+		#map-holder{
+			width: 100%;
+			height: 210px;
+		}
+		#contact-info{
+			text-align: left !important;
+		    direction: ltr !important;
+		    font-family: mitra, monospace !important;
+		    font-size: 16px !important;
+		}
+        .campaign-img {
+          cursor: pointer;
+          border: 0 none;
+          display: inline-block;
+          height: auto;
+          max-width: 100%;
+          vertical-align: middle;
+        }
+        #registering {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .container-fluid {
+            padding: 64px 101px 50px;
+        }
+
+	</style>
+{% endblock %}
+
+{% block meta_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block main %}
+
+    {% block authentication %}
+    {% endblock %}
+
+    {% if formLog.errors %}
+        <div class="alert alert-danger">
+            <p>{% trans "Your username and password didn't match. Please try again." %}</p>
+        </div>
+    {% endif %}
+
+
+{#    {% if formReg.errors %}#}
+{#        <div class="alert alert-danger">#}
+{#            <p>{% trans "You have error in register form." %}</p>#}
+{#        </div>#}
+{#    {% endif %}#}
+
+    {% if user.is_authenticated %}
+        <h1>{% trans "You are already loggin in" %}</h1>
+    {% else %}
+	<div class="container-fluid">
+		<div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="col-md-2 col-lg-2"></div>
+                <div id="registering" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <form role="form" id="form-sign-in-account"  method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+                        {% csrf_token %}
+                        <h3>{% trans "Sign In" %}</h3>
+                        <br>
+                        {% for field in formLog %}
+                            <a style="color:red">{{ field.errors }}</a>
+                            <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
+                        {% endfor %}
+                        <input type="hidden" name="userAction" value="signIn" />
+                        <a href="{% url 'password_reset' %}"><small>{% trans "Lost your password?" %}</small></a>
+                        <br>
+                        <br>
+                        <input type="submit" value="{% trans "Sign In" %}" class="btn btn-default">
+                    </form>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="scrollToElement('#registering', 600)">
+                    <img class="campaign-img" src="{% static "img/campaign2.png" %}"alt="campaign">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6" onclick="scrollToElement('#registering', 600)">
+                <img class="campaign-img" src="{% static "img/campaign1.png" %}"alt="campaign">
+            </div>
+		</div>
+	</div>
+    {% endif %}
+
+{% endblock %}
+{% block extra_js_end %}
+    <script type="text/javascript">
+        $('.campaign-img').click(function() {
+            window.location.href = '/accounts/register';
+            return false;
+        });
+    </script>
+    <script type="text/javascript" src="{% static "assets/js/icheck.min.js" %}"></script>
+{% endblock %}
