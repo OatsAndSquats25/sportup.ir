@@ -229,7 +229,7 @@ class loginRegisterCampaign(View):
                                           value=200000,
                                           status=userCredit.CONTENT_STATUS_ACTIVE,
                                           publish_date=now(),
-                                          expiry_date=now()+timedelta(days=7),
+                                          expiry_date=now()+timedelta(days=20),
                                           user=userAuth)
                 email.approvedRegisteredAccount(request, userAuth)
                 messages.info(request, _("Register successfully"))
