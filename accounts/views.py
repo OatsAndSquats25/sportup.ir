@@ -134,7 +134,7 @@ class loginRegister(View):
             return redirect(request.GET.get('next','/'))
         formLog = userLoginForm(prefix='formLog')
         formReg = userRegisterForm(prefix='formReg')
-        return render(request, 'registration/login-register.html',
+        return render(request, 'registration/login-campaign.html',
                       {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
 
     def post(self, request, *args, **kwargs):
