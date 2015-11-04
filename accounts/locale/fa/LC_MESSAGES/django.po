@@ -195,4 +195,4 @@ msgstr "شما با موفقیت ثبت نام کردید."
 
 #: views.py:160
 msgid "Email address exist. Please try another email address."
-msgstr ""
+msgstr "آدرس ایمیل وجود دارد، لطفا آدرسی دیگری وارد کنید."
