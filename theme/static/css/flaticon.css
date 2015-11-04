@@ -14,27 +14,16 @@
 	font-size: 40px;
 font-style: normal;
 margin-left: 20px;
+
 }.flaticon-aim5:before {
 	content: "\e000";
 }
-.flaticon-essential1:before {
+.flaticon-diver2:before {
 	content: "\e001";
 }
-.flaticon-massage3:before {
+.flaticon-relax34:before {
 	content: "\e002";
 }
-.flaticon-rescue:before {
-	content: "\e003";
-}
-.flaticon-soldiers2:before {
-	content: "\e004";
-}
 .flaticon-tennis2:before {
-	content: "\e005";
-}
-.flaticon-tennis4:before {
-	content: "\e006";
-}
-.flaticon-water77:before {
-	content: "\e007";
+	content: "\e003";
 }
