@@ -95,16 +95,16 @@
             </div>
             <div class="row">
                 <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4"></div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><span class="flaticon-tennis4"></span>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><span class="flaticon-tennis4"></span>
                     <p>تنیس</p>
                 </div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><i class="flaticon-massage3"></i>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><i class="flaticon-massage3"></i>
                     <p>ماساژ</p>
                 </div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><i class="flaticon-aim5"></i>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><i class="flaticon-aim5"></i>
                     <p>پینت بال</p>
                 </div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><i class="flaticon-rescue"></i>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><i class="flaticon-rescue"></i>
                     <p>غواصی</p>
                 </div>
                 <div class="col-md-4 col-lg-4"></div>
@@ -266,5 +266,11 @@
         $(window).load(function(){
             $('#myModal').modal('show');
         });
+    </script>
+    <script type="text/javascript">
+        var categoryClick = function(ref) {
+            window.location.href = ref;
+            return false;
+        };
     </script>
 {% endblock %}
