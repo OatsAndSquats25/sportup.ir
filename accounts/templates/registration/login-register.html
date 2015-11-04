@@ -58,7 +58,7 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-4">
-				<form role="form" id="form-sign-in-account"  method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+				<form role="form" id="form-sign-in-account"  method="post" action="{% url 'accountsLoginRegister' %}?next={{ next }}">
                     {% csrf_token %}
 					<h3>{% trans "Sign In" %}</h3>
 					<br>
@@ -77,7 +77,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-4">
 
-				<form role="form" id="form-register" method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+				<form role="form" id="form-register" method="post" action="{% url 'accountsLoginRegister' %}?next={{ next }}">
                     {% csrf_token %}
 					<h3>{% trans "Register" %}</h3>
 					<br>

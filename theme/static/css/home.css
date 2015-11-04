@@ -507,7 +507,7 @@ header{
 
 #campaign-modal button{
     position: absolute;
-    color: red;
-    margin-top: 15px;
-    margin-right: 15px;
+    color: black;
+    margin-top: 2px;
+    margin-right: 2px;
 }

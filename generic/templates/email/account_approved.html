@@ -1,7 +1,10 @@
 {% extends "email/emailbase.html" %}
 {% load i18n future %}
-{% block emailmain %}
+
+{% block main %}
 <p>{% trans "Hey there, your account has been activated." %}</p>
+<p>مبلغ ۲۰۰.۰۰۰ ریال از طرف اسپورتآپ به مدت ۲۰ روز جهت هدیه استفاده از خدمات ما در اختیار شما است.</p>
+<p>با هر خرید شانس خود را در برنده شدن یکی از ۵ دستگاه تبلت افزایش دهید.</p>
 <p>{% trans "Please use the link below to log in." %}</p>
 <p><a href="http://{{ request.get_host }}{% url "login" %}">http://{{ request.get_host }}{% url "login" %}</a></p>
 {% endblock %}
