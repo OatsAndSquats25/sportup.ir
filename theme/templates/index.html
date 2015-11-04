@@ -7,6 +7,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href={% static "css/home.css" %}>
+    <link rel="stylesheet" href={% static "css/flaticon.css" %}>
 {% endblock %}
 
 {#{% block breadcrumb_menu %}#}
@@ -95,16 +96,16 @@
             </div>
             <div class="row">
                 <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4"></div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><span class="flaticon-tennis4"></span>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/search#category=1')"><span class="flaticon-tennis4"></span>
                     <p>تنیس</p>
                 </div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><i class="flaticon-massage3"></i>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/search#category=2')"><i class="flaticon-massage3"></i>
                     <p>ماساژ</p>
                 </div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><i class="flaticon-aim5"></i>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/search#category=3')"><i class="flaticon-aim5"></i>
                     <p>پینت بال</p>
                 </div>
-                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/')"><i class="flaticon-rescue"></i>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1" onclick="categoryClick('/search#category=5')"><i class="flaticon-rescue"></i>
                     <p>غواصی</p>
                 </div>
                 <div class="col-md-4 col-lg-4"></div>
@@ -149,9 +150,9 @@
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
-					<a class="items">
-						<img src={% static "img/sports/7.jpg" %} alt="" style="opacity: 0.4;">
-						<div class="items-title">تفریحی <small>(به زودی)</small></div>
+					<a href="/search#genre=2" class="items">
+						<img src={% static "img/sports/7.jpg" %} alt="">
+						<div class="items-title">تفریحی </div>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
@@ -167,15 +168,15 @@
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
-					<a class="items">
-						<img src={% static "img/sports/2.jpg" %} alt="" style="opacity: 0.4;">
-						<div class="items-title">آرامش بخش <small>(به زودی)</small></div>
+					<a href="/search#genre=5" class="items">
+						<img src={% static "img/sports/2.jpg" %} alt="">
+						<div class="items-title">آرامش بخش </div>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
-					<a class="items">
-						<img src={% static "img/sports/5.jpg" %} alt="" style="opacity: 0.4;">
-						<div class="items-title">مبارزه ای <small>(به زودی)</small></div>
+					<a href="/search#genre=6" class="items">
+						<img src={% static "img/sports/5.jpg" %} alt="">
+						<div class="items-title">مبارزه ای</div>
 					</a>
 				</div>
 			</div>
