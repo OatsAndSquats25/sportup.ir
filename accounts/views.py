@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect
 from django.utils.timezone import now
+from datetime import datetime, timedelta
 import time
 import importlib
 import jdatetime
@@ -19,6 +20,7 @@ from generic import sms
 from enroll.models import enrolledProgram
 from agreement.models import agreement
 from directory.models import club
+from credit.models import userCredit
 
 from forms import userLoginForm, userRegisterForm
 from models import userProfile
@@ -177,8 +179,69 @@ class loginRegister(View):
 
         return render(request, 'registration/login-register.html',
                       {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
+# -----------------------------------------------------------------------
+class loginRegisterCampaign(View):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return redirect(request.GET.get('next','/'))
+        formLog = userLoginForm(prefix='formLog')
+        formReg = userRegisterForm(prefix='formReg')
+        if kwargs.get('register', False):
+            templateFile = 'registration/register-campaign.html'
+        else:
+            templateFile = 'registration/login-campaign.html'
+        return render(request, templateFile, {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
 
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('userAction', None) == "signIn":
+            formLog = userLoginForm(request.POST, prefix='formLog')
+            formReg = userRegisterForm(prefix='formReg')
+        elif request.POST.get('userAction', None) == "signUp":
+            formReg = userRegisterForm(request.POST, prefix='formReg')
+            formLog = userLoginForm(prefix='formLog')
 
+        if request.POST.get('userAction', None) == "signIn":
+            if formLog.is_valid():
+                userAuth = authenticate(username=formLog.cleaned_data['email'],
+                                        password=formLog.cleaned_data['password'])
+                if userAuth is not None:
+                    if userAuth.is_active:
+                        login(request, userAuth)
+                        messages.info(request, _("Logged in successfully"))
+                        return HttpResponseRedirect(request.GET.get('next', '/'))
+                    else:
+                        messages.error(request, _("Your account has been disabled. Please contact info@sportup.ir"))
+                else:
+                    messages.error(request, _("email or password is not correct."))
+        elif request.POST.get('userAction', None) == "signUp":
+            if formReg.is_valid():
+                userInst = User.objects.create_user(User.objects.count() + 1,
+                                                    email=formReg.cleaned_data['email'],
+                                                    password=formReg.cleaned_data['password'],
+                                                    first_name=formReg.cleaned_data['first_name'],
+                                                    last_name=formReg.cleaned_data['last_name'])
+                # return messages.error(_("Email address exist. Please try another email address."))
+                userAuth = authenticate(username=formReg.cleaned_data['email'],
+                                        password=formReg.cleaned_data['password'])
+                login(request, userAuth)
+                # add 200,000 rial credit to user after registration
+                userCredit.objects.create(originValue=200000,
+                                          value=200000,
+                                          status=userCredit.CONTENT_STATUS_ACTIVE,
+                                          publish_date=now(),
+                                          expiry_date=now()+timedelta(days=20),
+                                          user=userAuth)
+                email.approvedRegisteredAccount(request, userAuth)
+                messages.info(request, _("Register successfully"))
+                return HttpResponseRedirect(request.GET.get('next', '/'))
+            else:
+                messages.error(request, _("Email address exist. Please try another email address."))
+
+        if kwargs.get('register', False):
+            templateFile = 'registration/register-campaign.html'
+        else:
+            templateFile = 'registration/login-campaign.html'
+        return render(request, templateFile, {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
 # -----------------------------------------------------------------------
 class emailTest(View):
     # def get(self,request):

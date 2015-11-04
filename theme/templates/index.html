@@ -19,8 +19,8 @@
 		    <div class="modal-dialog">
 	            <div id= "campaign-modal" class="modal-content" width ="200px">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <a href="/search#genre=1">
-                        <img src={% static "img/tenis-toop.png" %} alt="" width="100%">
+                    <a href="{% url 'accountsRegisterURL' %}">
+                        <img src={% static "img/campaign1.png" %} alt="" width="100%">
                     </a>
 	        	</div>
 	        </div>
@@ -67,8 +67,8 @@
 			<ul class="hidden-xs">
             {% if not user.is_authenticated %}
 
-            {% block login_register %}<li><a id="signup"  href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Register" %}</a></li>{% endblock %}
-            {% block login_register2 %}<li><a href="{% url  'accounts_login_register' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>{% endblock %}
+            {% block login_register %}<li><a id="signup"  href="{% url  'accountsRegisterURL' %}?next={{ request.path }}">{% trans "Register" %}</a></li>{% endblock %}
+            {% block login_register2 %}<li><a href="{% url  'accountsLoginURL' %}?next={{ request.path }}">{% trans "Sign In" %}</a></li>{% endblock %}
 
             {% endif %}
 			</ul>

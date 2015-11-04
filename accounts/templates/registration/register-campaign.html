@@ -51,7 +51,7 @@
 
 {% block main %}
 
-    {% block authentication %}
+    {% block login_register %}
     {% endblock %}
 
     {% if formLog.errors %}
@@ -79,7 +79,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="col-md-2 col-lg-2"></div>
                 <div id="registering" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <form role="form" id="form-register" method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+                    <form role="form" id="form-register" method="post" action="{% url 'accountsRegisterURL' %}?next={{ next }}">
                         {% csrf_token %}
                         <h3>{% trans "Register" %}</h3>
                         <br>
@@ -88,7 +88,7 @@
                             <input type="{{ field.name }}" name="{{ field.html_name }}" class="form-control form-group" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"  {% if field.value %}value="{{ field.value }}"{% endif %}>
                         {% endfor %}
                         <input type="hidden" name="userAction" value="signUp" />
-                        <input type="submit" value="ثبت نام" class="btn btn-default">
+                        <input type="submit" value="ثبت نام" class="btn btn-danger">
                     </form>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="scrollToElement('#registering', 600)">

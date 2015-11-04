@@ -51,7 +51,7 @@
 
 {% block main %}
 
-    {% block authentication %}
+    {% block login_register2 %}
     {% endblock %}
 
     {% if formLog.errors %}
@@ -75,7 +75,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="col-md-2 col-lg-2"></div>
                 <div id="registering" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <form role="form" id="form-sign-in-account"  method="post" action="{% url 'accounts_login_register' %}?next={{ next }}">
+                    <form role="form" id="form-sign-in-account"  method="post" action="{% url 'accountsLoginURL' %}?next={{ next }}">
                         {% csrf_token %}
                         <h3>{% trans "Sign In" %}</h3>
                         <br>
@@ -87,7 +87,7 @@
                         <a href="{% url 'password_reset' %}"><small>{% trans "Lost your password?" %}</small></a>
                         <br>
                         <br>
-                        <input type="submit" value="{% trans "Sign In" %}" class="btn btn-default">
+                        <input type="submit" value="{% trans "Sign In" %}" class="btn btn-danger">
                     </form>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" onclick="scrollToElement('#registering', 600)">

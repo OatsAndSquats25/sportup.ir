@@ -2,6 +2,8 @@
 {% load i18n future %}
 {% block main %}
 {% trans "Hey there, your account has been activated." %}
+<p>مبلغ ۲۰۰.۰۰۰ ریال از طرف اسپورتآپ به مدت ۲۰ روز جهت هدیه استفاده از خدمات ما در اختیار شما است.</p>
+<p>با هر خرید شانس خود را در برنده شدن یکی از ۵ دستگاه تبلت افزایش دهید.</p>
 {% trans "Please use the link below to log in." %}
 http://{{ request.get_host }}{% url "login" %}
 {% endblock %}
