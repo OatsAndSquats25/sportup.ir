@@ -82,17 +82,33 @@
 			<button id="aboutTop">با یک کلیک</button>
 		</div>
 
-		<div id="searchbox">
-			<div id="sbholder" style="visibility: visible; ">
-				<select name="category" id="category">
-					<option value="0">نوع ورزش</option>
-				</select>
-				<div class="sbholder-a">
-					<input type="text" id="titleHome" placeholder="جستجو بر اساس نام باشگاه" class="searchInput">
-					<input type="submit" id="titleBtn" value="جستجو" class="searchButton">
-				</div>
-
-			</div>
+		<div id="searchbox" class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4"></div>
+                <div id="sbholder" style="visibility: visible; " class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="sbholder-a">
+                        <input type="text" id="titleHome" placeholder="جستجو بر اساس نام باشگاه" class="searchInput">
+                        <input type="submit" id="titleBtn" value="جستجو" class="searchButton">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-4 col-lg-4"></div>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><span class="flaticon-tennis4"></span>
+                    <p>تنیس</p>
+                </div>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><i class="flaticon-massage3"></i>
+                    <p>ماساژ</p>
+                </div>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><i class="flaticon-aim5"></i>
+                    <p>پینت بال</p>
+                </div>
+                <div class="category-icon col-xs-2 col-sm-2 col-md-1 col-lg-1"><i class="flaticon-rescue"></i>
+                    <p>غواصی</p>
+                </div>
+                <div class="col-md-4 col-lg-4"></div>
+            </div>
 		</div>
 	</header>
 
