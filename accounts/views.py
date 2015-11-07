@@ -233,7 +233,8 @@ class loginRegisterCampaign(View):
                                           user=userAuth)
                 email.approvedRegisteredAccount(request, userAuth)
                 messages.info(request, _("Register successfully"))
-                return HttpResponseRedirect(request.GET.get('next', '/'))
+                #return HttpResponseRedirect(request.GET.get('next', '/'))
+                return HttpResponseRedirect("/accounts/welcome/?next=" + request.GET.get('next', '/'))
             else:
                 messages.error(request, _("Email address exist. Please try another email address."))
 
@@ -242,6 +243,13 @@ class loginRegisterCampaign(View):
         else:
             templateFile = 'registration/login-campaign.html'
         return render(request, templateFile, {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
+# -----------------------------------------------------------------------
+class welcome(TemplateView):
+    template_name = 'registration/welcome.html'
+    def get_context_data(self, **kwargs):
+        context = {'nextPage': self.request.GET.get('next','/')}
+        return context
+
 # -----------------------------------------------------------------------
 class emailTest(View):
     # def get(self,request):

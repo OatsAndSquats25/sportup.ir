@@ -80,11 +80,11 @@ def paymentRes(request, *args, **kwargs):
     if payRes['status'] == True :
         invoicePayed(request, payRes['invoiceId'])
         messages.success(request, _("Payment was successful."))
-        return reverse('checkoutURL')
+        return reverse('paymentSucceededURL')
     else:
         invoiceError(payRes['invoiceId'])
         messages.error(request, _("Payment has error"))
-        return reverse('checkoutURL')
+        return reverse('paymentFailedURL')
 # ----------------------------------------------------
 class paymentResponse(View):
     def get(self,request,*args,**kwargs):
@@ -104,3 +104,17 @@ class testGateway(TemplateView):
 #     # show account eligible for defray but not dfray
 #     # capability for defray and insert finance document
 # ----------------------------------------------------
+class paymentSucceeded(TemplateView):
+    template_name = 'finance/paymentSucceeded.html'
+    #def get_context_data(self, **kwargs):
+    #    context = {'nextPage': kwargs.get("next")}
+    #    return context
+
+# -----------------------------------------------------------------------
+class paymentFailed(TemplateView):
+    template_name = 'finance/paymentFailed.html'
+    #def get_context_data(self, **kwargs):
+    #    context = {'nextPage': kwargs.get("next")}
+    #    return context
+
+# -----------------------------------------------------------------------
