@@ -1,0 +1,106 @@
+{% extends 'basenew.html' %}
+{%  load i18n static %}
+{% block extra_css %}
+    <style>
+        .col-md-6 {
+            border-right: 1px solid #F0F0F0;
+            border-left: 1px solid #F0F0F0;
+        }
+        #content {
+            text-align: right;
+             margin: 60px;
+        }
+        #head {
+              margin-bottom: 15px;
+              height: 55px;
+              text-align: center;
+              color: #6d717a;
+{#              border-bottom: 1px solid #F0F0F0;#}
+        }
+        #wrapper{
+            text-align: center;
+              margin: 40px;
+        }
+        a {
+           color: rgb(237, 52, 57);
+        }
+        h2 {
+              margin: 113px 0 33px 0;
+        }
+        .col-md-6 i {
+            color: #8BC34A;
+        }
+        .user-info {
+            height: 43px;
+        }
+        .about img{
+            width: 20px;
+            height: 20px;
+        }
+        @media screen and (max-width:992px){
+            #content {
+                 margin: 10px;
+            }
+        }
+
+    </style>
+{% endblock %}
+{% block extra_head %}
+    <META http-equiv="refresh" content="10000;URL={{ nextPage }}">
+{% endblock %}
+
+
+{% block main %}
+    <div id="wrapper">
+        <div id="head">
+            <h2>به خانواده اسپرت‌آپ خوش آمدید</h2>
+        </div>
+        <div id="content" class="row">
+            <div id="welcome" class="col-md-6">
+            <p>هدیه‌ی اسپرت‌آپ به شما مبلغ <strong>۲۰۰۰۰۰ ریال </strong> اعتبار است و این اعتبار از امروز به مدت ۲۰ روز در اختیار شما است.</p>
+            <p>پس از اولین
+    <a href="{% url 'directorySearchURL' %}">خرید</a>
+                در قرعه‌کشی
+                <strong>
+                ۵ تبلت
+                </strong>
+                شرکت کنید و با هر خرید شانس خود را در برنده شدن یکی از این تبلت‌ها افزایش دهید.</p>
+                </br></br>
+            <p>خواهشمند است با
+                <a href="{% url 'profileUpdate' %}">تکمیل پروفایل</a>
+          خود ما را در ارایه خدمات بهتر، یاری کنید.</p>
+            </div>
+            <div class="col-md-6 container">
+                <div class="user-info row">
+                    <div class="about col-md-1">
+                        <img src={% static "img/user1.png" %} alt="" width="100%">
+                    </div>
+                    <div class="col-md-11">
+جستجوی آنلاین
+                    </div>
+                </div>
+                <div class="user-info row">
+                    <div class="about col-md-1">
+                        <img src={% static "img/user2.png" %} alt="" height="100%">
+                    </div>
+                    <div class="col-md-11">برنامه ریزی</div>
+                </div>
+                <div class="user-info row">
+                    <div class="about col-md-1">
+                        <img src={% static "img/user3.png" %} alt="" width="100%">
+                    </div>
+                    <div class="col-md-11">پرداخت الکترونیک</div>
+                </div>
+                <div class="user-info row">
+                    <div class="about col-md-1">
+                        <img src={% static "img/user4.png" %} alt="" width="100%">
+                    </div>
+                    <div class="col-md-11">استفاده از خدمات</div>
+                </div>
+            </div>
+        </div>
+        <p>این صفحه بعد از ۳۰ ثانیه به طور خودکار به صفحه‌ی قبل منتقل می‌شود.</p>
+        <a href="{{ nextPage }}">بازگشت به صفحه‌ی قبل</a>
+    </div>
+{% endblock %}
+
