@@ -1,0 +1,73 @@
+{% extends 'basenew.html' %}
+{%  load i18n static %}
+{% block extra_css %}
+    <style>
+
+        #head {
+              margin-bottom: 15px;
+              height: 55px;
+              text-align: center;
+              color: #6d717a;
+{#              border-bottom: 1px solid #F0F0F0;#}
+        }
+        #wrapper{
+            text-align: center;
+            margin: 95px;
+        }
+        a {
+           color: rgb(237, 52, 57);
+        }
+        h2 {
+              margin: 113px 0 33px 0;
+        }
+        .col-md-6 i {
+            color: #8BC34A;
+        }
+        @media screen and (max-width:992px){
+            #content {
+                 margin: 10px;
+            }
+        }
+        #sign {
+              font-size: 80px;
+              text-align: center;
+        }
+    </style>
+{% endblock %}
+{% block extra_head %}
+    <META http-equiv="refresh" content="10;URL={% url 'dashboardURL' %}">
+{% endblock %}
+{% block main %}
+<div id="wrapper">
+     <div id="head">
+        <h3>پرداخت با موفقیت انجام شد.</h3>
+     </div>
+          <div class="row">
+          <div class="col-md-3"></div>
+        <div id="sign" class="col-md-6">
+            <i class="fa fa-check"></i>
+        </div>
+         <div class="col-md-3"></div>
+    </div>
+     <div class="row">
+         <div class="col-md-3"></div>
+        <div class="col-md-6">
+     <p>
+        مشاهده‌ی لیست
+        <a href="{% url 'dashboardURL' %}">
+        خریدها.
+        </a>
+   </p>
+    <p>
+        مشاهده‌ی لیست
+        <a href="{% url 'addCreditURL' %}">
+        اعتبار
+        </a>
+       های فعال.
+   </p>
+  </div>
+</div>
+  <p>این صفحه بعد از ۱۰ ثانیه به طور خودکار به صفحه‌ی سبد خرید منتقل می‌شود.</p>
+ </div>
+
+{% endblock %}
