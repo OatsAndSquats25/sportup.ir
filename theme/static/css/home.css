@@ -15,6 +15,7 @@ body, html{
 		/* margin-bottom: 10px; */
 	}
 }
+
 a, a:focus, a:active, a:hover{
 	text-decoration: none;
 }
@@ -273,7 +274,7 @@ header{
 }
 #video{
 	background-color: #FFB400;
-	height: 600px;
+	min-height: 600px;
 	width: 100%;
 	margin: 50px 0 0;
 	position: relative;
@@ -530,4 +531,23 @@ header{
 }
 .category-icon i {
     padding-right: 16px;
+}
+
+@media screen and (max-width:994px){
+    .user-info {
+        max-width: 375px;
+    }
+	#about-user {
+	    padding-top: 0px;
+    }
+    .about-user-img {
+        width: 65px;
+        height: 60px;
+        margin: auto;
+    }
+}
+@media screen and (min-width:744px){
+    #about-user {
+	    padding-top: 160px;
+    }
 }

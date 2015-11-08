@@ -954,7 +954,7 @@
 				var curDate = new Date.parse(date).addDays(i - day - 1).toString("yyyy-MM-dd");
 				var exactDate = toJalaali(parseInt(curDate.split('-')[0]), parseInt(curDate.split('-')[1]), parseInt(curDate.split('-')[2]));
 
-				if(i > day){
+				if(i > 0){
 					slices += '<td class="program2-title">' + days[i] + '<br>' + exactDate.jy + '/' + exactDate.jm + '/' + exactDate.jd + '</td>'; 
 				}else{
 					slices += '<td class="program2-title">' + days[i] + '</td>';
