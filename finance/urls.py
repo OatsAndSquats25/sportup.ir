@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^paymentresponse/(?P<gateway>.*)/$', csrf_exempt(paymentResponse.as_view()), name='financePaymentResponseURL1'),
     url(r'^paymentresponse/(?P<gateway>.*)/(?P<additional>.*)$', csrf_exempt(paymentResponse.as_view()), name='financePaymentResponseURL2'),
     url(r'^testgateway/(?P<refid>\d+)/$', testGateway.as_view(), name = 'financeTestGatewayURL'),
-    url(r'^paymentSucceeded/$', paymentSucceeded.as_view(), name='paymentSucceededURL'),
-    url(r'^paymentFailed/$', paymentFailed.as_view(), name='paymentFailedURL'),
+    url(r'^paymentSucceeded/$', login_required(paymentSucceeded.as_view()), name='paymentSucceededURL'),
+    url(r'^paymentFailed/$', login_required(paymentFailed.as_view()), name='paymentFailedURL'),
     )
 
