@@ -11,7 +11,7 @@ urlpatterns = patterns('',
    url(r'^dashboard/$', login_required(dashboardSelector.as_view()), name='dashboardURL'),
    url(r'^profile/$', login_required(profileUpdate.as_view()), name='profileUpdate'),
    url(r'^', include('django.contrib.auth.urls')),
-   url(r'^welcome/$', welcome.as_view(), name='welcomeURL'),
+   url(r'^welcome/$', login_required(welcome.as_view()), name='welcomeURL'),
    #url(r'^email/$', login_required(emailTest.as_view()), name='emailURL'),
    #url(r'^sms/$', login_required(smsTest.as_view()), name='smsURL'),
 )
