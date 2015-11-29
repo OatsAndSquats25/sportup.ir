@@ -12,7 +12,7 @@ from django.contrib.gis.measure import D
 # from accounts.views import MyRegistrationView
 from generic.models import Displayable
 from directory.models import club, category, contact, address, complexTitle, complexLocation, genre
-from forms import clubRegistrationForm
+# from forms import clubRegistrationForm
 from serializers import clubSerializer, clubItemSerializer
 
 # -----------------------------------------------------------------------
