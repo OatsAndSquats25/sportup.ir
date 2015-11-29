@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from views import dashboard, profileUpdate, loginRegister, emailTest, smsTest, dashboardSelector, printForUser, loginRegisterCampaign, welcome
 
 urlpatterns = patterns('',
-   # url(r'^login/$', loginRegister.as_view(), name='accountsLoginRegister'),
+   url(r'^loginregister/$', loginRegister.as_view(), name='accountsLoginRegister'),
    url(r'^login/$', loginRegisterCampaign.as_view(), name='accountsLoginURL'),
    url(r'^register/$', loginRegisterCampaign.as_view(), {'register': True}, name='accountsRegisterURL'),
    url(r'^print/(?P<pk>\d+)/$', login_required(printForUser.as_view()), name='print'),

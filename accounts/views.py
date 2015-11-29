@@ -136,7 +136,7 @@ class loginRegister(View):
             return redirect(request.GET.get('next','/'))
         formLog = userLoginForm(prefix='formLog')
         formReg = userRegisterForm(prefix='formReg')
-        return render(request, 'registration/login-campaign.html',
+        return render(request, 'registration/login-register.html',
                       {'formReg': formReg, 'formLog': formLog, 'next': request.GET.get('next', '/')})
 
     def post(self, request, *args, **kwargs):
@@ -171,9 +171,9 @@ class loginRegister(View):
                 userAuth = authenticate(username=formReg.cleaned_data['email'],
                                         password=formReg.cleaned_data['password'])
                 login(request, userAuth)
-                #            emailNotifications.approvedAccount(request, userAuth)
+                email.approvedRegisteredAccount(request, userAuth)
                 messages.info(request, _("Register successfully"))
-                return HttpResponseRedirect(request.GET.get('next', '/'))
+                return HttpResponseRedirect("/accounts/welcome/?next=" + request.GET.get('next', '/'))
             else:
                 messages.error(request, _("Email address exist. Please try another email address."))
 
