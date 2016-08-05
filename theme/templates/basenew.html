@@ -94,6 +94,13 @@
 		<i class="fa fa-angle-up"></i>
 	</div>
 {#------------------------------------------------------------------------------#}
+{% block inactivemssage %}
+<div class="alert alert-dismissable alert-info fade in" data-alert="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+<a href="/pages/story/">اسپورتآپ موقتا فعال نمی&zwnj;باشد. لطفا اینجا را مطالعه نمایید.</a>
+        </div>
+{% endblock %}
+{#------------------------------------------------------------------------------#}
         {% if messages %}
 {#        <div class="messages">#}
         {% for message in messages %}
